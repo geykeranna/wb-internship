@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.data.modal
+package ru.testtask.testapplication.data.model
 
 import ru.testtask.testapplication.R
 
@@ -23,12 +23,12 @@ data class UserData(
                 SocialMedia(
                     name = "twitter",
                     icon = R.drawable.ic_twitter,
-                    url = ""
+                    url = "https://twitter.com/"
                 ),
                 SocialMedia(
                     name = "instagram",
                     icon = R.drawable.ic_instagram,
-                    url = ""
+                    url = "https://instagram.com/"
                 ),
                 SocialMedia(
                     name = "coolicon",
@@ -38,7 +38,7 @@ data class UserData(
                 SocialMedia(
                     name = "facebook",
                     icon = R.drawable.ic_facebook,
-                    url = ""
+                    url = "https://facebook.com/"
                 ),
             )
         )

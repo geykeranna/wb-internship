@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.modal.UserData
+import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.chips.SocialChips

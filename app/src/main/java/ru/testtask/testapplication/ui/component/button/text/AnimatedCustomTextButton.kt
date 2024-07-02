@@ -40,7 +40,7 @@ fun AnimatedCustomTextButton(
     Button(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(30.dp),
         enabled = !disabled,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = if (isPressed) contentPrimaryColor else contentDefaultColor,

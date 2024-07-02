@@ -10,8 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.tooling.preview.Preview
-import ru.testtask.testapplication.data.modal.UserData
+import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.UserAvatar
 import ru.testtask.testapplication.ui.theme.bodyText1
 

@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.data.modal.EventData
+import ru.testtask.testapplication.data.model.EventData
 
 @Composable
 fun EventCardsList(

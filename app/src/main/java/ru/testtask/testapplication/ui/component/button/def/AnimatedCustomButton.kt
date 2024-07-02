@@ -36,7 +36,7 @@ fun AnimatedCustomButton(
 
     Button(
         modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(30.dp),
         onClick = onClick,
         enabled = !disabled,
         colors = ButtonDefaults.buttonColors(

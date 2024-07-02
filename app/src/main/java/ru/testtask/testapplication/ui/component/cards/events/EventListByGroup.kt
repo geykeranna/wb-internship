@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import ru.testtask.testapplication.data.modal.EventsByGroup
+import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
 import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
 import ru.testtask.testapplication.ui.theme.TabUnselectedColor

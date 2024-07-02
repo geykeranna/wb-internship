@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.data.modal.EventData
-import ru.testtask.testapplication.data.modal.UserData
+import ru.testtask.testapplication.data.model.EventData
+import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.cards.community.CommunityCard

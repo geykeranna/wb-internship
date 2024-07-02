@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.modal.EventsByGroup
+import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.cards.events.EventListByGroup
 import ru.testtask.testapplication.ui.component.input.SearchBar
 import ru.testtask.testapplication.ui.component.toolbars.TopBar

@@ -25,3 +25,4 @@ val BlueDarkColor = Color(0xFF2C37E1)
 val CursorDarkColor = Color(0xFF29183B)
 val PlaceholderColor = Color(0xFFADB5BD)
 val TabUnselectedColor = Color(0xFF666666)
+
