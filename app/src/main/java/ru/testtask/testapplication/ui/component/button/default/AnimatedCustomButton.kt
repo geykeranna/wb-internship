@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.component.button.def
+package ru.testtask.testapplication.ui.component.button.default
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -15,15 +15,15 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.testtask.testapplication.ui.theme.LightColor
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
-import ru.testtask.testapplication.ui.theme.PurplePrimaryColor
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 
 @Composable
 fun AnimatedCustomButton(
     modifier: Modifier = Modifier,
-    backgroundDefaultColor: Color = PurpleDefaultColor,
-    backgroundClickedColor: Color = PurplePrimaryColor,
+    backgroundDefaultColor: Color = BrandDefaultColor,
+    backgroundClickedColor: Color = BrandDarkModeColor,
     labelColor: Color = LightColor,
     disableColor: Color = PurpleLightColor,
     disabled: Boolean = false,

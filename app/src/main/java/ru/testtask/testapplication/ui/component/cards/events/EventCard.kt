@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.GrayLightColor
-import ru.testtask.testapplication.ui.theme.TextPlaceholder
+import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NaturalWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata2
 
@@ -81,7 +81,7 @@ fun EventCard(
                                 modifier = Modifier,
                                 text = "Закончилась",
                                 style = MaterialTheme.typography.metadata2,
-                                color = TextPlaceholder,
+                                color = NaturalWeakColor,
                             )
                         }
                     }
@@ -102,7 +102,7 @@ fun EventCard(
         }
 
         HorizontalDivider(
-            color = GrayLightColor,
+            color = NaturalLineColor,
             modifier = Modifier.padding(top = 12.dp)
         )
     }

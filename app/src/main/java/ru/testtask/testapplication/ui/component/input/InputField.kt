@@ -37,10 +37,10 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.ui.theme.CursorDarkColor
-import ru.testtask.testapplication.ui.theme.GrayColor
-import ru.testtask.testapplication.ui.theme.GrayLightColor
-import ru.testtask.testapplication.ui.theme.PlaceholderColor
+import ru.testtask.testapplication.ui.theme.NaturalActiveColor
+import ru.testtask.testapplication.ui.theme.NaturalOffWhiteColor
+import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NaturalDisabledColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 
 
@@ -56,9 +56,9 @@ fun InputField(
     },
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
-    color: Color = CursorDarkColor,
-    placeholderColor: Color = PlaceholderColor,
-    borderColor: Color = GrayLightColor,
+    color: Color = NaturalActiveColor,
+    placeholderColor: Color = NaturalDisabledColor,
+    borderColor: Color = NaturalLineColor,
     onClickRightIcon: (() -> Unit?)? = null,
     onClickLeftIcon: (() -> Unit)? = null,
     onEnter: (state: TextFieldState) -> Unit = {},
@@ -80,7 +80,7 @@ fun InputField(
             .focusable(interactionSource = interactionSource)
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(4.dp))
-            .background(GrayColor)
+            .background(NaturalOffWhiteColor)
             .focusedBorder(isFocused && isEmpty, borderColor),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,

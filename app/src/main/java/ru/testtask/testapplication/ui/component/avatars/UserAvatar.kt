@@ -17,22 +17,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.theme.BlueDarkColor
-import ru.testtask.testapplication.ui.theme.BlueLightColor
-import ru.testtask.testapplication.ui.theme.GrayColor
-import ru.testtask.testapplication.ui.theme.GrayLightColor
+import ru.testtask.testapplication.ui.theme.BrandLightModeColor
+import ru.testtask.testapplication.ui.theme.NaturalLineColor
 
 @Composable
 fun UserAvatar(
     status: Boolean = false,
     story: Boolean = false,
     colorBadge: Color = BlueDarkColor,
-    background: Color = GrayLightColor,
+    background: Color = NaturalLineColor,
     src: String? = null,
 ) {
     Box(
@@ -44,7 +42,7 @@ fun UserAvatar(
             modifier = Modifier
                 .storyBorder(story)
                 .padding(4.dp)
-                .border(2.dp, BlueLightColor, RoundedCornerShape(16.dp))
+                .border(2.dp, BrandLightModeColor, RoundedCornerShape(16.dp))
             ,
         ) {
             if (src.isNullOrEmpty()) {
@@ -86,7 +84,7 @@ fun Modifier.storyBorder(story: Boolean) = composed {
         return@composed this.border(
             2.dp,
             Brush.linearGradient(
-                colors = listOf(BlueLightColor, BlueDarkColor),
+                colors = listOf(BrandLightModeColor, BlueDarkColor),
                 start = Offset(0f, Float.POSITIVE_INFINITY),
                 end = Offset(0f, Float.POSITIVE_INFINITY)
             ),

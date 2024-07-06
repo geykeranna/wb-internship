@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.CommunityAvatar
 import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.GrayLightColor
+import ru.testtask.testapplication.ui.theme.NaturalLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 import java.util.Locale
@@ -64,7 +64,7 @@ fun CommunityCard(
         }
 
         HorizontalDivider(
-            color = GrayLightColor,
+            color = NaturalLineColor,
             modifier = Modifier.padding(top = 10.dp)
         )
     }

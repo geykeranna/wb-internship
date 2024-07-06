@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -41,10 +41,10 @@ fun EventListByGroup(
             selectedTabIndex = selectedTab.value,
             modifier = Modifier.fillMaxWidth(),
             containerColor = Color.Transparent,
-            contentColor = PurpleDefaultColor,
+            contentColor = BrandDefaultColor,
             divider = {},
             indicator = @Composable { tabPositions: List<TabPosition> ->
-                CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), PurpleDefaultColor)
+                CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
             }
         ) {
             listByGroup.forEachIndexed { index, tab ->
@@ -52,7 +52,7 @@ fun EventListByGroup(
                     modifier = Modifier
                         .height(48.dp),
                     selected = selectedTab.value == index,
-                    selectedContentColor = PurpleDefaultColor,
+                    selectedContentColor = BrandDefaultColor,
                     unselectedContentColor = TabUnselectedColor,
                     onClick = {
                         scope.launch {
@@ -77,7 +77,7 @@ fun EventListByGroup(
         state = pagerState,
         modifier = modifier
             .fillMaxWidth(),
-        userScrollEnabled = false
+//        userScrollEnabled = false
     ) { page ->
         EventCardsList(
             itemsList = listByGroup[page].listOfEvents

@@ -15,14 +15,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.testtask.testapplication.ui.theme.PinkLightColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
-import ru.testtask.testapplication.ui.theme.PurplePrimaryColor
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 
 @Composable
 fun CustomOutlinedButton(
     modifier: Modifier = Modifier,
-    contentDefaultColor: Color = PurpleDefaultColor,
-    contentPrimaryColor: Color = PurplePrimaryColor,
+    contentDefaultColor: Color = BrandDefaultColor,
+    contentPrimaryColor: Color = BrandDarkModeColor,
     disableColor: Color = PurpleLightColor,
     outlineColor: Color = PinkLightColor,
     outlined: Boolean = false,

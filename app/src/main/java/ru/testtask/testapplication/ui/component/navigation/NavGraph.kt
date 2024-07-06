@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.testtask.testapplication.ui.screens.community.CommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
-import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
-import ru.testtask.testapplication.ui.screens.profile.ProfileScreen
+import ru.testtask.testapplication.ui.screens.more.MoreScreen
 
 @Composable
 fun NavGraph(
@@ -21,12 +21,11 @@ fun NavGraph(
         }
 
         composable(route = NavBar.Community.route) {
-//            CommunityScreen() // Временно чтобы показать все экраны с дз
-            MyEventsScreen()
+            CommunityScreen()
         }
 
         composable(route = NavBar.More.route) {
-            ProfileScreen()
+            MoreScreen()
         }
     }
 }
