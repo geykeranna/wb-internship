@@ -5,7 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.testtask.testapplication.ui.screens.community.CommunityScreen
+import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
+import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
 
 @Composable
@@ -17,11 +19,11 @@ fun NavGraph(
         startDestination = NavBar.Meeting.route
     ){
         composable(route = NavBar.Meeting.route) {
-            ActiveEventsScreen()
+            DetailEventScreen()
         }
 
         composable(route = NavBar.Community.route) {
-            CommunityScreen()
+            DetailCommunityScreen()
         }
 
         composable(route = NavBar.More.route) {

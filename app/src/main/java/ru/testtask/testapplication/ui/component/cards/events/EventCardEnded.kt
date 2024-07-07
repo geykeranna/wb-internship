@@ -25,7 +25,7 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata2
 
 @Composable
-fun EventCard(
+fun EventCardEnded(
     modifier: Modifier = Modifier,
     title: String = "",
     tagList: List<String> = listOf(),
@@ -72,6 +72,16 @@ fun EventCard(
                         style = MaterialTheme.typography.bodyText1,
                         color = Color.Black
                     )
+                    Box(
+                        contentAlignment = Alignment.TopEnd,
+                    ){
+                        Text(
+                            modifier = Modifier,
+                            text = "Закончилась",
+                            style = MaterialTheme.typography.metadata2,
+                            color = NaturalWeakColor,
+                        )
+                    }
                 }
 
                 Text(

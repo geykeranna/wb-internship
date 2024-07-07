@@ -30,7 +30,7 @@ fun TopBar(
 ) {
     Box(
         modifier = modifier
-            .padding(vertical = 14.dp)
+            .padding(vertical = 16.dp)
             .height(30.dp)
             .fillMaxWidth()
     ) {

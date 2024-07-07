@@ -37,16 +37,8 @@ fun Task2() {
 
         EventCardsList(
             itemsList = listOf(
-                EventData(
-                    id = 0,
-                    name = "Developer meeting",
-                    location = "Москва",
-                    date = "19.09.2024",
-                    tagList = listOf("Python", "Junior", "Moscow"),
-                    icon = null,
-                    active = false
-                ),
-                EventData.shimmerData1
+                EventData.shimmerData1,
+                EventData.shimmerData2,
             )
         )
 

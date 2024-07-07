@@ -21,15 +21,25 @@ fun EventCardsList(
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         items(itemsList.size){index ->
-            EventCard(
-                title = itemsList[index].name,
-                location = itemsList[index].location,
-                date = itemsList[index].date,
-                tagList = itemsList[index].tagList,
-                onClick = onClick,
-                isActual = itemsList[index].active,
-                src = itemsList[index].icon
-            )
+            if (itemsList[index].active) {
+                EventCard(
+                    title = itemsList[index].name,
+                    location = itemsList[index].location.city,
+                    date = itemsList[index].date,
+                    tagList = itemsList[index].tagList,
+                    onClick = onClick,
+                    src = itemsList[index].icon
+                )
+            } else {
+                EventCardEnded(
+                    title = itemsList[index].name,
+                    location = itemsList[index].location.city,
+                    date = itemsList[index].date,
+                    tagList = itemsList[index].tagList,
+                    onClick = onClick,
+                    src = itemsList[index].icon
+                )
+            }
         }
     }
 }

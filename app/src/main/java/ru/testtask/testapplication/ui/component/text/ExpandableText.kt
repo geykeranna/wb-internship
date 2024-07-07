@@ -1,6 +1,7 @@
 package ru.testtask.testapplication.ui.component.text
 
 import android.icu.text.BreakIterator
+import android.util.Log
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
@@ -20,17 +21,16 @@ import androidx.compose.ui.unit.Constraints
 
 const val COLLAPSED_SPAN = "collapsed_span"
 const val EXPANDED_SPAN = "expanded_span"
-const val LINE_EXTRA_SPACE = 13
 
 @Composable
 fun ExpandableText(
+    modifier: Modifier = Modifier,
     text: String,
     expandText: String,
-    modifier: Modifier = Modifier,
     expandColor: Color = Color.Unspecified,
     collapseText: String? = null,
     collapseColor: Color = Color.Unspecified,
-    maxLinesCollapsed: Int = LINE_EXTRA_SPACE,
+    maxLinesCollapsed: Int,
     style: TextStyle = TextStyle.Default,
 ) {
     BoxWithConstraints(modifier) {
@@ -47,9 +47,10 @@ fun ExpandableText(
         } else {
             null
         }
+
         val expandState = SpanState(expandText, expandColor)
         val collapseState = collapseText?.let { SpanState(it, collapseColor) }
-        val state = rememberState(text, expandState, collapseState, trimLineRange, style)
+        val state = rememberState(text, expandState, collapseState, trimLineRange, style, maxLinesCollapsed)
 
         ClickableText(text = state.annotatedString, style = style, onClick = { position ->
             val annotation = state.getClickableAnnotation(position)
@@ -69,6 +70,7 @@ private fun rememberState(
     collapseSpanState: SpanState?,
     lastLineRange: IntRange?,
     style: TextStyle,
+    maxLinesCollapsed: Int,
 ): State {
     return remember(text, expandSpanState, collapseSpanState, lastLineRange, style) {
         State(
@@ -77,6 +79,7 @@ private fun rememberState(
             collapseSpanState = collapseSpanState,
             lastLineTrimRange = lastLineRange,
             style = style,
+            maxLinesCollapsed = maxLinesCollapsed
         )
     }
 }
@@ -92,6 +95,7 @@ private class State(
     collapseSpanState: SpanState?,
     lastLineTrimRange: IntRange?,
     style: TextStyle,
+    maxLinesCollapsed: Int,
 ) {
     enum class ExpandState {
         Collapsed, Expanded,
@@ -102,7 +106,7 @@ private class State(
         val lastLineLen = lastLineTrimRange.last - lastLineTrimRange.first + 1
         val expandTextLen = getSafeLength(expandSpanState.text)
         val collapsedText =
-            text.take(lastLineTrimRange.last + 1).dropLast(minOf(lastLineLen, expandTextLen + LINE_EXTRA_SPACE))
+            text.take(lastLineTrimRange.last + 1).dropLast(minOf(lastLineLen, expandTextLen + maxLinesCollapsed))
         val collapsedTextLen = getSafeLength(collapsedText)
         val expandSpanStyle = style.merge(TextStyle(color = expandSpanState.color)).toSpanStyle()
         buildAnnotatedString {
