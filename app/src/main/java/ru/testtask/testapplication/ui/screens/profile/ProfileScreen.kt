@@ -35,7 +35,7 @@ fun ProfileScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         TopBar(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = modifier.padding(horizontal = 16.dp),
             iconLeft = R.drawable.ic_chevron_left,
             onLeftIconClick = {  },
             iconRight = R.drawable.ic_edit,
