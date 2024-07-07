@@ -9,24 +9,24 @@ sealed class NavBar(
     val route: String,
     val focused: Int,
 ) {
-    data object Meeting: NavBar(
+    data object Event: NavBar(
         label = "Встречи",
         icon = R.drawable.ic_coffee,
-        route = "meeting",
+        route = Screen.Events.route,
         focused = R.drawable.ic_choisen
     )
 
     data object Community: NavBar (
         label = "Сообщества",
         icon = R.drawable.ic_group,
-        route = "community",
+        route = Screen.Community.route,
         focused = R.drawable.ic_choisen
     )
 
     data object More: NavBar (
         label = "Ещё",
         icon = R.drawable.ic_more_horizontal,
-        route = "more",
+        route = Screen.More.route,
         focused = R.drawable.ic_choisen
     )
 }

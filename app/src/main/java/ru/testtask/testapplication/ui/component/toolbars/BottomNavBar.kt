@@ -35,7 +35,7 @@ fun BottomNavBar(
     navController: NavHostController
 ){
     val screens = listOf(
-        NavBar.Meeting,
+        NavBar.Event,
         NavBar.Community,
         NavBar.More
     )

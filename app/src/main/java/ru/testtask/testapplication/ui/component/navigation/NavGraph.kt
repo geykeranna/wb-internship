@@ -16,14 +16,18 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavBar.Meeting.route
+        startDestination = Screen.Splash.route
     ){
-        composable(route = NavBar.Meeting.route) {
-            DetailEventScreen()
+//        composable(route = Screen.Splash.route) {
+//
+//        }
+
+        composable(route = NavBar.Event.route) {
+            ActiveEventsScreen()
         }
 
         composable(route = NavBar.Community.route) {
-            DetailCommunityScreen()
+            CommunityScreen()
         }
 
         composable(route = NavBar.More.route) {
