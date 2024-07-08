@@ -3,7 +3,7 @@ package ru.testtask.testapplication.data.model
 import ru.testtask.testapplication.R
 
 data class UserData(
-    val id: Int,
+    val id: String,
     val icon: String?,
     val name: String,
     val story: Boolean,
@@ -13,7 +13,7 @@ data class UserData(
 ){
     companion object{
         val shimmerData = UserData(
-            id = 0,
+            id = "0",
             name = "User",
             icon = null,
             story = false,

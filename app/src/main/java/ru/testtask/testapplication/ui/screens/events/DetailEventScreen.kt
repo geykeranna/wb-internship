@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.EventData
 import ru.testtask.testapplication.data.model.UserData
@@ -41,6 +43,7 @@ import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomBut
 import ru.testtask.testapplication.ui.component.button.outlined.AnimatedCustomOutlinedButton
 import ru.testtask.testapplication.ui.component.cards.visitors.VisitorsList
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
+import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
@@ -51,6 +54,8 @@ import ru.testtask.testapplication.ui.theme.metadata1
 @Composable
 fun DetailEventScreen(
     modifier: Modifier = Modifier,
+    id: String = "",
+    navController: NavController
 ) {
     val detailInfo = EventData.shimmerData1
     val scroll = rememberScrollState()
@@ -83,7 +88,6 @@ fun DetailEventScreen(
             .padding(horizontal = 16.dp),
     ) {
         TopBar(
-            modifier = Modifier.padding(top = 16.dp),
             iconLeft = R.drawable.ic_chevron_left,
             text = detailInfo.name,
             iconRight = when (stateBnt) {
@@ -91,7 +95,8 @@ fun DetailEventScreen(
                 else -> null
             },
             onRightIconClick = { onClickButton() },
-            tintRightIcon = BrandDefaultColor
+            tintRightIcon = BrandDefaultColor,
+            onLeftIconClick = { navController.navigate(Screen.Events.route) }
         )
 
         Column(
@@ -167,12 +172,11 @@ fun DetailEventScreen(
     }
 }
 
-
 @Composable
 fun FullScreenImageDialog(isMapFullScreen: MutableState<Boolean>) {
     if (isMapFullScreen.value) {
         Dialog(onDismissRequest = { isMapFullScreen.value = false }) {
-            var scale by remember { mutableStateOf(1f) }
+            var scale by remember { mutableFloatStateOf(1f) }
             var offset by remember { mutableStateOf(Offset.Zero) }
 
             val width = 1280f

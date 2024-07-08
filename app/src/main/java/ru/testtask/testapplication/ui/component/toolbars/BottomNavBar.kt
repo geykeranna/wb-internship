@@ -72,7 +72,7 @@ fun BarItem(
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {
-    val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
+    val selected = currentDestination?.hierarchy?.any { it.route?.contains(screen.route) ?: false } == true
 
     Column (
         modifier = Modifier

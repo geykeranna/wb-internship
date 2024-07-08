@@ -3,7 +3,7 @@ package ru.testtask.testapplication.data.model
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 
 data class EventData(
-    val id: Int,
+    val id: String,
     val name: String,
     val date: String,
     val location: Location,
@@ -15,7 +15,7 @@ data class EventData(
 ){
     companion object{
         val shimmerData1 = EventData(
-            id = 0,
+            id = "0",
             name = "Developer meeting",
             location = Location("Москва", "ул. Громова, 4"),
             date = "19.09.2024",
@@ -33,7 +33,7 @@ data class EventData(
             )
         )
         val shimmerData2 = EventData(
-            id = 0,
+            id = "0",
             name = "Developer meeting",
             location = Location("Москва", "ул. Громова, 4"),
             date = "19.09.2024",

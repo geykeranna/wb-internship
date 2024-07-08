@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
+import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.subheading1
 
 @Composable
@@ -29,8 +29,8 @@ fun TopBar(
     iconLeft: Int? = null,
     onLeftIconClick: () -> Unit = {},
     text: String = "",
-    tintRightIcon: Color = BrandDarkModeColor,
-    tinyLeftIcon: Color = BrandDarkModeColor
+    tintRightIcon: Color = NeutralActiveColor,
+    tinyLeftIcon: Color = NeutralActiveColor
 ) {
     Box(
         modifier = modifier

@@ -19,14 +19,35 @@ fun NavGraph(
         navController = navController,
         startDestination = NavBar.Event.route
     ){
-        composable(route = NavBar.Event.route) {
-//            ActiveEventsScreen()
-            DetailEventScreen()
+        composable(route = Screen.Events.route) {
+            ActiveEventsScreen(
+                navController = navController
+            )
         }
 
-        composable(route = NavBar.Community.route) {
-//            CommunityScreen()
-            DetailCommunityScreen()
+        composable(route = Screen.EventsDetail.route + "/{id}") { stackEntry ->
+            val id = stackEntry.arguments?.getString("id")
+            if (id != null) {
+                DetailEventScreen(
+                    id = id,
+                    navController = navController
+                )
+            }
+        }
+
+        composable(route = Screen.Community.route) {
+            CommunityScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.CommunityDetail.route + "/{id}") { stackEntry ->
+            val id = stackEntry.arguments?.getString("id")
+            if (id != null) {
+                DetailCommunityScreen(
+                    navController = navController
+                )
+            }
         }
 
         composable(route = NavBar.More.route) {

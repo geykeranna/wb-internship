@@ -39,10 +39,9 @@ class MainActivity : ComponentActivity() {
                 var isReady by remember { mutableStateOf(false) }
 
                 LaunchedEffect(key1 = Unit) {
-                    delay(4000)
+                    delay(3000)
                     isReady = true
                 }
-
 
                 if (isReady) {
                     Scaffold(

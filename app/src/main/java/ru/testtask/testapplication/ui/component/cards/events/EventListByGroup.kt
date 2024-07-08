@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
@@ -31,6 +32,7 @@ import ru.testtask.testapplication.ui.theme.TabUnselectedColor
 fun EventListByGroup(
     modifier: Modifier,
     listByGroup: List<EventsByGroup>,
+    navController: NavController,
 ) {
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { listByGroup.size })
@@ -56,10 +58,9 @@ fun EventListByGroup(
                     unselectedContentColor = TabUnselectedColor,
                     onClick = {
                         scope.launch {
-                            pagerState.animateScrollToPage(index)
+                            pagerState.scrollToPage(index)
                         }
                     },
-
                 ) {
                     Text(
                         text = tab.group.uppercase(),
@@ -70,17 +71,20 @@ fun EventListByGroup(
             }
         }
     }
-//    EventCardsList(
-//        itemsList = listByGroup[selectedTab.value].listOfEvents
-//    )
     HorizontalPager(
         state = pagerState,
         modifier = modifier
             .fillMaxWidth(),
-//        userScrollEnabled = false
     ) { page ->
+        val sorted = when (listByGroup[page].group) {
+            "Уже прошли" -> SORTBY.NO_ACTIVE
+            "Активные" -> SORTBY.ACTIVE
+            else -> SORTBY.NO_SORT
+        }
         EventCardsList(
-            itemsList = listByGroup[page].listOfEvents
+            itemsList = listByGroup[page].listOfEvents,
+            navController = navController,
+            sorted = sorted
         )
     }
 }

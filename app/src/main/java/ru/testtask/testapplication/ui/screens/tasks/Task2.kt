@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.data.model.EventData
 import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
@@ -39,7 +40,8 @@ fun Task2() {
             itemsList = listOf(
                 EventData.shimmerData1,
                 EventData.shimmerData2,
-            )
+            ),
+            navController = rememberNavController()
         )
 
 

@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.CommunityData
 import ru.testtask.testapplication.ui.component.cards.events.EventCardsList
+import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.theme.NeutralWeakColor
@@ -23,7 +25,9 @@ import ru.testtask.testapplication.ui.theme.metadata1
 
 @Composable
 fun DetailCommunityScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    id: String = "",
+    navController: NavController
 ) {
     val detailInfo = CommunityData.shimmerData
     val scroll = rememberScrollState()
@@ -33,10 +37,10 @@ fun DetailCommunityScreen(
     ){
         TopBar(
             modifier = Modifier
-                .padding(top = 16.dp)
                 .padding(horizontal = 16.dp),
             iconLeft = R.drawable.ic_chevron_left,
             text = detailInfo.label,
+            onLeftIconClick = { navController.navigate(Screen.Community.route) }
         )
         Column(
             modifier = modifier
@@ -62,7 +66,10 @@ fun DetailCommunityScreen(
                 style = MaterialTheme.typography.bodyText1
             )
 
-            EventCardsList(itemsList = detailInfo.eventList)
+            EventCardsList(
+                itemsList = detailInfo.eventList,
+                navController = navController
+            )
         }
     }
 }

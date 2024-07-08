@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.cards.events.EventListByGroup
@@ -14,6 +15,7 @@ import ru.testtask.testapplication.ui.component.toolbars.TopBar
 @Composable
 fun MyEventsScreen(
     modifier: Modifier = Modifier,
+    navController: NavController,
 ) {
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList2
 
@@ -28,7 +30,8 @@ fun MyEventsScreen(
 
         EventListByGroup(
             modifier = Modifier.padding(top = 16.dp),
-            listByGroup = listByGroup
+            listByGroup = listByGroup,
+            navController = navController
         )
     }
 }
