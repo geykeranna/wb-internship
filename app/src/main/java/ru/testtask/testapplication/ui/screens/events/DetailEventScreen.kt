@@ -44,7 +44,7 @@ import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
-import ru.testtask.testapplication.ui.theme.NaturalWeakColor
+import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 
@@ -102,7 +102,7 @@ fun DetailEventScreen(
         ) {
             Text(
                 text = "${detailInfo.date} - ${detailInfo.location.city} ${detailInfo.location.address}",
-                style = MaterialTheme.typography.bodyText1.copy(color = NaturalWeakColor)
+                style = MaterialTheme.typography.bodyText1.copy(color = NeutralWeakColor)
             )
 
             CustomChipsGroup(
@@ -140,7 +140,7 @@ fun DetailEventScreen(
                 expandText = "...",
                 collapseText = "Скрыть",
                 maxLinesCollapsed = 8,
-                style = MaterialTheme.typography.metadata1.copy(color = NaturalWeakColor, lineHeight = 20.sp)
+                style = MaterialTheme.typography.metadata1.copy(color = NeutralWeakColor, lineHeight = 20.sp)
             )
 
             VisitorsList(

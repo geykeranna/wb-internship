@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
 fun ProfileAvatar(
@@ -30,7 +30,7 @@ fun ProfileAvatar(
             modifier = Modifier
                 .size(size.boxSize.dp)
                 .clip(CircleShape)
-                .background(NaturalLineColor),
+                .background(NeutralLineColor),
             contentAlignment = Alignment.Center
         ){
             if (src.isNullOrEmpty()) {

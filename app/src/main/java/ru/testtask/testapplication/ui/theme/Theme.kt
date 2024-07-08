@@ -22,8 +22,8 @@ private val LightColorScheme = lightColorScheme(
 //    secondary = PurpleGrey40,
 //    tertiary = Pink40,
     primary = BrandDefaultColor,
-    secondary = NaturalOffWhiteColor,
-    tertiary = NaturalActiveColor,
+    secondary = NeutralOffWhiteColor,
+    tertiary = NeutralActiveColor,
     background = Color.White,
     onBackground = BrandBackgroundColor,
 

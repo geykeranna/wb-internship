@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.testtask.testapplication.ui.theme.NaturalOffWhiteColor
+import ru.testtask.testapplication.ui.theme.NeutralOffWhiteColor
 import ru.testtask.testapplication.ui.theme.PinkLightColor
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
@@ -23,7 +23,7 @@ fun CustomTextButton(
     modifier: Modifier = Modifier,
     contentDefaultColor: Color = BrandDefaultColor,
     contentPrimaryColor: Color = BrandDarkModeColor,
-    backgroundBorderColor: Color = NaturalOffWhiteColor,
+    backgroundBorderColor: Color = NeutralOffWhiteColor,
     disableColor: Color = PurpleLightColor,
     outlineColor: Color = PinkLightColor,
     outlined: Boolean = false,

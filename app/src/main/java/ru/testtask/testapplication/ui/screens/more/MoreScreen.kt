@@ -14,7 +14,7 @@ import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.toolbars.MenuItem
 import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
 fun MoreScreen(
@@ -76,7 +76,7 @@ fun MoreScreen(
             HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp,
-                color = NaturalLineColor
+                color = NeutralLineColor
             )
 
             MenuItem(

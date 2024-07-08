@@ -20,7 +20,7 @@ import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.chips.SocialChips
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.heading3
 import ru.testtask.testapplication.ui.theme.subheading2
 
@@ -69,7 +69,7 @@ fun ProfileScreen(
                     modifier = Modifier,
                     text = userData.phone,
                     style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
             }
 

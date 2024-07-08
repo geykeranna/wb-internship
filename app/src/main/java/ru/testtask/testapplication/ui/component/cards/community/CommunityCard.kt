@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.CommunityAvatar
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 import java.util.Locale
@@ -58,13 +58,13 @@ fun CommunityCard(
                     modifier = Modifier.height(20.dp),
                     text = "$countText человек",
                     style = MaterialTheme.typography.metadata1,
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
             }
         }
 
         HorizontalDivider(
-            color = NaturalLineColor,
+            color = NeutralLineColor,
             modifier = Modifier.padding(top = 10.dp)
         )
     }

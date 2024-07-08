@@ -2,7 +2,6 @@ package ru.testtask.testapplication.ui.component.cards.events
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,11 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
-import ru.testtask.testapplication.ui.theme.NaturalWeakColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
-import ru.testtask.testapplication.ui.theme.metadata2
 
 @Composable
 fun EventCard(
@@ -80,7 +77,7 @@ fun EventCard(
                         .padding(bottom = 2.dp),
                     text = "$date — $location",
                     style = MaterialTheme.typography.bodyText1,
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
                 CustomChipsGroup(
                     chipsList = tagList
@@ -89,7 +86,7 @@ fun EventCard(
         }
 
         HorizontalDivider(
-            color = NaturalLineColor,
+            color = NeutralLineColor,
             modifier = Modifier.padding(top = 12.dp)
         )
     }

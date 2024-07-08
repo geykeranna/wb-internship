@@ -23,14 +23,14 @@ import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.theme.BlueDarkColor
 import ru.testtask.testapplication.ui.theme.BrandLightModeColor
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
 fun UserAvatar(
     status: Boolean = false,
     story: Boolean = false,
     colorBadge: Color = BlueDarkColor,
-    background: Color = NaturalLineColor,
+    background: Color = NeutralLineColor,
     src: String? = null,
 ) {
     Box(

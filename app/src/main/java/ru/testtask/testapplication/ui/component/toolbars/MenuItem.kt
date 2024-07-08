@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.UserData
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 
@@ -99,7 +99,7 @@ fun MenuItemUser(
             val mod = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
-                .background(NaturalLineColor)
+                .background(NeutralLineColor)
 
             if(userData.icon.isNullOrEmpty()) {
                 Image(
@@ -126,7 +126,7 @@ fun MenuItemUser(
                 Text (
                     text = userData.phone,
                     style = MaterialTheme.typography.metadata1,
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
             }
         }

@@ -18,9 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
-import ru.testtask.testapplication.ui.theme.NaturalLineColor
-import ru.testtask.testapplication.ui.theme.NaturalWeakColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
+import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata2
 
@@ -79,7 +79,7 @@ fun EventCardEnded(
                             modifier = Modifier,
                             text = "Закончилась",
                             style = MaterialTheme.typography.metadata2,
-                            color = NaturalWeakColor,
+                            color = NeutralWeakColor,
                         )
                     }
                 }
@@ -90,7 +90,7 @@ fun EventCardEnded(
                         .padding(bottom = 2.dp),
                     text = "$date — $location",
                     style = MaterialTheme.typography.bodyText1,
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
                 CustomChipsGroup(
                     chipsList = tagList
@@ -99,7 +99,7 @@ fun EventCardEnded(
         }
 
         HorizontalDivider(
-            color = NaturalLineColor,
+            color = NeutralLineColor,
             modifier = Modifier.padding(top = 12.dp)
         )
     }

@@ -17,7 +17,7 @@ import ru.testtask.testapplication.data.model.CommunityData
 import ru.testtask.testapplication.ui.component.cards.events.EventCardsList
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
-import ru.testtask.testapplication.ui.theme.NaturalWeakColor
+import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 
@@ -48,7 +48,7 @@ fun DetailCommunityScreen(
                 text = detailInfo.description,
                 expandText = "...",
                 style = MaterialTheme.typography.metadata1
-                    .copy(color = NaturalWeakColor, lineHeight = 20.sp),
+                    .copy(color = NeutralWeakColor, lineHeight = 20.sp),
                 maxLinesCollapsed = 13,
                 collapseText = "Скрыть",
             )
@@ -58,7 +58,7 @@ fun DetailCommunityScreen(
                     .fillMaxWidth()
                     .padding(top = 30.dp, bottom = 16.dp),
                 text = "Встречи сообщества",
-                color = NaturalWeakColor,
+                color = NeutralWeakColor,
                 style = MaterialTheme.typography.bodyText1
             )
 
