@@ -15,8 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 import ru.testtask.testapplication.ui.theme.subheading1
 
 @Composable
@@ -26,7 +28,9 @@ fun TopBar(
     onRightIconClick: () -> Unit = {},
     iconLeft: Int? = null,
     onLeftIconClick: () -> Unit = {},
-    text: String = ""
+    text: String = "",
+    tintRightIcon: Color = BrandDarkModeColor,
+    tinyLeftIcon: Color = BrandDarkModeColor
 ) {
     Box(
         modifier = modifier
@@ -52,7 +56,8 @@ fun TopBar(
                             .clickable { onLeftIconClick() }
                             .align(Alignment.CenterVertically),
                         painter = painterResource(iconLeft),
-                        contentDescription = "left button"
+                        contentDescription = "left button",
+                        tint = tinyLeftIcon
                     )
                 }
                 Text(
@@ -68,7 +73,8 @@ fun TopBar(
                         .clickable { onRightIconClick() }
                         .align(Alignment.CenterVertically),
                     painter = painterResource(iconRight),
-                    contentDescription = "left button"
+                    contentDescription = "left button",
+                    tint = tintRightIcon
                 )
             }
         }

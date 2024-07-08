@@ -43,6 +43,7 @@ import ru.testtask.testapplication.ui.component.cards.visitors.VisitorsList
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.NaturalWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
@@ -85,6 +86,12 @@ fun DetailEventScreen(
             modifier = Modifier.padding(top = 16.dp),
             iconLeft = R.drawable.ic_chevron_left,
             text = detailInfo.name,
+            iconRight = when (stateBnt) {
+                ButtonState.PRESSED.id -> R.drawable.ic_check_big
+                else -> null
+            },
+            onRightIconClick = { onClickButton() },
+            tintRightIcon = BrandDefaultColor
         )
 
         Column(
