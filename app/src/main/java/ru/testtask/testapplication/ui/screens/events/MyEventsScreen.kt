@@ -2,6 +2,7 @@ package ru.testtask.testapplication.ui.screens.events
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,19 +20,21 @@ fun MyEventsScreen(
 ) {
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList2
 
-    Column(
+    LazyColumn(
         modifier = modifier
             .padding(horizontal = 24.dp)
     ) {
-        TopBar(
-            text = "Мои встречи",
-            iconLeft = R.drawable.ic_chevron_left,
-        )
+        item {
+            TopBar(
+                text = "Мои встречи",
+                iconLeft = R.drawable.ic_chevron_left,
+            )
 
-        EventListByGroup(
-            modifier = Modifier.padding(top = 16.dp),
-            listByGroup = listByGroup,
-            navController = navController
-        )
+            EventListByGroup(
+                modifier = Modifier.padding(top = 16.dp),
+                listByGroup = listByGroup,
+                navController = navController
+            )
+        }
     }
 }

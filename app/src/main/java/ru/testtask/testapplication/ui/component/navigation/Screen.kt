@@ -12,4 +12,8 @@ sealed class Screen(val route: String) {
     data object Community: Screen("community")
 
     data object More: Screen("more")
+
+    data object Profile: Screen("more_profile")
+
+    data object MyEvents: Screen("more_my_events")
 }

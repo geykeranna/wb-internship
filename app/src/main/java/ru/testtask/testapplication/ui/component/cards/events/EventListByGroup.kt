@@ -1,9 +1,11 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
@@ -29,7 +31,7 @@ import ru.testtask.testapplication.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EventListByGroup(
+fun EventListByGroup (
     modifier: Modifier,
     listByGroup: List<EventsByGroup>,
     navController: NavController,
@@ -38,39 +40,38 @@ fun EventListByGroup(
     val pagerState = rememberPagerState(pageCount = { listByGroup.size })
     val selectedTab = remember { derivedStateOf { pagerState.currentPage } }
 
-    Column(modifier = modifier) {
-        TabRow(
-            selectedTabIndex = selectedTab.value,
-            modifier = Modifier.fillMaxWidth(),
-            containerColor = Color.Transparent,
-            contentColor = BrandDefaultColor,
-            divider = {},
-            indicator = @Composable { tabPositions: List<TabPosition> ->
-                CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
-            }
-        ) {
-            listByGroup.forEachIndexed { index, tab ->
-                Tab(
-                    modifier = Modifier
-                        .height(48.dp),
-                    selected = selectedTab.value == index,
-                    selectedContentColor = BrandDefaultColor,
-                    unselectedContentColor = TabUnselectedColor,
-                    onClick = {
-                        scope.launch {
-                            pagerState.scrollToPage(index)
-                        }
-                    },
-                ) {
-                    Text(
-                        text = tab.group.uppercase(),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+    TabRow(
+        selectedTabIndex = selectedTab.value,
+        modifier = Modifier.fillMaxWidth(),
+        containerColor = Color.Transparent,
+        contentColor = BrandDefaultColor,
+        divider = {},
+        indicator = @Composable { tabPositions: List<TabPosition> ->
+            CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
+        }
+    ) {
+        listByGroup.forEachIndexed { index, tab ->
+            Tab(
+                modifier = Modifier
+                    .height(48.dp),
+                selected = selectedTab.value == index,
+                selectedContentColor = BrandDefaultColor,
+                unselectedContentColor = TabUnselectedColor,
+                onClick = {
+                    scope.launch {
+                        pagerState.scrollToPage(index)
+                    }
+                },
+            ) {
+                Text(
+                    text = tab.group.uppercase(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                )
             }
         }
     }
+
     HorizontalPager(
         state = pagerState,
         modifier = modifier

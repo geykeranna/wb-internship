@@ -9,6 +9,7 @@ import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
 import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
+import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 import ru.testtask.testapplication.ui.screens.tasks.Task6
 
 @Composable
@@ -17,7 +18,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavBar.Event.route
+        startDestination = Screen.Splash.route
     ){
         composable(route = Screen.Events.route) {
             ActiveEventsScreen(
@@ -50,9 +51,16 @@ fun NavGraph(
             }
         }
 
-        composable(route = NavBar.More.route) {
-//            MoreScreen()
-            Task6()
+        composable(route = Screen.More.route) {
+            MoreScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.Splash.route) {
+            SplashScreen(
+                navController = navController
+            )
         }
     }
 }

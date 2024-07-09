@@ -1,10 +1,10 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,7 +18,7 @@ fun EventCardsList(
     itemsList: List<EventData>,
     navController: NavController,
     sorted: SORTBY = SORTBY.NO_SORT,
-    height: Int = 104
+    height: Int = 104,
 ) {
     val listItems = when (sorted) {
         SORTBY.NO_ACTIVE -> itemsList.filter { !it.active }
@@ -29,7 +29,7 @@ fun EventCardsList(
     LazyColumn(
         modifier = modifier.heightIn(min = (listItems.size * height).dp, max = (listItems.size * height).dp + 10.dp),
         contentPadding = PaddingValues(top = 14.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         items(listItems.size) { index ->
             if (itemsList[index].active) {

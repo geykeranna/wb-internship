@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -28,55 +29,57 @@ import ru.testtask.testapplication.ui.theme.subheading2
 fun ProfileScreen(
     modifier: Modifier = Modifier,
 ){
-    val scroll = rememberScrollState()
     val userData: UserData = UserData.shimmerData
 
-    Column(
+    LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
-        TopBar(
-            modifier = modifier.padding(horizontal = 16.dp),
-            iconLeft = R.drawable.ic_chevron_left,
-            onLeftIconClick = {  },
-            iconRight = R.drawable.ic_edit,
-            onRightIconClick = { },
-            text = "Профиль"
-        )
-
-        Column (
-            modifier = Modifier
-                .verticalScroll(scroll),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            ProfileAvatar(
-                modifier = Modifier.padding(top = 50.dp),
-                size = ProfileSize.LARGE
+        item {
+            TopBar(
+                modifier = modifier.padding(horizontal = 16.dp),
+                iconLeft = R.drawable.ic_chevron_left,
+                onLeftIconClick = {  },
+                iconRight = R.drawable.ic_edit,
+                onRightIconClick = { },
+                text = "Профиль"
             )
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
+            LazyColumn (
+                modifier = Modifier,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier,
-                    text = userData.name,
-                    style = MaterialTheme.typography.heading3.copy(textAlign = TextAlign.Center)
-                )
-                Text(
-                    modifier = Modifier,
-                    text = userData.phone,
-                    style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
-                    color = NeutralDisabledColor
-                )
-            }
+            ){
+                item {
+                    ProfileAvatar(
+                        modifier = Modifier.padding(top = 50.dp),
+                        size = ProfileSize.LARGE
+                    )
 
-            SocialChips(
-                modifier = Modifier.padding(26.dp),
-                list = userData.socialMedia
-            )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            modifier = Modifier,
+                            text = userData.name,
+                            style = MaterialTheme.typography.heading3.copy(textAlign = TextAlign.Center)
+                        )
+                        Text(
+                            modifier = Modifier,
+                            text = userData.phone,
+                            style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
+                            color = NeutralDisabledColor
+                        )
+                    }
+
+                    SocialChips(
+                        modifier = Modifier.padding(26.dp),
+                        list = userData.socialMedia
+                    )
+                }
+            }
         }
     }
 }

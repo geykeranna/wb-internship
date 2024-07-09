@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -35,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.EventData
@@ -58,7 +62,6 @@ fun DetailEventScreen(
     navController: NavController
 ) {
     val detailInfo = EventData.shimmerData1
-    val scroll = rememberScrollState()
     val usersList = remember { detailInfo.usersList }
     val isMapFullScreen = remember { mutableStateOf(false) }
     FullScreenImageDialog(isMapFullScreen = isMapFullScreen)
@@ -96,7 +99,10 @@ fun DetailEventScreen(
             },
             onRightIconClick = { onClickButton() },
             tintRightIcon = BrandDefaultColor,
-            onLeftIconClick = { navController.navigate(Screen.Events.route) }
+            onLeftIconClick = {
+                if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+                    navController.popBackStack()
+            }
         )
 
         Column(
@@ -115,42 +121,48 @@ fun DetailEventScreen(
             )
         }
 
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.85f)
-                .padding(horizontal = 12.dp)
-                .verticalScroll(scroll),
+                .padding(horizontal = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // заглушка
-            Surface(
-                onClick = { isMapFullScreen.value = true },
-                color = Color.White
-            ) {
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(24.dp)),
-                    painter = painterResource(R.drawable.defaultmap),
-                    contentDescription = "map",
-                    contentScale = ContentScale.FillWidth
+            item {
+                // заглушка
+                Surface(
+                    modifier = Modifier.height(175.dp),
+                    onClick = { isMapFullScreen.value = true },
+                    color = Color.White
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(24.dp)),
+                        painter = painterResource(R.drawable.defaultmap),
+                        contentDescription = "map",
+                        contentScale = ContentScale.FillWidth
+                    )
+                }
+            }
+            item {
+                ExpandableText(
+                    modifier = Modifier,
+                    text = detailInfo.description,
+                    expandText = "...",
+                    collapseText = "Скрыть",
+                    maxLinesCollapsed = 8,
+                    style = MaterialTheme.typography.metadata1.copy(color = NeutralWeakColor, lineHeight = 20.sp)
                 )
             }
 
-            ExpandableText(
-                modifier = Modifier,
-                text = detailInfo.description,
-                expandText = "...",
-                collapseText = "Скрыть",
-                maxLinesCollapsed = 8,
-                style = MaterialTheme.typography.metadata1.copy(color = NeutralWeakColor, lineHeight = 20.sp)
-            )
-
-            VisitorsList(
-                visitorsList = usersList
-            )
+            item {
+                VisitorsList(
+                    modifier = Modifier.height(56.dp),
+                    visitorsList = usersList
+                )
+            }
         }
 
         when(stateBnt) {
