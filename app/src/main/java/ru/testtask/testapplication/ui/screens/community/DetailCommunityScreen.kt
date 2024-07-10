@@ -3,7 +3,9 @@ package ru.testtask.testapplication.ui.screens.community
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -30,23 +32,21 @@ fun DetailCommunityScreen(
     navController: NavController
 ) {
     val detailInfo = CommunityData.shimmerData
-    val scroll = rememberScrollState()
 
-    Column(
-        modifier = Modifier.fillMaxSize()
+    TopBar(
+        modifier = Modifier
+            .padding(horizontal = 16.dp),
+        iconLeft = R.drawable.ic_chevron_left,
+        text = detailInfo.label,
+        onLeftIconClick = { navController.navigate(Screen.Community.route) }
+    )
+
+    LazyColumn (
+        modifier = Modifier
+            .padding(horizontal = 28.dp)
+            .padding(top = 62.dp)
     ){
-        TopBar(
-            modifier = Modifier
-                .padding(horizontal = 16.dp),
-            iconLeft = R.drawable.ic_chevron_left,
-            text = detailInfo.label,
-            onLeftIconClick = { navController.navigate(Screen.Community.route) }
-        )
-        Column(
-            modifier = modifier
-                .padding(horizontal = 28.dp)
-                .verticalScroll(scroll),
-        ) {
+        item {
             ExpandableText(
                 modifier = Modifier,
                 text = detailInfo.description,

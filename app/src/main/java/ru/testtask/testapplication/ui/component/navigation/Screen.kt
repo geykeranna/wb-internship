@@ -1,19 +1,44 @@
 package ru.testtask.testapplication.ui.component.navigation
 
-sealed class Screen(val route: String) {
-    data object Splash: Screen("splash")
+sealed class Screen(val route: String, val name: String) {
 
-    data object Events: Screen("event")
+    data object Splash: Screen(
+        route = "splash",
+        name = "Сплеш"
+    )
 
-    data object EventsDetail: Screen("event_detail")
+    data object Events: Screen(
+        route = "event",
+        name = "Встречи"
+    )
 
-    data object CommunityDetail: Screen("community_detail")
+    data object EventsDetail: Screen(
+        route = "event_detail",
+        name = "Экран детального просмотра"
+    )
 
-    data object Community: Screen("community")
+    data object CommunityDetail: Screen(
+        route = "community_detail",
+        name = "Экран детального просмотра"
+    )
 
-    data object More: Screen("more")
+    data object Community: Screen(
+        route = "community",
+        name = "Сообщества"
+    )
 
-    data object Profile: Screen("more_profile")
+    data object More: Screen(
+        route = "more",
+        name = "Ещё"
+    )
 
-    data object MyEvents: Screen("more_my_events")
+    data object Profile: Screen(
+        route = "more_profile",
+        name = "Профиль"
+    )
+
+    data object MyEvents: Screen(
+        route = "more_my_meets",
+        name = "Мои встречи"
+    )
 }

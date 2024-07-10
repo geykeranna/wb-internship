@@ -34,15 +34,15 @@ fun MenuItem(
     iconRight: Int? = null,
     iconLeft: Int? = null,
     text: String = "",
-    onClickRightIcon: () -> Unit = {}
+    onClickItem: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp),
+            .height(40.dp)
+            .clickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-
     ) {
         Row (
             modifier = Modifier
@@ -66,8 +66,7 @@ fun MenuItem(
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .size(24.dp)
-                    .clickable { onClickRightIcon() },
+                    .size(24.dp),
                 contentDescription = "next",
                 painter = painterResource(it)
             )
@@ -80,15 +79,15 @@ fun MenuItemUser(
     modifier: Modifier = Modifier,
     userData: UserData,
     iconRight: Int? = null,
-    onClickRightIcon: () -> Unit = {}
+    onClickItem: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(66.dp),
+            .height(66.dp)
+            .clickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-
     ) {
         Row (
             modifier = Modifier
@@ -133,8 +132,7 @@ fun MenuItemUser(
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .size(24.dp)
-                    .clickable { onClickRightIcon() },
+                    .size(24.dp),
                 contentDescription = "next",
                 painter = painterResource(it)
             )

@@ -8,7 +8,9 @@ import ru.testtask.testapplication.ui.screens.community.CommunityScreen
 import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
 import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
+import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
+import ru.testtask.testapplication.ui.screens.profile.ProfileScreen
 import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 import ru.testtask.testapplication.ui.screens.tasks.Task6
 
@@ -59,6 +61,18 @@ fun NavGraph(
 
         composable(route = Screen.Splash.route) {
             SplashScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.MyEvents.route) {
+            MyEventsScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.Profile.route) {
+            ProfileScreen(
                 navController = navController
             )
         }

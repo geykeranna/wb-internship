@@ -3,6 +3,7 @@ package ru.testtask.testapplication.ui.component.cards.events
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
@@ -42,7 +43,7 @@ fun EventListByGroup (
 
     TabRow(
         selectedTabIndex = selectedTab.value,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         containerColor = Color.Transparent,
         contentColor = BrandDefaultColor,
         divider = {},

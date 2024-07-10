@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.ui.component.navigation.NavGraph
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.BottomNavBar
+import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.component.utils.NoRippleTheme
 import ru.testtask.testapplication.ui.theme.TestApplicationTheme
 
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         val currScreen = navController.currentBackStackEntryAsState().value?.destination?.route
                         if (currScreen != Screen.Splash.route)
                             BottomNavBar(navController)
-                     },
+                    },
                     containerColor = Color.White,
                 ) { padding ->
                     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {

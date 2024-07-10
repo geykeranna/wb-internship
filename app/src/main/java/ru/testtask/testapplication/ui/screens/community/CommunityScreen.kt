@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import ru.testtask.testapplication.data.model.CommunityData
 import ru.testtask.testapplication.ui.component.cards.community.CommunityCardList
 import ru.testtask.testapplication.ui.component.input.SearchBar
+import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -39,14 +40,18 @@ fun CommunityScreen(
     ) {
         item {
             TopBar(
-                text = "Сообщества",
+                text = Screen.Community.name,
             )
+        }
 
+        item {
             SearchBar (
                 modifier = Modifier.padding(vertical = 16.dp),
                 state = searchState
             )
+        }
 
+        item {
             CommunityCardList(
                 modifier = Modifier,
                 itemsList = itemsList,

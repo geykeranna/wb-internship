@@ -1,7 +1,6 @@
 package ru.testtask.testapplication.ui.screens.more
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.MenuItem
 import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
@@ -23,82 +23,87 @@ fun MoreScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
+    TopBar (
+        modifier = Modifier
+            .padding(start = 16.dp),
+        text = Screen.More.name
+    )
+
     LazyColumn (
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .padding(top = 62.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
-            TopBar (
-                modifier = Modifier
-                    .padding(start = 8.dp),
-                text = "Ещё"
-            )
-
             MenuItemUser(
                 userData = UserData.shimmerData,
-                onClickRightIcon = {}
+                onClickItem = {
+                    navController.navigate(Screen.Profile.route)
+                }
             )
+        }
 
+        item {
             MenuItem(
                 iconLeft = R.drawable.ic_coffee,
-                onClickRightIcon = { },
+                onClickItem = {
+                    navController.navigate(Screen.MyEvents.route)
+                },
                 text = "Мои встречи",
                 iconRight = R.drawable.ic_chevron_right
             )
+        }
 
-            LazyColumn {
-                item {
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Тема",
-                        iconLeft = R.drawable.ic_sun
-                    )
+        item {
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Тема",
+                iconLeft = R.drawable.ic_sun
+            )
 
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Уведомления",
-                        iconLeft = R.drawable.ic_notification
-                    )
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Уведомления",
+                iconLeft = R.drawable.ic_notification
+            )
 
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Безопасность",
-                        iconLeft = R.drawable.ic_outline_privacy_tip
-                    )
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Безопасность",
+                iconLeft = R.drawable.ic_outline_privacy_tip
+            )
 
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Память и ресурсы",
-                        iconLeft = R.drawable.ic_folder
-                    )
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Память и ресурсы",
+                iconLeft = R.drawable.ic_folder
+            )
 
-                    HorizontalDivider(
-                        modifier = Modifier.fillMaxWidth(),
-                        thickness = 1.dp,
-                        color = NeutralLineColor
-                    )
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                thickness = 1.dp,
+                color = NeutralLineColor
+            )
 
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Помощь",
-                        iconLeft = R.drawable.ic_help_circle
-                    )
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Помощь",
+                iconLeft = R.drawable.ic_help_circle
+            )
 
-                    MenuItem(
-                        iconRight = R.drawable.ic_chevron_right,
-                        onClickRightIcon = { },
-                        text = "Пригласи друга",
-                        iconLeft = R.drawable.ic_mail
-                    )
-                }
-            }
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Пригласи друга",
+                iconLeft = R.drawable.ic_mail
+            )
         }
     }
 }
