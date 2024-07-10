@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.ui.theme.PinkColor
-import ru.testtask.testapplication.ui.theme.PurplePrimaryColor
+import ru.testtask.testapplication.ui.theme.BrandBackgroundColor
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 import ru.testtask.testapplication.ui.theme.metadata3
 
 @Composable
@@ -33,13 +33,13 @@ fun CustomChipsGroup(
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .clip(RoundedCornerShape(40.dp))
-                    .background(PinkColor)
+                    .background(BrandBackgroundColor)
             ) {
                 Text(
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                     text = chipsList[it],
                     maxLines = 1,
-                    color = PurplePrimaryColor,
+                    color = BrandDarkModeColor,
                     style = MaterialTheme.typography.metadata3
                 )
             }

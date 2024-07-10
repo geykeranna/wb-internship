@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.component.button.def
+package ru.testtask.testapplication.ui.component.button.default
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
@@ -14,15 +14,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.testtask.testapplication.ui.theme.LightColor
 import ru.testtask.testapplication.ui.theme.PinkLightColor
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
-import ru.testtask.testapplication.ui.theme.PurplePrimaryColor
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 
 @Composable
 fun CustomButton(
     modifier: Modifier = Modifier,
-    backgroundDefaultColor: Color = PurpleDefaultColor,
-    backgroundPrimaryColor: Color = PurplePrimaryColor,
+    backgroundDefaultColor: Color = BrandDefaultColor,
+    backgroundPrimaryColor: Color = BrandDarkModeColor,
     labelColor: Color = LightColor,
     disableColor: Color = PurpleLightColor,
     outlineColor: Color = PinkLightColor,

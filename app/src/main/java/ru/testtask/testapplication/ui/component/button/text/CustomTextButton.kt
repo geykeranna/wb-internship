@@ -12,18 +12,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.testtask.testapplication.ui.theme.GrayColor
+import ru.testtask.testapplication.ui.theme.NeutralOffWhiteColor
 import ru.testtask.testapplication.ui.theme.PinkLightColor
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
-import ru.testtask.testapplication.ui.theme.PurplePrimaryColor
+import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 
 @Composable
 fun CustomTextButton(
     modifier: Modifier = Modifier,
-    contentDefaultColor: Color = PurpleDefaultColor,
-    contentPrimaryColor: Color = PurplePrimaryColor,
-    backgroundBorderColor: Color = GrayColor,
+    contentDefaultColor: Color = BrandDefaultColor,
+    contentPrimaryColor: Color = BrandDarkModeColor,
+    backgroundBorderColor: Color = NeutralOffWhiteColor,
     disableColor: Color = PurpleLightColor,
     outlineColor: Color = PinkLightColor,
     outlined: Boolean = false,

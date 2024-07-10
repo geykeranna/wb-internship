@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.data.model.SocialMedia
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 
 @Composable
 fun SocialChips(
@@ -41,7 +41,7 @@ fun SocialChips(
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(25.dp))
-                    .border(1.67.dp, PurpleDefaultColor, RoundedCornerShape(25.dp))
+                    .border(1.67.dp, BrandDefaultColor, RoundedCornerShape(25.dp))
             ) {
                 list[it].icon?.let { icon ->
                     Icon(
@@ -52,7 +52,7 @@ fun SocialChips(
                             .clickable { if(intent.data.toString().isNotEmpty()) context.startActivity(intent) },
                         painter = painterResource(icon),
                         contentDescription = null,
-                        tint = PurpleDefaultColor
+                        tint = BrandDefaultColor
                     )
                 }
             }

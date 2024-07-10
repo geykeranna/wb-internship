@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.ui.theme.GrayLightColor
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
 fun ProfileAvatar(
@@ -30,7 +30,7 @@ fun ProfileAvatar(
             modifier = Modifier
                 .size(size.boxSize.dp)
                 .clip(CircleShape)
-                .background(GrayLightColor),
+                .background(NeutralLineColor),
             contentAlignment = Alignment.Center
         ){
             if (src.isNullOrEmpty()) {
@@ -56,7 +56,7 @@ fun ProfileAvatar(
                     .padding(end = 3.dp)
                     .size(size.floatingBntSize.dp)
                     .clip(CircleShape)
-                    .clickable { onFloatingClick },
+                    .clickable { onFloatingClick() },
                 painter = painterResource(id = R.drawable.ic_plus_circle),
                 contentDescription = "profile"
             )

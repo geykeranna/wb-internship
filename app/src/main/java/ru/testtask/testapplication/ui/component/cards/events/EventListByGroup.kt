@@ -1,9 +1,12 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
@@ -20,67 +23,70 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
-import ru.testtask.testapplication.ui.theme.PurpleDefaultColor
+import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EventListByGroup(
+fun EventListByGroup (
     modifier: Modifier,
     listByGroup: List<EventsByGroup>,
+    navController: NavController,
 ) {
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { listByGroup.size })
     val selectedTab = remember { derivedStateOf { pagerState.currentPage } }
 
-    Column(modifier = modifier) {
-        TabRow(
-            selectedTabIndex = selectedTab.value,
-            modifier = Modifier.fillMaxWidth(),
-            containerColor = Color.Transparent,
-            contentColor = PurpleDefaultColor,
-            divider = {},
-            indicator = @Composable { tabPositions: List<TabPosition> ->
-                CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), PurpleDefaultColor)
-            }
-        ) {
-            listByGroup.forEachIndexed { index, tab ->
-                Tab(
-                    modifier = Modifier
-                        .height(48.dp),
-                    selected = selectedTab.value == index,
-                    selectedContentColor = PurpleDefaultColor,
-                    unselectedContentColor = TabUnselectedColor,
-                    onClick = {
-                        scope.launch {
-                            pagerState.animateScrollToPage(index)
-                        }
-                    },
-
-                ) {
-                    Text(
-                        text = tab.group.uppercase(),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+    TabRow(
+        selectedTabIndex = selectedTab.value,
+        modifier = modifier.fillMaxWidth(),
+        containerColor = Color.Transparent,
+        contentColor = BrandDefaultColor,
+        divider = {},
+        indicator = @Composable { tabPositions: List<TabPosition> ->
+            CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
+        }
+    ) {
+        listByGroup.forEachIndexed { index, tab ->
+            Tab(
+                modifier = Modifier
+                    .height(48.dp),
+                selected = selectedTab.value == index,
+                selectedContentColor = BrandDefaultColor,
+                unselectedContentColor = TabUnselectedColor,
+                onClick = {
+                    scope.launch {
+                        pagerState.scrollToPage(index)
+                    }
+                },
+            ) {
+                Text(
+                    text = tab.group.uppercase(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                )
             }
         }
     }
-//    EventCardsList(
-//        itemsList = listByGroup[selectedTab.value].listOfEvents
-//    )
+
     HorizontalPager(
         state = pagerState,
         modifier = modifier
             .fillMaxWidth(),
-        userScrollEnabled = false
     ) { page ->
+        val sorted = when (listByGroup[page].group) {
+            "Уже прошли" -> SORTBY.NO_ACTIVE
+            "Активные" -> SORTBY.ACTIVE
+            else -> SORTBY.NO_SORT
+        }
         EventCardsList(
-            itemsList = listByGroup[page].listOfEvents
+            itemsList = listByGroup[page].listOfEvents,
+            navController = navController,
+            sorted = sorted
         )
     }
 }

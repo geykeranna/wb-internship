@@ -2,6 +2,7 @@ package ru.testtask.testapplication.ui.component.cards.events
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,10 +20,12 @@ import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
+import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
+import ru.testtask.testapplication.ui.theme.metadata2
 
 @Composable
-fun EventCard(
+fun EventCardEnded(
     modifier: Modifier = Modifier,
     title: String = "",
     tagList: List<String> = listOf(),
@@ -69,6 +72,16 @@ fun EventCard(
                         style = MaterialTheme.typography.bodyText1,
                         color = Color.Black
                     )
+                    Box(
+                        contentAlignment = Alignment.TopEnd,
+                    ){
+                        Text(
+                            modifier = Modifier,
+                            text = "Закончилась",
+                            style = MaterialTheme.typography.metadata2,
+                            color = NeutralWeakColor,
+                        )
+                    }
                 }
 
                 Text(

@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
-import ru.testtask.testapplication.ui.component.button.def.AnimatedCustomButton
-import ru.testtask.testapplication.ui.component.button.def.CustomButton
+import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomButton
+import ru.testtask.testapplication.ui.component.button.default.CustomButton
 import ru.testtask.testapplication.ui.component.button.outlined.AnimatedCustomOutlinedButton
 import ru.testtask.testapplication.ui.component.button.outlined.CustomOutlinedButton
 import ru.testtask.testapplication.ui.component.button.text.AnimatedCustomTextButton

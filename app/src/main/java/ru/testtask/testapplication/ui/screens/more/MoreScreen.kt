@@ -1,0 +1,109 @@
+package ru.testtask.testapplication.ui.screens.more
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import ru.testtask.testapplication.R
+import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.ui.component.navigation.Screen
+import ru.testtask.testapplication.ui.component.toolbars.MenuItem
+import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser
+import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.theme.NeutralLineColor
+
+@Composable
+fun MoreScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
+    TopBar (
+        modifier = Modifier
+            .padding(start = 16.dp),
+        text = Screen.More.name
+    )
+
+    LazyColumn (
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(top = 62.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        item {
+            MenuItemUser(
+                userData = UserData.shimmerData,
+                onClickItem = {
+                    navController.navigate(Screen.Profile.route)
+                }
+            )
+        }
+
+        item {
+            MenuItem(
+                iconLeft = R.drawable.ic_coffee,
+                onClickItem = {
+                    navController.navigate(Screen.MyEvents.route)
+                },
+                text = "Мои встречи",
+                iconRight = R.drawable.ic_chevron_right
+            )
+        }
+
+        item {
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Тема",
+                iconLeft = R.drawable.ic_sun
+            )
+
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Уведомления",
+                iconLeft = R.drawable.ic_notification
+            )
+
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Безопасность",
+                iconLeft = R.drawable.ic_outline_privacy_tip
+            )
+
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Память и ресурсы",
+                iconLeft = R.drawable.ic_folder
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                thickness = 1.dp,
+                color = NeutralLineColor
+            )
+
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Помощь",
+                iconLeft = R.drawable.ic_help_circle
+            )
+
+            MenuItem(
+                iconRight = R.drawable.ic_chevron_right,
+                onClickItem = { },
+                text = "Пригласи друга",
+                iconLeft = R.drawable.ic_mail
+            )
+        }
+    }
+}
