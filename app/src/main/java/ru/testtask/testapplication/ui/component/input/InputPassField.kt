@@ -36,15 +36,18 @@ import ru.testtask.testapplication.ui.theme.heading1
 @Composable
 fun InputPassField(
     modifier: Modifier = Modifier,
-    onEnterClick: () -> Unit = {}
+    onEnterClick: () -> Unit = {},
+    passLength: Int = 4,
 ) {
     var textFieldValue by remember() {
         mutableStateOf(TextFieldValue("" ))
     }
     val focusRequester = remember { FocusRequester() }
+
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
+
     BasicTextField(
         modifier = modifier
             .focusRequester(focusRequester),
@@ -69,7 +72,7 @@ fun InputPassField(
                 horizontalArrangement = Arrangement.spacedBy(40.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                repeat(4){
+                repeat(passLength){
                     PinCodeDot(value = textFieldValue.text, index = it)
                 }
             }
@@ -90,7 +93,7 @@ fun PinCodeDot(value: String, index: Int) {
                 style = MaterialTheme.typography.heading1,
                 color = NeutralActiveColor
             )
-        }else{
+        } else{
             Box(
                 modifier = Modifier
                     .fillMaxSize()

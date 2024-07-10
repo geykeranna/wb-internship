@@ -32,13 +32,28 @@ sealed class Screen(val route: String, val name: String) {
         name = "Ещё"
     )
 
-    data object Profile: Screen(
+    data object ProfileView: Screen(
         route = "more_profile",
+        name = "Профиль"
+    )
+
+    data object ProfileEdit: Screen(
+        route = "more_profile_edit",
         name = "Профиль"
     )
 
     data object MyEvents: Screen(
         route = "more_my_meets",
         name = "Мои встречи"
+    )
+
+    data object Phone: Screen(
+        route = "first_number",
+        name = "Введите номер телефона"
+    )
+
+    data object PinCode: Screen(
+        route = "first_pin_code",
+        name = "Введите код"
     )
 }

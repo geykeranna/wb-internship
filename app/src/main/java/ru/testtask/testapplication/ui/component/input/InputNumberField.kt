@@ -30,6 +30,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,7 +45,8 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 @Composable
 fun InputNumberField(
     modifier: Modifier = Modifier,
-    onEnterClick: () -> Unit = {},
+    onEnterClick: (number: String) -> Unit = {},
+    placeholder: String = "000 000 00-00-00"
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textFieldValue by remember {
@@ -55,6 +57,9 @@ fun InputNumberField(
         mutableStateOf(phoneCountryCodeList.first())
     }
     val focusRequester = remember { FocusRequester() }
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Row(
         modifier = modifier
@@ -118,6 +123,7 @@ fun InputNumberField(
             }
         }
         Spacer(modifier = Modifier.width(8.dp))
+
         BasicTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
@@ -134,7 +140,7 @@ fun InputNumberField(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { onEnterClick() }
+                onNext = { onEnterClick(textFieldValue) }
             ),
             visualTransformation = PhoneNumberVisualTransformation(),
             decorationBox = { innerTextField ->
@@ -149,7 +155,7 @@ fun InputNumberField(
                 ) {
                     if (textFieldValue.isEmpty()){
                         Text(
-                            text = "000 000 00-00-00",
+                            text = placeholder,
                             style = MaterialTheme.typography.bodyText1,
                             color = NeutralDisabledColor
                         )
@@ -158,8 +164,5 @@ fun InputNumberField(
                 }
             }
         )
-        LaunchedEffect(Unit) {
-            focusRequester.requestFocus()
-        }
     }
 }
