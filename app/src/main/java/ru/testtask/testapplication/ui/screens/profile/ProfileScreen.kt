@@ -20,7 +20,7 @@ import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.chips.SocialChips
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
-import ru.testtask.testapplication.ui.theme.GrayDarkColor
+import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.heading3
 import ru.testtask.testapplication.ui.theme.subheading2
 
@@ -35,7 +35,7 @@ fun ProfileScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         TopBar(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = modifier.padding(horizontal = 16.dp),
             iconLeft = R.drawable.ic_chevron_left,
             onLeftIconClick = {  },
             iconRight = R.drawable.ic_edit,
@@ -69,7 +69,7 @@ fun ProfileScreen(
                     modifier = Modifier,
                     text = userData.phone,
                     style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
-                    color = GrayDarkColor
+                    color = NeutralDisabledColor
                 )
             }
 

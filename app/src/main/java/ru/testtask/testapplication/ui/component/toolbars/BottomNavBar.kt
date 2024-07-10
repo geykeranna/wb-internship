@@ -35,7 +35,7 @@ fun BottomNavBar(
     navController: NavHostController
 ){
     val screens = listOf(
-        NavBar.Meeting,
+        NavBar.Event,
         NavBar.Community,
         NavBar.More
     )
@@ -72,7 +72,7 @@ fun BarItem(
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {
-    val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
+    val selected = currentDestination?.hierarchy?.any { it.route?.contains(screen.route) ?: false } == true
 
     Column (
         modifier = Modifier

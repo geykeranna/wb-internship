@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.data.model.EventData
 import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
@@ -37,17 +38,10 @@ fun Task2() {
 
         EventCardsList(
             itemsList = listOf(
-                EventData(
-                    id = 0,
-                    name = "Developer meeting",
-                    location = "Москва",
-                    date = "19.09.2024",
-                    tagList = listOf("Python", "Junior", "Moscow"),
-                    icon = null,
-                    active = false
-                ),
-                EventData.shimmerData1
-            )
+                EventData.shimmerData1,
+                EventData.shimmerData2,
+            ),
+            navController = rememberNavController()
         )
 
 

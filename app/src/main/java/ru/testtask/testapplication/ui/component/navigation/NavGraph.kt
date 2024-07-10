@@ -4,9 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.testtask.testapplication.ui.screens.community.CommunityScreen
+import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
-import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
-import ru.testtask.testapplication.ui.screens.profile.ProfileScreen
+import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
+import ru.testtask.testapplication.ui.screens.more.MoreScreen
+import ru.testtask.testapplication.ui.screens.tasks.Task6
 
 @Composable
 fun NavGraph(
@@ -14,19 +17,42 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavBar.Meeting.route
+        startDestination = NavBar.Event.route
     ){
-        composable(route = NavBar.Meeting.route) {
-            ActiveEventsScreen()
+        composable(route = Screen.Events.route) {
+            ActiveEventsScreen(
+                navController = navController
+            )
         }
 
-        composable(route = NavBar.Community.route) {
-//            CommunityScreen() // Временно чтобы показать все экраны с дз
-            MyEventsScreen()
+        composable(route = Screen.EventsDetail.route + "/{id}") { stackEntry ->
+            val id = stackEntry.arguments?.getString("id")
+            if (id != null) {
+                DetailEventScreen(
+                    id = id,
+                    navController = navController
+                )
+            }
+        }
+
+        composable(route = Screen.Community.route) {
+            CommunityScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.CommunityDetail.route + "/{id}") { stackEntry ->
+            val id = stackEntry.arguments?.getString("id")
+            if (id != null) {
+                DetailCommunityScreen(
+                    navController = navController
+                )
+            }
         }
 
         composable(route = NavBar.More.route) {
-            ProfileScreen()
+//            MoreScreen()
+            Task6()
         }
     }
 }

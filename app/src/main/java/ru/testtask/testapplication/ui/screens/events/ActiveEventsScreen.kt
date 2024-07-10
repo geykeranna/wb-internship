@@ -7,6 +7,8 @@ import androidx.compose.foundation.text2.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.cards.events.EventListByGroup
@@ -17,6 +19,7 @@ import ru.testtask.testapplication.ui.component.toolbars.TopBar
 @Composable
 fun ActiveEventsScreen(
     modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     val searchState = rememberTextFieldState("")
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList1
@@ -37,7 +40,8 @@ fun ActiveEventsScreen(
 
         EventListByGroup(
             listByGroup = listByGroup,
-            modifier = Modifier
+            modifier = Modifier,
+            navController = navController,
         )
     }
 }
