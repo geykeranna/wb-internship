@@ -17,7 +17,8 @@ import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 
 @Composable
 fun NavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    isAuth: Boolean = false,
 ) {
     NavHost(
         navController = navController,
@@ -62,7 +63,8 @@ fun NavGraph(
 
         composable(route = Screen.Splash.route) {
             SplashScreen(
-                navController = navController
+                navController = navController,
+                isAuth = isAuth
             )
         }
 
