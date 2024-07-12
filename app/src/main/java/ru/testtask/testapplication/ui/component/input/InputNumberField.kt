@@ -44,7 +44,9 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 @Composable
 fun InputNumberField(
     modifier: Modifier = Modifier,
+    onChange: (number: String) -> Unit = {},
     onEnterClick: () -> Unit = {},
+    onValidate: (validate: Boolean) -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textFieldValue by remember {
@@ -55,6 +57,9 @@ fun InputNumberField(
         mutableStateOf(phoneCountryCodeList.first())
     }
     val focusRequester = remember { FocusRequester() }
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Row(
         modifier = modifier
@@ -118,25 +123,30 @@ fun InputNumberField(
             }
         }
         Spacer(modifier = Modifier.width(8.dp))
+
         BasicTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
             value = textFieldValue,
             cursorBrush = SolidColor(Color.Transparent),
             onValueChange = {
-                textFieldValue = it.take(9)
+                textFieldValue = it
+                    .replace("\\D", "")
+                    .take(selectedPhoneCountryCode.mask.count { num -> num == '0' })
+                onValidate(selectedPhoneCountryCode.mask.count { num -> num == '0' } == textFieldValue.length)
+                onChange("${selectedPhoneCountryCode.countryCode}$textFieldValue")
             },
             textStyle = MaterialTheme.typography.bodyText1.copy(
                 color = NeutralActiveColor
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Phone,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.NumberPassword,
+                imeAction = ImeAction.Send
             ),
             keyboardActions = KeyboardActions(
-                onNext = { onEnterClick() }
+                onSend = { onEnterClick() },
             ),
-            visualTransformation = PhoneNumberVisualTransformation(),
+            visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
             decorationBox = { innerTextField ->
                 Row(
                     modifier = Modifier
@@ -149,7 +159,7 @@ fun InputNumberField(
                 ) {
                     if (textFieldValue.isEmpty()){
                         Text(
-                            text = "000 000 00-00-00",
+                            text = selectedPhoneCountryCode.mask,
                             style = MaterialTheme.typography.bodyText1,
                             color = NeutralDisabledColor
                         )
@@ -158,8 +168,5 @@ fun InputNumberField(
                 }
             }
         )
-        LaunchedEffect(Unit) {
-            focusRequester.requestFocus()
-        }
     }
 }

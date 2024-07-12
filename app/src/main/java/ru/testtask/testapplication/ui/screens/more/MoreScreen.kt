@@ -40,7 +40,7 @@ fun MoreScreen(
             MenuItemUser(
                 userData = UserData.shimmerData,
                 onClickItem = {
-                    navController.navigate(Screen.Profile.route)
+                    navController.navigate(Screen.ProfileView.route)
                 }
             )
         }

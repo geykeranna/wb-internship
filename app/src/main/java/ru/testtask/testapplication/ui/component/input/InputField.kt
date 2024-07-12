@@ -25,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
@@ -65,7 +67,6 @@ fun InputField(
 ){
     val focusManager = LocalFocusManager.current
     val isFocused by interactionSource.collectIsFocusedAsState()
-
     val isEmpty by remember {
         derivedStateOf { state.text.isEmpty() }
     }
@@ -103,13 +104,14 @@ fun InputField(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
+                modifier = Modifier.padding(horizontal = 8.dp),
                 text = placeholder,
                 style = MaterialTheme.typography.bodyText1,
                 color = hintColor,
             )
 
             BasicTextField2(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
                 enabled = !disable,
                 state = state,
                 lineLimits = TextFieldLineLimits.SingleLine,

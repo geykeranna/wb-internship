@@ -14,13 +14,19 @@ import ru.testtask.testapplication.ui.component.navigation.Screen
 
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navController: NavController,
+    isAuth: Boolean
 ) {
     LaunchedEffect(Unit) {
         delay(3000)
-        navController.navigate(Screen.Events.route) {
-            popUpTo(Screen.Splash.route) { inclusive = true }
-        }
+        if(isAuth)
+            navController.navigate(Screen.Events.route) {
+                popUpTo(Screen.Splash.route) { inclusive = true }
+            }
+        else
+            navController.navigate(Screen.Phone.route) {
+                popUpTo(Screen.Splash.route) { inclusive = true }
+            }
     }
 
     Box(

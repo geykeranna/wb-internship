@@ -2,12 +2,9 @@ package ru.testtask.testapplication.ui.screens.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,7 +26,7 @@ import ru.testtask.testapplication.ui.theme.heading3
 import ru.testtask.testapplication.ui.theme.subheading2
 
 @Composable
-fun ProfileScreen(
+fun ProfileViewScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ){
@@ -44,7 +41,7 @@ fun ProfileScreen(
         },
         iconRight = R.drawable.ic_edit,
         onRightIconClick = { },
-        text = Screen.Profile.name
+        text = Screen.ProfileView.name
     )
 
     LazyColumn (

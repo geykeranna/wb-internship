@@ -30,7 +30,8 @@ fun TopBar(
     onLeftIconClick: () -> Unit = {},
     text: String = "",
     tintRightIcon: Color = NeutralActiveColor,
-    tinyLeftIcon: Color = NeutralActiveColor
+    tintLeftIcon: Color = NeutralActiveColor,
+    textColor: Color = NeutralActiveColor
 ) {
     Box(
         modifier = modifier
@@ -57,12 +58,13 @@ fun TopBar(
                             .align(Alignment.CenterVertically),
                         painter = painterResource(iconLeft),
                         contentDescription = "left button",
-                        tint = tinyLeftIcon
+                        tint = tintLeftIcon
                     )
                 }
                 Text(
                     text = text,
                     style = MaterialTheme.typography.subheading1,
+                    color = textColor
                 )
             }
 
