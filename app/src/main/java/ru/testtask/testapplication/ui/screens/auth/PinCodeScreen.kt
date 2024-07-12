@@ -75,7 +75,8 @@ fun PinCodeScreen(
 
             item {
                 Text(
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .padding(bottom = 2.dp),
                     text = description,
                     style = MaterialTheme.typography.bodyText2
                         .copy(lineHeight = 24.sp),
