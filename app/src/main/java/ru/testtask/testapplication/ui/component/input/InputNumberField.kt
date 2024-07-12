@@ -133,8 +133,7 @@ fun InputNumberField(
                 textFieldValue = it
                     .replace("\\D", "")
                     .take(selectedPhoneCountryCode.mask.count { num -> num == '0' })
-                onValidate(selectedPhoneCountryCode.countryCode.length + selectedPhoneCountryCode.mask.count { it == '0' }
-                        == textFieldValue.length)
+                onValidate(selectedPhoneCountryCode.mask.count { num -> num == '0' } == textFieldValue.length)
                 onChange("${selectedPhoneCountryCode.countryCode}$textFieldValue")
             },
             textStyle = MaterialTheme.typography.bodyText1.copy(

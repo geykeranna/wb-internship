@@ -36,7 +36,7 @@ fun PinCodeScreen(
     phone: String,
     label: String = "Введите номер телефона",
     description: String = "Отправили код на номер",
-    labelButton: String = "Продолжить",
+    labelButton: String = "Запросить код повторно",
 ) {
     val stateEnterNumber = remember {
         mutableStateOf(true)
@@ -53,9 +53,9 @@ fun PinCodeScreen(
 
     Column (
         modifier = modifier
+            .padding(top = 100.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ){
         LazyColumn(
             modifier = Modifier
@@ -92,8 +92,6 @@ fun PinCodeScreen(
             }
         }
 
-
-
         InputPassField(
             modifier = Modifier
                 .padding(top = 50.dp)
@@ -106,8 +104,6 @@ fun PinCodeScreen(
             }
         )
 
-
-
         AnimatedCustomTextButton(
             modifier = Modifier
                 .fillMaxWidth()
@@ -115,10 +111,6 @@ fun PinCodeScreen(
                 .padding(top = 70.dp)
                 .height(52.dp),
             label = labelButton,
-            onClick = {
-                navController.navigate(Screen.ProfileFirstEdit.route)
-            },
-            disabled = stateEnterNumber.value
         )
     }
 }

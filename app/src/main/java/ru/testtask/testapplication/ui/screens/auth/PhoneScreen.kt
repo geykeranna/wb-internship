@@ -32,7 +32,7 @@ fun PhoneScreen(
     labelButton: String = "Продолжить",
 ) {
     val stateEnterNumber = remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
     val phone = remember {
         mutableStateOf("")
@@ -40,9 +40,9 @@ fun PhoneScreen(
 
     LazyColumn(
         modifier = modifier
+            .padding(top = 100.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ){
         item{
             Column(
@@ -81,7 +81,7 @@ fun PhoneScreen(
                     phone.value = number
                 },
                 onValidate = {
-                    stateEnterNumber.value = !it
+                    stateEnterNumber.value = it
                 }
             )
         }
@@ -97,7 +97,7 @@ fun PhoneScreen(
                 onClick = {
                     navController.navigate(Screen.PinCode.route + "/${phone.value}")
                 },
-                disabled = stateEnterNumber.value
+                disabled = !stateEnterNumber.value
             )
         }
     }
