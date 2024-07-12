@@ -73,9 +73,15 @@ fun PhoneScreen(
                 modifier = Modifier
                     .padding(top = 50.dp)
                     .padding(horizontal = 24.dp),
-                onEnterClick = { number ->
+                onEnterClick = {
+                    if (stateEnterNumber.value)
+                        navController.navigate(Screen.PinCode.route + "/${phone.value}")
+                },
+                onChange = { number ->
                     phone.value = number
-                    stateEnterNumber.value = false
+                },
+                onValidate = {
+                    stateEnterNumber.value = !it
                 }
             )
         }

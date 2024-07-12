@@ -30,11 +30,16 @@ import ru.testtask.testapplication.ui.component.toolbars.TopBar
 @Composable
 fun ProfileEditScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    onBackClick: () -> Unit = {
+        if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+            navController.popBackStack()
+    }
 ){
     val labelButton = "Сохранить"
 
     val heightInputField = 36
+
     val formFields = remember {
         mutableListOf(
             FormField(
@@ -57,10 +62,7 @@ fun ProfileEditScreen(
     TopBar(
         modifier = modifier.padding(horizontal = 16.dp),
         iconLeft = R.drawable.ic_chevron_left,
-        onLeftIconClick = {
-            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
-                navController.popBackStack()
-        },
+        onLeftIconClick = { onBackClick() },
         text = Screen.ProfileView.name
     )
 
@@ -112,7 +114,9 @@ fun ProfileEditScreen(
                 onClick = {
                     navController.navigate(Screen.Events.route)
                 },
-//                disabled = stateEnterNumber.value
+                disabled = !formFields
+                    .filter { it.required }
+                    .all { it.value.text.isNotEmpty() }
             )
         }
     }
@@ -126,11 +130,3 @@ private data class FormField (
     val required: Boolean,
     val value: TextFieldState
 )
-
-@Preview
-@Composable
-fun Pr(){
-    ProfileEditScreen(
-        navController = rememberNavController()
-    )
-}

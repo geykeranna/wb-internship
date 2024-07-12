@@ -30,7 +30,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -45,8 +44,9 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 @Composable
 fun InputNumberField(
     modifier: Modifier = Modifier,
-    onEnterClick: (number: String) -> Unit = {},
-    placeholder: String = "000 000 00-00-00"
+    onChange: (number: String) -> Unit = {},
+    onEnterClick: () -> Unit = {},
+    onValidate: (validate: Boolean) -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textFieldValue by remember {
@@ -130,19 +130,24 @@ fun InputNumberField(
             value = textFieldValue,
             cursorBrush = SolidColor(Color.Transparent),
             onValueChange = {
-                textFieldValue = it.take(9)
+                textFieldValue = it
+                    .replace("\\D", "")
+                    .take(selectedPhoneCountryCode.mask.count { num -> num == '0' })
+                onValidate(selectedPhoneCountryCode.countryCode.length + selectedPhoneCountryCode.mask.count { it == '0' }
+                        == textFieldValue.length)
+                onChange("${selectedPhoneCountryCode.countryCode}$textFieldValue")
             },
             textStyle = MaterialTheme.typography.bodyText1.copy(
                 color = NeutralActiveColor
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Phone,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.NumberPassword,
+                imeAction = ImeAction.Send
             ),
             keyboardActions = KeyboardActions(
-                onNext = { onEnterClick(textFieldValue) }
+                onSend = { onEnterClick() },
             ),
-            visualTransformation = PhoneNumberVisualTransformation(),
+            visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
             decorationBox = { innerTextField ->
                 Row(
                     modifier = Modifier
@@ -155,7 +160,7 @@ fun InputNumberField(
                 ) {
                     if (textFieldValue.isEmpty()){
                         Text(
-                            text = placeholder,
+                            text = selectedPhoneCountryCode.mask,
                             style = MaterialTheme.typography.bodyText1,
                             color = NeutralDisabledColor
                         )

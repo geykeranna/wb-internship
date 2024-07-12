@@ -1,10 +1,13 @@
 package ru.testtask.testapplication.ui.component.navigation
 
-sealed class Screen(val route: String, val name: String) {
+sealed class Screen(
+    val route: String,
+    val name: String
+) {
 
     data object Splash: Screen(
-        route = "splash",
-        name = "Сплеш"
+        route = "splash_invisible",
+        name = "Сплеш",
     )
 
     data object Events: Screen(
@@ -48,12 +51,17 @@ sealed class Screen(val route: String, val name: String) {
     )
 
     data object Phone: Screen(
-        route = "first_number",
-        name = "Введите номер телефона"
+        route = "first_number_invisible",
+        name = "Введите номер телефона",
     )
 
     data object PinCode: Screen(
-        route = "first_pin_code",
-        name = "Введите код"
+        route = "first_pin_code_invisible",
+        name = "Введите код",
+    )
+
+    data object ProfileFirstEdit: Screen(
+        route = "first_profile_edit_invisible",
+        name = "Профиль",
     )
 }

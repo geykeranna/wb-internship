@@ -12,6 +12,7 @@ import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
 import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
 import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
+import ru.testtask.testapplication.ui.screens.profile.ProfileEditScreen
 import ru.testtask.testapplication.ui.screens.profile.ProfileViewScreen
 import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 
@@ -95,5 +96,23 @@ fun NavGraph(
                 )
             }
         }
+
+        composable(route = Screen.ProfileEdit.route) {
+            ProfileEditScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.ProfileFirstEdit.route) {
+            ProfileEditScreen(
+                navController = navController,
+                onBackClick = {
+                    navController.navigate(Screen.Phone.route) {
+                        popUpTo(Screen.ProfileFirstEdit.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
     }
 }

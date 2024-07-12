@@ -38,6 +38,8 @@ fun InputPassField(
     modifier: Modifier = Modifier,
     onEnterClick: () -> Unit = {},
     passLength: Int = 4,
+    onChange: (number: String) -> Unit = {},
+    onValidate: (validate: Boolean) -> Unit = {}
 ) {
     var textFieldValue by remember() {
         mutableStateOf(TextFieldValue("" ))
@@ -56,6 +58,8 @@ fun InputPassField(
             if (it.text.length <= 4) {
                 textFieldValue = it
             }
+            onValidate(it.text.length == 4)
+            onChange(textFieldValue.text)
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.NumberPassword,

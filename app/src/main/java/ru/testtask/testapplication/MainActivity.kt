@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         },
                     bottomBar = {
                         val currScreen = navController.currentBackStackEntryAsState().value?.destination?.route
-                        if (currScreen != Screen.Splash.route)
+                        if (currScreen?.contains("invisible") != true)
                             BottomNavBar(navController)
                     },
                     containerColor = Color.White,

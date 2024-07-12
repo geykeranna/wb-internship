@@ -67,17 +67,12 @@ fun InputField(
 ){
     val focusManager = LocalFocusManager.current
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val focusRequester = remember { FocusRequester() }
     val isEmpty by remember {
         derivedStateOf { state.text.isEmpty() }
     }
 
     val hintColor = if (isEmpty) placeholderColor else Color.Transparent
     val contentColor = if (isEmpty && !isFocused) placeholderColor else color
-
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
 
     Row(
         modifier = modifier
@@ -116,7 +111,7 @@ fun InputField(
             )
 
             BasicTextField2(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
                 enabled = !disable,
                 state = state,
                 lineLimits = TextFieldLineLimits.SingleLine,
