@@ -14,18 +14,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.button.text.AnimatedCustomTextButton
 import ru.testtask.testapplication.ui.component.input.InputPassField
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_BUTTON_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_BUTTON_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_FIELD_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.testtask.testapplication.ui.theme.bodyText2
 import ru.testtask.testapplication.ui.theme.heading2
 
@@ -34,16 +41,13 @@ fun PinCodeScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     phone: String,
-    label: String = "Введите номер телефона",
-    description: String = "Отправили код на номер",
-    labelButton: String = "Запросить код повторно",
 ) {
     val stateEnterNumber = remember {
         mutableStateOf(true)
     }
 
     TopBar(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
             if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
@@ -53,21 +57,21 @@ fun PinCodeScreen(
 
     Column (
         modifier = modifier
-            .padding(top = 100.dp)
+            .padding(top = TOP_PADDING_LOGIN_SCREEN.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 40.dp),
+                .padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN.dp)
         ) {
             item {
                 Text(
                     modifier = Modifier,
-                    text = label,
+                    text = stringResource(R.string.label_screens_pin),
                     style = MaterialTheme.typography.heading2,
                     textAlign = TextAlign.Center
                 )
@@ -77,7 +81,7 @@ fun PinCodeScreen(
                 Text(
                     modifier = Modifier
                         .padding(bottom = 2.dp),
-                    text = description,
+                    text = stringResource(R.string.description_screens_pin),
                     style = MaterialTheme.typography.bodyText2
                         .copy(lineHeight = 24.sp),
                     textAlign = TextAlign.Center
@@ -95,8 +99,8 @@ fun PinCodeScreen(
 
         InputPassField(
             modifier = Modifier
-                .padding(top = 50.dp)
-                .padding(horizontal = 24.dp),
+                .padding(top = TOP_PADDING_FIELD_IN_LOGIN_SCREEN.dp)
+                .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp),
             onEnterClick = {
                 navController.navigate(Screen.ProfileFirstEdit.route)
             },
@@ -108,10 +112,10 @@ fun PinCodeScreen(
         AnimatedCustomTextButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp)
-                .padding(top = 70.dp)
-                .height(52.dp),
-            label = labelButton,
+                .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp)
+                .padding(top = TOP_PADDING_BUTTON_IN_LOGIN_SCREEN.dp)
+                .height(HEIGHT_BUTTON_LOGIN_SCREEN.dp),
+            label = stringResource(R.string.button_label_screens_pin_request_the_code_again),
         )
     }
 }

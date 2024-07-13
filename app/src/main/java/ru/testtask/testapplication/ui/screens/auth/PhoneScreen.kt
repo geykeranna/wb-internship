@@ -14,12 +14,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomButton
 import ru.testtask.testapplication.ui.component.input.InputNumberField
 import ru.testtask.testapplication.ui.component.navigation.Screen
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_BUTTON_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_BUTTON_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_FIELD_IN_LOGIN_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.testtask.testapplication.ui.theme.bodyText2
 import ru.testtask.testapplication.ui.theme.heading2
 
@@ -27,9 +36,6 @@ import ru.testtask.testapplication.ui.theme.heading2
 fun PhoneScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    label: String = "Введите номер телефона",
-    description: String = "Мы вышлем код подтверждения на указаный номер",
-    labelButton: String = "Продолжить",
 ) {
     val stateEnterNumber = remember {
         mutableStateOf(false)
@@ -40,7 +46,7 @@ fun PhoneScreen(
 
     LazyColumn(
         modifier = modifier
-            .padding(top = 100.dp)
+            .padding(top = TOP_PADDING_LOGIN_SCREEN.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
@@ -48,20 +54,20 @@ fun PhoneScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 40.dp),
+                    .padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN.dp)
             ) {
                 Text(
                     modifier = Modifier,
-                    text = label,
+                    text = stringResource(R.string.label_screens_phone),
                     style = MaterialTheme.typography.heading2,
                     textAlign = TextAlign.Center
                 )
 
                 Text(
                     modifier = Modifier,
-                    text = description,
+                    text = stringResource(R.string.description_screens_phone),
                     style = MaterialTheme.typography.bodyText2,
                     textAlign = TextAlign.Center
                 )
@@ -71,8 +77,8 @@ fun PhoneScreen(
         item {
             InputNumberField(
                 modifier = Modifier
-                    .padding(top = 50.dp)
-                    .padding(horizontal = 24.dp),
+                    .padding(top = TOP_PADDING_FIELD_IN_LOGIN_SCREEN.dp)
+                    .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp),
                 onEnterClick = {
                     if (stateEnterNumber.value)
                         navController.navigate(Screen.PinCode.route + "/${phone.value}")
@@ -90,10 +96,10 @@ fun PhoneScreen(
             AnimatedCustomButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
-                    .padding(top = 70.dp)
-                    .height(52.dp),
-                label = labelButton,
+                    .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp)
+                    .padding(top = TOP_PADDING_BUTTON_IN_LOGIN_SCREEN.dp)
+                    .height(HEIGHT_BUTTON_LOGIN_SCREEN.dp),
+                label = stringResource(R.string.button_label_screens_phone_continue),
                 onClick = {
                     navController.navigate(Screen.PinCode.route + "/${phone.value}")
                 },

@@ -14,6 +14,9 @@ import ru.testtask.testapplication.ui.component.cards.events.EventListByGroup
 import ru.testtask.testapplication.ui.component.input.SearchBar
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -25,7 +28,7 @@ fun ActiveEventsScreen(
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList1
 
     TopBar(
-        modifier = Modifier.padding(horizontal = 24.dp),
+        modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
         text = Screen.Events.name,
         iconRight = R.drawable.ic_plus,
     )
@@ -33,14 +36,17 @@ fun ActiveEventsScreen(
     SearchBar (
         modifier = Modifier
             .padding(top = 52.dp)
-            .padding(vertical = 16.dp, horizontal = 24.dp),
+            .padding(
+                vertical = VERTICAL_PADDING_SEARCH_BAR_COMMON.dp,
+                horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp
+            ),
         state = searchState
     )
 
     LazyColumn(
         modifier = modifier
             .padding(top = 122.dp)
-            .padding(horizontal = 24.dp),
+            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
     ) {
         item {
             EventListByGroup(

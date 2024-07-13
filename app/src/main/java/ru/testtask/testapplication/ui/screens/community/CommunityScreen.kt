@@ -13,6 +13,8 @@ import ru.testtask.testapplication.ui.component.cards.community.CommunityCardLis
 import ru.testtask.testapplication.ui.component.input.SearchBar
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,7 +38,7 @@ fun CommunityScreen(
 
     LazyColumn(
         modifier = modifier
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp)
     ) {
         item {
             TopBar(
@@ -46,7 +48,7 @@ fun CommunityScreen(
 
         item {
             SearchBar (
-                modifier = Modifier.padding(vertical = 16.dp),
+                modifier = Modifier.padding(vertical = VERTICAL_PADDING_SEARCH_BAR_COMMON.dp),
                 state = searchState
             )
         }

@@ -14,5 +14,11 @@
     <string name="label_screens_my_meets">Мои встречи</string>
     <string name="label_screens_phone">Введите номер телефона</string>
     <string name="label_screens_pin">Введите код</string>
+    <string name="description_screens_phone">Мы вышлем код подтверждения на указаный номер</string>
+    <string name="description_screens_pin">Отправили код на номер</string>
+    <string name="button_label_screens_phone_continue">Продолжить</string>
+    <string name="button_label_screens_pin_request_the_code_again">Запросить код повторно</string>
+    <string name="expandable_text_collapse_text">Скрыть</string>
+    <string name="expandable_text_expand_text">...</string>
 
 </resources>

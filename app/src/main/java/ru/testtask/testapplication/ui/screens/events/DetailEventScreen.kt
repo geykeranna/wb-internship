@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
@@ -44,9 +45,18 @@ import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomBut
 import ru.testtask.testapplication.ui.component.button.outlined.AnimatedCustomOutlinedButton
 import ru.testtask.testapplication.ui.component.cards.visitors.VisitorsList
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
-import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_MAP_SCREEN_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_MAP_SCREEN_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_USERS_LIST_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.MAX_LINE_COLLAPSED_IN_EXPANDABLE_TEXT_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_ITEMS_COMMON
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
@@ -82,29 +92,34 @@ fun DetailEventScreen(
         }
     }
 
-    Column(
+    TopBar(
+        modifier = Modifier
+            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
+        iconLeft = R.drawable.ic_chevron_left,
+        text = detailInfo.name,
+        iconRight = when (stateBnt) {
+            ButtonState.PRESSED.id -> R.drawable.ic_check_big
+            else -> null
+        },
+        onRightIconClick = { onClickButton() },
+        tintRightIcon = BrandDefaultColor,
+        onLeftIconClick = {
+            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+                navController.popBackStack()
+        }
+    )
+
+
+    Column (
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp)
+            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp),
     ) {
-        TopBar(
-            iconLeft = R.drawable.ic_chevron_left,
-            text = detailInfo.name,
-            iconRight = when (stateBnt) {
-                ButtonState.PRESSED.id -> R.drawable.ic_check_big
-                else -> null
-            },
-            onRightIconClick = { onClickButton() },
-            tintRightIcon = BrandDefaultColor,
-            onLeftIconClick = {
-                if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
-                    navController.popBackStack()
-            }
-        )
-
         Column(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical =  16.dp),
+                .padding(vertical = VERTICAL_PADDING_ITEMS_COMMON.dp)
+                .height(HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -118,25 +133,25 @@ fun DetailEventScreen(
             )
         }
 
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.85f)
-                .padding(horizontal = 12.dp),
+                .fillMaxHeight(0.85f),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             item {
                 // заглушка
                 Surface(
-                    modifier = Modifier.height(175.dp),
+                    modifier = Modifier.height(HEIGHT_MAP_SCREEN_DETAIL_EVENT_SCREEN.dp),
                     onClick = { isMapFullScreen.value = true },
                     color = Color.White
                 ) {
                     Image(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(24.dp)),
+                            .clip(RoundedCornerShape(CORNER_RADIUS_MAP_SCREEN_DETAIL_EVENT_SCREEN.dp)),
                         painter = painterResource(R.drawable.defaultmap),
                         contentDescription = "map",
                         contentScale = ContentScale.FillWidth
@@ -147,16 +162,16 @@ fun DetailEventScreen(
                 ExpandableText(
                     modifier = Modifier,
                     text = detailInfo.description,
-                    expandText = "...",
-                    collapseText = "Скрыть",
-                    maxLinesCollapsed = 8,
+                    expandText = stringResource(R.string.expandable_text_expand_text),
+                    collapseText = stringResource(R.string.expandable_text_collapse_text),
+                    maxLinesCollapsed = MAX_LINE_COLLAPSED_IN_EXPANDABLE_TEXT_DETAIL_EVENT_SCREEN,
                     style = MaterialTheme.typography.metadata1.copy(color = NeutralWeakColor, lineHeight = 20.sp)
                 )
             }
 
             item {
                 VisitorsList(
-                    modifier = Modifier.height(56.dp),
+                    modifier = Modifier.height(HEIGHT_USERS_LIST_DETAIL_EVENT_SCREEN.dp),
                     visitorsList = usersList
                 )
             }
@@ -166,16 +181,16 @@ fun DetailEventScreen(
             ButtonState.PRESSED.id -> AnimatedCustomOutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 14.dp, horizontal = 12.dp),
+                    .padding(vertical = VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN.dp),
                 label = ButtonState.PRESSED.label,
-                onClick = {onClickButton()}
+                onClick = { onClickButton() }
             )
             else -> AnimatedCustomButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 14.dp, horizontal = 12.dp),
+                    .padding(vertical = VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN.dp),
                 label = ButtonState.UNPRESSED.label,
-                onClick = {onClickButton()}
+                onClick = { onClickButton() }
             )
         }
     }
