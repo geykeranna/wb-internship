@@ -25,7 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -33,12 +32,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_INPUT_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
 import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.NeutralOffWhiteColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
@@ -49,10 +52,10 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun InputField(
+    state: TextFieldState,
     modifier: Modifier = Modifier,
     placeholder: String = "",
     disable: Boolean = false,
-    state: TextFieldState,
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
@@ -77,10 +80,10 @@ fun InputField(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(36.dp)
+            .height(HEIGHT_OF_INPUT_FIELD.dp)
             .focusable(interactionSource = interactionSource)
             .hoverable(interactionSource = interactionSource)
-            .clip(RoundedCornerShape(4.dp))
+            .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(NeutralOffWhiteColor)
             .focusedBorder(isFocused && isEmpty, borderColor),
         verticalAlignment = Alignment.CenterVertically,
@@ -91,7 +94,7 @@ fun InputField(
                 modifier = Modifier
                     .clickable { onClickLeftIcon?.let { onClickLeftIcon() } }
                     .padding(vertical = 9.dp, horizontal = 8.dp)
-                    .size(24.dp),
+                    .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
                 contentDescription = ""
@@ -104,14 +107,14 @@ fun InputField(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
+                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 text = placeholder,
                 style = MaterialTheme.typography.bodyText1,
                 color = hintColor,
             )
 
             BasicTextField2(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 enabled = !disable,
                 state = state,
                 lineLimits = TextFieldLineLimits.SingleLine,
@@ -131,7 +134,7 @@ fun InputField(
                 modifier = Modifier
                     .clickable { onClickRightIcon?.let { onClickRightIcon() } }
                     .padding(vertical = 9.dp, horizontal = 8.dp)
-                    .size(24.dp),
+                    .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
                 contentDescription = ""
@@ -143,6 +146,6 @@ fun InputField(
 @SuppressLint("UnnecessaryComposedModifier")
 fun Modifier.focusedBorder(isActive: Boolean = false, borderColor: Color) = composed {
     return@composed  if (isActive) {
-        this.border(2.dp, borderColor, RoundedCornerShape(4.dp))
+        this.border(FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD.dp, borderColor, RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
     } else this
 }

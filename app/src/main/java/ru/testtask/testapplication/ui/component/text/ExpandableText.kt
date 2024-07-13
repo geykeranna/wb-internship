@@ -1,7 +1,6 @@
 package ru.testtask.testapplication.ui.component.text
 
 import android.icu.text.BreakIterator
-import android.util.Log
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
@@ -24,13 +23,13 @@ const val EXPANDED_SPAN = "expanded_span"
 
 @Composable
 fun ExpandableText(
-    modifier: Modifier = Modifier,
     text: String,
     expandText: String,
+    maxLinesCollapsed: Int,
+    modifier: Modifier = Modifier,
     expandColor: Color = Color.Unspecified,
     collapseText: String? = null,
     collapseColor: Color = Color.Unspecified,
-    maxLinesCollapsed: Int,
     style: TextStyle = TextStyle.Default,
 ) {
     BoxWithConstraints(modifier) {

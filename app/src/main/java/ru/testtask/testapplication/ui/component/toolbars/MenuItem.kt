@@ -23,13 +23,16 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_IN_MENU_ITEM
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_MENU_ITEM
+import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_MENU_ITEM
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 
 @Composable
-fun MenuItem(
+fun MenuItem (
     modifier: Modifier = Modifier,
     iconRight: Int? = null,
     iconLeft: Int? = null,
@@ -39,21 +42,21 @@ fun MenuItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp)
+            .height(HEIGHT_MENU_ITEM.dp)
             .clickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+            horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_IN_MENU_ITEM.dp)
         ){
             iconLeft?.let {
                 Icon(
                     modifier = Modifier
-                        .size(24.dp),
+                        .size(ICON_SIZE_IN_MENU_ITEM.dp),
                     contentDescription = null,
                     painter = painterResource(it)
                 )
@@ -66,7 +69,7 @@ fun MenuItem(
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .size(24.dp),
+                    .size(ICON_SIZE_IN_MENU_ITEM.dp),
                 contentDescription = "next",
                 painter = painterResource(it)
             )

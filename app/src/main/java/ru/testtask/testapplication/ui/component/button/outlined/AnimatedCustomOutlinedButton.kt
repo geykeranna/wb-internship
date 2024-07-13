@@ -28,7 +28,9 @@ fun AnimatedCustomOutlinedButton(
     disabled: Boolean = false,
     label: String = "",
     labelSize: TextUnit = 14.sp,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    cornerRadius: Int = 30,
+    borderWidth: Int = 2
 ){
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -42,7 +44,7 @@ fun AnimatedCustomOutlinedButton(
     OutlinedButton(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(30.dp),
+        shape = RoundedCornerShape(cornerRadius.dp),
         enabled = !disabled,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = color,
@@ -50,7 +52,7 @@ fun AnimatedCustomOutlinedButton(
             disabledContentColor = disableColor,
             disabledContainerColor = Color.Transparent,
         ),
-        border = BorderStroke(2.dp, color),
+        border = BorderStroke(borderWidth.dp, color),
         interactionSource = interactionSource
     ) {
         Text(

@@ -3,10 +3,6 @@ package ru.testtask.testapplication.ui.component.cards.events
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
@@ -26,6 +22,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP
+import ru.testtask.testapplication.ui.component.utils.Constants.TAB_LABEL_TEXT_SIZE
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.TabUnselectedColor
@@ -54,7 +52,7 @@ fun EventListByGroup (
         listByGroup.forEachIndexed { index, tab ->
             Tab(
                 modifier = Modifier
-                    .height(48.dp),
+                    .height(HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp),
                 selected = selectedTab.value == index,
                 selectedContentColor = BrandDefaultColor,
                 unselectedContentColor = TabUnselectedColor,
@@ -66,7 +64,7 @@ fun EventListByGroup (
             ) {
                 Text(
                     text = tab.group.uppercase(),
-                    fontSize = 14.sp,
+                    fontSize = TAB_LABEL_TEXT_SIZE.sp,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -78,6 +76,7 @@ fun EventListByGroup (
         modifier = modifier
             .fillMaxWidth(),
     ) { page ->
+        // strings are not constant values (in the future, state will be taken from the viewmodel)
         val sorted = when (listByGroup[page].group) {
             "Уже прошли" -> SORTBY.NO_ACTIVE
             "Активные" -> SORTBY.ACTIVE

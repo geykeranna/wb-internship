@@ -18,6 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_TOP_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_TOP_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_VERTICAL_IN_TOP_BAR
 import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.subheading1
 
@@ -35,8 +38,8 @@ fun TopBar(
 ) {
     Box(
         modifier = modifier
-            .padding(vertical = 16.dp)
-            .height(30.dp)
+            .padding(vertical = PADDING_VERTICAL_IN_TOP_BAR.dp)
+            .height(HEIGHT_TOP_BAR.dp)
             .fillMaxWidth()
     ) {
         Row(
@@ -53,7 +56,7 @@ fun TopBar(
                 iconLeft?.let {
                     Icon(
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(ICON_SIZE_IN_TOP_BAR.dp)
                             .clickable { onLeftIconClick() }
                             .align(Alignment.CenterVertically),
                         painter = painterResource(iconLeft),
@@ -71,11 +74,11 @@ fun TopBar(
             iconRight?.let {
                 Icon(
                     modifier = Modifier
-                        .size(24.dp)
+                        .size(ICON_SIZE_IN_TOP_BAR.dp)
                         .clickable { onRightIconClick() }
                         .align(Alignment.CenterVertically),
                     painter = painterResource(iconRight),
-                    contentDescription = "left button",
+                    contentDescription = "right button",
                     tint = tintRightIcon
                 )
             }

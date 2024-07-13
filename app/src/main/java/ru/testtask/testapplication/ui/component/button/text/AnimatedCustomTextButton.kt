@@ -27,7 +27,8 @@ fun AnimatedCustomTextButton(
     disabled: Boolean = false,
     label: String = "",
     labelSize: TextUnit = 14.sp,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    cornerRadius: Int = 30
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -40,7 +41,7 @@ fun AnimatedCustomTextButton(
     Button(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(30.dp),
+        shape = RoundedCornerShape(cornerRadius.dp),
         enabled = !disabled,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = if (isPressed) contentPrimaryColor else contentDefaultColor,

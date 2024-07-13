@@ -29,6 +29,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.PASS_LENGTH_IN_PASS_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.SIZE_OF_PASS_ITEMS
 import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.heading1
@@ -37,7 +39,6 @@ import ru.testtask.testapplication.ui.theme.heading1
 fun InputPassField(
     modifier: Modifier = Modifier,
     onEnterClick: () -> Unit = {},
-    passLength: Int = 4,
     onChange: (number: String) -> Unit = {},
     onValidate: (validate: Boolean) -> Unit = {}
 ) {
@@ -55,10 +56,10 @@ fun InputPassField(
             .focusRequester(focusRequester),
         value = textFieldValue,
         onValueChange = {
-            if (it.text.length <= 4) {
+            if (it.text.length <= PASS_LENGTH_IN_PASS_FIELD) {
                 textFieldValue = it
             }
-            onValidate(it.text.length == 4)
+            onValidate(it.text.length == PASS_LENGTH_IN_PASS_FIELD)
             onChange(textFieldValue.text)
         },
         keyboardOptions = KeyboardOptions(
@@ -76,7 +77,7 @@ fun InputPassField(
                 horizontalArrangement = Arrangement.spacedBy(40.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                repeat(passLength){
+                repeat(PASS_LENGTH_IN_PASS_FIELD){
                     PinCodeDot(value = textFieldValue.text, index = it)
                 }
             }
@@ -88,7 +89,7 @@ fun InputPassField(
 fun PinCodeDot(value: String, index: Int) {
     Box(
         modifier = Modifier
-            .size(40.dp),
+            .size(SIZE_OF_PASS_ITEMS.dp),
         contentAlignment = Alignment.Center
     ){
         if (value.getOrNull(index) != null){
@@ -97,7 +98,7 @@ fun PinCodeDot(value: String, index: Int) {
                 style = MaterialTheme.typography.heading1,
                 color = NeutralActiveColor
             )
-        } else{
+        } else {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

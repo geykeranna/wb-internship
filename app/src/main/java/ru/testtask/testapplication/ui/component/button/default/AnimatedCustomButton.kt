@@ -30,13 +30,14 @@ fun AnimatedCustomButton(
     label: String = "",
     labelSize: TextUnit = 14.sp,
     onClick: () -> Unit = {},
+    cornerRadius: Int = 30
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
     Button(
         modifier = modifier,
-        shape = RoundedCornerShape(30.dp),
+        shape = RoundedCornerShape(cornerRadius.dp),
         onClick = onClick,
         enabled = !disabled,
         colors = ButtonDefaults.buttonColors(

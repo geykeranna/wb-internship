@@ -15,60 +15,66 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import ru.testtask.testapplication.R
+import ru.testtask.testapplication.data.model.EventData
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_AROUND_IMG_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_START_TEXT_BLOCK_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
+import ru.testtask.testapplication.ui.theme.metadata1
 import ru.testtask.testapplication.ui.theme.metadata2
 
 @Composable
 fun EventCardEnded(
+    eventData: EventData,
     modifier: Modifier = Modifier,
-    title: String = "",
-    tagList: List<String> = listOf(),
-    date: String = "",
-    location: String = "",
     onClick: () -> Unit = {},
     src: String? = null,
 ){
     Column(
         modifier = Modifier
-            .height(88.dp)
+            .height(HEIGHT_OF_EVENT_CARD.dp)
             .fillMaxWidth()
             .clickable { onClick() }
     ) {
         Row(
             modifier = modifier
-                .height(76.dp)
+                .height(HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD.dp)
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
         ) {
             GroupAvatar(
                 src = src,
                 modifier = Modifier
-                    .padding(top = 4.dp)
-                    .padding(horizontal = 4.dp)
+                    .padding(top = PADDING_AROUND_IMG_IN_EVENT_CARD.dp)
             )
             Column(
                 modifier = Modifier
                     .height(76.dp)
                     .fillMaxWidth()
-                    .padding(start = 12.dp),
+                    .padding(start = PADDING_START_TEXT_BLOCK_IN_EVENT_CARD.dp),
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(24.dp)
+                        .height(HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD.dp)
                         .padding(bottom = 2.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         modifier = Modifier
                             .align(Alignment.CenterVertically),
-                        text = title,
+                        text = eventData.name,
                         style = MaterialTheme.typography.bodyText1,
                         color = Color.Black
                     )
@@ -77,7 +83,7 @@ fun EventCardEnded(
                     ){
                         Text(
                             modifier = Modifier,
-                            text = "Закончилась",
+                            text = stringResource(R.string.label_status_ended_events),
                             style = MaterialTheme.typography.metadata2,
                             color = NeutralWeakColor,
                         )
@@ -86,21 +92,19 @@ fun EventCardEnded(
 
                 Text(
                     modifier = Modifier
-                        .height(20.dp)
                         .padding(bottom = 2.dp),
-                    text = "$date — $location",
-                    style = MaterialTheme.typography.bodyText1,
+                    text = "${eventData.date} — ${eventData.location.city}",
+                    style = MaterialTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
                     color = NeutralDisabledColor
                 )
                 CustomChipsGroup(
-                    chipsList = tagList
+                    chipsList = eventData.tagList
                 )
             }
         }
 
         HorizontalDivider(
             color = NeutralLineColor,
-            modifier = Modifier.padding(top = 12.dp)
         )
     }
 }

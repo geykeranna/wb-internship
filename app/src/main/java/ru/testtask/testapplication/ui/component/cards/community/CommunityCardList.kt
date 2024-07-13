@@ -11,19 +11,22 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.data.model.CommunityData
 import ru.testtask.testapplication.ui.component.navigation.Screen
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_COMMUNITY_ITEM_LIST
 
 @Composable
 fun CommunityCardList(
-    modifier: Modifier = Modifier,
     itemsList: List<CommunityData>,
-    onClick: () -> Unit = {},
     navController: NavController,
-    height: Int = 104
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
+    val heightOfList = (itemsList.size * HEIGHT_OF_COMMUNITY_ITEM_LIST).dp
+
     LazyColumn(
-        modifier = modifier.heightIn(min = (itemsList.size * height).dp, max = (itemsList.size * height).dp + 10.dp),
-        contentPadding = PaddingValues(top = 14.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp)
+        modifier = modifier.heightIn(min = heightOfList, max = heightOfList),
+        contentPadding = PaddingValues(top = CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp),
+        verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp)
     ) {
         items(itemsList.size){ index ->
             CommunityCard(

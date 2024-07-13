@@ -28,6 +28,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.navigation.NavBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_TAB_ITEM_BOTTOM_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_BOTTOM_IN_BOTTOM_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_HORIZONTAL_IN_BOTTOM_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_TEXT_IN_BOTTOM_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_TOP_IN_BOTTOM_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.WIDTH_TAB_ITEM_BOTTOM_BAR
 import ru.testtask.testapplication.ui.component.utils.NoRippleTheme
 
 @Composable
@@ -46,8 +52,8 @@ fun BottomNavBar(
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         Row(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 8.dp, bottom = 25.dp)
+                .padding(horizontal = PADDING_HORIZONTAL_IN_BOTTOM_BAR.dp)
+                .padding(top = PADDING_TOP_IN_BOTTOM_BAR.dp, bottom = PADDING_BOTTOM_IN_BOTTOM_BAR.dp)
                 .fillMaxWidth()
                 .background(Color.White),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,8 +82,8 @@ fun BarItem(
 
     Column (
         modifier = Modifier
-            .height(44.dp)
-            .width(100.dp)
+            .height(HEIGHT_TAB_ITEM_BOTTOM_BAR.dp)
+            .width(WIDTH_TAB_ITEM_BOTTOM_BAR.dp)
             .clickable(onClick = {
                 navController.navigate(screen.route) {
                     popUpTo(navController.graph.findStartDestination().id)
@@ -100,7 +106,7 @@ fun BarItem(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    modifier = Modifier.padding(bottom = 4.dp),
+                    modifier = Modifier.padding(bottom = PADDING_TEXT_IN_BOTTOM_BAR.dp),
                     text = screen.label,
                 )
                 Icon(

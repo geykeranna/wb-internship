@@ -4,13 +4,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.data.model.EventData
 import ru.testtask.testapplication.ui.component.navigation.Screen
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_EVENT_ITEM_LIST
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_EVENT_ITEM_LIST
 
 @Composable
 fun EventCardsList(
@@ -18,7 +19,6 @@ fun EventCardsList(
     itemsList: List<EventData>,
     navController: NavController,
     sorted: SORTBY = SORTBY.NO_SORT,
-    height: Int = 104,
 ) {
     val listItems = when (sorted) {
         SORTBY.NO_ACTIVE -> itemsList.filter { !it.active }
@@ -26,27 +26,23 @@ fun EventCardsList(
         else -> itemsList
     }
 
+    val height = (listItems.size * HEIGHT_OF_EVENT_ITEM_LIST).dp
+
     LazyColumn(
-        modifier = modifier.heightIn(min = (listItems.size * height).dp, max = (listItems.size * height).dp + 10.dp),
-        contentPadding = PaddingValues(top = 14.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp)
+        modifier = modifier.heightIn(min = height, max = height),
+        contentPadding = PaddingValues(top = CONTENT_PADDING_OF_EVENT_ITEM_LIST.dp),
+        verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_EVENT_ITEM_LIST.dp)
     ) {
         items(listItems.size) { index ->
             if (itemsList[index].active) {
                 EventCard(
-                    title = listItems[index].name,
-                    location = listItems[index].location.city,
-                    date = listItems[index].date,
-                    tagList = listItems[index].tagList,
+                    eventData = itemsList[index],
                     onClick = { navController.navigate(Screen.EventsDetail.route + "/${listItems[index].id}") },
                     src = listItems[index].icon
                 )
             } else {
                 EventCardEnded(
-                    title = listItems[index].name,
-                    location = listItems[index].location.city,
-                    date = listItems[index].date,
-                    tagList = listItems[index].tagList,
+                    eventData = itemsList[index],
                     onClick = { navController.navigate(Screen.EventsDetail.route + "/${listItems[index].id}") },
                     src = listItems[index].icon
                 )

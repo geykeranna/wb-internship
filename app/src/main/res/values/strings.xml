@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">TestApplication</string>
+
+    <string name="continuation_count_of_human">человек</string>
+    <string name="label_status_ended_events">Закончилась</string>
+    <string name="placeholder_in_search_field">Поиск</string>
+
+    <string name="label_screens_splash">Сплеш</string>
+    <string name="label_screens_event">Встречи</string>
+    <string name="label_screens_detail">Экран детального просмотра</string>
+    <string name="label_screens_community">Сообщества</string>
+    <string name="label_screens_more">Ещё</string>
+    <string name="label_screens_profile">Профиль</string>
+    <string name="label_screens_my_meets">Мои встречи</string>
+    <string name="label_screens_phone">Введите номер телефона</string>
+    <string name="label_screens_pin">Введите код</string>
+
 </resources>
