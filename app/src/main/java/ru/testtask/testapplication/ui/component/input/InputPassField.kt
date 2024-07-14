@@ -38,9 +38,9 @@ import ru.testtask.testapplication.ui.theme.heading1
 @Composable
 fun InputPassField(
     modifier: Modifier = Modifier,
-    onEnterClick: () -> Unit = {},
     onChange: (number: String) -> Unit = {},
-    onValidate: (validate: Boolean) -> Unit = {}
+    onValidate: (validate: Boolean) -> Unit = {},
+    onEnterClick: () -> Unit = {},
 ) {
     var textFieldValue by remember() {
         mutableStateOf(TextFieldValue("" ))

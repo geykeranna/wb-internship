@@ -33,9 +33,9 @@ import java.util.Locale
 fun CommunityCard(
     modifier: Modifier = Modifier,
     src: String? = null,
-    onClick: () -> Unit = {},
     label: String = "",
-    countPeople: Int = 0
+    countPeople: Int = 0,
+    onClick: () -> Unit = {},
 ) {
     val countText = String.format(Locale.ENGLISH, "%,d", countPeople).replace(",", " ")
 

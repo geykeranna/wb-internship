@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text2.input.TextFieldState
@@ -21,27 +20,26 @@ import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomButton
-import ru.testtask.testapplication.ui.component.input.InputField
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_BUTTON_PROFILE_SCREEN
-import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_INPUT_FIELDS_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_BIG_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
-import ru.testtask.testapplication.ui.component.utils.Constants.SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
-import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.screens.profile.components.FormField
+import ru.testtask.testapplication.ui.screens.profile.components.NewUserForm
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProfileEditScreen(
-    modifier: Modifier = Modifier,
     navController: NavController,
+    modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {
-        if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+        if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
             navController.popBackStack()
+        }
     }
 ){
     val firstNameField = stringResource(R.string.text_form_field_first_name_profile_screen)
@@ -90,27 +88,7 @@ fun ProfileEditScreen(
         }
 
         item {
-            val height = formFields.size * (HEIGHT_INPUT_FIELDS_PROFILE_SCREEN + SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN)
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN.dp)
-                    .heightIn(
-                        min = height.dp,
-                        max = height.dp,
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN.dp)
-            ) {
-                items(formFields.size) {
-                    InputField(
-                        modifier = Modifier.height(HEIGHT_INPUT_FIELDS_PROFILE_SCREEN.dp),
-                        state = formFields[it].value,
-                        placeholder = formFields[it].placeholder
-                    )
-                }
-            }
+            NewUserForm(formFields = formFields)
         }
 
         item {
@@ -130,12 +108,3 @@ fun ProfileEditScreen(
         }
     }
 }
-
-@OptIn(ExperimentalFoundationApi::class)
-private data class FormField (
-    val id: Int,
-    val name: String,
-    val placeholder: String,
-    val required: Boolean,
-    val value: TextFieldState
-)

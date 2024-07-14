@@ -73,7 +73,6 @@ fun InputField(
     val isEmpty by remember {
         derivedStateOf { state.text.isEmpty() }
     }
-
     val hintColor = if (isEmpty) placeholderColor else Color.Transparent
     val contentColor = if (isEmpty && !isFocused) placeholderColor else color
 

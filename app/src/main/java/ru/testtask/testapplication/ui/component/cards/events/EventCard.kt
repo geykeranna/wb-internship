@@ -1,8 +1,6 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.testtask.testapplication.data.model.EventData
@@ -27,6 +24,7 @@ import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_WITHOUT_D
 import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_AROUND_IMG_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_START_TEXT_BLOCK_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
@@ -36,8 +34,8 @@ import ru.testtask.testapplication.ui.theme.metadata1
 fun EventCard(
     eventData: EventData,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
     src: String? = null,
+    onClick: () -> Unit = {},
 ){
     Column(
         modifier = Modifier
@@ -64,11 +62,10 @@ fun EventCard(
                 Text(
                     modifier = Modifier
                         .height(HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD.dp)
-                        .padding(
-                            top = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
+                        .padding(top = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
                     text = eventData.name,
                     style = MaterialTheme.typography.bodyText1,
-                    color = Color.Black
+                    color = NeutralActiveColor
                 )
 
                 Text(

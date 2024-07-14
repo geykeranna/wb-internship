@@ -28,9 +28,9 @@ fun AnimatedCustomOutlinedButton(
     disabled: Boolean = false,
     label: String = "",
     labelSize: TextUnit = 14.sp,
-    onClick: () -> Unit = {},
     cornerRadius: Int = 30,
-    borderWidth: Int = 2
+    borderWidth: Int = 2,
+    onClick: () -> Unit = {},
 ){
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()

@@ -38,9 +38,9 @@ import ru.testtask.testapplication.ui.theme.heading2
 
 @Composable
 fun PinCodeScreen(
-    modifier: Modifier = Modifier,
-    navController: NavController,
     phone: String,
+    navController: NavController,
+    modifier: Modifier = Modifier,
 ) {
     val stateEnterNumber = remember {
         mutableStateOf(true)
@@ -50,8 +50,9 @@ fun PinCodeScreen(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
-            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
-                navController.popBackStack()
+            when {
+                navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED -> navController.popBackStack()
+            }
         },
     )
 

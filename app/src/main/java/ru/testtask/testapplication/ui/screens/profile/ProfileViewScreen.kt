@@ -32,8 +32,8 @@ import ru.testtask.testapplication.ui.theme.subheading2
 
 @Composable
 fun ProfileViewScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ){
     val userData: UserData = UserData.shimmerData
 
@@ -41,8 +41,9 @@ fun ProfileViewScreen(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
-            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
                 navController.popBackStack()
+            }
         },
         iconRight = R.drawable.ic_edit,
         onRightIconClick = { },

@@ -20,8 +20,8 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ActiveEventsScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     val searchState = rememberTextFieldState("")
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList1
@@ -44,7 +44,7 @@ fun ActiveEventsScreen(
 
     EventListByGroup(
         listByGroup = listByGroup,
-        modifier = Modifier.padding(top = 122.dp)
+        modifier = modifier.padding(top = 122.dp)
             .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
         navController = navController,
     )

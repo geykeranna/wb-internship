@@ -27,11 +27,11 @@ import ru.testtask.testapplication.ui.theme.subheading1
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
+    text: String = "",
     iconRight: Int? = null,
-    onRightIconClick: () -> Unit = {},
     iconLeft: Int? = null,
     onLeftIconClick: () -> Unit = {},
-    text: String = "",
+    onRightIconClick: () -> Unit = {},
     tintRightIcon: Color = NeutralActiveColor,
     tintLeftIcon: Color = NeutralActiveColor,
     textColor: Color = NeutralActiveColor

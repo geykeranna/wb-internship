@@ -19,19 +19,19 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CommunityScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     val searchState = rememberTextFieldState("")
     val itemsList: List<CommunityData> = List(10) { CommunityData.shimmerData }
 
     TopBar(
-        modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
         text = Screen.Community.name,
     )
 
     SearchBar (
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 52.dp)
             .padding(
                 vertical = VERTICAL_PADDING_SEARCH_BAR_COMMON.dp,

@@ -50,8 +50,8 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 fun InputNumberField(
     modifier: Modifier = Modifier,
     onChange: (number: String) -> Unit = {},
+    onValidate: (validate: Boolean) -> Unit = {},
     onEnterClick: () -> Unit = {},
-    onValidate: (validate: Boolean) -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
     var textFieldValue by remember {

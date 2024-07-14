@@ -25,8 +25,8 @@ import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
 fun MoreScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     TopBar (
         modifier = Modifier

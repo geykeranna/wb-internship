@@ -27,8 +27,8 @@ fun AnimatedCustomTextButton(
     disabled: Boolean = false,
     label: String = "",
     labelSize: TextUnit = 14.sp,
+    cornerRadius: Int = 30,
     onClick: () -> Unit = {},
-    cornerRadius: Int = 30
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()

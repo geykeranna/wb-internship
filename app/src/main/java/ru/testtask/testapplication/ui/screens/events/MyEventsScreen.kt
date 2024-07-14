@@ -18,8 +18,8 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 
 @Composable
 fun MyEventsScreen(
-    modifier: Modifier = Modifier,
     navController: NavController,
+    modifier: Modifier = Modifier,
 ) {
     val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList2
 
@@ -30,8 +30,9 @@ fun MyEventsScreen(
         text = Screen.MyEvents.name,
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
-            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
                 navController.popBackStack()
+            }
         }
     )
 

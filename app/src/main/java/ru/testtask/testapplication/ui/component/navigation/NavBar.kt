@@ -2,7 +2,6 @@ package ru.testtask.testapplication.ui.component.navigation
 
 import ru.testtask.testapplication.R
 
-
 sealed class NavBar(
     val label: String,
     val icon: Int,

@@ -26,14 +26,14 @@ import ru.testtask.testapplication.ui.theme.metadata1
 
 @Composable
 fun DetailCommunityScreen(
+    id: String,
+    navController: NavController,
     modifier: Modifier = Modifier,
-    id: String = "",
-    navController: NavController
 ) {
     val detailInfo = CommunityData.shimmerData
 
     TopBar(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         text = detailInfo.label,

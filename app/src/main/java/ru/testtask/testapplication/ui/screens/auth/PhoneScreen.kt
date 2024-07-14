@@ -34,8 +34,8 @@ import ru.testtask.testapplication.ui.theme.heading2
 
 @Composable
 fun PhoneScreen(
-    modifier: Modifier = Modifier,
     navController: NavController,
+    modifier: Modifier = Modifier,
 ) {
     val stateEnterNumber = remember {
         mutableStateOf(false)
@@ -80,8 +80,9 @@ fun PhoneScreen(
                     .padding(top = TOP_PADDING_FIELD_IN_LOGIN_SCREEN.dp)
                     .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp),
                 onEnterClick = {
-                    if (stateEnterNumber.value)
+                    if (stateEnterNumber.value){
                         navController.navigate(Screen.PinCode.route + "/${phone.value}")
+                    }
                 },
                 onChange = { number ->
                     phone.value = number

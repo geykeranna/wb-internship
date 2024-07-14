@@ -26,7 +26,7 @@ fun VisitorsList(
         modifier = modifier
             .fillMaxWidth(),
     ) {
-        val factor = (1 - OVERLAPPING_PERCENTAGE)
+        val factor = 1 - OVERLAPPING_PERCENTAGE
 
         if (visitorsList.isNotEmpty()) {
             Row(

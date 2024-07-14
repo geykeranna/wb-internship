@@ -32,10 +32,9 @@ fun NavGraph(
         }
 
         composable(route = Screen.EventsDetail.route + "/{id}") { stackEntry ->
-            val id = stackEntry.arguments?.getString("id")
-            if (!id.isNullOrEmpty()) {
+            stackEntry.arguments?.getString("id")?.let {
                 DetailEventScreen(
-                    id = id,
+                    id = it,
                     navController = navController
                 )
             }
@@ -48,10 +47,10 @@ fun NavGraph(
         }
 
         composable(route = Screen.CommunityDetail.route + "/{id}") { stackEntry ->
-            val id = stackEntry.arguments?.getString("id")
-            if (!id.isNullOrEmpty()) {
+            stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
-                    navController = navController
+                    id = it,
+                    navController = navController,
                 )
             }
         }
@@ -88,11 +87,10 @@ fun NavGraph(
         }
 
         composable(route = Screen.PinCode.route + "/{number}") { stackEntry ->
-            val number = stackEntry.arguments?.getString("number")
-            if (!number.isNullOrEmpty()) {
+            stackEntry.arguments?.getString("number")?.let {
                 PinCodeScreen(
                     navController = navController,
-                    phone = number
+                    phone = it
                 )
             }
         }
