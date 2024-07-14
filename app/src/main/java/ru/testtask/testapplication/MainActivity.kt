@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 val focusManager = LocalFocusManager.current
                 val navController = rememberNavController()
                 val hasAuth = remember {
-                    mutableStateOf(true)
+                    mutableStateOf(false)
                 }
 
                 Scaffold(

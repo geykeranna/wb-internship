@@ -23,18 +23,7 @@ fun CommunityScreen(
     navController: NavController
 ) {
     val searchState = rememberTextFieldState("")
-    val itemsList: List<CommunityData> = listOf(
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-        CommunityData.shimmerData,
-    )
+    val itemsList: List<CommunityData> = List(10) { CommunityData.shimmerData }
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
