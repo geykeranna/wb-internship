@@ -1,7 +1,6 @@
 package ru.testtask.testapplication.ui.screens.events
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -36,17 +35,11 @@ fun MyEventsScreen(
         }
     )
 
-    LazyColumn(
-        modifier = modifier
+    EventListByGroup(
+        modifier = Modifier
             .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp)
-            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp)
-    ) {
-        item {
-            EventListByGroup(
-                modifier = Modifier,
-                listByGroup = listByGroup,
-                navController = navController
-            )
-        }
-    }
+            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
+        listByGroup = listByGroup,
+        navController = navController
+    )
 }

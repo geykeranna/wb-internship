@@ -1,5 +1,6 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,9 +26,11 @@ import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_TEXT_BLOCK_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_AROUND_IMG_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_START_TEXT_BLOCK_IN_EVENT_CARD
+import ru.testtask.testapplication.ui.component.utils.Constants.SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.NeutralWeakColor
@@ -60,7 +63,7 @@ fun EventCardEnded(
             )
             Column(
                 modifier = Modifier
-                    .height(76.dp)
+                    .height(HEIGHT_OF_TEXT_BLOCK_IN_EVENT_CARD.dp)
                     .fillMaxWidth()
                     .padding(start = PADDING_START_TEXT_BLOCK_IN_EVENT_CARD.dp),
             ) {
@@ -68,7 +71,7 @@ fun EventCardEnded(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD.dp)
-                        .padding(bottom = 2.dp),
+                        .padding(bottom = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
@@ -92,7 +95,7 @@ fun EventCardEnded(
 
                 Text(
                     modifier = Modifier
-                        .padding(bottom = 2.dp),
+                        .padding(bottom = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
                     text = "${eventData.date} — ${eventData.location.city}",
                     style = MaterialTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
                     color = NeutralDisabledColor

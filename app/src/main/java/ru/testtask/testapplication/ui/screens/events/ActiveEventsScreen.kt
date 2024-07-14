@@ -2,7 +2,6 @@ package ru.testtask.testapplication.ui.screens.events
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text2.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -43,17 +42,10 @@ fun ActiveEventsScreen(
         state = searchState
     )
 
-    LazyColumn(
-        modifier = modifier
-            .padding(top = 122.dp)
+    EventListByGroup(
+        listByGroup = listByGroup,
+        modifier = Modifier.padding(top = 122.dp)
             .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-    ) {
-        item {
-            EventListByGroup(
-                listByGroup = listByGroup,
-                modifier = Modifier,
-                navController = navController,
-            )
-        }
-    }
+        navController = navController,
+    )
 }

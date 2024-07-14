@@ -3,6 +3,7 @@ package ru.testtask.testapplication.ui.component.cards.events
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
@@ -74,6 +75,7 @@ fun EventListByGroup (
     HorizontalPager(
         state = pagerState,
         modifier = modifier
+            .padding(top = HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp)
             .fillMaxWidth(),
     ) { page ->
         // strings are not constant values (in the future, state will be taken from the viewmodel)

@@ -17,8 +17,8 @@ import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.MenuItem
 import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
-import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
-import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
@@ -30,14 +30,14 @@ fun MoreScreen(
 ) {
     TopBar (
         modifier = Modifier
-            .padding(start = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
+            .padding(start = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
         text = Screen.More.name
     )
 
     LazyColumn (
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp)
+            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp)
             .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp),
         verticalArrangement = Arrangement.spacedBy(VERTICAL_SPACE_BY_CONTENT_COMMON.dp)
     ) {
