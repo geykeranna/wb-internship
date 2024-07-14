@@ -4,6 +4,8 @@ object Constants {
 
     // Variables that are not specified as constants are temporary
 
+    // Components
+
     // composable CommunityCard
     const val HEIGHT_OF_COMMUNITY_CARD = 68
     const val HEIGHT_WITHOUT_DIVIDER_IN_COMMUNITY_CARD = 10
@@ -93,13 +95,18 @@ object Constants {
     const val HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN = 40
     const val CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN = 8
 
+    // Screens
+
     // composable common
     const val HORIZONTAL_PADDING_TOP_BAR_COMMON = 24
+    const val HORIZONTAL_PADDING_CONTENT_BIG_COMMON = 24
     const val HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON = 16
     const val HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON = 28
+    const val HORIZONTAL_PADDING_CONTENT_COMMON = 16
     const val VERTICAL_PADDING_SEARCH_BAR_COMMON = 16
     const val VERTICAL_PADDING_ITEMS_COMMON = 16
     const val VERTICAL_PADDING_CONTENT_DETAIL_COMMON = 62
+    const val VERTICAL_SPACE_BY_CONTENT_COMMON = 8
 
     // composable DetailEventScreen
     const val HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN = 54
@@ -109,6 +116,14 @@ object Constants {
     const val MAX_LINE_COLLAPSED_IN_EXPANDABLE_TEXT_DETAIL_EVENT_SCREEN = 8
     const val VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN = 14
 
-
+    // composable ProfileScreen
+    const val HEIGHT_INPUT_FIELDS_PROFILE_SCREEN = 36
+    const val HEIGHT_BUTTON_PROFILE_SCREEN = 52
+    const val VERTICAL_PADDING_AVATAR_PROFILE_SCREEN = 50
+    const val VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN = 20
+    const val VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN = 30
+    const val VERTICAL_PADDING_BUTTON_PROFILE_SCREEN = 56
+    const val SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN = 12
+    const val PADDING_CHIPS_GROUP_PROFILE_SCREEN = 26
 
 }

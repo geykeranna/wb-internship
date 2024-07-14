@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
@@ -16,6 +17,10 @@ import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.MenuItem
 import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 
 @Composable
@@ -25,16 +30,16 @@ fun MoreScreen(
 ) {
     TopBar (
         modifier = Modifier
-            .padding(start = 16.dp),
+            .padding(start = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         text = Screen.More.name
     )
 
     LazyColumn (
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(top = 62.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp)
+            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp),
+        verticalArrangement = Arrangement.spacedBy(VERTICAL_SPACE_BY_CONTENT_COMMON.dp)
     ) {
         item {
             MenuItemUser(
@@ -51,7 +56,7 @@ fun MoreScreen(
                 onClickItem = {
                     navController.navigate(Screen.MyEvents.route)
                 },
-                text = "Мои встречи",
+                text = stringResource(R.string.label_menu_items_my_meets),
                 iconRight = R.drawable.ic_chevron_right
             )
         }
@@ -60,28 +65,28 @@ fun MoreScreen(
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Тема",
+                text = stringResource(R.string.label_menu_items_theme),
                 iconLeft = R.drawable.ic_sun
             )
 
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Уведомления",
+                text = stringResource(R.string.label_menu_items_notification),
                 iconLeft = R.drawable.ic_notification
             )
 
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Безопасность",
+                text = stringResource(R.string.label_menu_items_privacy),
                 iconLeft = R.drawable.ic_outline_privacy_tip
             )
 
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Память и ресурсы",
+                text = stringResource(R.string.label_menu_items_folder),
                 iconLeft = R.drawable.ic_folder
             )
 
@@ -94,14 +99,14 @@ fun MoreScreen(
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Помощь",
+                text = stringResource(R.string.label_menu_items_help),
                 iconLeft = R.drawable.ic_help_circle
             )
 
             MenuItem(
                 iconRight = R.drawable.ic_chevron_right,
                 onClickItem = { },
-                text = "Пригласи друга",
+                text = stringResource(R.string.label_menu_items_referral),
                 iconLeft = R.drawable.ic_mail
             )
         }

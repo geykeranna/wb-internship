@@ -57,6 +57,7 @@ import ru.testtask.testapplication.ui.component.utils.Constants.MAX_LINE_COLLAPS
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_ITEMS_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.NeutralWeakColor
 import ru.testtask.testapplication.ui.theme.bodyText1
@@ -121,7 +122,7 @@ fun DetailEventScreen(
                 .padding(vertical = VERTICAL_PADDING_ITEMS_COMMON.dp)
                 .height(HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN.dp),
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(VERTICAL_SPACE_BY_CONTENT_COMMON.dp)
         ) {
             Text(
                 text = "${detailInfo.date} - ${detailInfo.location.city} ${detailInfo.location.address}",

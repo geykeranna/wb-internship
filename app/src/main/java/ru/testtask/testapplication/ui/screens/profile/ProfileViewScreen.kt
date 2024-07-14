@@ -21,6 +21,11 @@ import ru.testtask.testapplication.ui.component.avatars.ProfileSize
 import ru.testtask.testapplication.ui.component.chips.SocialChips
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_CHIPS_GROUP_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.heading3
 import ru.testtask.testapplication.ui.theme.subheading2
@@ -33,7 +38,7 @@ fun ProfileViewScreen(
     val userData: UserData = UserData.shimmerData
 
     TopBar(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
             if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
@@ -46,20 +51,20 @@ fun ProfileViewScreen(
 
     LazyColumn (
         modifier = Modifier
-            .padding(top = 62.dp),
+            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         item {
             ProfileAvatar(
-                modifier = Modifier.padding(top = 50.dp),
+                modifier = Modifier.padding(top = VERTICAL_PADDING_AVATAR_PROFILE_SCREEN.dp),
                 size = ProfileSize.LARGE
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 20.dp),
+                    .padding(top = VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -76,7 +81,7 @@ fun ProfileViewScreen(
             }
 
             SocialChips(
-                modifier = Modifier.padding(26.dp),
+                modifier = Modifier.padding(PADDING_CHIPS_GROUP_PROFILE_SCREEN.dp),
                 list = userData.socialMedia
             )
         }

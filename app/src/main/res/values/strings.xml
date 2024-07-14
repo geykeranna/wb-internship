@@ -20,5 +20,16 @@
     <string name="button_label_screens_pin_request_the_code_again">Запросить код повторно</string>
     <string name="expandable_text_collapse_text">Скрыть</string>
     <string name="expandable_text_expand_text">...</string>
+    <string name="label_button_save">Сохранить</string>
+    <string name="label_menu_items_my_meets">Мои встречи</string>
+    <string name="label_menu_items_theme">Тема</string>
+    <string name="label_menu_items_notification">Уведомления</string>
+    <string name="label_menu_items_privacy">Безопасность</string>
+    <string name="label_menu_items_folder">Память и ресурсы</string>
+    <string name="label_menu_items_help">Помощь</string>
+    <string name="label_menu_items_referral">Пригласи друга</string>
+
+    <string name="text_form_field_first_name_profile_screen">Имя (обязательно)</string>
+    <string name="text_form_field_last_name_profile_screen">Фамилия (опционально)</string>
 
 </resources>

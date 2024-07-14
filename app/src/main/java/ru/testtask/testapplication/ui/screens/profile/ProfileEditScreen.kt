@@ -13,11 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
@@ -25,6 +24,15 @@ import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomBut
 import ru.testtask.testapplication.ui.component.input.InputField
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_BUTTON_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_INPUT_FIELDS_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_BIG_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_PROFILE_SCREEN
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
+import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,23 +44,22 @@ fun ProfileEditScreen(
             navController.popBackStack()
     }
 ){
-    val labelButton = "Сохранить"
-
-    val heightInputField = 36
+    val firstNameField = stringResource(R.string.text_form_field_first_name_profile_screen)
+    val lastNameField = stringResource(R.string.text_form_field_last_name_profile_screen)
 
     val formFields = remember {
         mutableListOf(
             FormField(
                 id = 0,
-                name = "First name",
-                placeholder = "Имя (обязательно)",
+                name = "first_name",
+                placeholder = firstNameField,
                 required = true,
                 value = TextFieldState("")
             ),
             FormField(
                 id = 1,
-                name = "Last name",
-                placeholder = "Фамилия (опционально)",
+                name = "last_name",
+                placeholder = lastNameField,
                 required = false,
                 value = TextFieldState("")
             ),
@@ -60,7 +67,7 @@ fun ProfileEditScreen(
     }
 
     TopBar(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = { onBackClick() },
         text = Screen.ProfileView.name
@@ -68,35 +75,37 @@ fun ProfileEditScreen(
 
     LazyColumn (
         modifier = Modifier
-            .padding(horizontal = 24.dp)
-            .padding(top = 62.dp)
+            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_BIG_COMMON.dp)
+            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         item {
             ProfileAvatar(
-                modifier = Modifier.padding(top = 50.dp),
+                modifier = Modifier.padding(top = VERTICAL_PADDING_AVATAR_PROFILE_SCREEN.dp),
                 size = ProfileSize.NORMAL,
                 isFloatingVisible = true
             )
         }
 
         item {
+            val height = formFields.size * (HEIGHT_INPUT_FIELDS_PROFILE_SCREEN + SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN)
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 30.dp)
+                    .padding(top = VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN.dp)
                     .heightIn(
-                        min = (formFields.size * (heightInputField + 12)).dp,
-                        max = (formFields.size * (heightInputField + 12)).dp
+                        min = height.dp,
+                        max = height.dp,
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN.dp)
             ) {
                 items(formFields.size) {
                     InputField(
-                        modifier = Modifier.height(heightInputField.dp),
+                        modifier = Modifier.height(HEIGHT_INPUT_FIELDS_PROFILE_SCREEN.dp),
                         state = formFields[it].value,
                         placeholder = formFields[it].placeholder
                     )
@@ -108,9 +117,9 @@ fun ProfileEditScreen(
             AnimatedCustomButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 56.dp)
-                    .height(52.dp),
-                label = labelButton,
+                    .padding(top = VERTICAL_PADDING_BUTTON_PROFILE_SCREEN.dp)
+                    .height(HEIGHT_BUTTON_PROFILE_SCREEN.dp),
+                label = stringResource(R.string.label_button_save),
                 onClick = {
                     navController.navigate(Screen.Events.route)
                 },
