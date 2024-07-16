@@ -5,18 +5,20 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_BUTTON
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
 import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
+import ru.testtask.testapplication.ui.theme.subheading2
 
 @Composable
 fun AnimatedCustomTextButton(
@@ -26,8 +28,7 @@ fun AnimatedCustomTextButton(
     disableColor: Color = PurpleLightColor,
     disabled: Boolean = false,
     label: String = "",
-    labelSize: TextUnit = 14.sp,
-    cornerRadius: Int = 30,
+    labelStyle: TextStyle = MaterialTheme.typography.subheading2,
     onClick: () -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -41,7 +42,7 @@ fun AnimatedCustomTextButton(
     Button(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(cornerRadius.dp),
+        shape = RoundedCornerShape(CORNER_RADIUS_BUTTON.dp),
         enabled = !disabled,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = if (isPressed) contentPrimaryColor else contentDefaultColor,
@@ -53,7 +54,7 @@ fun AnimatedCustomTextButton(
     ) {
         Text(
             text = label,
-            fontSize = labelSize,
+            style = labelStyle,
             color =  color
         )
     }

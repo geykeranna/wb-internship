@@ -6,6 +6,11 @@ object Constants {
 
     // Components
 
+    // composable Buttons
+    const val CORNER_RADIUS_BUTTON = 30
+    const val BORDER_WIDTH_BUTTON = 2
+
+
     // composable CommunityCard
     const val HEIGHT_OF_COMMUNITY_CARD = 68
     const val HEIGHT_WITHOUT_DIVIDER_IN_COMMUNITY_CARD = 56
@@ -21,7 +26,7 @@ object Constants {
     // composable EventCard
     const val HEIGHT_OF_EVENT_CARD = 88
     const val HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD = 76
-    const val SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD = 2
+    const val SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD = 4
     const val PADDING_AROUND_IMG_IN_EVENT_CARD = 4
     const val PADDING_START_TEXT_BLOCK_IN_EVENT_CARD = 12
     const val HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD = 24

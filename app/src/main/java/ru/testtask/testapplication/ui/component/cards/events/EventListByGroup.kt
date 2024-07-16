@@ -78,16 +78,9 @@ fun EventListByGroup (
             .padding(top = HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp)
             .fillMaxWidth(),
     ) { page ->
-        // strings are not constant values (in the future, state will be taken from the viewmodel)
-        val sorted = when (listByGroup[page].group) {
-            "Уже прошли" -> SORTBY.NO_ACTIVE
-            "Активные" -> SORTBY.ACTIVE
-            else -> SORTBY.NO_SORT
-        }
         EventCardsList(
             itemsList = listByGroup[page].listOfEvents,
             navController = navController,
-            sorted = sorted
         )
     }
 }

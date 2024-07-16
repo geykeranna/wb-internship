@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,12 +13,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import ru.testtask.testapplication.ui.component.utils.Constants.BORDER_WIDTH_BUTTON
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_BUTTON
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
 import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
+import ru.testtask.testapplication.ui.theme.subheading2
 
 @Composable
 fun AnimatedCustomOutlinedButton(
@@ -27,9 +30,7 @@ fun AnimatedCustomOutlinedButton(
     disableColor: Color = PurpleLightColor,
     disabled: Boolean = false,
     label: String = "",
-    labelSize: TextUnit = 14.sp,
-    cornerRadius: Int = 30,
-    borderWidth: Int = 2,
+    labelStyle: TextStyle = MaterialTheme.typography.subheading2,
     onClick: () -> Unit = {},
 ){
     val interactionSource = remember { MutableInteractionSource() }
@@ -44,7 +45,7 @@ fun AnimatedCustomOutlinedButton(
     OutlinedButton(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(cornerRadius.dp),
+        shape = RoundedCornerShape(CORNER_RADIUS_BUTTON.dp),
         enabled = !disabled,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = color,
@@ -52,13 +53,13 @@ fun AnimatedCustomOutlinedButton(
             disabledContentColor = disableColor,
             disabledContainerColor = Color.Transparent,
         ),
-        border = BorderStroke(borderWidth.dp, color),
+        border = BorderStroke(BORDER_WIDTH_BUTTON.dp, color),
         interactionSource = interactionSource
     ) {
         Text(
             text = label,
-            fontSize = labelSize,
-            color = color
+            color = color,
+            style = labelStyle
         )
     }
 }
