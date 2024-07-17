@@ -4,20 +4,26 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.testtask.testapplication.ui.screens.auth.PhoneScreen
+import ru.testtask.testapplication.ui.screens.auth.PinCodeScreen
 import ru.testtask.testapplication.ui.screens.community.CommunityScreen
 import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
 import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
 import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
+import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
-import ru.testtask.testapplication.ui.screens.tasks.Task6
+import ru.testtask.testapplication.ui.screens.profile.ProfileEditScreen
+import ru.testtask.testapplication.ui.screens.profile.ProfileViewScreen
+import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 
 @Composable
 fun NavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    isAuth: Boolean = false,
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavBar.Event.route
+        startDestination = Screen.Splash.route
     ){
         composable(route = Screen.Events.route) {
             ActiveEventsScreen(
@@ -26,10 +32,9 @@ fun NavGraph(
         }
 
         composable(route = Screen.EventsDetail.route + "/{id}") { stackEntry ->
-            val id = stackEntry.arguments?.getString("id")
-            if (id != null) {
+            stackEntry.arguments?.getString("id")?.let {
                 DetailEventScreen(
-                    id = id,
+                    id = it,
                     navController = navController
                 )
             }
@@ -42,17 +47,70 @@ fun NavGraph(
         }
 
         composable(route = Screen.CommunityDetail.route + "/{id}") { stackEntry ->
-            val id = stackEntry.arguments?.getString("id")
-            if (id != null) {
+            stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
-                    navController = navController
+                    id = it,
+                    navController = navController,
                 )
             }
         }
 
-        composable(route = NavBar.More.route) {
-//            MoreScreen()
-            Task6()
+        composable(route = Screen.More.route) {
+            MoreScreen(
+                navController = navController
+            )
         }
+
+        composable(route = Screen.Splash.route) {
+            SplashScreen(
+                navController = navController,
+                isAuth = isAuth
+            )
+        }
+
+        composable(route = Screen.MyEvents.route) {
+            MyEventsScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.ProfileView.route) {
+            ProfileViewScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.Phone.route) {
+            PhoneScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.PinCode.route + "/{number}") { stackEntry ->
+            stackEntry.arguments?.getString("number")?.let {
+                PinCodeScreen(
+                    navController = navController,
+                    phone = it
+                )
+            }
+        }
+
+        composable(route = Screen.ProfileEdit.route) {
+            ProfileEditScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.ProfileFirstEdit.route) {
+            ProfileEditScreen(
+                navController = navController,
+                onBackClick = {
+                    navController.navigate(Screen.Phone.route) {
+                        popUpTo(Screen.ProfileFirstEdit.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
     }
 }

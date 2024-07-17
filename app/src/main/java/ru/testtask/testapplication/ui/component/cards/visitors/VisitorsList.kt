@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import ru.testtask.testapplication.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.UserAvatar
+import ru.testtask.testapplication.ui.component.utils.Constants.NUM_OF_VISIBLE_AVATARS
+import ru.testtask.testapplication.ui.component.utils.Constants.OVERLAPPING_PERCENTAGE
 import ru.testtask.testapplication.ui.theme.bodyText1
 
 @Composable
@@ -19,14 +21,12 @@ fun VisitorsList(
     modifier: Modifier = Modifier,
     visitorsList: List<UserData> = listOf(),
     onClick: () -> Unit = {},
-    showAvatarsNum: Int = 5,
-    overlappingPercentage: Float = 0.35f,
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth(),
     ) {
-        val factor = (1 - overlappingPercentage)
+        val factor = 1 - OVERLAPPING_PERCENTAGE
 
         if (visitorsList.isNotEmpty()) {
             Row(
@@ -35,7 +35,7 @@ fun VisitorsList(
             ) {
                 Layout(
                     content = {
-                        visitorsList.take(showAvatarsNum).forEach { visitors ->
+                        visitorsList.take(NUM_OF_VISIBLE_AVATARS).forEach { visitors ->
                             UserAvatar(
                                 src = visitors.icon,
                                 story = visitors.story,
@@ -60,9 +60,9 @@ fun VisitorsList(
                     }
                 })
 
-                if (visitorsList.size > showAvatarsNum) {
+                if (visitorsList.size > NUM_OF_VISIBLE_AVATARS) {
                     Text(
-                        text = "+${visitorsList.size - 5}",
+                        text = "+${visitorsList.size - NUM_OF_VISIBLE_AVATARS}",
                         style = MaterialTheme.typography.bodyText1
                     )
                 }

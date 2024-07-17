@@ -23,37 +23,40 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_IN_MENU_ITEM
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_MENU_ITEM
+import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_MENU_ITEM
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 import ru.testtask.testapplication.ui.theme.metadata1
 
 @Composable
-fun MenuItem(
+fun MenuItem (
     modifier: Modifier = Modifier,
     iconRight: Int? = null,
     iconLeft: Int? = null,
     text: String = "",
-    onClickRightIcon: () -> Unit = {}
+    onClickItem: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp),
+            .height(HEIGHT_MENU_ITEM.dp)
+            .clickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+            horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_IN_MENU_ITEM.dp)
         ){
             iconLeft?.let {
                 Icon(
                     modifier = Modifier
-                        .size(24.dp),
+                        .size(ICON_SIZE_IN_MENU_ITEM.dp),
                     contentDescription = null,
                     painter = painterResource(it)
                 )
@@ -66,8 +69,7 @@ fun MenuItem(
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .size(24.dp)
-                    .clickable { onClickRightIcon() },
+                    .size(ICON_SIZE_IN_MENU_ITEM.dp),
                 contentDescription = "next",
                 painter = painterResource(it)
             )
@@ -80,15 +82,15 @@ fun MenuItemUser(
     modifier: Modifier = Modifier,
     userData: UserData,
     iconRight: Int? = null,
-    onClickRightIcon: () -> Unit = {}
+    onClickItem: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(66.dp),
+            .height(66.dp)
+            .clickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-
     ) {
         Row (
             modifier = Modifier
@@ -133,8 +135,7 @@ fun MenuItemUser(
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .size(24.dp)
-                    .clickable { onClickRightIcon() },
+                    .size(24.dp),
                 contentDescription = "next",
                 painter = painterResource(it)
             )

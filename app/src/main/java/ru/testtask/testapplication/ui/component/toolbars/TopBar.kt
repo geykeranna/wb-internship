@@ -18,24 +18,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_TOP_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_TOP_BAR
+import ru.testtask.testapplication.ui.component.utils.Constants.PADDING_VERTICAL_IN_TOP_BAR
 import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.subheading1
 
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
+    text: String = "",
     iconRight: Int? = null,
-    onRightIconClick: () -> Unit = {},
     iconLeft: Int? = null,
     onLeftIconClick: () -> Unit = {},
-    text: String = "",
+    onRightIconClick: () -> Unit = {},
     tintRightIcon: Color = NeutralActiveColor,
-    tinyLeftIcon: Color = NeutralActiveColor
+    tintLeftIcon: Color = NeutralActiveColor,
+    textColor: Color = NeutralActiveColor
 ) {
     Box(
         modifier = modifier
-            .padding(vertical = 16.dp)
-            .height(30.dp)
+            .padding(vertical = PADDING_VERTICAL_IN_TOP_BAR.dp)
+            .height(HEIGHT_TOP_BAR.dp)
             .fillMaxWidth()
     ) {
         Row(
@@ -52,28 +56,29 @@ fun TopBar(
                 iconLeft?.let {
                     Icon(
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(ICON_SIZE_IN_TOP_BAR.dp)
                             .clickable { onLeftIconClick() }
                             .align(Alignment.CenterVertically),
                         painter = painterResource(iconLeft),
                         contentDescription = "left button",
-                        tint = tinyLeftIcon
+                        tint = tintLeftIcon
                     )
                 }
                 Text(
                     text = text,
                     style = MaterialTheme.typography.subheading1,
+                    color = textColor
                 )
             }
 
             iconRight?.let {
                 Icon(
                     modifier = Modifier
-                        .size(24.dp)
+                        .size(ICON_SIZE_IN_TOP_BAR.dp)
                         .clickable { onRightIconClick() }
                         .align(Alignment.CenterVertically),
                     painter = painterResource(iconRight),
-                    contentDescription = "left button",
+                    contentDescription = "right button",
                     tint = tintRightIcon
                 )
             }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,6 +36,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.data.model.CountryCodes
+import ru.testtask.testapplication.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_ITEM_DROPDOWN
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_NUMBER_INPUT_FIELD
 import ru.testtask.testapplication.ui.component.utils.PhoneNumberVisualTransformation
 import ru.testtask.testapplication.ui.theme.NeutralActiveColor
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
@@ -44,6 +49,8 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 @Composable
 fun InputNumberField(
     modifier: Modifier = Modifier,
+    onChange: (number: String) -> Unit = {},
+    onValidate: (validate: Boolean) -> Unit = {},
     onEnterClick: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -55,22 +62,26 @@ fun InputNumberField(
         mutableStateOf(phoneCountryCodeList.first())
     }
     val focusRequester = remember { FocusRequester() }
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Row(
         modifier = modifier
+            .height(HEIGHT_OF_NUMBER_INPUT_FIELD.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(4.dp))
+                .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
                 .clickable {
                     expanded = !expanded
                 }
                 .background(NeutralOffWhiteColor)
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp)
         ) {
             Icon(
                 painter = painterResource(id = selectedPhoneCountryCode.flagIcon),
@@ -96,7 +107,7 @@ fun InputNumberField(
                     text = {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp),
                         ) {
                             Icon(
                                 painter = painterResource(id = phoneCountryCode.flagIcon),
@@ -117,30 +128,36 @@ fun InputNumberField(
                 )
             }
         }
-        Spacer(modifier = Modifier.width(8.dp))
+
+        Spacer(modifier = Modifier.width(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp))
+
         BasicTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
             value = textFieldValue,
             cursorBrush = SolidColor(Color.Transparent),
             onValueChange = {
-                textFieldValue = it.take(9)
+                textFieldValue = it
+                    .replace("\\D", "")
+                    .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
+                onValidate(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER } == textFieldValue.length)
+                onChange("${selectedPhoneCountryCode.countryCode}$textFieldValue")
             },
             textStyle = MaterialTheme.typography.bodyText1.copy(
                 color = NeutralActiveColor
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Phone,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.NumberPassword,
+                imeAction = ImeAction.Send
             ),
             keyboardActions = KeyboardActions(
-                onNext = { onEnterClick() }
+                onSend = { onEnterClick() },
             ),
-            visualTransformation = PhoneNumberVisualTransformation(),
+            visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
             decorationBox = { innerTextField ->
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(4.dp))
+                        .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
                         .fillMaxWidth()
                         .background(NeutralOffWhiteColor)
                         .padding(8.dp)
@@ -149,7 +166,7 @@ fun InputNumberField(
                 ) {
                     if (textFieldValue.isEmpty()){
                         Text(
-                            text = "000 000 00-00-00",
+                            text = selectedPhoneCountryCode.mask,
                             style = MaterialTheme.typography.bodyText1,
                             color = NeutralDisabledColor
                         )
@@ -158,8 +175,5 @@ fun InputNumberField(
                 }
             }
         )
-        LaunchedEffect(Unit) {
-            focusRequester.requestFocus()
-        }
     }
 }

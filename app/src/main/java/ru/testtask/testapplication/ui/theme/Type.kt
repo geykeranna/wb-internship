@@ -2,11 +2,9 @@ package ru.testtask.testapplication.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
@@ -73,7 +71,6 @@ val Typography.bodyText1: TextStyle
         fontFamily = sfProDisplayFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold,
-        lineHeight = 14.sp
     )
 
 val Typography.bodyText2: TextStyle

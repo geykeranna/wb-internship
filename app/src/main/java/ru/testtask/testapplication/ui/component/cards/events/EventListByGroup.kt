@@ -1,9 +1,9 @@
 package ru.testtask.testapplication.ui.component.cards.events
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
@@ -23,13 +23,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP
+import ru.testtask.testapplication.ui.component.utils.Constants.TAB_LABEL_TEXT_SIZE
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EventListByGroup(
+fun EventListByGroup (
     modifier: Modifier,
     listByGroup: List<EventsByGroup>,
     navController: NavController,
@@ -38,53 +40,47 @@ fun EventListByGroup(
     val pagerState = rememberPagerState(pageCount = { listByGroup.size })
     val selectedTab = remember { derivedStateOf { pagerState.currentPage } }
 
-    Column(modifier = modifier) {
-        TabRow(
-            selectedTabIndex = selectedTab.value,
-            modifier = Modifier.fillMaxWidth(),
-            containerColor = Color.Transparent,
-            contentColor = BrandDefaultColor,
-            divider = {},
-            indicator = @Composable { tabPositions: List<TabPosition> ->
-                CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
-            }
-        ) {
-            listByGroup.forEachIndexed { index, tab ->
-                Tab(
-                    modifier = Modifier
-                        .height(48.dp),
-                    selected = selectedTab.value == index,
-                    selectedContentColor = BrandDefaultColor,
-                    unselectedContentColor = TabUnselectedColor,
-                    onClick = {
-                        scope.launch {
-                            pagerState.scrollToPage(index)
-                        }
-                    },
-                ) {
-                    Text(
-                        text = tab.group.uppercase(),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+    TabRow(
+        selectedTabIndex = selectedTab.value,
+        modifier = modifier.fillMaxWidth(),
+        containerColor = Color.Transparent,
+        contentColor = BrandDefaultColor,
+        divider = {},
+        indicator = @Composable { tabPositions: List<TabPosition> ->
+            CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
+        }
+    ) {
+        listByGroup.forEachIndexed { index, tab ->
+            Tab(
+                modifier = Modifier
+                    .height(HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp),
+                selected = selectedTab.value == index,
+                selectedContentColor = BrandDefaultColor,
+                unselectedContentColor = TabUnselectedColor,
+                onClick = {
+                    scope.launch {
+                        pagerState.scrollToPage(index)
+                    }
+                },
+            ) {
+                Text(
+                    text = tab.group.uppercase(),
+                    fontSize = TAB_LABEL_TEXT_SIZE.sp,
+                    fontWeight = FontWeight.Medium
+                )
             }
         }
     }
+
     HorizontalPager(
         state = pagerState,
         modifier = modifier
+            .padding(top = HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp)
             .fillMaxWidth(),
     ) { page ->
-        val sorted = when (listByGroup[page].group) {
-            "Уже прошли" -> SORTBY.NO_ACTIVE
-            "Активные" -> SORTBY.ACTIVE
-            else -> SORTBY.NO_SORT
-        }
         EventCardsList(
             itemsList = listByGroup[page].listOfEvents,
             navController = navController,
-            sorted = sorted
         )
     }
 }

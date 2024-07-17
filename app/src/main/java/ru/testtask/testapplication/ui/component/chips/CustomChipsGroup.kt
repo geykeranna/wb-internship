@@ -14,25 +14,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS
+import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_OF_CHIPS
+import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_LINE_CHIPS_GROUP
 import ru.testtask.testapplication.ui.theme.BrandBackgroundColor
 import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 import ru.testtask.testapplication.ui.theme.metadata3
 
 @Composable
 fun CustomChipsGroup(
+    chipsList: List<String>,
     modifier: Modifier = Modifier,
-    chipsList: List<String> = listOf(),
 ) {
     LazyRow(
-        modifier = modifier.height(20.dp),
+        modifier = modifier.height(HEIGHT_OF_LINE_CHIPS_GROUP.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
+        horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS.dp)
     ) {
         items(chipsList.size) {
             Box(
                 modifier = Modifier
-                    .padding(end = 10.dp)
-                    .clip(RoundedCornerShape(40.dp))
+                    .clip(RoundedCornerShape(CORNER_RADIUS_OF_CHIPS.dp))
                     .background(BrandBackgroundColor)
             ) {
                 Text(
