@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.auth
+package ru.testtask.testapplication.ui.screens.auth.pin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

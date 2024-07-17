@@ -4,16 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.testtask.testapplication.ui.screens.auth.PhoneScreen
-import ru.testtask.testapplication.ui.screens.auth.PinCodeScreen
-import ru.testtask.testapplication.ui.screens.community.CommunityScreen
-import ru.testtask.testapplication.ui.screens.community.DetailCommunityScreen
-import ru.testtask.testapplication.ui.screens.events.ActiveEventsScreen
-import ru.testtask.testapplication.ui.screens.events.DetailEventScreen
-import ru.testtask.testapplication.ui.screens.events.MyEventsScreen
+import ru.testtask.testapplication.ui.screens.auth.phone.PhoneScreen
+import ru.testtask.testapplication.ui.screens.auth.pin.PinCodeScreen
+import ru.testtask.testapplication.ui.screens.community.community.CommunityScreen
+import ru.testtask.testapplication.ui.screens.community.detail.DetailCommunityScreen
+import ru.testtask.testapplication.ui.screens.events.active.ActiveEventsScreen
+import ru.testtask.testapplication.ui.screens.events.detail.DetailEventScreen
+import ru.testtask.testapplication.ui.screens.events.myevents.MyEventsScreen
 import ru.testtask.testapplication.ui.screens.more.MoreScreen
-import ru.testtask.testapplication.ui.screens.profile.ProfileEditScreen
-import ru.testtask.testapplication.ui.screens.profile.ProfileViewScreen
+import ru.testtask.testapplication.ui.screens.profile.edit.ProfileEditScreen
+import ru.testtask.testapplication.ui.screens.profile.view.ProfileViewScreen
 import ru.testtask.testapplication.ui.screens.splash.SplashScreen
 
 @Composable

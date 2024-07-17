@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.events
+package ru.testtask.testapplication.ui.screens.events.active
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding

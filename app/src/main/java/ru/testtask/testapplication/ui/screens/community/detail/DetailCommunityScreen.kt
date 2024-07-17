@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.community
+package ru.testtask.testapplication.ui.screens.community.detail
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

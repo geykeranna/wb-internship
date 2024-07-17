@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.community
+package ru.testtask.testapplication.ui.screens.community.community
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding

@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.events
+package ru.testtask.testapplication.ui.screens.events.myevents
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
