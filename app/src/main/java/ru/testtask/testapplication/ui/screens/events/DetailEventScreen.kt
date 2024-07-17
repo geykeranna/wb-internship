@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.data.model.EventData
@@ -80,9 +79,7 @@ fun DetailEventScreen(
         onRightIconClick = ::onClickButton,
         tintRightIcon = BrandDefaultColor,
         onLeftIconClick = {
-            if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
-                navController.popBackStack()
-            }
+            navController.popBackStack()
         }
     )
 

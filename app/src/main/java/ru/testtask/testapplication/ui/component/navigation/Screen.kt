@@ -6,7 +6,7 @@ sealed class Screen(
 ) {
 
     data object Splash: Screen(
-        route = "splash_invisible",
+        route = "splash",
         name = "Сплеш",
     )
 
@@ -51,17 +51,17 @@ sealed class Screen(
     )
 
     data object Phone: Screen(
-        route = "first_number_invisible",
+        route = "first_number",
         name = "Введите номер телефона",
     )
 
     data object PinCode: Screen(
-        route = "first_pin_code_invisible",
+        route = "first_pin_code",
         name = "Введите код",
     )
 
     data object ProfileFirstEdit: Screen(
-        route = "first_profile_edit_invisible",
+        route = "first_profile_edit",
         name = "Профиль",
     )
 }

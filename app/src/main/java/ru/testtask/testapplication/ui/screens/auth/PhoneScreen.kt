@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomButton
+import ru.testtask.testapplication.ui.component.button.AnimatedCustomButton
 import ru.testtask.testapplication.ui.component.input.InputNumberField
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN

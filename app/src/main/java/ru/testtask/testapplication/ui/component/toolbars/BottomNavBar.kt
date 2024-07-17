@@ -1,6 +1,8 @@
 package ru.testtask.testapplication.ui.component.toolbars
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +41,8 @@ import ru.testtask.testapplication.ui.component.utils.NoRippleTheme
 
 @Composable
 fun BottomNavBar(
-    navController: NavHostController
+    navController: NavHostController,
+    state: MutableState<Boolean>,
 ){
     val screens = listOf(
         NavBar.Event,
@@ -50,24 +54,31 @@ fun BottomNavBar(
     val currentDestination = navStackEntry?.destination
 
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = PADDING_HORIZONTAL_IN_BOTTOM_BAR.dp)
-                .padding(top = PADDING_TOP_IN_BOTTOM_BAR.dp, bottom = PADDING_BOTTOM_IN_BOTTOM_BAR.dp)
-                .fillMaxWidth()
-                .background(Color.White),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        )
-        {
-            screens.forEach { screen ->
-                BarItem(
-                    screen,
-                    currentDestination,
-                    navController
-                )
+        AnimatedVisibility(
+            visible = state.value,
+            enter = slideInVertically(initialOffsetY = { it }),
+            exit = slideOutVertically(targetOffsetY = { it }),
+        ){
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = PADDING_HORIZONTAL_IN_BOTTOM_BAR.dp)
+                    .padding(top = PADDING_TOP_IN_BOTTOM_BAR.dp, bottom = PADDING_BOTTOM_IN_BOTTOM_BAR.dp)
+                    .fillMaxWidth()
+                    .background(Color.White),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            )
+            {
+                screens.forEach { screen ->
+                    BarItem(
+                        screen,
+                        currentDestination,
+                        navController
+                    )
+                }
             }
         }
+
     }
 }
 

@@ -1,5 +1,6 @@
-package ru.testtask.testapplication.ui.component.button.text
+package ru.testtask.testapplication.ui.component.button
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,18 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import ru.testtask.testapplication.ui.component.utils.Constants.BORDER_WIDTH_BUTTON
 import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_BUTTON
+import ru.testtask.testapplication.ui.theme.LightColor
 import ru.testtask.testapplication.ui.theme.BrandDefaultColor
 import ru.testtask.testapplication.ui.theme.PurpleLightColor
 import ru.testtask.testapplication.ui.theme.BrandDarkModeColor
 import ru.testtask.testapplication.ui.theme.subheading2
 
 @Composable
-fun AnimatedCustomTextButton(
+fun AnimatedCustomButton(
     modifier: Modifier = Modifier,
-    contentDefaultColor: Color = BrandDefaultColor,
-    contentPrimaryColor: Color = BrandDarkModeColor,
-    disableColor: Color = PurpleLightColor,
+    type: ButtonType = ButtonType.DEFAULT,
     disabled: Boolean = false,
     label: String = "",
     labelStyle: TextStyle = MaterialTheme.typography.subheading2,
@@ -34,28 +35,32 @@ fun AnimatedCustomTextButton(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
-    val color = when{
-        isPressed -> contentPrimaryColor
-        disabled -> disableColor
-        else -> contentDefaultColor
+    val color = when {
+        isPressed -> BrandDarkModeColor
+        disabled -> PurpleLightColor
+        else -> BrandDefaultColor
     }
+
     Button(
         modifier = modifier,
-        onClick = onClick,
         shape = RoundedCornerShape(CORNER_RADIUS_BUTTON.dp),
+        onClick = onClick,
         enabled = !disabled,
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = if (isPressed) contentPrimaryColor else contentDefaultColor,
-            containerColor = Color.Transparent,
-            disabledContentColor = disableColor,
-            disabledContainerColor = Color.Transparent,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = if (type == ButtonType.DEFAULT) LightColor else color,
+            containerColor = if (type != ButtonType.DEFAULT) Color.Transparent else color,
+            disabledContentColor = if (type == ButtonType.DEFAULT) LightColor else color,
+            disabledContainerColor = if (type != ButtonType.DEFAULT) Color.Transparent else color,
         ),
-        interactionSource = interactionSource
+        interactionSource = interactionSource,
+        border = if (type == ButtonType.OUTLINED) {
+            BorderStroke(BORDER_WIDTH_BUTTON.dp, color)
+        } else null,
     ) {
         Text(
             text = label,
             style = labelStyle,
-            color =  color
+            color = if (type == ButtonType.DEFAULT) LightColor else color
         )
     }
 }

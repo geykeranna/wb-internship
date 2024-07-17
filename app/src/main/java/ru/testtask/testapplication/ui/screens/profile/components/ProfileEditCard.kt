@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.avatars.ProfileAvatar
 import ru.testtask.testapplication.ui.component.avatars.ProfileSize
-import ru.testtask.testapplication.ui.component.button.default.AnimatedCustomButton
+import ru.testtask.testapplication.ui.component.button.AnimatedCustomButton
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_BUTTON_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_BIG_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN

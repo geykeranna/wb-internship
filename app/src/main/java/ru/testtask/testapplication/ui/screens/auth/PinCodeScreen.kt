@@ -21,7 +21,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.ui.component.button.text.AnimatedCustomTextButton
+import ru.testtask.testapplication.ui.component.button.AnimatedCustomButton
+import ru.testtask.testapplication.ui.component.button.ButtonType
 import ru.testtask.testapplication.ui.component.input.InputPassField
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
@@ -110,13 +111,14 @@ fun PinCodeScreen(
             }
         )
 
-        AnimatedCustomTextButton(
+        AnimatedCustomButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = HORIZONTAL_PADDING_IN_LOGIN_SCREEN.dp)
                 .padding(top = TOP_PADDING_BUTTON_IN_LOGIN_SCREEN.dp)
                 .height(HEIGHT_BUTTON_LOGIN_SCREEN.dp),
             label = stringResource(R.string.button_label_screens_pin_request_the_code_again),
+            type = ButtonType.TEXT
         )
     }
 }
