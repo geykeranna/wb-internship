@@ -68,4 +68,5 @@ dependencies {
     implementation libs.dotlottie.android
 
     implementation libs.koin.android
+    implementation libs.koin.core
 }
