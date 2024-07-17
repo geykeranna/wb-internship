@@ -24,7 +24,7 @@ fun ActiveEventsScreen(
     modifier: Modifier = Modifier,
 ) {
     val searchState = rememberTextFieldState("")
-    val listByGroup: List<EventsByGroup> = EventsByGroup.shimmerDataList1
+    val listByGroup: List<EventsByGroup> = listOf()
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
