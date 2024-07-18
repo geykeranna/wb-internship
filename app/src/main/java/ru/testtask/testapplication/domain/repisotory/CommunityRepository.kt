@@ -7,5 +7,5 @@ interface CommunityRepository {
 
     suspend fun getCommunitiesBySearch(query: String): List<CommunityData>
 
-    suspend fun getCommunities(): List<CommunityData>
+    suspend fun getCommunities(query: String? = null): List<CommunityData>
 }

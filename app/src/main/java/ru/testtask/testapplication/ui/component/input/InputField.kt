@@ -1,7 +1,6 @@
 package ru.testtask.testapplication.ui.component.input
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,15 +16,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text2.BasicTextField2
-import androidx.compose.foundation.text2.input.TextFieldLineLimits
-import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -49,10 +45,9 @@ import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun InputField(
-    state: TextFieldState,
+    value: String,
     modifier: Modifier = Modifier,
     placeholder: String = "",
     disable: Boolean = false,
@@ -66,15 +61,12 @@ fun InputField(
     borderColor: Color = NeutralLineColor,
     onClickRightIcon: (() -> Unit?)? = null,
     onClickLeftIcon: (() -> Unit)? = null,
-    onEnter: (state: TextFieldState) -> Unit = {},
+    onChangeValue: (text: String) -> Unit = {},
 ){
     val focusManager = LocalFocusManager.current
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val isEmpty by remember {
-        derivedStateOf { state.text.isEmpty() }
-    }
-    val hintColor = if (isEmpty) placeholderColor else Color.Transparent
-    val contentColor = if (isEmpty && !isFocused) placeholderColor else color
+    val hintColor = if (value.isEmpty()) placeholderColor else Color.Transparent
+    val contentColor = if (value.isEmpty() && !isFocused) placeholderColor else color
 
     Row(
         modifier = modifier
@@ -84,7 +76,7 @@ fun InputField(
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(NeutralOffWhiteColor)
-            .focusedBorder(isFocused && isEmpty, borderColor),
+            .focusedBorder(isFocused && value.isEmpty(), borderColor),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
     ) {
@@ -112,20 +104,20 @@ fun InputField(
                 color = hintColor,
             )
 
-            BasicTextField2(
+            BasicTextField(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 enabled = !disable,
-                state = state,
-                lineLimits = TextFieldLineLimits.SingleLine,
+                value = value,
+                singleLine = true,
                 cursorBrush = SolidColor(color),
                 textStyle = MaterialTheme.typography.bodyText1.copy(color = color),
                 interactionSource = interactionSource,
                 keyboardActions = KeyboardActions(
                     onSearch = {
                         focusManager.clearFocus()
-                        onEnter(state)
                     },
                 ),
+                onValueChange = onChangeValue
             )
         }
         iconRight?.let {

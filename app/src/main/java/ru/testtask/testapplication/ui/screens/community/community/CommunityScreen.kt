@@ -1,8 +1,6 @@
 package ru.testtask.testapplication.ui.screens.community.community
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text2.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -17,7 +15,6 @@ import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDI
 import ru.testtask.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CommunityScreen(
     navController: NavController,
@@ -26,7 +23,7 @@ fun CommunityScreen(
     val viewModel: CommunityViewModel = viewModel()
     val itemsList = viewModel.getData().collectAsState().value
     val isSearching = viewModel.getSearchState().collectAsState().value
-    val searchState = rememberTextFieldState("")
+    val searchState = viewModel.getSearchText().collectAsState().value
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
@@ -40,7 +37,8 @@ fun CommunityScreen(
                 vertical = VERTICAL_PADDING_SEARCH_BAR_COMMON.dp,
                 horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp
             ),
-        state = searchState
+        value = searchState,
+        onChangeValue = viewModel::onSearchTextChange
     )
 
     CommunityCardList(

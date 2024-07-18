@@ -3,8 +3,8 @@ package ru.testtask.testapplication.repository.data.repisotory
 import ru.testtask.testapplication.repository.data.model.CommunityData
 import ru.testtask.testapplication.domain.repisotory.CommunityRepository
 
-interface CommunityRepositoryImpl: CommunityRepository {
-    override suspend fun getCommunities(): List<CommunityData> = List(10) { CommunityData.shimmerData }
+class CommunityRepositoryImpl: CommunityRepository {
+    override suspend fun getCommunities(query: String?): List<CommunityData> = List(10) { CommunityData.shimmerData }
 
     override suspend fun getCommunity(id: String): CommunityData = CommunityData.shimmerData
 
