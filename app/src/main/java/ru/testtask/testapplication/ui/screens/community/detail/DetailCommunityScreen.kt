@@ -63,7 +63,7 @@ fun DetailCommunityScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 30.dp, bottom = 16.dp),
-                text = "Встречи сообщества",
+                text = stringResource(R.string.text_community_meetings),
                 color = NeutralWeakColor,
                 style = MaterialTheme.typography.bodyText1
             )

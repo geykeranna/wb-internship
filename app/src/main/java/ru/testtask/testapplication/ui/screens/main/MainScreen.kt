@@ -28,7 +28,7 @@ import ru.testtask.testapplication.ui.component.utils.NoRippleTheme
 @Composable
 fun MainScreen() {
     // Заглушка: Будет вынесено во ViewModel
-    val hasAuth = MutableStateFlow(false)
+    val hasAuth = MutableStateFlow(true)
     fun isAuth() = hasAuth.asStateFlow().value
 
     val focusManager = LocalFocusManager.current
