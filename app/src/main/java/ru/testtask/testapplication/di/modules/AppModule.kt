@@ -1,10 +1,11 @@
 package ru.testtask.testapplication.di.modules
 
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import ru.testtask.testapplication.ui.screens.auth.phone.PhoneScreenViewModel
 import ru.testtask.testapplication.ui.screens.auth.pin.PinCodeScreenViewModel
 import ru.testtask.testapplication.ui.screens.community.community.CommunityViewModel
+import ru.testtask.testapplication.ui.screens.community.detail.DetailCommunityScreenViewModel
 import ru.testtask.testapplication.ui.screens.events.active.ActiveEventsScreenViewModel
 import ru.testtask.testapplication.ui.screens.events.detail.DetailEventScreenViewModel
 import ru.testtask.testapplication.ui.screens.events.myevents.MyEventScreenViewModel
@@ -12,58 +13,13 @@ import ru.testtask.testapplication.ui.screens.profile.edit.ProfileEditScreenView
 import ru.testtask.testapplication.ui.screens.profile.view.ProfileViewScreenViewModel
 
 val appModule = module {
-    viewModel {
-        PhoneScreenViewModel(
-            sendPin = get()
-        )
-    }
-
-    viewModel {
-        PinCodeScreenViewModel(
-            getPhone = get(),
-            sendPin = get()
-        )
-    }
-
-    viewModel {
-        CommunityViewModel(
-            getDataList = get()
-        )
-    }
-
-    viewModel {
-        DetailEventScreenViewModel(
-            getData = get()
-        )
-    }
-
-    viewModel {
-        ActiveEventsScreenViewModel(
-            getEvents = get()
-        )
-    }
-
-    viewModel {
-        DetailEventScreenViewModel(
-            getData = get()
-        )
-    }
-
-    viewModel {
-        MyEventScreenViewModel(
-            getEvents = get()
-        )
-    }
-
-    viewModel {
-        ProfileEditScreenViewModel(
-            getUserData = get()
-        )
-    }
-
-    viewModel {
-        ProfileViewScreenViewModel(
-            getUserData = get()
-        )
-    }
+    viewModelOf(::PhoneScreenViewModel)
+    viewModelOf(::PinCodeScreenViewModel)
+    viewModelOf(::CommunityViewModel)
+    viewModelOf(::ActiveEventsScreenViewModel)
+    viewModelOf(::MyEventScreenViewModel)
+    viewModelOf(::ProfileEditScreenViewModel)
+    viewModelOf(::ProfileViewScreenViewModel)
+    viewModelOf(::DetailCommunityScreenViewModel)
+    viewModelOf(::DetailEventScreenViewModel)
 }
