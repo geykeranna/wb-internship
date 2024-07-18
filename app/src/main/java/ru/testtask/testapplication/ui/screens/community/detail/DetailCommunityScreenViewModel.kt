@@ -9,7 +9,7 @@ import ru.testtask.testapplication.data.model.CommunityData
 import ru.testtask.testapplication.domain.usecases.community.GetCommunityDataUseCase
 
 class DetailCommunityScreenViewModel(
-    private val idCommunity: String,
+    idCommunity: String,
     private val getData: GetCommunityDataUseCase
 ) : ViewModel() {
     private val _detailData = MutableStateFlow(CommunityData.shimmerData)
