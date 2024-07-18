@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.events
+package ru.testtask.testapplication.ui.screens.events.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

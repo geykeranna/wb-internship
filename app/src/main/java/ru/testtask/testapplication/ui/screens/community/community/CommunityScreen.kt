@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.ui.screens.community
+package ru.testtask.testapplication.ui.screens.community.community
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
@@ -23,7 +23,7 @@ fun CommunityScreen(
     modifier: Modifier = Modifier,
 ) {
     val searchState = rememberTextFieldState("")
-    val itemsList: List<CommunityData> = List(10) { CommunityData.shimmerData }
+    val itemsList: List<CommunityData> = listOf()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),

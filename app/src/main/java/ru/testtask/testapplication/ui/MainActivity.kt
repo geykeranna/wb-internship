@@ -1,4 +1,4 @@
-package ru.testtask.testapplication
+package ru.testtask.testapplication.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
