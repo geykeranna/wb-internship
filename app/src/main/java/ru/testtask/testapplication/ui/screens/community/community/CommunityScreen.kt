@@ -23,9 +23,10 @@ fun CommunityScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    val searchState = rememberTextFieldState("")
     val viewModel: CommunityViewModel = viewModel()
     val itemsList = viewModel.getData().collectAsState().value
+    val isSearching = viewModel.getSearchState().collectAsState().value
+    val searchState = rememberTextFieldState("")
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),

@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.data.model
+package ru.testtask.testapplication.repository.data.model
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 
@@ -29,5 +29,15 @@ data class CommunityData (
                 EventData.shimmerData2,
             )
         )
+    }
+
+    fun doesMatchSearchQuery(query: String): Boolean {
+        val matchingCombinations = listOf(
+            label, description,
+        )
+
+        return matchingCombinations.any {
+            it.contains(query, ignoreCase = true)
+        }
     }
 }

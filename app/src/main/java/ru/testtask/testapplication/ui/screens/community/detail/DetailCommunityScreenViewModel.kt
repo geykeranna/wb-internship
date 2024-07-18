@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.testtask.testapplication.data.model.CommunityData
+import ru.testtask.testapplication.repository.data.model.CommunityData
 import ru.testtask.testapplication.domain.usecases.community.GetCommunityDataUseCase
 import ru.testtask.testapplication.ui.base.BaseEvent
 import ru.testtask.testapplication.ui.base.BaseViewModel

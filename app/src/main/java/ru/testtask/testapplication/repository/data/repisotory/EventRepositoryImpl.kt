@@ -1,7 +1,7 @@
-package ru.testtask.testapplication.data.repisotory
+package ru.testtask.testapplication.repository.data.repisotory
 
-import ru.testtask.testapplication.data.model.EventData
-import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.repository.data.model.EventData
+import ru.testtask.testapplication.repository.data.model.EventsByGroup
 import ru.testtask.testapplication.domain.repisotory.EventRepository
 
 class EventRepositoryImpl: EventRepository {

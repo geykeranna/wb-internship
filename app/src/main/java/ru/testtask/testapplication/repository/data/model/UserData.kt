@@ -1,6 +1,7 @@
-package ru.testtask.testapplication.data.model
+package ru.testtask.testapplication.presentation.data.model
 
 import ru.testtask.testapplication.R
+import ru.testtask.testapplication.repository.data.model.SocialMedia
 
 data class UserData(
     val id: String,

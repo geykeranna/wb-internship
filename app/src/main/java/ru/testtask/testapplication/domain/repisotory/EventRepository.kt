@@ -1,7 +1,7 @@
 package ru.testtask.testapplication.domain.repisotory
 
-import ru.testtask.testapplication.data.model.EventData
-import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.repository.data.model.EventData
+import ru.testtask.testapplication.repository.data.model.EventsByGroup
 
 interface EventRepository {
     suspend fun getEvents(): List<EventData>

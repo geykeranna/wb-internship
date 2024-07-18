@@ -21,7 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.data.model.SocialMedia
+import ru.testtask.testapplication.repository.data.model.SocialMedia
 import ru.testtask.testapplication.ui.component.utils.Constants.BORDER_WIDTH_OF_SOCIAL_CHIP
 import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS_ITEM_LIST
 import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_OF_SOCIAL_CHIPS

@@ -5,9 +5,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import ru.testtask.testapplication.di.modules.appModule
-import ru.testtask.testapplication.di.modules.dataModule
-import ru.testtask.testapplication.di.modules.domainModules
+import ru.testtask.testapplication.domain.di.modules.appModule
+import ru.testtask.testapplication.domain.di.modules.dataModule
+import ru.testtask.testapplication.domain.di.modules.domainModules
 
 class App : Application() {
 

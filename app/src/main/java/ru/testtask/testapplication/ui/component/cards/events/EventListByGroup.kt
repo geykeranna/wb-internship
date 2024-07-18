@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.repository.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP
 import ru.testtask.testapplication.ui.component.utils.Constants.TAB_LABEL_TEXT_SIZE
 import ru.testtask.testapplication.ui.component.utils.CustomIndicator

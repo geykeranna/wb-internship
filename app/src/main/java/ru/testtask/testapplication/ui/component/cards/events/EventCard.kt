@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.testtask.testapplication.data.model.EventData
+import ru.testtask.testapplication.repository.data.model.EventData
 import ru.testtask.testapplication.ui.component.avatars.GroupAvatar
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD

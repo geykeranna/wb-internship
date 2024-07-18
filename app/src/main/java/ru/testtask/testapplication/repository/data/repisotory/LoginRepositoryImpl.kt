@@ -1,6 +1,6 @@
-package ru.testtask.testapplication.data.repisotory
+package ru.testtask.testapplication.repository.data.repisotory
 
-import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.presentation.data.model.UserData
 import ru.testtask.testapplication.domain.repisotory.LoginRepository
 
 class LoginRepositoryImpl: LoginRepository {

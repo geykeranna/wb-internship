@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.data.model
+package ru.testtask.testapplication.repository.data.model
 
 import ru.testtask.testapplication.R
 

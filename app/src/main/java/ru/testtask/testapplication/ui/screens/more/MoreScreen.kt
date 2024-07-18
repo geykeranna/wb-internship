@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.presentation.data.model.UserData
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.MenuItem
 import ru.testtask.testapplication.ui.component.toolbars.MenuItemUser

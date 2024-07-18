@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.data.model
+package ru.testtask.testapplication.repository.data.model
 
 data class EventsByGroup(
     val listOfEvents: List<EventData>,

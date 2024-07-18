@@ -1,6 +1,7 @@
-package ru.testtask.testapplication.data.model
+package ru.testtask.testapplication.repository.data.model
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import ru.testtask.testapplication.presentation.data.model.UserData
 
 data class EventData(
     val id: String,

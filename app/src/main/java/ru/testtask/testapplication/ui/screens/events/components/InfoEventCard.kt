@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.model.EventData
+import ru.testtask.testapplication.repository.data.model.EventData
 import ru.testtask.testapplication.ui.component.cards.visitors.VisitorsList
 import ru.testtask.testapplication.ui.component.text.ExpandableText
 import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_MAP_SCREEN_DETAIL_EVENT_SCREEN

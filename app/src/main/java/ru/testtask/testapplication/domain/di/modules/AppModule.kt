@@ -1,4 +1,4 @@
-package ru.testtask.testapplication.di.modules
+package ru.testtask.testapplication.domain.di.modules
 
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module

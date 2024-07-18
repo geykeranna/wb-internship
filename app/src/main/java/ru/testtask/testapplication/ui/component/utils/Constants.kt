@@ -10,7 +10,6 @@ object Constants {
     const val CORNER_RADIUS_BUTTON = 30
     const val BORDER_WIDTH_BUTTON = 2
 
-
     // composable CommunityCard
     const val HEIGHT_OF_COMMUNITY_CARD = 68
     const val HEIGHT_WITHOUT_DIVIDER_IN_COMMUNITY_CARD = 56
@@ -134,4 +133,9 @@ object Constants {
     const val VERTICAL_PADDING_BUTTON_PROFILE_SCREEN = 56
     const val SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN = 12
     const val PADDING_CHIPS_GROUP_PROFILE_SCREEN = 26
+
+
+
+    // View Models
+    const val SEARCH_WAITING_TIME: Long = 5000
 }

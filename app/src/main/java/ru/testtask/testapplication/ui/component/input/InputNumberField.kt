@@ -35,7 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import ru.testtask.testapplication.data.model.CountryCodes
+import ru.testtask.testapplication.presentation.data.model.CountryCodes
 import ru.testtask.testapplication.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
 import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_ITEM_DROPDOWN
 import ru.testtask.testapplication.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD

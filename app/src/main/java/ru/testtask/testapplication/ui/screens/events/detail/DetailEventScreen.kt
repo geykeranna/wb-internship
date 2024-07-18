@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.model.EventData
-import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.repository.data.model.EventData
+import ru.testtask.testapplication.presentation.data.model.UserData
 import ru.testtask.testapplication.ui.component.chips.CustomChipsGroup
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN

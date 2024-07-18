@@ -3,7 +3,7 @@ package ru.testtask.testapplication.ui.screens.events.detail
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import ru.testtask.testapplication.data.model.EventData
+import ru.testtask.testapplication.repository.data.model.EventData
 import ru.testtask.testapplication.domain.usecases.event.GetEventDataUseCase
 
 class DetailEventScreenViewModel(

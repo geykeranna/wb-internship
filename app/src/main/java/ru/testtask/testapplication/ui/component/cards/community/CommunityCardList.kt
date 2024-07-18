@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import ru.testtask.testapplication.data.model.CommunityData
+import ru.testtask.testapplication.repository.data.model.CommunityData
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_OF_COMMUNITY_ITEM_LIST

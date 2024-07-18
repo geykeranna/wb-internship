@@ -22,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.model.UserData
+import ru.testtask.testapplication.presentation.data.model.UserData
 import ru.testtask.testapplication.ui.component.utils.Constants.CONTENT_PADDING_IN_MENU_ITEM
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_MENU_ITEM
 import ru.testtask.testapplication.ui.component.utils.Constants.ICON_SIZE_IN_MENU_ITEM

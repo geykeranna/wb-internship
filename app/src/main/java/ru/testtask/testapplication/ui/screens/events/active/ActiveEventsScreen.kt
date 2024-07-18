@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.testtask.testapplication.R
-import ru.testtask.testapplication.data.model.EventsByGroup
+import ru.testtask.testapplication.repository.data.model.EventsByGroup
 import ru.testtask.testapplication.ui.component.cards.events.EventListByGroup
 import ru.testtask.testapplication.ui.component.input.SearchBar
 import ru.testtask.testapplication.ui.component.navigation.Screen
