@@ -23,7 +23,6 @@ import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_MAP_FULL_WINDOW
 import ru.testtask.testapplication.ui.component.utils.Constants.WIDTH_MAP_FULL_WINDOW
 
-
 @Composable
 fun FullScreenImageDialog(isMapFullScreen: MutableState<Boolean>) {
     if (isMapFullScreen.value) {

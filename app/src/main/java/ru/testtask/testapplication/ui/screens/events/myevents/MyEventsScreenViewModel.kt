@@ -1,16 +1,51 @@
 package ru.testtask.testapplication.ui.screens.events.myevents
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import ru.testtask.testapplication.repository.data.model.CommunityData
+import kotlinx.coroutines.launch
 import ru.testtask.testapplication.domain.usecases.event.GetEventListByGroupUseCase
+import ru.testtask.testapplication.domain.usecases.login.GetCurrentUserIDUseCase
+import ru.testtask.testapplication.repository.data.model.EventsByGroup
+import ru.testtask.testapplication.ui.base.BaseEvent
+import ru.testtask.testapplication.ui.base.BaseViewModel
 
 class MyEventScreenViewModel(
-    private val getEvents: GetEventListByGroupUseCase
-) : ViewModel() {
-    private val _dataList = MutableStateFlow(listOf(CommunityData.shimmerData) )
-    private val dataList: StateFlow<List<CommunityData>> = _dataList
+    private val getEvents: GetEventListByGroupUseCase,
+    private val getUserId: GetCurrentUserIDUseCase,
+) : BaseViewModel<MyEventScreenViewModel.Event>() {
+    private val _dataList = MutableStateFlow(listOf(EventsByGroup.shimmerData))
+    private val dataList: StateFlow<List<EventsByGroup>> = _dataList
 
-    fun getData(): StateFlow<List<CommunityData>> = dataList
+    private val _userID = MutableStateFlow("")
+    private val userID: StateFlow<String> = _userID
+
+    init {
+        obtainEvent(Event.OnLoadingStarted)
+    }
+
+    private fun startLoading() = viewModelScope.launch {
+        _userID.value = getUserId.execute()
+        _dataList.emit(getEvents.execute(query = "", userId = userID.value))
+    }
+
+    private fun fetchData(query: String? = null) = viewModelScope.launch {
+        _dataList.emit(getEvents.execute(query, userId = userID.value))
+    }
+
+    sealed class Event : BaseEvent() {
+        data object OnLoadingStarted : Event()
+        class OnLoadData(val query: String) : Event()
+    }
+
+    override fun obtainEvent(event: Event) {
+        when (event) {
+            is Event.OnLoadingStarted -> {
+                startLoading()
+            }
+            is Event.OnLoadData -> {
+                fetchData(event.query)
+            }
+        }
+    }
 }

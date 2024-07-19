@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.testtask.testapplication.ui.component.cards.community.CommunityCardList
@@ -23,7 +22,6 @@ fun CommunityScreen(
     viewModel: CommunityViewModel = koinViewModel()
 ) {
     val itemsList = viewModel.getData().collectAsState().value
-    val isSearching = viewModel.getSearchState().collectAsState().value
     val searchState = viewModel.getSearchText().collectAsState().value
 
     TopBar(

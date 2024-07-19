@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.cards.events.EventCardsList
@@ -32,7 +32,7 @@ fun DetailCommunityScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    val detailViewModel: DetailCommunityScreenViewModel = getViewModel(parameters = { parametersOf(id) })
+    val detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
     val detailInfo = detailViewModel.getDetailData().collectAsState().value
 
     TopBar(

@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import ru.testtask.testapplication.presentation.data.model.UserData
+import ru.testtask.testapplication.repository.data.model.UserData
 import ru.testtask.testapplication.ui.component.avatars.UserAvatar
 import ru.testtask.testapplication.ui.component.utils.Constants.NUM_OF_VISIBLE_AVATARS
 import ru.testtask.testapplication.ui.component.utils.Constants.OVERLAPPING_PERCENTAGE

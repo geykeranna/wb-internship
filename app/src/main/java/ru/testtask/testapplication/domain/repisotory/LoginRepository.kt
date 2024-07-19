@@ -7,4 +7,6 @@ interface LoginRepository {
     suspend fun getPhoneAuth(): String
 
     suspend fun getAuthState(): Boolean
+
+    suspend fun getUserID(): String
 }

@@ -64,7 +64,7 @@ class CommunityViewModel(
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
-        class OnChangeParams(val query: String) : Event()
+        class OnLoadData(val query: String) : Event()
     }
 
     override fun obtainEvent(event: Event) {
@@ -72,7 +72,7 @@ class CommunityViewModel(
             is Event.OnLoadingStarted -> {
                 startLoading()
             }
-            is Event.OnChangeParams -> {
+            is Event.OnLoadData -> {
                 fetchData(event.query)
             }
         }
