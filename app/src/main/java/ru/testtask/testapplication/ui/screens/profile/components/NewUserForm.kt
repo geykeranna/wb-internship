@@ -1,6 +1,5 @@
 package ru.testtask.testapplication.ui.screens.profile.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,7 +15,6 @@ import ru.testtask.testapplication.ui.component.utils.Constants.HEIGHT_INPUT_FIE
 import ru.testtask.testapplication.ui.component.utils.Constants.SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NewUserForm(
     formFields: MutableList<FormField>,
@@ -38,7 +36,7 @@ fun NewUserForm(
         items(formFields.size) {
             InputField(
                 modifier = Modifier.height(HEIGHT_INPUT_FIELDS_PROFILE_SCREEN.dp),
-                state = formFields[it].value,
+                value = formFields[it].value,
                 placeholder = formFields[it].placeholder
             )
         }

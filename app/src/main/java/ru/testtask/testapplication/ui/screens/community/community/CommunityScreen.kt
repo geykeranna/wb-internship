@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.testtask.testapplication.ui.component.cards.community.CommunityCardList
 import ru.testtask.testapplication.ui.component.input.SearchBar
 import ru.testtask.testapplication.ui.component.navigation.Screen
@@ -19,8 +20,8 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 fun CommunityScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: CommunityViewModel = koinViewModel()
 ) {
-    val viewModel: CommunityViewModel = viewModel()
     val itemsList = viewModel.getData().collectAsState().value
     val isSearching = viewModel.getSearchState().collectAsState().value
     val searchState = viewModel.getSearchText().collectAsState().value

@@ -1,6 +1,5 @@
 package ru.testtask.testapplication.ui.screens.community.community
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,6 +25,10 @@ class CommunityViewModel(
     private val _isSearching = MutableStateFlow(false)
     private val isSearching: StateFlow<Boolean> = _isSearching
 
+    init {
+        obtainEvent(Event.OnLoadingStarted)
+    }
+
     fun getDataFlow(): StateFlow<List<CommunityData>> = dataList
 
     fun getSearchState(): StateFlow<Boolean> = isSearching
@@ -47,13 +50,12 @@ class CommunityViewModel(
             dataList.value
         )
 
-    fun onSearchTextChange(text: String) {
-        _searchText.value = text
+    private fun startLoading() = viewModelScope.launch {
+        _dataList.emit(getDataList.execute(""))
     }
 
-    private fun startLoading() = viewModelScope.launch {
-        // TODO
-        _dataList.emit(getDataList.execute(""))
+    fun onSearchTextChange(text: String) {
+        _searchText.value = text
     }
 
     private fun fetchData(query: String? = null) = viewModelScope.launch {
@@ -61,7 +63,7 @@ class CommunityViewModel(
     }
 
     sealed class Event : BaseEvent() {
-        class OnLoadingStarted(val id: String) : Event()
+        data object OnLoadingStarted : Event()
         class OnChangeParams(val query: String) : Event()
     }
 

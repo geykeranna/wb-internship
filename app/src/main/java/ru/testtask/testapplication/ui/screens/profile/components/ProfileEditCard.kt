@@ -1,13 +1,11 @@
 package ru.testtask.testapplication.ui.screens.profile.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -24,7 +22,6 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_PROFILE_SCREEN
 import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProfileEditCard(
     onClick: () -> Unit,
@@ -39,14 +36,14 @@ fun ProfileEditCard(
                 name = "first_name",
                 placeholder = firstNameField,
                 required = true,
-                value = TextFieldState("")
+                value = ""
             ),
             FormField(
                 id = 1,
                 name = "last_name",
                 placeholder = lastNameField,
                 required = false,
-                value = TextFieldState("")
+                value = ""
             ),
         )
     }
@@ -80,7 +77,7 @@ fun ProfileEditCard(
                 onClick = onClick,
                 disabled = !formFields
                     .filter { it.required }
-                    .all { it.value.text.isNotEmpty() }
+                    .all { it.value.isNotEmpty() }
             )
         }
     }

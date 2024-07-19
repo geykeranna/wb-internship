@@ -39,7 +39,7 @@ fun ActiveEventsScreen(
                 vertical = VERTICAL_PADDING_SEARCH_BAR_COMMON.dp,
                 horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp
             ),
-        state = searchState
+        value = ""
     )
 
     EventListByGroup(

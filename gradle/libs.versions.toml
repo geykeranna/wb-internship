@@ -3,8 +3,8 @@ agp = "8.4.2"
 coilCompose = "2.6.0"
 dotlottieAndroid = "0.3.0"
 koinAndroid = "3.5.6"
-koinAndroidExt = "3.1.2"
-koinAndroidxCompose = "3.1.2"
+koinAndroidExt = "3.5.6"
+koinAndroidxCompose = "3.5.6"
 koinCore = "3.5.6"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -35,7 +35,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-android-ext = { module = "io.insert-koin:koin-android-ext", version.ref = "koinAndroidExt" }
+koin-android-ext = { module = "io.insert-koin:koin-android-ext", version = "3.0.2" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 
