@@ -48,19 +48,15 @@ import ru.testtask.testapplication.ui.theme.bodyText1
 
 @Composable
 fun InputNumberField(
+    phone: String,
+    selectedPhoneCountryCode: CountryCodes,
+    phoneCountryCodeList: List<CountryCodes>,
     modifier: Modifier = Modifier,
-    onChange: (number: String) -> Unit = {},
-    onValidate: (validate: Boolean) -> Unit = {},
+    onChange: (value: String) -> Unit = {},
+    onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit = {},
     onEnterClick: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var textFieldValue by remember {
-        mutableStateOf("")
-    }
-    val phoneCountryCodeList = CountryCodes.shimmerData
-    var selectedPhoneCountryCode by remember {
-        mutableStateOf(phoneCountryCodeList.first())
-    }
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
@@ -122,7 +118,7 @@ fun InputNumberField(
                         }
                     },
                     onClick = {
-                        selectedPhoneCountryCode = phoneCountryCode
+                        onSelectedPhoneCountryCode(phoneCountryCode)
                         expanded = false
                     }
                 )
@@ -134,14 +130,13 @@ fun InputNumberField(
         BasicTextField(
             modifier = Modifier
                 .focusRequester(focusRequester),
-            value = textFieldValue,
+            value = phone,
             cursorBrush = SolidColor(Color.Transparent),
             onValueChange = {
-                textFieldValue = it
+                val value = it
                     .replace("\\D", "")
                     .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
-                onValidate(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER } == textFieldValue.length)
-                onChange("${selectedPhoneCountryCode.countryCode}$textFieldValue")
+                onChange(value)
             },
             textStyle = MaterialTheme.typography.bodyText1.copy(
                 color = NeutralActiveColor
@@ -164,7 +159,7 @@ fun InputNumberField(
                         .weight(1f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (textFieldValue.isEmpty()){
+                    if (phone.isEmpty()){
                         Text(
                             text = selectedPhoneCountryCode.mask,
                             style = MaterialTheme.typography.bodyText1,

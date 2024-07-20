@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.ui.component.navigation.Screen
 import ru.testtask.testapplication.ui.component.toolbars.TopBar
@@ -20,7 +21,8 @@ fun ProfileEditScreen(
         if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
             navController.popBackStack()
         }
-    }
+    },
+    viewModel: ProfileEditScreenViewModel = koinViewModel()
 ){
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
@@ -31,6 +33,13 @@ fun ProfileEditScreen(
 
     ProfileEditCard(
         modifier = modifier,
-        onClick = { navController.navigate(Screen.Events.route) }
+        formField = viewModel.formFields,
+        state = viewModel.getState(),
+        onClick = {
+            if(viewModel.getState()){
+                viewModel.obtainEvent(ProfileEditScreenViewModel.Event.OnSetData)
+                navController.navigate(Screen.Events.route)
+            }
+        }
     )
 }

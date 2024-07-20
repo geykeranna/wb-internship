@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -24,29 +23,11 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 
 @Composable
 fun ProfileEditCard(
+    state: Boolean,
+    formField: MutableList<FormField>,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
-    val firstNameField = stringResource(R.string.text_form_field_first_name_profile_screen)
-    val lastNameField = stringResource(R.string.text_form_field_last_name_profile_screen)
-    val formFields = remember {
-        mutableListOf(
-            FormField(
-                id = 0,
-                name = "first_name",
-                placeholder = firstNameField,
-                required = true,
-                value = ""
-            ),
-            FormField(
-                id = 1,
-                name = "last_name",
-                placeholder = lastNameField,
-                required = false,
-                value = ""
-            ),
-        )
-    }
     LazyColumn (
         modifier = modifier
             .padding(horizontal = HORIZONTAL_PADDING_CONTENT_BIG_COMMON.dp)
@@ -64,7 +45,7 @@ fun ProfileEditCard(
         }
 
         item {
-            NewUserForm(formFields = formFields)
+            NewUserForm(formFields = formField)
         }
 
         item {
@@ -75,9 +56,7 @@ fun ProfileEditCard(
                     .height(HEIGHT_BUTTON_PROFILE_SCREEN.dp),
                 label = stringResource(R.string.label_button_save),
                 onClick = onClick,
-                disabled = !formFields
-                    .filter { it.required }
-                    .all { it.value.isNotEmpty() }
+                disabled = !state
             )
         }
     }

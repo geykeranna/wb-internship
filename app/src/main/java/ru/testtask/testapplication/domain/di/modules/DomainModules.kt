@@ -11,6 +11,7 @@ import ru.testtask.testapplication.domain.usecases.login.CheckAuthStateUseCase
 import ru.testtask.testapplication.domain.usecases.login.GetCurrentPhoneNumberUseCase
 import ru.testtask.testapplication.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.testtask.testapplication.domain.usecases.login.SendPinCodeOnPhoneUseCase
+import ru.testtask.testapplication.domain.usecases.login.SendPinCodeUseCase
 import ru.testtask.testapplication.domain.usecases.user.GetUserDataUseCase
 import ru.testtask.testapplication.domain.usecases.user.GetUserListUseCase
 import ru.testtask.testapplication.domain.usecases.user.SetUserDataUseCase
@@ -31,4 +32,5 @@ val domainModules = module {
     factoryOf(::SendPinCodeOnPhoneUseCase)
     factoryOf(::GetCurrentUserIDUseCase)
     factoryOf(::CheckAuthStateUseCase)
+    factoryOf(::SendPinCodeUseCase)
 }

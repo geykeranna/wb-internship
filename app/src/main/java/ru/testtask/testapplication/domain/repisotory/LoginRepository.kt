@@ -2,7 +2,9 @@ package ru.testtask.testapplication.domain.repisotory
 
 interface LoginRepository {
 
-    suspend fun sendCode(phoneNumber: String)
+    suspend fun setPhone(phoneNumber: String)
+
+    suspend fun sendCode(pinCode: String)
 
     suspend fun getPhoneAuth(): String
 

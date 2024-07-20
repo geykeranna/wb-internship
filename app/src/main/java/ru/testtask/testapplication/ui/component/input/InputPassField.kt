@@ -16,10 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,7 +24,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import ru.testtask.testapplication.ui.component.utils.Constants.PASS_LENGTH_IN_PASS_FIELD
 import ru.testtask.testapplication.ui.component.utils.Constants.SIZE_OF_PASS_ITEMS
@@ -37,14 +33,11 @@ import ru.testtask.testapplication.ui.theme.heading1
 
 @Composable
 fun InputPassField(
+    value: String,
     modifier: Modifier = Modifier,
-    onChange: (number: String) -> Unit = {},
-    onValidate: (validate: Boolean) -> Unit = {},
+    onChange: (value: String) -> Unit = {},
     onEnterClick: () -> Unit = {},
 ) {
-    var textFieldValue by remember() {
-        mutableStateOf(TextFieldValue("" ))
-    }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -54,13 +47,9 @@ fun InputPassField(
     BasicTextField(
         modifier = modifier
             .focusRequester(focusRequester),
-        value = textFieldValue,
-        onValueChange = {
-            if (it.text.length <= PASS_LENGTH_IN_PASS_FIELD) {
-                textFieldValue = it
-            }
-            onValidate(it.text.length == PASS_LENGTH_IN_PASS_FIELD)
-            onChange(textFieldValue.text)
+        value = value,
+        onValueChange = {pin ->
+            onChange(pin.take(PASS_LENGTH_IN_PASS_FIELD))
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.NumberPassword,
@@ -78,7 +67,7 @@ fun InputPassField(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 repeat(PASS_LENGTH_IN_PASS_FIELD){
-                    PinCodeDot(value = textFieldValue.text, index = it)
+                    PinCodeDot(value = value, index = it)
                 }
             }
         }

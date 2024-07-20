@@ -86,13 +86,10 @@ fun NavGraph(
             )
         }
 
-        composable(route = Screen.PinCode.route + "/{number}") { stackEntry ->
-            stackEntry.arguments?.getString("number")?.let {
-                PinCodeScreen(
-                    navController = navController,
-                    phone = it
-                )
-            }
+        composable(route = Screen.PinCode.route) {
+            PinCodeScreen(
+                navController = navController
+            )
         }
 
         composable(route = Screen.ProfileEdit.route) {

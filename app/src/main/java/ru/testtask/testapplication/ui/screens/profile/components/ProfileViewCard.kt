@@ -49,12 +49,12 @@ fun ProfileViewCard(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = userData.name,
+                    text = userData.firstName + userData.lastName,
                     style = MaterialTheme.typography.heading3.copy(textAlign = TextAlign.Center)
                 )
                 Text(
                     modifier = Modifier,
-                    text = userData.phone,
+                    text = userData.phone ?: "",
                     style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
                     color = NeutralDisabledColor
                 )

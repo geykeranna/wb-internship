@@ -94,6 +94,7 @@ object Constants {
     // composable LoginScreen
     const val TOP_PADDING_LOGIN_SCREEN = 100
     const val HEIGHT_BUTTON_LOGIN_SCREEN = 52
+    const val HEIGHT_TEXT_INFO_BLOCK_LOGIN_SCREEN = 85
     const val HORIZONTAL_PADDING_IN_LOGIN_SCREEN = 24
     const val TOP_PADDING_BUTTON_IN_LOGIN_SCREEN = 70
     const val TOP_PADDING_FIELD_IN_LOGIN_SCREEN = 50

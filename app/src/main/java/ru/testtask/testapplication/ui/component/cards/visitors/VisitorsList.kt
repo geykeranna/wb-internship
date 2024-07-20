@@ -38,8 +38,8 @@ fun VisitorsList(
                         visitorsList.take(NUM_OF_VISIBLE_AVATARS).forEach { visitors ->
                             UserAvatar(
                                 src = visitors.icon,
-                                story = visitors.story,
-                                status = visitors.status
+                                story = visitors.story ?: false,
+                                status = visitors.status ?: false
                             )
                         }
                     },

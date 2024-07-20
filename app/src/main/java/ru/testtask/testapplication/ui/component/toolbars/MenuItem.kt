@@ -122,11 +122,11 @@ fun MenuItemUser(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text (
-                    text = userData.name,
+                    text = "${userData.firstName} ${userData.lastName}",
                     style = MaterialTheme.typography.bodyText1
                 )
                 Text (
-                    text = userData.phone,
+                    text = userData.phone ?: "",
                     style = MaterialTheme.typography.metadata1,
                     color = NeutralDisabledColor
                 )

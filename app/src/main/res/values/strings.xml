@@ -29,8 +29,6 @@
     <string name="label_menu_items_help">Помощь</string>
     <string name="label_menu_items_referral">Пригласи друга</string>
 
-    <string name="text_form_field_first_name_profile_screen">Имя (обязательно)</string>
-    <string name="text_form_field_last_name_profile_screen">Фамилия (опционально)</string>
     <string name="text_community_meetings">Встречи сообщества</string>
 
 </resources>

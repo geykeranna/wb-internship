@@ -5,5 +5,5 @@ data class FormField (
     val name: String,
     val placeholder: String,
     val required: Boolean,
-    val value: String
+    var value: String
 )

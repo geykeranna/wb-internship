@@ -2,10 +2,12 @@ package ru.testtask.testapplication.ui.screens.profile.view
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.testtask.testapplication.R
 import ru.testtask.testapplication.repository.data.model.UserData
 import ru.testtask.testapplication.ui.component.navigation.Screen
@@ -17,8 +19,9 @@ import ru.testtask.testapplication.ui.screens.profile.components.ProfileViewCard
 fun ProfileViewScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: ProfileViewScreenViewModel = koinViewModel()
 ){
-    val userData: UserData = UserData.shimmerData
+    val userData: UserData = viewModel.getUser().collectAsState().value
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
