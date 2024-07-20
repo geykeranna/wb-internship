@@ -1,9 +1,11 @@
 package ru.testtask.testapplication.ui.screens.profile.components
 
+import androidx.compose.runtime.MutableState
+
 data class FormField (
     val id: Int,
     val name: String,
     val placeholder: String,
     val required: Boolean,
-    var value: String
+    val inputValue: MutableState<String>
 )

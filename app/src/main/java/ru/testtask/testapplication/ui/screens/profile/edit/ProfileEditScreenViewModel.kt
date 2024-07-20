@@ -1,5 +1,7 @@
 package ru.testtask.testapplication.ui.screens.profile.edit
 
+import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,26 +28,32 @@ class ProfileEditScreenViewModel(
             name = "first_name",
             placeholder = "Имя (обязательно)",
             required = true,
-            value = userData.value.firstName
+            inputValue = mutableStateOf(userData.value.firstName)
         ),
         FormField(
             id = 1,
             name = "last_name",
             placeholder = "Фамилия (опционально)",
             required = false,
-            value = userData.value.firstName
+            inputValue = mutableStateOf(userData.value.firstName)
         ),
     )
 
     fun getState(): Boolean {
-        return !formFields
+        return formFields
             .filter { it.required }
-            .all { it.value.isNotEmpty() }
+            .all { it.inputValue.value.isNotEmpty() }
+    }
+
+    fun setFieldData(index: Int, input: String) {
+        Log.d("check111 2222", input)
+        Log.d("check111 2222", formFields[0].toString())
+        formFields[index].inputValue.value = input
     }
 
     private fun sendData() = viewModelScope.launch {
-        _userData.value.firstName = formFields[0].value
-        _userData.value.lastName = formFields[1].value
+        _userData.value.firstName = formFields[0].inputValue.value
+        _userData.value.lastName = formFields[1].inputValue.value
         setUserData.execute(userData.value)
     }
 

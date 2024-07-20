@@ -1,5 +1,6 @@
 package ru.testtask.testapplication.ui.screens.profile.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +19,7 @@ import ru.testtask.testapplication.ui.component.utils.Constants.VERTICAL_PADDING
 fun NewUserForm(
     formFields: MutableList<FormField>,
     modifier: Modifier = Modifier,
+    onValueChange: (index: Int, value: String) -> Unit = {_, _ -> }
 ) {
     val height = formFields.size * (HEIGHT_INPUT_FIELDS_PROFILE_SCREEN + SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN)
 
@@ -32,9 +34,12 @@ fun NewUserForm(
         items(formFields.size) {
             InputField(
                 modifier = Modifier.height(HEIGHT_INPUT_FIELDS_PROFILE_SCREEN.dp),
-                value = formFields[it].value,
+                value = formFields[it].inputValue.value,
                 placeholder = formFields[it].placeholder,
-                onChangeValue = { value -> formFields[it].value = value},
+                onChangeValue = { text ->
+                    Log.d("check111", text)
+                    onValueChange(it, text)
+                },
             )
         }
     }

@@ -26,6 +26,7 @@ fun ProfileEditCard(
     state: Boolean,
     formField: MutableList<FormField>,
     modifier: Modifier = Modifier,
+    onValueChange: (index: Int, value: String) -> Unit = {_, _ -> },
     onClick: () -> Unit,
 ) {
     LazyColumn (
@@ -45,7 +46,10 @@ fun ProfileEditCard(
         }
 
         item {
-            NewUserForm(formFields = formField)
+            NewUserForm(
+                formFields = formField,
+                onValueChange = onValueChange
+            )
         }
 
         item {
