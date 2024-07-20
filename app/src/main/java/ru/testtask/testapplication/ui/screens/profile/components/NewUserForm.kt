@@ -1,6 +1,5 @@
 package ru.testtask.testapplication.ui.screens.profile.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +36,6 @@ fun NewUserForm(
                 value = formFields[it].inputValue.value,
                 placeholder = formFields[it].placeholder,
                 onChangeValue = { text ->
-                    Log.d("check111", text)
                     onValueChange(it, text)
                 },
             )

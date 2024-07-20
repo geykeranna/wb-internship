@@ -1,6 +1,5 @@
 package ru.testtask.testapplication.ui.screens.profile.edit
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,8 +45,6 @@ class ProfileEditScreenViewModel(
     }
 
     fun setFieldData(index: Int, input: String) {
-        Log.d("check111 2222", input)
-        Log.d("check111 2222", formFields[0].toString())
         formFields[index].inputValue.value = input
     }
 

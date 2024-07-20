@@ -44,7 +44,6 @@ import ru.testtask.testapplication.ui.theme.NeutralLineColor
 import ru.testtask.testapplication.ui.theme.NeutralDisabledColor
 import ru.testtask.testapplication.ui.theme.bodyText1
 
-
 @Composable
 fun InputField(
     value: String,
