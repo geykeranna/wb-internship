@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'ru.testtask.testapplication'
+    namespace 'ru.wb.testapplication'
     compileSdk 34
 
     defaultConfig {
-        applicationId "ru.testtask.testapplication"
+        applicationId "ru.wb.testapplication"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -47,6 +47,9 @@ android {
 }
 
 dependencies {
+    implementation project(':repository')
+    implementation project(':domain')
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime.ktx
     implementation libs.androidx.activity.compose
@@ -69,6 +72,6 @@ dependencies {
 
     implementation libs.koin.android
     implementation libs.koin.core
-    implementation (libs.koin.android.ext)
-    implementation (libs.koin.androidx.compose)
+    implementation libs.koin.android.ext
+    implementation libs.koin.androidx.compose
 }
