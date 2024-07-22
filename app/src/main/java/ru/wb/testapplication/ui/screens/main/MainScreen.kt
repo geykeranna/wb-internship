@@ -9,6 +9,7 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,8 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import org.koin.androidx.compose.koinViewModel
 import ru.wb.testapplication.ui.component.navigation.NavGraph
 import ru.wb.testapplication.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.BottomNavBar
@@ -27,9 +27,8 @@ import ru.wb.testapplication.ui.component.utils.NoRippleTheme
 
 @Composable
 fun MainScreen() {
-    // Заглушка: Будет вынесено во ViewModel
-    val hasAuth = MutableStateFlow(false)
-    fun isAuth() = hasAuth.asStateFlow().value
+    val viewModel: MainViewModel = koinViewModel()
+    val isAuth = viewModel.getState().collectAsState().value
 
     val focusManager = LocalFocusManager.current
 
@@ -71,7 +70,7 @@ fun MainScreen() {
                     .padding(padding)
             ){
                 NavGraph(
-                    isAuth = isAuth(),
+                    isAuth = isAuth,
                     navController = navController
                 )
             }

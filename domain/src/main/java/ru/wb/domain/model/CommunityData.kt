@@ -14,8 +14,8 @@ data class CommunityData (
             label = "Developer meeting",
             icon = null,
             countPeople = 10000,
-            description = "",
-            eventList = listOf()
+            description = "Описание",
+            eventList = List(5){ EventData.defaultObject }
         )
     }
 }

@@ -24,6 +24,8 @@ class MyEventScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
+    fun getDataList(): StateFlow<List<EventsByGroup>> = dataList
+
     private fun startLoading() = viewModelScope.launch {
         _userID.value = getUserId.execute()
         _dataList.emit(getEvents.execute(query = "", userId = userID.value))

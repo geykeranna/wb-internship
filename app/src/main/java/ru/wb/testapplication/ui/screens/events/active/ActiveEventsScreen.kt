@@ -21,8 +21,8 @@ import ru.wb.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_SEARC
 fun ActiveEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
+    val viewModel: ActiveEventsScreenViewModel = koinViewModel()
     val listByGroup: List<EventsByGroup> = viewModel.getData().collectAsState().value
 
     TopBar(

@@ -20,7 +20,7 @@ data class EventData(
             tagList = listOf("Python", "Junior", "Moscow"),
             icon = null,
             active = true,
-            description = "",
+            description = "Описание",
             usersList = mutableListOf(UserData.defaultObject)
         )
     }

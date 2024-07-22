@@ -15,15 +15,14 @@ import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.testapplication.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
-import ru.wb.testapplication.ui.screens.events.active.ActiveEventsScreenViewModel
 
 @Composable
 fun MyEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
-    val listByGroup = viewModel.getData().collectAsState().value
+    val viewModel: MyEventScreenViewModel = koinViewModel()
+    val listByGroup = viewModel.getDataList().collectAsState().value
 
     TopBar(
         modifier = modifier

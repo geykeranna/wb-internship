@@ -18,8 +18,8 @@ import ru.wb.testapplication.ui.screens.auth.pin.components.InputPinCard
 fun PinCodeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: PinCodeScreenViewModel = koinViewModel()
 ) {
+    val viewModel: PinCodeScreenViewModel = koinViewModel()
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
         iconLeft = R.drawable.ic_chevron_left,

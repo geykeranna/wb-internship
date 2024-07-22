@@ -4,7 +4,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.repisotory.EventRepository
 import ru.wb.domain.model.EventsByGroup
 
-class EventRepositoryImpl: EventRepository {
+internal class EventRepositoryImpl: EventRepository {
     override suspend fun getEvents(
         query: String?,
         userId: String?,

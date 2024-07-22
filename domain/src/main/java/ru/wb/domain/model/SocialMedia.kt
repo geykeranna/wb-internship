@@ -4,4 +4,6 @@ data class SocialMedia(
     val name: String,
     val icon: Int?,
     val url: String
-)
+) {
+    
+}

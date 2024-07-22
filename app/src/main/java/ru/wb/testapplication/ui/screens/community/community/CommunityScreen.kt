@@ -19,8 +19,8 @@ import ru.wb.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_SEARC
 fun CommunityScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: CommunityViewModel = koinViewModel()
 ) {
+    val viewModel: CommunityViewModel = koinViewModel()
     val itemsList = viewModel.getData().collectAsState().value
     val searchState = viewModel.getSearchText().collectAsState().value
 
