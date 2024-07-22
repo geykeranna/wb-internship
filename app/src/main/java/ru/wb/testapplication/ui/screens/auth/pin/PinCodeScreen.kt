@@ -6,6 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.testapplication.R
@@ -18,8 +19,8 @@ import ru.wb.testapplication.ui.screens.auth.pin.components.InputPinCard
 fun PinCodeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: PinCodeScreenViewModel = koinViewModel()
 ) {
-    val viewModel: PinCodeScreenViewModel = koinViewModel()
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
         iconLeft = R.drawable.ic_chevron_left,
@@ -31,7 +32,7 @@ fun PinCodeScreen(
     )
 
     InputPinCard(
-        phone = viewModel.getPhoneNumber().collectAsState().value,
+        phone = viewModel.getPhoneNumber().collectAsStateWithLifecycle().value,
         pin = viewModel.getPinValue().collectAsState().value,
         onChange = {pin -> viewModel.onChangePin(pin)},
         onClickPassAgain = { viewModel.sendPinAgain() }

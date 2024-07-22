@@ -54,7 +54,7 @@ fun ProfileViewCard(
                 )
                 Text(
                     modifier = Modifier,
-                    text = userData.phone ?: "",
+                    text = userData.phone.orEmpty(),
                     style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
                     color = NeutralDisabledColor
                 )

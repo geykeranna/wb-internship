@@ -19,8 +19,8 @@ import ru.wb.testapplication.ui.screens.profile.components.ProfileViewCard
 fun ProfileViewScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: ProfileViewScreenViewModel = koinViewModel()
 ){
-    val  viewModel: ProfileViewScreenViewModel = koinViewModel()
     val userData: UserData = viewModel.getUser().collectAsState().value
 
     TopBar(

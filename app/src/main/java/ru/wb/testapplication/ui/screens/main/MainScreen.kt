@@ -9,7 +9,6 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,6 +16,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
@@ -26,9 +26,10 @@ import ru.wb.testapplication.ui.component.toolbars.BottomNavBar
 import ru.wb.testapplication.ui.component.utils.NoRippleTheme
 
 @Composable
-fun MainScreen() {
-    val viewModel: MainViewModel = koinViewModel()
-    val isAuth = viewModel.getState().collectAsState().value
+fun MainScreen(
+    viewModel: MainViewModel = koinViewModel()
+) {
+    val isAuth by viewModel.getState().collectAsStateWithLifecycle()
 
     val focusManager = LocalFocusManager.current
 

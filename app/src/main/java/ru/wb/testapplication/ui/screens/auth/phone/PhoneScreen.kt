@@ -28,8 +28,8 @@ import ru.wb.testapplication.ui.screens.auth.components.TextFieldInfo
 fun PhoneScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: PhoneScreenViewModel = koinViewModel()
 ) {
-    val viewModel: PhoneScreenViewModel = koinViewModel()
     Column(
         modifier = modifier
             .padding(top = TOP_PADDING_LOGIN_SCREEN.dp)

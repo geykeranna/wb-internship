@@ -8,9 +8,9 @@ internal class LoginRepositoryImpl: LoginRepository {
 
     override suspend fun setPhone(phoneNumber: String) = Unit
 
-    override suspend fun getPhoneAuth(): String = UserData.defaultObject.phone ?: ""
+    override suspend fun getPhoneAuth(): String = UserData.defaultObject.phone.orEmpty()
 
     override suspend fun getAuthState(): Boolean = !UserData.defaultObject.id.isNullOrEmpty()
 
-    override suspend fun getUserID(): String = UserData.defaultObject.id ?: ""
+    override suspend fun getUserID(): String = UserData.defaultObject.id.orEmpty()
 }

@@ -2,10 +2,11 @@ package ru.wb.testapplication.ui.screens.events.myevents
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.testapplication.R
@@ -20,9 +21,9 @@ import ru.wb.testapplication.ui.component.utils.Constants.VERTICAL_PADDING_CONTE
 fun MyEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: MyEventScreenViewModel = koinViewModel()
 ) {
-    val viewModel: MyEventScreenViewModel = koinViewModel()
-    val listByGroup = viewModel.getDataList().collectAsState().value
+    val listByGroup by viewModel.getDataList().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier

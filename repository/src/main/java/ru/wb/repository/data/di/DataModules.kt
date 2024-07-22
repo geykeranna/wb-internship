@@ -1,4 +1,4 @@
-package ru.wb.testapplication.modules
+package ru.wb.repository.data.di
 
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf

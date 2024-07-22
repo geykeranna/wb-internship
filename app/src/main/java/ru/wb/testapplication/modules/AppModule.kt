@@ -11,6 +11,7 @@ import ru.wb.testapplication.ui.screens.events.detail.DetailEventScreenViewModel
 import ru.wb.testapplication.ui.screens.events.myevents.MyEventScreenViewModel
 import ru.wb.testapplication.ui.screens.profile.edit.ProfileEditScreenViewModel
 import ru.wb.testapplication.ui.screens.profile.view.ProfileViewScreenViewModel
+import ru.wb.testapplication.ui.screens.main.MainViewModel
 
 val appModule = module {
     viewModelOf(::PhoneScreenViewModel)
@@ -22,4 +23,5 @@ val appModule = module {
     viewModelOf(::ProfileViewScreenViewModel)
     viewModelOf(::DetailCommunityScreenViewModel)
     viewModelOf(::DetailEventScreenViewModel)
+    viewModelOf(::MainViewModel)
 }

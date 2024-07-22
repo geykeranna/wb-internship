@@ -2,6 +2,12 @@ package ru.wb.domain.usecases.login
 
 import ru.wb.domain.repisotory.LoginRepository
 
-class CheckAuthStateUseCase(private val repository: LoginRepository) {
-    suspend fun execute(): Boolean = repository.getAuthState()
+class CheckAuthStateUseCaseImpl(
+    private val repository: LoginRepository
+) : CheckAuthStateUseCase {
+    override suspend fun execute(): Boolean = repository.getAuthState()
+}
+
+interface CheckAuthStateUseCase {
+    suspend fun execute(): Boolean
 }

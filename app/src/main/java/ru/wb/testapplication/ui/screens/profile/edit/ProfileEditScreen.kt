@@ -17,9 +17,8 @@ fun ProfileEditScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = { navController.popBackStack() },
+    viewModel: ProfileEditScreenViewModel = koinViewModel()
 ){
-    val viewModel: ProfileEditScreenViewModel = koinViewModel()
-
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,

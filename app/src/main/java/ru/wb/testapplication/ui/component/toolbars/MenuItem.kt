@@ -126,7 +126,7 @@ fun MenuItemUser(
                     style = MaterialTheme.typography.bodyText1
                 )
                 Text (
-                    text = userData.phone ?: "",
+                    text = userData.phone.orEmpty(),
                     style = MaterialTheme.typography.metadata1,
                     color = NeutralDisabledColor
                 )

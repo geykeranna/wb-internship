@@ -31,8 +31,8 @@ fun DetailCommunityScreen(
     id: String,
     navController: NavController,
     modifier: Modifier = Modifier,
+    detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
 ) {
-    val detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
     val detailInfo = detailViewModel.getDetailData().collectAsState().value
 
     TopBar(

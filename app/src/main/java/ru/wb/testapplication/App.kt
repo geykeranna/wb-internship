@@ -6,8 +6,8 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import ru.wb.testapplication.modules.appModule
-import ru.wb.testapplication.modules.dataModule
-import ru.wb.testapplication.modules.domainModules
+import ru.wb.repository.data.di.dataModule
+import ru.wb.domain.di.domainModules
 
 class App : Application() {
     override fun onCreate() {

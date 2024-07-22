@@ -2,13 +2,13 @@ package ru.wb.testapplication.ui.screens.events.detail
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -26,9 +26,9 @@ fun DetailEventScreen(
     id: String,
     navController: NavController,
     modifier: Modifier = Modifier,
+    detailViewModel: DetailEventScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
 ) {
-    val detailViewModel: DetailEventScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
-    val detailInfo = detailViewModel.getDetailData().collectAsState().value
+    val detailInfo by detailViewModel.getDetailData().collectAsStateWithLifecycle()
     val isMapFullScreen = remember { mutableStateOf(false) }
     var stateBnt by remember { mutableStateOf(ButtonState.DEFAULT.id) }
     val iconRight = when (stateBnt) {
