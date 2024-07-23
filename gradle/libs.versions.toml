@@ -16,6 +16,8 @@ activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 navigationCompose = "2.7.7"
 jetbrainsKotlinJvm = "1.9.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +42,8 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndr
 koin-android-ext = { module = "io.insert-koin:koin-android-ext", version = "3.0.2" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
