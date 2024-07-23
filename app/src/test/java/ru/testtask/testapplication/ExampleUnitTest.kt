@@ -1,4 +1,4 @@
-package ru.testtask.testapplication
+package ru.wb.testapplication
 
 import org.junit.Test
 

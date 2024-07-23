@@ -22,3 +22,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "TestApplication"
 include ':app'
+include ':repository'
+include ':domain'
+include ':ui'
