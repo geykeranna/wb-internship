@@ -13,15 +13,15 @@ data class EventData(
 ){
     companion object{
         val defaultObject = EventData(
-            id = "0",
-            name = "Developer meeting",
-            location = Location("Москва", "ул. Громова, 4"),
-            date = "19.09.2024",
-            tagList = listOf("Python", "Junior", "Moscow"),
+            id = "",
+            name = "",
+            location = Location.defaultObject,
+            date = "",
+            tagList = listOf(),
             icon = null,
             active = true,
-            description = "Описание",
-            usersList = mutableListOf(UserData.defaultObject)
+            description = "",
+            usersList = mutableListOf()
         )
     }
 }

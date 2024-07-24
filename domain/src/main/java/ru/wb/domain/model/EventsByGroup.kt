@@ -5,15 +5,6 @@ data class EventsByGroup(
     val group: String,
 ) {
     companion object {
-        val defaultObject = listOf(
-            EventsByGroup(
-                group = "Все встречи",
-                listOfEvents = List(10) { EventData.defaultObject }
-            ),
-            EventsByGroup(
-                group = "Активные",
-                listOfEvents = List(10) { EventData.defaultObject }
-            )
-        )
+        val defaultObject = EventsByGroup(listOfEvents = listOf(), group = "")
     }
 }

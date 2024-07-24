@@ -1,7 +1,7 @@
 package ru.wb.domain.model
 
 data class UserData(
-    var id: String?,
+    var id: String,
     var icon: String?,
     var firstName: String,
     var lastName: String,
@@ -12,13 +12,13 @@ data class UserData(
 ){
     companion object{
         val defaultObject = UserData(
-            id = null,
+            id = "",
             firstName = "",
             lastName = "",
-            icon = "https://i.gifer.com/9NL8.gif",
+            icon = "",
             story = null,
             status = null,
-            phone = "+71234567890",
+            phone = "",
             socialMedia = listOf()
         )
     }
