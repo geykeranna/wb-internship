@@ -1,13 +1,12 @@
 package ru.wb.domain.usecases.login
 
+import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
 import ru.wb.domain.repisotory.LoginRepository
 
-internal class SendPinCodeOnPhoneUseCaseImpl(
-    private val repository: LoginRepository
-) : SendPinCodeOnPhoneUseCase {
-    override suspend fun execute(phone: String): Unit = repository.setPhone(phoneNumber = phone)
-}
+internal class SendPinCodeOnPhoneUseCaseImpl{
+    private val testRepository = mock<LoginRepository>()
 
-interface SendPinCodeOnPhoneUseCase {
-    suspend fun execute(phone: String)
+    @Test
+    fun test(){}
 }

@@ -12,6 +12,7 @@ dependencies {
     implementation libs.koin.core
 
     testImplementation libs.junit.jupiter
+    testImplementation libs.kotlinx.coroutines.test
     testImplementation libs.mockito.core
     testImplementation libs.mockito.kotlin
 }

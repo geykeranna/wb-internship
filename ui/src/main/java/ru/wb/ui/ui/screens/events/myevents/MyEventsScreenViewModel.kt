@@ -14,7 +14,7 @@ class MyEventScreenViewModel(
     private val getEvents: GetEventListByGroupUseCase,
     private val getUserId: GetCurrentUserIDUseCase,
 ) : BaseViewModel<MyEventScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(EventsByGroup.defaultObject)
+    private val _dataList = MutableStateFlow(listOf(EventsByGroup.defaultObject))
     private val dataList: StateFlow<List<EventsByGroup>> = _dataList
 
     private val _userID = MutableStateFlow("")
@@ -28,11 +28,11 @@ class MyEventScreenViewModel(
 
     private fun startLoading() = viewModelScope.launch {
         _userID.value = getUserId.execute()
-        _dataList.emit(getEvents.execute(query = "", userId = userID.value))
+        _dataList.emit(getEvents.execute(userId = userID.value))
     }
 
     private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getEvents.execute(query, userId = userID.value))
+        _dataList.emit(getEvents.execute(userId = userID.value))
     }
 
     sealed class Event : BaseEvent() {
