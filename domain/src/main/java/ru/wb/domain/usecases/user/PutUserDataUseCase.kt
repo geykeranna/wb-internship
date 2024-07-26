@@ -3,12 +3,12 @@ package ru.wb.domain.usecases.user
 import ru.wb.domain.model.UserData
 import ru.wb.domain.repisotory.UserRepository
 
-internal class SetUserDataUseCaseImpl(
+internal class PutUserDataUseCaseImpl(
     private val repository: UserRepository
-) : SetUserDataUseCase {
+) : PutUserDataUseCase {
     override suspend fun execute(user: UserData): Boolean = repository.putUser(userData = user)
 }
 
-interface SetUserDataUseCase {
+interface PutUserDataUseCase {
     suspend fun execute(user: UserData): Boolean
 }
