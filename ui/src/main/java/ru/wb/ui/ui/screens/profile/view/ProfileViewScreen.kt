@@ -17,7 +17,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_C
 import ru.wb.ui.ui.screens.profile.components.ProfileViewCard
 
 @Composable
-fun ProfileViewScreen(
+internal fun ProfileViewScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: ProfileViewScreenViewModel = koinViewModel()

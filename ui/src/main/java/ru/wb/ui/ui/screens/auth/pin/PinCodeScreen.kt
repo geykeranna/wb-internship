@@ -11,11 +11,11 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN
-import ru.wb.testapplication.ui.screens.auth.pin.components.InputPinCard
+import ru.wb.ui.ui.screens.auth.pin.components.InputPinCard
 import ru.wb.ui.R
 
 @Composable
-fun PinCodeScreen(
+internal fun PinCodeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: PinCodeScreenViewModel = koinViewModel()

@@ -10,7 +10,7 @@ import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class MyEventScreenViewModel(
+internal class MyEventScreenViewModel(
     private val getEvents: GetEventListByGroupUseCase,
     private val getUserId: GetCurrentUserIDUseCase,
 ) : BaseViewModel<MyEventScreenViewModel.Event>() {

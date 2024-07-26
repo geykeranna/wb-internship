@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +26,7 @@ import ru.wb.ui.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.wb.ui.ui.screens.auth.components.TitleInfoWithDescription
 
 @Composable
-fun PhoneScreen(
+internal fun PhoneScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: PhoneScreenViewModel = koinViewModel()

@@ -8,14 +8,14 @@ import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
-import ru.wb.domain.usecases.user.SetUserDataUseCase
+import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 import ru.wb.ui.ui.screens.profile.components.FormField
 
-class ProfileEditScreenViewModel(
+internal class ProfileEditScreenViewModel(
     private val getUserData: GetUserDataUseCase,
-    private val setUserData: SetUserDataUseCase,
+    private val setUserData: PostUserDataUseCase,
     private val getUserID: GetCurrentUserIDUseCase,
 ): BaseViewModel<ProfileEditScreenViewModel.Event>() {
     private val _userData = MutableStateFlow(UserData.defaultObject)

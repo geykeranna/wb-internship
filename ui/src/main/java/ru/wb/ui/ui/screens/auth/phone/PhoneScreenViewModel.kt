@@ -10,7 +10,7 @@ import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 import ru.wb.ui.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
 
-class PhoneScreenViewModel(
+internal class PhoneScreenViewModel(
     private val sendPin: SendPinCodeOnPhoneUseCase,
 ) : BaseViewModel<PhoneScreenViewModel.Event>() {
     private val _phoneNumber = MutableStateFlow("")

@@ -5,11 +5,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
+import ru.wb.domain.repisotory.model.CommunitiesGetRequest
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class CommunityViewModel(
+internal class CommunityViewModel(
     private val getDataList: GetCommunityListUseCase,
 ) : BaseViewModel<CommunityViewModel.Event>() {
     private val _dataList = MutableStateFlow(listOf(CommunityData.defaultObject))
@@ -27,15 +28,17 @@ class CommunityViewModel(
     fun getData(): StateFlow<List<CommunityData>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _dataList.emit(getDataList.execute(""))
+        _dataList.emit(getDataList.execute())
     }
 
     private fun onSearchTextChange(text: String) {
         _searchText.value = text
     }
 
-    private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getDataList.execute(query))
+    private fun fetchData(
+        query: String? = null,
+    ) = viewModelScope.launch {
+        _dataList.emit(getDataList.execute(CommunitiesGetRequest(query = query)))
     }
 
     sealed class Event : BaseEvent() {

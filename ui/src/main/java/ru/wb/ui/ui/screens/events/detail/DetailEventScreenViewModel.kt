@@ -9,7 +9,7 @@ import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class DetailEventScreenViewModel(
+internal class DetailEventScreenViewModel(
     idEvent: String,
     private val getData: GetEventDataUseCase
 ) : BaseViewModel<DetailEventScreenViewModel.Event>() {

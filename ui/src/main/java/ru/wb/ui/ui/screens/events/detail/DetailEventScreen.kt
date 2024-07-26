@@ -22,7 +22,7 @@ import ru.wb.ui.ui.screens.events.components.FullScreenImageDialog
 import ru.wb.ui.ui.theme.BrandDefaultColor
 
 @Composable
-fun DetailEventScreen(
+internal fun DetailEventScreen(
     id: String,
     navController: NavController,
     modifier: Modifier = Modifier,

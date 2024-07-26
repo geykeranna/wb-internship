@@ -27,7 +27,7 @@ import ru.wb.ui.ui.theme.bodyText1
 import ru.wb.ui.ui.theme.metadata1
 
 @Composable
-fun DetailCommunityScreen(
+internal fun DetailCommunityScreen(
     id: String,
     navController: NavController,
     modifier: Modifier = Modifier,

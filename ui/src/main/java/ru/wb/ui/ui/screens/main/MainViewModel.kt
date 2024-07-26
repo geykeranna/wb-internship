@@ -8,7 +8,7 @@ import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class MainViewModel(
+internal class MainViewModel(
     private val getAuthState: CheckAuthStateUseCase
 ): BaseViewModel<MainViewModel.Event>() {
     private val _state = MutableStateFlow(false)

@@ -9,10 +9,10 @@ import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class ActiveEventsScreenViewModel(
+internal class ActiveEventsScreenViewModel(
     private val getEventsList: GetEventListByGroupUseCase
 ) : BaseViewModel<ActiveEventsScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(EventsByGroup.defaultObject)
+    private val _dataList = MutableStateFlow(listOf(EventsByGroup.defaultObject))
     private val dataList: StateFlow<List<EventsByGroup>> = _dataList
 
     init {

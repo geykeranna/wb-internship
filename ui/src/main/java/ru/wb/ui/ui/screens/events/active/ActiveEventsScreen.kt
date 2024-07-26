@@ -19,7 +19,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
 @Composable
-fun ActiveEventsScreen(
+internal fun ActiveEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: ActiveEventsScreenViewModel = koinViewModel()

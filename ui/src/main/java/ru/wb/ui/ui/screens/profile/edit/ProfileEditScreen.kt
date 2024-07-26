@@ -13,7 +13,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_C
 import ru.wb.ui.ui.screens.profile.components.ProfileEditCard
 
 @Composable
-fun ProfileEditScreen(
+internal fun ProfileEditScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = { navController.popBackStack() },

@@ -9,7 +9,7 @@ import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class DetailCommunityScreenViewModel(
+internal class DetailCommunityScreenViewModel(
     idCommunity: String,
     private val getData: GetCommunityDataUseCase
 ) : BaseViewModel<DetailCommunityScreenViewModel.Event>() {
