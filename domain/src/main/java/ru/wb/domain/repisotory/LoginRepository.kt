@@ -2,9 +2,9 @@ package ru.wb.domain.repisotory
 
 interface LoginRepository {
 
-    suspend fun setPhone(phoneNumber: String)
+    suspend fun sendOnPhone(phoneNumber: String): Boolean
 
-    suspend fun sendCode(pinCode: String)
+    suspend fun checkCode(pinCode: String): Boolean
 
     suspend fun getPhoneAuth(): String
 

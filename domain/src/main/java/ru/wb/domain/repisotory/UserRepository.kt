@@ -11,4 +11,6 @@ interface UserRepository {
     suspend fun putUser(userData: UserData): Boolean
 
     suspend fun postUser(userData: UserData): Boolean
+
+    suspend fun handleGoingEvent(eventID: String): Boolean
 }
