@@ -14,7 +14,6 @@ class TestGetEventDataUseCaseImpl{
 
     @Test
     fun `should return the same event data as in repo`() = runTest {
-
         val testData = EventData(
             id = "1",
             name = "Event",

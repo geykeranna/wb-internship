@@ -7,17 +7,17 @@ import org.mockito.Mockito
 import org.mockito.kotlin.mock
 import ru.wb.domain.repisotory.LoginRepository
 
-class GetCurrentUserIDUseCaseImpl{
+class TestCheckPinCodeUseCaseImpl{
     private val testRepository = mock<LoginRepository>()
 
     @Test
-    fun `should return the same auth user id data as in repo`() = runTest{
-        Mockito.`when`(testRepository.getUserID())
-            .thenReturn("1")
+    fun `show return the same check pin results as in repo`() = runTest{
+        Mockito.`when`(testRepository.checkCode("4444"))
+            .thenReturn(true)
 
-        val useCase = GetCurrentPhoneNumberUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute()
-        val expected = "1"
+        val useCase = CheckPinCodeUseCaseImpl(repository = testRepository)
+        val actual = useCase.execute("4444")
+        val expected = true
 
         Assertions.assertEquals(expected, actual)
     }
