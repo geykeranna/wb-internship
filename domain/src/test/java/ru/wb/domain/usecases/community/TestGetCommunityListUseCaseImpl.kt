@@ -22,7 +22,7 @@ class TestGetCommunityListUseCaseImpl {
             description = "Community Test",
             eventList = listOf()
         )
-        Mockito.`when`(testRepository.getCommunities())
+        Mockito.`when`(testRepository.getCommunities(CommunitiesGetRequest()))
             .thenReturn(listOf(testCommunityData))
 
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
@@ -49,12 +49,12 @@ class TestGetCommunityListUseCaseImpl {
             description = "Community Test",
             eventList = listOf()
         )
-        Mockito.`when`(testRepository.getCommunities())
+        Mockito.`when`(testRepository.getCommunities(CommunitiesGetRequest(limit = 10)))
             .thenReturn(List(10) {testCommunityData})
 
         val testRepo = testRepository
         val useCase = GetCommunityListUseCaseImpl(repository = testRepo)
-        val actual = useCase.execute(CommunitiesGetRequest(limit = 10))
+        val actual = useCase.execute(limit = 10)
         val expected = List(10){ CommunityData(
             id = "1",
             label = "Community",

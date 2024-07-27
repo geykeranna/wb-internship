@@ -15,7 +15,7 @@ class TestGetCurrentUserIDUseCaseImpl{
         Mockito.`when`(testRepository.getUserID())
             .thenReturn("1")
 
-        val useCase = GetCurrentPhoneNumberUseCaseImpl(repository = testRepository)
+        val useCase = GetCurrentUserIDUseCaseImpl(repository = testRepository)
         val actual = useCase.execute()
         val expected = "1"
 

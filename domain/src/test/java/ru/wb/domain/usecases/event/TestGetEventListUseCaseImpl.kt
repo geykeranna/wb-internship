@@ -26,7 +26,7 @@ class TestGetEventListUseCaseImpl {
             description = "description",
             usersList = mutableListOf()
         )
-        Mockito.`when`(testRepository.getEvents())
+        Mockito.`when`(testRepository.getEvents(EventGetRequest()))
             .thenReturn(listOf(testData))
 
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
@@ -49,7 +49,7 @@ class TestGetEventListUseCaseImpl {
     }
 
     @Test
-    fun `should return the same count event list data in list as in repo limit`() = runTest{
+    fun `should return the same count event list limit data in list as in repo `() = runTest{
         val testData = EventData(
             id = "1",
             name = "Event",
@@ -65,7 +65,7 @@ class TestGetEventListUseCaseImpl {
             .thenReturn(List(10) { testData })
 
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute()
+        val actual = useCase.execute(limit = 10)
         val expected = List(10) {
             EventData(
                 id = "1",

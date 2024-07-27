@@ -12,7 +12,7 @@ internal class TestSendPinCodeOnPhoneUseCaseImpl{
 
     @Test
     fun `show return the same send pin on phone results as in repo`() = runTest{
-        Mockito.`when`(testRepository.checkCode("8888888888"))
+        Mockito.`when`(testRepository.sendOnPhone("89099099900"))
             .thenReturn(true)
 
         val useCase = SendPinCodeOnPhoneUseCaseImpl(repository = testRepository)

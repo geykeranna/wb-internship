@@ -9,7 +9,7 @@ data class EventData(
     val icon: String?,
     val active: Boolean,
     val description: String,
-    val usersList: MutableList<UserData> = mutableListOf()
+    val usersList: List<UserData> = listOf()
 ){
     companion object{
         val defaultObject = EventData(

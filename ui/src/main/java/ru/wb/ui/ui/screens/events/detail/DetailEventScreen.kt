@@ -30,22 +30,10 @@ internal fun DetailEventScreen(
 ) {
     val detailInfo by detailViewModel.getDetailData().collectAsStateWithLifecycle()
     val isMapFullScreen = remember { mutableStateOf(false) }
-    var stateBnt by remember { mutableStateOf(ButtonState.DEFAULT.id) }
+    val stateBnt by detailViewModel.getBntState().collectAsStateWithLifecycle()
     val iconRight = when (stateBnt) {
         ButtonState.PRESSED.id -> R.drawable.ic_check_big
         else -> null
-    }
-    fun onClickButton() {
-         when (stateBnt) {
-            ButtonState.PRESSED.id -> {
-                stateBnt = ButtonState.UNPRESSED.id
-                detailInfo.usersList.remove(UserData.defaultObject)
-            }
-            else -> {
-                stateBnt = ButtonState.PRESSED.id
-                detailInfo.usersList.add(UserData.defaultObject)
-            }
-        }
     }
 
     FullScreenImageDialog(isMapFullScreen = isMapFullScreen)
@@ -56,7 +44,13 @@ internal fun DetailEventScreen(
         iconLeft = R.drawable.ic_chevron_left,
         text = detailInfo.name,
         iconRight = iconRight,
-        onRightIconClick = ::onClickButton,
+        onRightIconClick = {
+            detailViewModel.obtainEvent(
+                DetailEventScreenViewModel.Event.OnHandleGoingEvent(
+                    id = id
+                )
+            )
+        },
         tintRightIcon = BrandDefaultColor,
         onLeftIconClick = {
             navController.popBackStack()
@@ -68,6 +62,12 @@ internal fun DetailEventScreen(
         stateBnt = stateBnt,
         isMapFullScreen = isMapFullScreen,
         detailInfo = detailInfo,
-        onClickButton = ::onClickButton
+        onClickButton = {
+            detailViewModel.obtainEvent(
+                DetailEventScreenViewModel.Event.OnHandleGoingEvent(
+                    id = id
+                )
+            )
+        }
     )
 }
