@@ -19,8 +19,7 @@ class TestHandleGoingEventImpl {
 
         val useCase = HandleGoingEventImpl(repository = testRepository)
         val actual = useCase.execute("1")
-        val expected = true
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertTrue(actual)
     }
 }

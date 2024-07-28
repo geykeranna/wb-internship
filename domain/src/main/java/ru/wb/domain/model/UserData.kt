@@ -4,10 +4,10 @@ data class UserData(
     var id: String,
     var icon: String?,
     var firstName: String,
-    var lastName: String,
-    val story: Boolean?,
-    var status: Boolean?,
-    var phone: String?,
+    var lastName: String?,
+    val story: Boolean,
+    var status: Boolean,
+    var phone: String,
     var socialMedia: List<SocialMedia>
 ){
     companion object{
@@ -16,8 +16,8 @@ data class UserData(
             firstName = "",
             lastName = "",
             icon = "",
-            story = null,
-            status = null,
+            story = false,
+            status = false,
             phone = "",
             socialMedia = listOf()
         )

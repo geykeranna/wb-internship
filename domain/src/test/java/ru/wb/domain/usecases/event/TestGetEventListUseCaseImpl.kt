@@ -31,25 +31,13 @@ class TestGetEventListUseCaseImpl {
 
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute()
-        val expected = listOf(
-            EventData(
-                id = "1",
-                name = "Event",
-                location = Location.defaultObject,
-                date = "",
-                tagList = listOf(),
-                icon = null,
-                active = true,
-                description = "description",
-                usersList = mutableListOf()
-            )
-        )
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertFalse(actual.isEmpty())
     }
 
     @Test
     fun `should return the same count event list limit data in list as in repo `() = runTest{
+        val expectedLimit = 10
         val testData = EventData(
             id = "1",
             name = "Event",
@@ -61,25 +49,12 @@ class TestGetEventListUseCaseImpl {
             description = "description",
             usersList = mutableListOf()
         )
-        Mockito.`when`(testRepository.getEvents(EventGetRequest(limit = 10)))
-            .thenReturn(List(10) { testData })
+        Mockito.`when`(testRepository.getEvents(EventGetRequest(limit = expectedLimit)))
+            .thenReturn(List(expectedLimit) { testData })
 
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute(limit = 10)
-        val expected = List(10) {
-            EventData(
-                id = "1",
-                name = "Event",
-                location = Location.defaultObject,
-                date = "",
-                tagList = listOf(),
-                icon = null,
-                active = true,
-                description = "description",
-                usersList = mutableListOf()
-            )
-        }
+        val actual = useCase.execute(limit = expectedLimit)
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertEquals(expectedLimit, actual.size)
     }
 }

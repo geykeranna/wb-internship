@@ -17,8 +17,7 @@ class TestCheckPinCodeUseCaseImpl{
 
         val useCase = CheckPinCodeUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("4444")
-        val expected = true
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertTrue(actual)
     }
 }

@@ -17,8 +17,7 @@ internal class TestSendPinCodeOnPhoneUseCaseImpl{
 
         val useCase = SendPinCodeOnPhoneUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("89099099900")
-        val expected = true
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertTrue(actual)
     }
 }

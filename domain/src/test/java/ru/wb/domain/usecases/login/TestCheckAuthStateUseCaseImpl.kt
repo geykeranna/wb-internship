@@ -17,8 +17,7 @@ class TestCheckAuthStateUseCaseImpl{
 
         val useCase = CheckAuthStateUseCaseImpl(repository = testRepository)
         val actual = useCase.execute()
-        val expected = false
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertFalse(actual)
     }
 }

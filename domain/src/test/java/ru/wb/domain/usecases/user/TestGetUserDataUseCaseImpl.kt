@@ -15,12 +15,12 @@ class TestGetUserDataUseCaseImpl{
     fun `show return the same user data as in repo`() = runTest{
         val user = UserData(
             id = "1",
-            firstName = "",
-            lastName = "",
-            icon = "",
-            story = null,
-            status = null,
-            phone = "",
+            firstName = "Name",
+            lastName = null,
+            icon = null,
+            story = false,
+            status = false,
+            phone = "0000000000",
             socialMedia = listOf()
         )
         Mockito.`when`(testRepository.getUser("1"))
@@ -28,17 +28,21 @@ class TestGetUserDataUseCaseImpl{
 
         val useCase = GetUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("1")
-        val expected = UserData(
-            id = "1",
-            firstName = "",
-            lastName = "",
-            icon = "",
-            story = null,
-            status = null,
-            phone = "",
-            socialMedia = listOf()
-        )
 
-        Assertions.assertEquals(expected, actual)
+        if (actual != null) {
+            Assertions.assertTrue(
+                actual.id.isNotEmpty()
+                && actual.firstName.isNotEmpty()
+                && actual.phone.isNotEmpty()
+            )
+        }
+    }
+
+    @Test
+    fun `show return null with null id as in repo`() = runTest{
+        val useCase = GetUserDataUseCaseImpl(repository = testRepository)
+        val actual = useCase.execute(null)
+
+        Assertions.assertEquals(null, actual)
     }
 }

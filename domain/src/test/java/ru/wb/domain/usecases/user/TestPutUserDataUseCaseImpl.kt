@@ -18,8 +18,8 @@ class TestPutUserDataUseCaseImpl {
             firstName = "",
             lastName = "",
             icon = "",
-            story = null,
-            status = null,
+            story = false,
+            status = false,
             phone = "",
             socialMedia = listOf()
         )
@@ -27,18 +27,8 @@ class TestPutUserDataUseCaseImpl {
             .thenReturn(true)
 
         val useCase = PutUserDataUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute(UserData(
-            id = "1",
-            firstName = "",
-            lastName = "",
-            icon = "",
-            story = null,
-            status = null,
-            phone = "",
-            socialMedia = listOf()
-        ))
-        val expected = true
+        val actual = useCase.execute(user)
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertTrue(actual)
     }
 }

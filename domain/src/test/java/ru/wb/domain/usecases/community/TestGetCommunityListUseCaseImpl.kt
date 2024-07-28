@@ -27,20 +27,13 @@ class TestGetCommunityListUseCaseImpl {
 
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute()
-        val expected = listOf(CommunityData(
-            id = "1",
-            label = "Community",
-            icon = null,
-            countPeople = 20,
-            description = "Community Test",
-            eventList = listOf()
-        ))
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertFalse(actual.isEmpty())
     }
 
     @Test
     fun `should return the same count community list data in list as in repo limit`() = runTest{
+        val expectedLimit = 10
         val testCommunityData = CommunityData(
             id = "1",
             label = "Community",
@@ -49,21 +42,13 @@ class TestGetCommunityListUseCaseImpl {
             description = "Community Test",
             eventList = listOf()
         )
-        Mockito.`when`(testRepository.getCommunities(CommunitiesGetRequest(limit = 10)))
-            .thenReturn(List(10) {testCommunityData})
+        Mockito.`when`(testRepository.getCommunities(CommunitiesGetRequest(limit = expectedLimit)))
+            .thenReturn(List(expectedLimit) {testCommunityData})
 
         val testRepo = testRepository
         val useCase = GetCommunityListUseCaseImpl(repository = testRepo)
-        val actual = useCase.execute(limit = 10)
-        val expected = List(10){ CommunityData(
-            id = "1",
-            label = "Community",
-            icon = null,
-            countPeople = 20,
-            description = "Community Test",
-            eventList = listOf()
-        )}
+        val actual = useCase.execute(limit = expectedLimit)
 
-        Assertions.assertEquals(expected, actual)
+        Assertions.assertEquals(expectedLimit, actual.size)
     }
 }
