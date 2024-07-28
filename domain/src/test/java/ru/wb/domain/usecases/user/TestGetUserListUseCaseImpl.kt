@@ -3,30 +3,13 @@ package ru.wb.domain.usecases.user
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import org.mockito.kotlin.mock
-import ru.wb.domain.model.UserData
-import ru.wb.domain.repisotory.UserRepository
-import ru.wb.domain.repisotory.model.UsersGetRequest
+import ru.wb.domain.stabs.UserRepositoryStubs
 
 internal class TestGetUserListUseCaseImpl{
-    private val testRepository = mock<UserRepository>()
+    private val testRepository = UserRepositoryStubs()
 
     @Test
     fun `show return the same list user data as in repo`() = runTest{
-        val user = UserData(
-            id = "1",
-            firstName = "Name",
-            lastName = null,
-            icon = null,
-            story = false,
-            status = false,
-            phone = "0000000000",
-            socialMedia = listOf()
-        )
-        Mockito.`when`(testRepository.getUsers(UsersGetRequest()))
-            .thenReturn(listOf(user))
-
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute()
 
@@ -36,18 +19,6 @@ internal class TestGetUserListUseCaseImpl{
     @Test
     fun `show return the same list limit user data as in repo`() = runTest{
         val expectedLimit = 10
-        val user = UserData(
-            id = "1",
-            firstName = "Name",
-            lastName = null,
-            icon = null,
-            story = false,
-            status = false,
-            phone = "0000000000",
-            socialMedia = listOf()
-        )
-        Mockito.`when`(testRepository.getUsers(UsersGetRequest(limit = expectedLimit)))
-            .thenReturn(List(expectedLimit) { user })
 
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(limit = expectedLimit)

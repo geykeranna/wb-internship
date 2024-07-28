@@ -3,13 +3,11 @@ package ru.wb.domain.usecases.user
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import org.mockito.kotlin.mock
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repisotory.UserRepository
+import ru.wb.domain.stabs.UserRepositoryStubs
 
 class TestPutUserDataUseCaseImpl {
-    private val testRepository = mock<UserRepository>()
+    private val testRepository = UserRepositoryStubs()
 
     @Test
     fun `show return results put user as in repo`() = runTest{
@@ -23,8 +21,6 @@ class TestPutUserDataUseCaseImpl {
             phone = "",
             socialMedia = listOf()
         )
-        Mockito.`when`(testRepository.putUser(user))
-            .thenReturn(true)
 
         val useCase = PutUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(user)

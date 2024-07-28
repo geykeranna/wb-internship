@@ -3,29 +3,13 @@ package ru.wb.domain.usecases.user
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import org.mockito.kotlin.mock
-import ru.wb.domain.model.UserData
-import ru.wb.domain.repisotory.UserRepository
+import ru.wb.domain.stabs.UserRepositoryStubs
 
 class TestGetUserDataUseCaseImpl{
-    private val testRepository = mock<UserRepository>()
+    private val testRepository = UserRepositoryStubs()
 
     @Test
     fun `show return the same user data as in repo`() = runTest{
-        val user = UserData(
-            id = "1",
-            firstName = "Name",
-            lastName = null,
-            icon = null,
-            story = false,
-            status = false,
-            phone = "0000000000",
-            socialMedia = listOf()
-        )
-        Mockito.`when`(testRepository.getUser("1"))
-            .thenReturn(user)
-
         val useCase = GetUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("1")
 

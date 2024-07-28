@@ -13,7 +13,5 @@ internal class UserRepositoryImpl: UserRepository {
 
     override suspend fun postUser(userData: UserData): Boolean = false
 
-    override suspend fun handleGoingEvent(eventID: String): Boolean {
-        return true
-    }
+    override suspend fun handleGoingEvent(eventID: String): Boolean = true
 }

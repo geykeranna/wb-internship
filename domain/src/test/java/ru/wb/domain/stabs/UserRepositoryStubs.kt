@@ -5,15 +5,29 @@ import ru.wb.domain.repisotory.UserRepository
 import ru.wb.domain.repisotory.model.UsersGetRequest
 
 internal class UserRepositoryStubs: UserRepository {
-    override suspend fun getUsers(data: UsersGetRequest?): List<UserData> = List(10) { UserData.defaultObject }
+    private val userData = UserData(
+        id = "1",
+        firstName = "Name",
+        lastName = null,
+        icon = null,
+        story = false,
+        status = false,
+        phone = "0000000000",
+        socialMedia = listOf()
+    )
 
-    override suspend fun getUser(id: String): UserData = UserData.defaultObject
-
-    override suspend fun putUser(userData: UserData): Boolean = false
-
-    override suspend fun postUser(userData: UserData): Boolean = false
-
-    override suspend fun handleGoingEvent(eventID: String): Boolean {
-        return true
+    override suspend fun getUsers(data: UsersGetRequest?): List<UserData> {
+        data?.limit?.let {
+            return List(it) { userData }
+        }
+        return listOf(userData)
     }
+
+    override suspend fun getUser(id: String): UserData = userData
+
+    override suspend fun putUser(userData: UserData): Boolean = true
+
+    override suspend fun postUser(userData: UserData): Boolean = true
+
+    override suspend fun handleGoingEvent(eventID: String): Boolean = true
 }
