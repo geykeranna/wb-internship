@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -13,7 +12,6 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.R
-import ru.wb.domain.model.UserData
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.ui.ui.screens.events.components.ButtonState
@@ -28,9 +26,9 @@ internal fun DetailEventScreen(
     modifier: Modifier = Modifier,
     detailViewModel: DetailEventScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
 ) {
-    val detailInfo by detailViewModel.getDetailData().collectAsStateWithLifecycle()
+    val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val isMapFullScreen = remember { mutableStateOf(false) }
-    val stateBnt by detailViewModel.getBntState().collectAsStateWithLifecycle()
+    val stateBnt by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
     val iconRight = when (stateBnt) {
         ButtonState.PRESSED.id -> R.drawable.ic_check_big
         else -> null

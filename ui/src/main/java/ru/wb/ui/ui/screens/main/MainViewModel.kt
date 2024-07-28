@@ -14,14 +14,14 @@ internal class MainViewModel(
     private val _state = MutableStateFlow(false)
     private val state: StateFlow<Boolean> = _state
 
-    fun getState() : StateFlow<Boolean> = state
+    fun getStateFlow() : StateFlow<Boolean> = state
 
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _state.value = getAuthState.execute()
+        _state.emit(getAuthState.execute())
     }
 
     sealed class Event : BaseEvent() {

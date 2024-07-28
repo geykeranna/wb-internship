@@ -33,7 +33,7 @@ internal fun DetailCommunityScreen(
     modifier: Modifier = Modifier,
     detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
 ) {
-    val detailInfo = detailViewModel.getDetailData().collectAsState().value
+    val detailInfo = detailViewModel.getDetailDataFlow().collectAsState().value
 
     TopBar(
         modifier = modifier

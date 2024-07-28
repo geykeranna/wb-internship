@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
@@ -23,7 +22,7 @@ internal fun MyEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: MyEventScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getDataList().collectAsStateWithLifecycle()
+    val listByGroup by viewModel.getDataListFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier

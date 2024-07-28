@@ -22,9 +22,9 @@ internal class PinCodeScreenViewModel(
     private val _pin = MutableStateFlow("")
     private val pin: StateFlow<String> = _pin
 
-    fun getPhoneNumber(): StateFlow<String> = phoneNumber
+    fun getPhoneNumberFlow(): StateFlow<String> = phoneNumber
 
-    fun getPinValue(): StateFlow<String> = pin
+    fun getPinValueFlow(): StateFlow<String> = pin
 
     fun getValidateState(): Boolean {
         return pin.value.length == PASS_LENGTH_IN_PASS_FIELD

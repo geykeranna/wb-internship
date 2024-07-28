@@ -19,7 +19,7 @@ internal class ActiveEventsScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getData(): StateFlow<List<EventsByGroup>> = dataList
+    fun getDataFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
         _dataList.emit(getEventsList.execute(""))

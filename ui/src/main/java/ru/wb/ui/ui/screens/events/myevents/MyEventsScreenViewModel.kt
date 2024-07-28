@@ -24,20 +24,20 @@ internal class MyEventScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getDataList(): StateFlow<List<EventsByGroup>> = dataList
+    fun getDataListFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _userID.value = getUserId.execute()
+        _userID.emit(getUserId.execute())
         _dataList.emit(getEvents.execute(userId = userID.value))
     }
 
-    private fun fetchData(query: String? = null) = viewModelScope.launch {
+    private fun fetchData() = viewModelScope.launch {
         _dataList.emit(getEvents.execute(userId = userID.value))
     }
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
-        class OnLoadData(val query: String) : Event()
+        data object OnLoadData : Event()
     }
 
     override fun obtainEvent(event: Event) {
@@ -46,7 +46,7 @@ internal class MyEventScreenViewModel(
                 startLoading()
             }
             is Event.OnLoadData -> {
-                fetchData(event.query)
+                fetchData()
             }
         }
     }

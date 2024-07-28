@@ -22,7 +22,7 @@ internal fun ProfileViewScreen(
     modifier: Modifier = Modifier,
     viewModel: ProfileViewScreenViewModel = koinViewModel()
 ){
-    val userData: UserData by viewModel.getUser().collectAsStateWithLifecycle()
+    val userData: UserData by viewModel.getUserFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),

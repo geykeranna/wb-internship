@@ -13,7 +13,7 @@ data class EventData(
 ){
     companion object{
         val defaultObject = EventData(
-            id = "",
+            id = "1",
             name = "",
             location = Location.defaultObject,
             date = "",

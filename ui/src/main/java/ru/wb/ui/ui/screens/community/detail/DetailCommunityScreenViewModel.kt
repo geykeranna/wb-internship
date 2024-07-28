@@ -20,7 +20,7 @@ internal class DetailCommunityScreenViewModel(
         obtainEvent(Event.OnLoadingStarted(idCommunity))
     }
 
-    fun getDetailData(): StateFlow<CommunityData> = detailData
+    fun getDetailDataFlow(): StateFlow<CommunityData> = detailData
 
     private fun startLoading(id: String) = viewModelScope.launch {
         _detailData.emit(getData.execute(id))

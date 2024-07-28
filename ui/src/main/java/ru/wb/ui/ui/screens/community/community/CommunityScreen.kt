@@ -22,8 +22,8 @@ internal fun CommunityScreen(
     modifier: Modifier = Modifier,
     viewModel: CommunityViewModel = koinViewModel()
 ) {
-    val itemsList by viewModel.getData().collectAsStateWithLifecycle()
-    val searchValue by viewModel.getSearchText().collectAsStateWithLifecycle()
+    val itemsList by viewModel.getDataFlow().collectAsStateWithLifecycle()
+    val searchValue by viewModel.getSearchTextFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),

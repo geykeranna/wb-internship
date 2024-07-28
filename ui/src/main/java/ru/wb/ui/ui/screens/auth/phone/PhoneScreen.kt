@@ -31,9 +31,9 @@ internal fun PhoneScreen(
     modifier: Modifier = Modifier,
     viewModel: PhoneScreenViewModel = koinViewModel()
 ) {
-    val phone by viewModel.getPhoneNumber().collectAsStateWithLifecycle()
-    val selectedPhoneCountryCode by viewModel.getSelectedPhoneCode().collectAsStateWithLifecycle()
-    val phoneCountryCodeList by viewModel.getPhoneCountryCodeList().collectAsStateWithLifecycle()
+    val phone by viewModel.getPhoneNumberFlow().collectAsStateWithLifecycle()
+    val selectedPhoneCountryCode by viewModel.getSelectedPhoneCodeFlow().collectAsStateWithLifecycle()
+    val phoneCountryCodeList by viewModel.getPhoneCountryCodeListFlow().collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier

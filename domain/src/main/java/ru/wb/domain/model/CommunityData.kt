@@ -10,7 +10,7 @@ data class CommunityData (
 ){
     companion object{
         val defaultObject = CommunityData(
-            id = "",
+            id = "1",
             label = "",
             icon = null,
             countPeople = 0,

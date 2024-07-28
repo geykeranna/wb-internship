@@ -56,7 +56,7 @@ internal class ProfileEditScreenViewModel(
 
     private fun startLoading() = viewModelScope.launch {
         _userData.value.id = getUserID.execute()
-        _userData.emit(getUserData.execute(id = _userData.value.id))
+        getUserData.execute(id = _userData.value.id)?.let { _userData.emit(it) }
     }
 
     sealed class Event : BaseEvent() {

@@ -15,7 +15,7 @@ internal class ProfileViewScreenViewModel(
     private val _userData = MutableStateFlow(UserData.defaultObject)
     private val userData: StateFlow<UserData> = _userData
 
-    fun getUser(): StateFlow<UserData> = userData
+    fun getUserFlow(): StateFlow<UserData> = userData
 
     private fun startLoading() = viewModelScope.launch {
         getUserData.execute(id = _userData.value.id)?.let { _userData.emit(it) }

@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
-import ru.wb.domain.model.EventsByGroup
 import ru.wb.ui.ui.component.cards.events.EventListByGroup
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
@@ -24,7 +23,7 @@ internal fun ActiveEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getData().collectAsStateWithLifecycle()
+    val listByGroup by viewModel.getDataFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),

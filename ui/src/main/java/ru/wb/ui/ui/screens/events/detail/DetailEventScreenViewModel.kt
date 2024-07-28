@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.EventData
-import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.domain.usecases.user.HandleGoingEventUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -27,9 +26,9 @@ internal class DetailEventScreenViewModel(
         obtainEvent(Event.OnLoadingStarted(idEvent))
     }
 
-    fun getDetailData(): StateFlow<EventData> = detailData
+    fun getDetailDataFlow(): StateFlow<EventData> = detailData
 
-    fun getBntState(): StateFlow<String> = bntState
+    fun getBntStateFlow(): StateFlow<String> = bntState
 
     private fun startLoading(id: String) = viewModelScope.launch {
         _detailData.emit(getData.execute(id))

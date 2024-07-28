@@ -20,8 +20,8 @@ internal fun PinCodeScreen(
     modifier: Modifier = Modifier,
     viewModel: PinCodeScreenViewModel = koinViewModel()
 ) {
-    val phone by viewModel.getPhoneNumber().collectAsStateWithLifecycle()
-    val pinCode by viewModel.getPinValue().collectAsStateWithLifecycle()
+    val phone by viewModel.getPhoneNumberFlow().collectAsStateWithLifecycle()
+    val pinCode by viewModel.getPinValueFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
