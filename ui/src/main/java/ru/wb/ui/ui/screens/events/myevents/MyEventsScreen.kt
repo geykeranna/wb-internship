@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
@@ -18,12 +17,12 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_C
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 
 @Composable
-fun MyEventsScreen(
+internal fun MyEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: MyEventScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getDataList().collectAsStateWithLifecycle()
+    val listByGroup by viewModel.getDataListFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier

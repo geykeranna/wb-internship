@@ -1,22 +1,12 @@
 package ru.wb.domain.usecases.event
 
+import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.EventsByGroup
 import ru.wb.domain.repisotory.EventRepository
-
-internal class GetEventListByGroupUseCaseImpl(
-    private val repository: EventRepository
-) : GetEventListByGroupUseCase {
-    override suspend fun execute(
-        query: String?,
-        userId: String?
-    ) : List<EventsByGroup> {
-        return repository.getEventsByGroup(
-            query = query,
-            userId = userId
-        )
-    }
-}
+import ru.wb.domain.repisotory.model.EventGetRequest
 
 interface GetEventListByGroupUseCase {
-    suspend fun execute(query: String? = null, userId: String? = null): List<EventsByGroup>
+    suspend fun execute(userId: String? = null,
+                        date: String? = null
+    ): Flow<List<EventsByGroup>>
 }

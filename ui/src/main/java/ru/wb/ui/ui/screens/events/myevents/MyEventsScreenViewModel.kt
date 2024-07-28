@@ -3,6 +3,7 @@ package ru.wb.ui.ui.screens.events.myevents
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.EventsByGroup
 import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
@@ -10,11 +11,11 @@ import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class MyEventScreenViewModel(
+internal class MyEventScreenViewModel(
     private val getEvents: GetEventListByGroupUseCase,
     private val getUserId: GetCurrentUserIDUseCase,
 ) : BaseViewModel<MyEventScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(EventsByGroup.defaultObject)
+    private val _dataList = MutableStateFlow(listOf(EventsByGroup.defaultObject))
     private val dataList: StateFlow<List<EventsByGroup>> = _dataList
 
     private val _userID = MutableStateFlow("")
@@ -24,20 +25,24 @@ class MyEventScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getDataList(): StateFlow<List<EventsByGroup>> = dataList
+    fun getDataListFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _userID.value = getUserId.execute()
-        _dataList.emit(getEvents.execute(query = "", userId = userID.value))
+        _userID.emit(getUserId.execute().last())
+        getEvents.execute(userId = userID.value).collect{
+            _dataList.emit(it)
+        }
     }
 
-    private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getEvents.execute(query, userId = userID.value))
+    private fun fetchData() = viewModelScope.launch {
+        getEvents.execute(userId = userID.value).collect{
+            _dataList.emit(it)
+        }
     }
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
-        class OnLoadData(val query: String) : Event()
+        data object OnLoadData : Event()
     }
 
     override fun obtainEvent(event: Event) {
@@ -46,7 +51,7 @@ class MyEventScreenViewModel(
                 startLoading()
             }
             is Event.OnLoadData -> {
-                fetchData(event.query)
+                fetchData()
             }
         }
     }

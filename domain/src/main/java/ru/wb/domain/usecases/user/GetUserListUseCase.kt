@@ -1,14 +1,14 @@
 package ru.wb.domain.usecases.user
 
+import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repisotory.UserRepository
-
-internal class GetUserListUseCaseImpl(
-    private val repository: UserRepository
-) : GetUserListUseCase {
-    override suspend fun execute(): List<UserData> = repository.getUsers()
-}
 
 interface GetUserListUseCase {
-    suspend fun execute(): List<UserData>
+    suspend fun execute(
+        limit: Int? = null,
+        offset: Int? = null,
+        query: String? = null,
+        communityId: String? = null,
+        eventId: String? = null,
+    ): Flow<List<UserData>>
 }

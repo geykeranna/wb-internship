@@ -17,13 +17,13 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
 @Composable
-fun CommunityScreen(
+internal fun CommunityScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: CommunityViewModel = koinViewModel()
 ) {
-    val itemsList by viewModel.getData().collectAsStateWithLifecycle()
-    val searchValue by viewModel.getSearchText().collectAsStateWithLifecycle()
+    val itemsList by viewModel.getDataFlow().collectAsStateWithLifecycle()
+    val searchValue by viewModel.getSearchTextFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),

@@ -1,4 +1,4 @@
-package ru.wb.testapplication.ui.screens.auth.pin.components
+package ru.wb.ui.ui.screens.auth.pin.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

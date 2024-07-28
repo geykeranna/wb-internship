@@ -9,24 +9,28 @@ import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class ActiveEventsScreenViewModel(
+internal class ActiveEventsScreenViewModel(
     private val getEventsList: GetEventListByGroupUseCase
 ) : BaseViewModel<ActiveEventsScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(EventsByGroup.defaultObject)
+    private val _dataList = MutableStateFlow(listOf(EventsByGroup.defaultObject))
     private val dataList: StateFlow<List<EventsByGroup>> = _dataList
 
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getData(): StateFlow<List<EventsByGroup>> = dataList
+    fun getDataFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _dataList.emit(getEventsList.execute(""))
+        getEventsList.execute("").collect{
+            _dataList.emit(it)
+        }
     }
 
     private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getEventsList.execute(query))
+        getEventsList.execute(query).collect{
+            _dataList.emit(it)
+        }
     }
 
     sealed class Event : BaseEvent() {

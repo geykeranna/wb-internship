@@ -26,10 +26,10 @@ import ru.wb.ui.ui.component.toolbars.BottomNavBar
 import ru.wb.ui.ui.component.utils.NoRippleTheme
 
 @Composable
-fun MainScreen(
+internal fun MainScreen(
     viewModel: MainViewModel = koinViewModel()
 ) {
-    val isAuth by viewModel.getState().collectAsStateWithLifecycle()
+    val isAuth by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     val focusManager = LocalFocusManager.current
 
