@@ -3,7 +3,7 @@ package ru.wb.domain.stabs
 import ru.wb.domain.repisotory.LoginRepository
 import ru.wb.domain.model.UserData
 
-internal class LoginRepositoryStabs: LoginRepository {
+internal class LoginRepositoryStubs: LoginRepository {
     override suspend fun checkCode(pinCode: String) = true
 
     override suspend fun sendOnPhone(phoneNumber: String) = true

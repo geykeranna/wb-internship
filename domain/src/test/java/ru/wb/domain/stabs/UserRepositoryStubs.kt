@@ -4,7 +4,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.domain.repisotory.UserRepository
 import ru.wb.domain.repisotory.model.UsersGetRequest
 
-internal class UserRepositoryStabs: UserRepository {
+internal class UserRepositoryStubs: UserRepository {
     override suspend fun getUsers(data: UsersGetRequest?): List<UserData> = List(10) { UserData.defaultObject }
 
     override suspend fun getUser(id: String): UserData = UserData.defaultObject

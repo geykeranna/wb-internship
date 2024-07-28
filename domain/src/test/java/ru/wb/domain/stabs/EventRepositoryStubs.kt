@@ -4,7 +4,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.repisotory.EventRepository
 import ru.wb.domain.repisotory.model.EventGetRequest
 
-internal class EventRepositoryStabs: EventRepository {
+internal class EventRepositoryStubs: EventRepository {
     override suspend fun getEvents(
         data: EventGetRequest?,
     ): List<EventData> = listOf(EventData.defaultObject)
