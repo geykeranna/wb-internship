@@ -26,7 +26,7 @@ import ru.wb.ui.ui.theme.NeutralOffWhiteColor
 import ru.wb.ui.ui.theme.bodyText1
 
 @Composable
-fun DropDownCode(
+internal fun DropDownCode(
     expanded: Boolean,
     selectedPhoneCountryCode: CountryCodes,
     phoneCountryCodeList: List<CountryCodes>,

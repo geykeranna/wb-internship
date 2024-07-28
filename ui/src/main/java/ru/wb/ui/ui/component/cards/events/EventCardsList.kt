@@ -14,7 +14,7 @@ import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_EVENT_ITEM_LIST
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_EVENT_ITEM_LIST
 
 @Composable
-fun EventCardsList(
+internal fun EventCardsList(
     modifier: Modifier = Modifier,
     itemsList: List<EventData>,
     navController: NavController,

@@ -2,8 +2,10 @@ package ru.wb.ui.ui.screens.profile.edit
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.R
@@ -19,6 +21,7 @@ internal fun ProfileEditScreen(
     onBackClick: () -> Unit = { navController.popBackStack() },
     viewModel: ProfileEditScreenViewModel = koinViewModel()
 ){
+    val formField by viewModel.formFields.collectAsStateWithLifecycle()
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
@@ -28,7 +31,7 @@ internal fun ProfileEditScreen(
 
     ProfileEditCard(
         modifier = modifier,
-        formField = viewModel.formFields,
+        formField = formField,
         state = viewModel.getState(),
         onValueChange = { index, text ->
             viewModel.obtainEvent(

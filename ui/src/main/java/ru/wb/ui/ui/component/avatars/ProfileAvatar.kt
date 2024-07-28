@@ -18,7 +18,7 @@ import ru.wb.ui.R
 import ru.wb.ui.ui.theme.NeutralLineColor
 
 @Composable
-fun ProfileAvatar(
+internal fun ProfileAvatar(
     modifier: Modifier = Modifier,
     onFloatingClick: () -> Unit = {},
     isFloatingVisible: Boolean = false,

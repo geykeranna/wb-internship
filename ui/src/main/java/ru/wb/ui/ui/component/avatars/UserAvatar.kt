@@ -26,7 +26,7 @@ import ru.wb.ui.ui.theme.BrandLightModeColor
 import ru.wb.ui.ui.theme.NeutralLineColor
 
 @Composable
-fun UserAvatar(
+internal fun UserAvatar(
     status: Boolean = false,
     story: Boolean = false,
     colorBadge: Color = BlueDarkColor,

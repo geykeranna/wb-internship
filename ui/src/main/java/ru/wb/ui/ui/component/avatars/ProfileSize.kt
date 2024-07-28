@@ -1,6 +1,6 @@
 package ru.wb.ui.ui.component.avatars
 
-enum class ProfileSize(val boxSize: Int,
+internal enum class ProfileSize(val boxSize: Int,
                        val iconSize: Int,
                        val floatingBntSize: Int
 ) {

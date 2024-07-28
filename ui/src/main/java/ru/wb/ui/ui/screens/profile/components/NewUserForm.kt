@@ -13,11 +13,10 @@ import ru.wb.ui.ui.component.input.InputField
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_INPUT_FIELDS_PROFILE_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_INPUT_FIELDS_PROFILE_SCREEN
-import ru.wb.ui.ui.screens.profile.components.FormField
 
 @Composable
-fun NewUserForm(
-    formFields: MutableList<FormField>,
+internal fun NewUserForm(
+    formFields: List<FormField>,
     modifier: Modifier = Modifier,
     onValueChange: (index: Int, value: String) -> Unit = {_, _ -> }
 ) {

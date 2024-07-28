@@ -12,7 +12,7 @@ import coil.compose.AsyncImage
 import ru.wb.ui.R
 
 @Composable
-fun CommunityAvatar (
+internal fun CommunityAvatar (
     modifier: Modifier = Modifier,
     src: String? = null,
 ) {

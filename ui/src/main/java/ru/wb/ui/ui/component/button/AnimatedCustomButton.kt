@@ -24,7 +24,7 @@ import ru.wb.ui.ui.theme.BrandDarkModeColor
 import ru.wb.ui.ui.theme.subheading2
 
 @Composable
-fun AnimatedCustomButton(
+internal fun AnimatedCustomButton(
     modifier: Modifier = Modifier,
     type: ButtonType = ButtonType.DEFAULT,
     disabled: Boolean = false,

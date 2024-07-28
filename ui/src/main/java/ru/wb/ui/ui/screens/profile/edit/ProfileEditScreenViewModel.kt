@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
@@ -22,36 +23,39 @@ internal class ProfileEditScreenViewModel(
     private val _userData = MutableStateFlow(UserData.defaultObject)
     private val userData: StateFlow<UserData> = _userData
 
-    val formFields = mutableListOf(
-        FormField(
-            id = 0,
-            name = "first_name",
-            placeholder = "Имя (обязательно)",
-            required = true,
-            inputValue = mutableStateOf(userData.value.firstName)
-        ),
-        FormField(
-            id = 1,
-            name = "last_name",
-            placeholder = "Фамилия (опционально)",
-            required = false,
-            inputValue = mutableStateOf(userData.value.firstName)
-        ),
+    val formFields = MutableStateFlow(
+        listOf(
+            FormField(
+                id = 0,
+                name = "first_name",
+                placeholder = "Имя (обязательно)",
+                required = true,
+                inputValue = mutableStateOf(userData.value.firstName)
+            ),
+            FormField(
+                id = 1,
+                name = "last_name",
+                placeholder = "Фамилия (опционально)",
+                required = false,
+                inputValue = mutableStateOf(userData.value.firstName)
+            )
+        )
     )
 
     fun getState(): Boolean {
         return formFields
+            .asStateFlow().value
             .filter { it.required }
             .all { it.inputValue.value.isNotEmpty() }
     }
 
     private fun setFieldData(index: Int, input: String) {
-        formFields[index].inputValue.value = input
+        formFields.value[index].inputValue.value = input
     }
 
     private fun sendData() = viewModelScope.launch {
-        _userData.value.firstName = formFields[0].inputValue.value
-        _userData.value.lastName = formFields[1].inputValue.value
+        _userData.value.firstName = formFields.value[0].inputValue.value
+        _userData.value.lastName = formFields.value[1].inputValue.value
         setUserData.execute(userData.value)
     }
 

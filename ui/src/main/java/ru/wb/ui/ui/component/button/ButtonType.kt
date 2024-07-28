@@ -1,5 +1,5 @@
 package ru.wb.ui.ui.component.button
 
-enum class ButtonType {
+internal enum class ButtonType {
     DEFAULT, OUTLINED, TEXT
 }

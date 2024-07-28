@@ -23,7 +23,7 @@ import ru.wb.ui.ui.theme.NeutralWeakColor
 import ru.wb.ui.ui.theme.bodyText1
 
 @Composable
-fun DetailData(
+internal fun DetailData(
     detailInfo: EventData,
     stateBnt: String,
     isMapFullScreen: MutableState<Boolean>,

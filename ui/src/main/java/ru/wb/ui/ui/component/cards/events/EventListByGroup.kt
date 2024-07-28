@@ -31,7 +31,7 @@ import ru.wb.ui.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EventListByGroup (
+internal fun EventListByGroup (
     modifier: Modifier,
     listByGroup: List<EventsByGroup>,
     navController: NavController,

@@ -33,7 +33,7 @@ import ru.wb.ui.ui.theme.NeutralOffWhiteColor
 import ru.wb.ui.ui.theme.bodyText1
 
 @Composable
-fun InputNumberTextField(
+internal fun InputNumberTextField(
     phone: String,
     selectedPhoneCountryCode: CountryCodes,
     modifier: Modifier = Modifier,

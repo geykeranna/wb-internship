@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.PASS_LENGTH_IN_PASS_FIELD
 
 @Composable
-fun InputPassField(
+internal fun InputPassField(
     value: String,
     modifier: Modifier = Modifier,
     onChange: (value: String) -> Unit = {},

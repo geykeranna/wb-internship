@@ -12,7 +12,7 @@ import coil.compose.AsyncImage
 import ru.wb.ui.R
 
 @Composable
-fun GroupAvatar(
+internal fun GroupAvatar(
     modifier: Modifier = Modifier,
     src: String? = null,
 ) {

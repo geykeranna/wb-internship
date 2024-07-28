@@ -2,7 +2,7 @@ package ru.wb.ui.ui.component.navigation
 
 import ru.wb.ui.R
 
-sealed class NavBar(
+internal sealed class NavBar(
     val label: String,
     val icon: Int,
     val route: String,

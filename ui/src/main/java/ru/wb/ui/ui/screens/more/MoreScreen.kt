@@ -14,8 +14,8 @@ import androidx.navigation.NavController
 import ru.wb.ui.R
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.testapplication.ui.component.toolbars.MenuItem
-import ru.wb.testapplication.ui.component.toolbars.MenuItemUser
+import ru.wb.ui.ui.component.toolbars.MenuItem
+import ru.wb.ui.ui.component.toolbars.MenuItemUser
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
@@ -24,7 +24,7 @@ import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.wb.ui.ui.theme.NeutralLineColor
 
 @Composable
-fun MoreScreen(
+internal fun MoreScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {

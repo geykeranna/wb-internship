@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomIndicator(
+internal fun CustomIndicator(
     modifier: Modifier = Modifier,
     color: Color,
     height: Dp = 2.dp,

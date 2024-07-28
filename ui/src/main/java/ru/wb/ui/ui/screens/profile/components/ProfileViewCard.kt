@@ -25,7 +25,7 @@ import ru.wb.ui.ui.theme.heading3
 import ru.wb.ui.ui.theme.subheading2
 
 @Composable
-fun ProfileViewCard(
+internal fun ProfileViewCard(
     userData: UserData,
     modifier: Modifier = Modifier
 ) {
@@ -54,7 +54,7 @@ fun ProfileViewCard(
                 )
                 Text(
                     modifier = Modifier,
-                    text = userData.phone.orEmpty(),
+                    text = userData.phone,
                     style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
                     color = NeutralDisabledColor
                 )

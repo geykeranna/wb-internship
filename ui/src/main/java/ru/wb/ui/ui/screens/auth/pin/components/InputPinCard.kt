@@ -22,7 +22,7 @@ import ru.wb.ui.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.wb.ui.ui.screens.auth.components.TitleInfoWithDescription
 
 @Composable
-fun InputPinCard(
+internal fun InputPinCard(
     phone: String,
     pin: String,
     modifier: Modifier = Modifier,

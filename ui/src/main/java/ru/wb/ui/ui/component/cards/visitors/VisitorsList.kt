@@ -17,7 +17,7 @@ import ru.wb.ui.ui.component.utils.Constants.OVERLAPPING_PERCENTAGE
 import ru.wb.ui.ui.theme.bodyText1
 
 @Composable
-fun VisitorsList(
+internal fun VisitorsList(
     modifier: Modifier = Modifier,
     visitorsList: List<UserData> = listOf(),
     onClick: () -> Unit = {},

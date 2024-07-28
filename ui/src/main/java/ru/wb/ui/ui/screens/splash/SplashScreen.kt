@@ -13,7 +13,7 @@ import com.lottiefiles.dotlottie.core.util.DotLottieSource
 import ru.wb.ui.ui.component.navigation.Screen
 
 @Composable
-fun SplashScreen(
+internal fun SplashScreen(
     isAuth: Boolean,
     navController: NavController,
 ) {

@@ -32,7 +32,7 @@ import ru.wb.ui.ui.theme.NeutralWeakColor
 import ru.wb.ui.ui.theme.metadata1
 
 @Composable
-fun InfoEventCard(
+internal fun InfoEventCard(
     isMapFullScreen: MutableState<Boolean>,
     detailInfo: EventData,
 ){
