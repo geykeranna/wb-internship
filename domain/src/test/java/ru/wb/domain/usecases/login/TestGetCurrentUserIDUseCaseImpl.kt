@@ -1,5 +1,6 @@
 package ru.wb.domain.usecases.login
 
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -11,7 +12,7 @@ class TestGetCurrentUserIDUseCaseImpl{
     @Test
     fun `should return the same auth user id data as in repo`() = runTest{
         val useCase = GetCurrentUserIDUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute()
+        val actual = useCase.execute().last()
 
         Assertions.assertTrue(actual.isNotEmpty())
     }

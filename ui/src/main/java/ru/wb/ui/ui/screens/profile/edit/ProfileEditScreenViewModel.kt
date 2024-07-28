@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
@@ -55,9 +56,9 @@ internal class ProfileEditScreenViewModel(
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _userData.value.id = getUserID.execute()
-        getUserData.execute(id = _userData.value.id)?.let { _userData.emit(it) }
-    }
+        _userData.value.id = getUserID.execute().last()
+        getUserData.execute(id = _userData.value.id).last()?.let { _userData.emit(it) } }
+
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()

@@ -1,5 +1,7 @@
 package ru.wb.domain.stabs
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
 import ru.wb.domain.repisotory.UserRepository
 import ru.wb.domain.repisotory.model.UsersGetRequest
@@ -16,18 +18,18 @@ internal class UserRepositoryStubs: UserRepository {
         socialMedia = listOf()
     )
 
-    override suspend fun getUsers(data: UsersGetRequest?): List<UserData> {
+    override suspend fun getUsers(data: UsersGetRequest?): Flow<List<UserData>> {
         data?.limit?.let {
-            return List(it) { userData }
+            return flowOf(List(it) { userData })
         }
-        return listOf(userData)
+        return flowOf(listOf(userData))
     }
 
-    override suspend fun getUser(id: String): UserData = userData
+    override suspend fun getUser(id: String) = flowOf(userData)
 
-    override suspend fun putUser(userData: UserData): Boolean = true
+    override suspend fun putUser(userData: UserData) = flowOf(true)
 
-    override suspend fun postUser(userData: UserData): Boolean = true
+    override suspend fun postUser(userData: UserData) = flowOf(true)
 
-    override suspend fun handleGoingEvent(eventID: String): Boolean = true
+    override suspend fun handleGoingEvent(eventID: String) = flowOf(true)
 }

@@ -1,5 +1,6 @@
 package ru.wb.domain.usecases.user
 
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -11,7 +12,7 @@ internal class TestGetUserListUseCaseImpl{
     @Test
     fun `show return the same list user data as in repo`() = runTest{
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute()
+        val actual = useCase.execute().last()
 
         Assertions.assertTrue(actual.isNotEmpty())
     }
@@ -21,7 +22,7 @@ internal class TestGetUserListUseCaseImpl{
         val expectedLimit = 10
 
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute(limit = expectedLimit)
+        val actual = useCase.execute(limit = expectedLimit).last()
 
         Assertions.assertTrue(actual.isNotEmpty())
     }

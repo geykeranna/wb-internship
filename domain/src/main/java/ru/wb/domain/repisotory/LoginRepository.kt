@@ -1,14 +1,16 @@
 package ru.wb.domain.repisotory
 
+import kotlinx.coroutines.flow.Flow
+
 interface LoginRepository {
 
-    suspend fun sendOnPhone(phoneNumber: String): Boolean
+    suspend fun sendOnPhone(phoneNumber: String): Flow<Boolean>
 
-    suspend fun checkCode(pinCode: String): Boolean
+    suspend fun checkCode(pinCode: String): Flow<Boolean>
 
-    suspend fun getPhoneAuth(): String
+    suspend fun getPhoneAuth(): Flow<String>
 
-    suspend fun getAuthState(): Boolean
+    suspend fun getAuthState(): Flow<Boolean>
 
-    suspend fun getUserID(): String
+    suspend fun getUserID(): Flow<String>
 }

@@ -1,5 +1,11 @@
 package ru.wb.domain.usecases.event
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.toList
 import ru.wb.domain.model.EventsByGroup
 import ru.wb.domain.repisotory.EventRepository
 import ru.wb.domain.repisotory.model.EventGetRequest
@@ -10,19 +16,19 @@ internal class GetEventListByGroupUseCaseImpl(
     override suspend fun execute(
         userId: String?,
         date: String?
-    ) : List<EventsByGroup> {
+    ) : Flow<List<EventsByGroup>> {
         val listByGroup = mutableListOf<EventsByGroup>()
         when(userId){
             null -> {
                 listByGroup.add(
                     EventsByGroup(
-                        listOfEvents = repository.getEvents(EventGetRequest(state = "all")),
+                        listOfEvents = repository.getEvents(EventGetRequest(state = "all")).last(),
                         group = "Все встречи"
                     )
                 )
                 listByGroup.add(
                     EventsByGroup(
-                        listOfEvents = repository.getEvents(EventGetRequest(state = "active")),
+                        listOfEvents = repository.getEvents(EventGetRequest(state = "active")).last(),
                         group = "Активные"
                     )
                 )
@@ -33,7 +39,7 @@ internal class GetEventListByGroupUseCaseImpl(
                         listOfEvents = repository.getEvents(EventGetRequest(
                             userId = userId,
                             startDate = date
-                            )),
+                            )).last(),
                         group = "Запланированы"
                     )
                 )
@@ -42,12 +48,12 @@ internal class GetEventListByGroupUseCaseImpl(
                         listOfEvents = repository.getEvents(EventGetRequest(
                             state = "active",
                             endDate = date
-                        )),
+                        )).last(),
                         group = "Прошли"
                     )
                 )
             }
         }
-        return listByGroup
+        return flowOf(listByGroup)
     }
 }

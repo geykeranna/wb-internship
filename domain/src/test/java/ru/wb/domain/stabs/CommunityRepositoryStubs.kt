@@ -1,5 +1,7 @@
 package ru.wb.domain.stabs
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.repisotory.CommunityRepository
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.repisotory.model.CommunitiesGetRequest
@@ -16,15 +18,15 @@ internal class CommunityRepositoryStubs: CommunityRepository {
 
     override suspend fun getCommunities(
         data: CommunitiesGetRequest?
-    ): List<CommunityData> {
+    ): Flow<List<CommunityData>> {
         data?.limit?.let {
-            return List (it) { communityData }
+            return flowOf(List (it) { communityData })
         }
-        return listOf(communityData)
+        return flowOf(listOf(communityData))
 
     }
 
     override suspend fun getCommunity(
         id: String
-    ): CommunityData = communityData
+    ): Flow<CommunityData> = flowOf(communityData)
 }

@@ -1,5 +1,7 @@
 package ru.wb.domain.stabs
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.Location
 import ru.wb.domain.repisotory.EventRepository
@@ -20,14 +22,14 @@ internal class EventRepositoryStubs: EventRepository {
 
     override suspend fun getEvents(
         data: EventGetRequest?,
-    ): List<EventData> {
+    ): Flow<List<EventData>> {
         data?.limit?.let {
-            return List (it) { eventData }
+            return flowOf(List (it) { eventData })
         }
-        return listOf(eventData)
+        return flowOf(listOf(eventData))
     }
 
     override suspend fun getEvent(
         id: String,
-    ): EventData = eventData
+    ): Flow<EventData> = flowOf(eventData)
 }

@@ -22,11 +22,15 @@ internal class ActiveEventsScreenViewModel(
     fun getDataFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _dataList.emit(getEventsList.execute(""))
+        getEventsList.execute("").collect{
+            _dataList.emit(it)
+        }
     }
 
     private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getEventsList.execute(query))
+        getEventsList.execute(query).collect{
+            _dataList.emit(it)
+        }
     }
 
     sealed class Event : BaseEvent() {

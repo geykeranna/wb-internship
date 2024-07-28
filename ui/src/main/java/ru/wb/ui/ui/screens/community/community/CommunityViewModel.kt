@@ -27,7 +27,9 @@ internal class CommunityViewModel(
     fun getDataFlow(): StateFlow<List<CommunityData>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _dataList.emit(getDataList.execute())
+        getDataList.execute().collect{
+            _dataList.emit(it)
+        }
     }
 
     private fun onSearchTextChange(text: String) = viewModelScope.launch {
@@ -37,7 +39,10 @@ internal class CommunityViewModel(
     private fun fetchData(
         query: String? = null,
     ) = viewModelScope.launch {
-        _dataList.emit(getDataList.execute(query = query))
+        getDataList.execute(query = query).collect{
+            _dataList.emit(it)
+        }
+
     }
 
     sealed class Event : BaseEvent() {

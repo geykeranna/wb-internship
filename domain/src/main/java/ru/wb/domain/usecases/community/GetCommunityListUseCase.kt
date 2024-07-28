@@ -1,5 +1,6 @@
 package ru.wb.domain.usecases.community
 
+import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.repisotory.model.CommunitiesGetRequest
 
@@ -8,5 +9,5 @@ interface GetCommunityListUseCase {
         limit: Int? = null,
         offset: Int? = null,
         query: String? = null,
-    ): List<CommunityData>
+    ): Flow<List<CommunityData>>
 }

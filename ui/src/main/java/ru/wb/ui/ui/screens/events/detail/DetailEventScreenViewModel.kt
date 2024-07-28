@@ -31,7 +31,9 @@ internal class DetailEventScreenViewModel(
     fun getBntStateFlow(): StateFlow<String> = bntState
 
     private fun startLoading(id: String) = viewModelScope.launch {
-        _detailData.emit(getData.execute(id))
+        getData.execute(id).collect{
+            _detailData.emit(it)
+        }
     }
 
     private fun onHandleEvent(idEvent: String) = viewModelScope.launch {
@@ -43,7 +45,9 @@ internal class DetailEventScreenViewModel(
             }
             else -> {
                 _btnState.emit(ButtonState.UNPRESSED.id)
-                _detailData.emit(getData.execute(idEvent))
+                getData.execute(idEvent).collect{
+                    _detailData.emit(it)
+                }
             }
         }
     }

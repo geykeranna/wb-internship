@@ -3,6 +3,7 @@ package ru.wb.ui.ui.screens.events.myevents
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.EventsByGroup
 import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
@@ -27,12 +28,16 @@ internal class MyEventScreenViewModel(
     fun getDataListFlow(): StateFlow<List<EventsByGroup>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _userID.emit(getUserId.execute())
-        _dataList.emit(getEvents.execute(userId = userID.value))
+        _userID.emit(getUserId.execute().last())
+        getEvents.execute(userId = userID.value).collect{
+            _dataList.emit(it)
+        }
     }
 
     private fun fetchData() = viewModelScope.launch {
-        _dataList.emit(getEvents.execute(userId = userID.value))
+        getEvents.execute(userId = userID.value).collect{
+            _dataList.emit(it)
+        }
     }
 
     sealed class Event : BaseEvent() {

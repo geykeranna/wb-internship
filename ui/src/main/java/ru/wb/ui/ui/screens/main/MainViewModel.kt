@@ -3,6 +3,7 @@ package ru.wb.ui.ui.screens.main
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -21,7 +22,7 @@ internal class MainViewModel(
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _state.emit(getAuthState.execute())
+        _state.emit(getAuthState.execute().last())
     }
 
     sealed class Event : BaseEvent() {

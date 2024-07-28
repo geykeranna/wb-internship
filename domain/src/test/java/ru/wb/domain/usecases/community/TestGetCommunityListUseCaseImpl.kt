@@ -1,5 +1,6 @@
 package ru.wb.domain.usecases.community
 
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -11,7 +12,7 @@ class TestGetCommunityListUseCaseImpl {
     @Test
     fun `should return the same community list data as in repo`() = runTest{
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute()
+        val actual = useCase.execute().last()
 
         Assertions.assertFalse(actual.isEmpty())
     }
@@ -22,7 +23,7 @@ class TestGetCommunityListUseCaseImpl {
 
         val testRepo = testRepository
         val useCase = GetCommunityListUseCaseImpl(repository = testRepo)
-        val actual = useCase.execute(limit = expectedLimit)
+        val actual = useCase.execute(limit = expectedLimit).last()
 
         Assertions.assertEquals(expectedLimit, actual.size)
     }
