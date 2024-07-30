@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.EventsByGroup
+import ru.wb.domain.model.EventData
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP
 import ru.wb.ui.ui.component.utils.Constants.TAB_LABEL_TEXT_SIZE
 import ru.wb.ui.ui.component.utils.CustomIndicator
@@ -31,10 +31,11 @@ import ru.wb.ui.ui.theme.TabUnselectedColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EventListByGroup (
-    modifier: Modifier,
-    listByGroup: List<EventsByGroup>,
+internal fun EventListByGroup (
     navController: NavController,
+    modifier: Modifier = Modifier,
+    listByGroup: List<List<EventData>> = listOf(),
+    tabsList: List<String> = listOf()
 ) {
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { listByGroup.size })
@@ -50,7 +51,7 @@ fun EventListByGroup (
             CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
         }
     ) {
-        listByGroup.forEachIndexed { index, tab ->
+        tabsList.forEachIndexed { index, tab ->
             Tab(
                 modifier = Modifier
                     .height(HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp),
@@ -64,7 +65,7 @@ fun EventListByGroup (
                 },
             ) {
                 Text(
-                    text = tab.group.uppercase(),
+                    text = tab.uppercase(),
                     fontSize = TAB_LABEL_TEXT_SIZE.sp,
                     fontWeight = FontWeight.Medium
                 )
@@ -79,7 +80,7 @@ fun EventListByGroup (
             .fillMaxWidth(),
     ) { page ->
         EventCardsList(
-            itemsList = listByGroup[page].listOfEvents,
+            itemsList = listByGroup[page],
             navController = navController,
         )
     }

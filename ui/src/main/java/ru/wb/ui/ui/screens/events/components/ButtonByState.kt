@@ -10,7 +10,7 @@ import ru.wb.ui.ui.component.button.ButtonType
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_DETAIL_EVENT_SCREEN
 
 @Composable
-fun ButtonByState(
+internal fun ButtonByState(
     state: String,
     modifier: Modifier = Modifier,
     onClickButton: () -> Unit,

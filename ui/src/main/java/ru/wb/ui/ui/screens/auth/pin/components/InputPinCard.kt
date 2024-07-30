@@ -1,4 +1,4 @@
-package ru.wb.testapplication.ui.screens.auth.pin.components
+package ru.wb.ui.ui.screens.auth.pin.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +22,7 @@ import ru.wb.ui.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.wb.ui.ui.screens.auth.components.TitleInfoWithDescription
 
 @Composable
-fun InputPinCard(
+internal fun InputPinCard(
     phone: String,
     pin: String,
     modifier: Modifier = Modifier,

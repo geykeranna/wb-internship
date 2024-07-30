@@ -8,20 +8,20 @@ import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class MainViewModel(
+internal class MainViewModel(
     private val getAuthState: CheckAuthStateUseCase
 ): BaseViewModel<MainViewModel.Event>() {
     private val _state = MutableStateFlow(false)
     private val state: StateFlow<Boolean> = _state
 
-    fun getState() : StateFlow<Boolean> = state
+    fun getStateFlow() : StateFlow<Boolean> = state
 
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _state.value = getAuthState.execute()
+        getAuthState.execute().collect{  _state.emit(it) }
     }
 
     sealed class Event : BaseEvent() {

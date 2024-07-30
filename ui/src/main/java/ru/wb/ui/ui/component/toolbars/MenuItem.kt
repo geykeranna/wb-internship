@@ -1,4 +1,4 @@
-package ru.wb.testapplication.ui.component.toolbars
+package ru.wb.ui.ui.component.toolbars
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +32,7 @@ import ru.wb.ui.ui.theme.bodyText1
 import ru.wb.ui.ui.theme.metadata1
 
 @Composable
-fun MenuItem (
+internal fun MenuItem (
     modifier: Modifier = Modifier,
     iconRight: Int? = null,
     iconLeft: Int? = null,
@@ -126,7 +126,7 @@ fun MenuItemUser(
                     style = MaterialTheme.typography.bodyText1
                 )
                 Text (
-                    text = userData.phone.orEmpty(),
+                    text = userData.phone,
                     style = MaterialTheme.typography.metadata1,
                     color = NeutralDisabledColor
                 )

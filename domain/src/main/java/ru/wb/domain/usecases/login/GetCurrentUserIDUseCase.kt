@@ -1,13 +1,7 @@
 package ru.wb.domain.usecases.login
 
-import ru.wb.domain.repisotory.LoginRepository
-
-internal class GetCurrentUserIDUseCaseImpl(
-    private val repository: LoginRepository
-) : GetCurrentUserIDUseCase {
-    override suspend fun execute(): String = repository.getUserID()
-}
+import kotlinx.coroutines.flow.Flow
 
 interface GetCurrentUserIDUseCase {
-    suspend fun execute(): String
+    fun execute(): Flow<String>
 }

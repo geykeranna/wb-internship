@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,7 +45,7 @@ import ru.wb.ui.ui.theme.NeutralDisabledColor
 import ru.wb.ui.ui.theme.bodyText1
 
 @Composable
-fun InputField(
+internal fun InputField(
     value: String,
     modifier: Modifier = Modifier,
     placeholder: String = "",

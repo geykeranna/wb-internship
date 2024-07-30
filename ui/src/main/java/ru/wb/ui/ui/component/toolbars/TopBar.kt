@@ -25,7 +25,7 @@ import ru.wb.ui.ui.theme.NeutralActiveColor
 import ru.wb.ui.ui.theme.subheading1
 
 @Composable
-fun TopBar(
+internal fun TopBar(
     modifier: Modifier = Modifier,
     text: String = "",
     iconRight: Int? = null,

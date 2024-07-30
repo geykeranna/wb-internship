@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
-import ru.wb.domain.model.EventsByGroup
 import ru.wb.ui.ui.component.cards.events.EventListByGroup
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
@@ -19,16 +18,17 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
 
 @Composable
-fun ActiveEventsScreen(
+internal fun ActiveEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getData().collectAsStateWithLifecycle()
+    val allListByGroup by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
+    val activeListByGroup by viewModel.getActiveDataFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.Events.name,
+        text = Screen.EVENTS.label,
         iconRight = R.drawable.ic_plus,
     )
 
@@ -43,9 +43,15 @@ fun ActiveEventsScreen(
     )
 
     EventListByGroup(
-        listByGroup = listByGroup,
         modifier = modifier.padding(top = 122.dp)
             .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
         navController = navController,
+        listByGroup = listOf(allListByGroup, activeListByGroup),
+        tabsList = listOf(Group.ALL.label, Group.ACTIVE.label)
     )
+}
+
+private enum class Group(val label: String) {
+    ALL("Все встречи"),
+    ACTIVE("Активные"),
 }

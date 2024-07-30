@@ -14,8 +14,8 @@ import androidx.navigation.NavController
 import ru.wb.ui.R
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.testapplication.ui.component.toolbars.MenuItem
-import ru.wb.testapplication.ui.component.toolbars.MenuItemUser
+import ru.wb.ui.ui.component.toolbars.MenuItem
+import ru.wb.ui.ui.component.toolbars.MenuItemUser
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
@@ -24,14 +24,14 @@ import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.wb.ui.ui.theme.NeutralLineColor
 
 @Composable
-fun MoreScreen(
+internal fun MoreScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     TopBar (
         modifier = Modifier
             .padding(start = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.More.name
+        text = Screen.MORE.label
     )
 
     LazyColumn (
@@ -45,7 +45,7 @@ fun MoreScreen(
             MenuItemUser(
                 userData = UserData.defaultObject,
                 onClickItem = {
-                    navController.navigate(Screen.ProfileView.route)
+                    navController.navigate(Screen.PROFILE_VIEW.route)
                 }
             )
         }
@@ -54,7 +54,7 @@ fun MoreScreen(
             MenuItem(
                 iconLeft = R.drawable.ic_coffee,
                 onClickItem = {
-                    navController.navigate(Screen.MyEvents.route)
+                    navController.navigate(Screen.MY_EVENTS.route)
                 },
                 text = stringResource(R.string.label_menu_items_my_meets),
                 iconRight = R.drawable.ic_chevron_right

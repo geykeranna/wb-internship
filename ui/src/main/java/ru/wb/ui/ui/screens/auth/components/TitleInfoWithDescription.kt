@@ -20,7 +20,7 @@ import ru.wb.ui.ui.theme.bodyText2
 import ru.wb.ui.ui.theme.heading2
 
 @Composable
-fun TitleInfoWithDescription(
+internal fun TitleInfoWithDescription(
     titleText: String,
     descriptionText: String,
     modifier: Modifier = Modifier,

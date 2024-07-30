@@ -7,7 +7,7 @@ import androidx.compose.ui.res.stringResource
 import ru.wb.ui.R
 
 @Composable
-fun SearchBar(
+internal fun SearchBar(
     value: String,
     modifier: Modifier = Modifier,
     disable: Boolean = false,

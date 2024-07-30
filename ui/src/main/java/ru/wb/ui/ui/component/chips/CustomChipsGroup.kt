@@ -22,7 +22,7 @@ import ru.wb.ui.ui.theme.BrandDarkModeColor
 import ru.wb.ui.ui.theme.metadata3
 
 @Composable
-fun CustomChipsGroup(
+internal fun CustomChipsGroup(
     chipsList: List<String>,
     modifier: Modifier = Modifier,
 ) {

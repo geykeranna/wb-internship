@@ -24,7 +24,9 @@ import ru.wb.ui.ui.component.utils.Constants.HEIGHT_MAP_FULL_WINDOW
 import ru.wb.ui.ui.component.utils.Constants.WIDTH_MAP_FULL_WINDOW
 
 @Composable
-fun FullScreenImageDialog(isMapFullScreen: MutableState<Boolean>) {
+internal fun FullScreenImageDialog(
+    isMapFullScreen: MutableState<Boolean>
+) {
     if (isMapFullScreen.value) {
         Dialog(onDismissRequest = { isMapFullScreen.value = false }) {
             var scale by remember { mutableFloatStateOf(1f) }

@@ -22,7 +22,7 @@ const val COLLAPSED_SPAN = "collapsed_span"
 const val EXPANDED_SPAN = "expanded_span"
 
 @Composable
-fun ExpandableText(
+internal fun ExpandableText(
     text: String,
     expandText: String,
     maxLinesCollapsed: Int,

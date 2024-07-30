@@ -1,13 +1,7 @@
 package ru.wb.domain.usecases.login
 
-import ru.wb.domain.repisotory.LoginRepository
-
-internal class SendPinCodeOnPhoneUseCaseImpl(
-    private val repository: LoginRepository
-) : SendPinCodeOnPhoneUseCase {
-    override suspend fun execute(phone: String): Unit = repository.setPhone(phoneNumber = phone)
-}
+import kotlinx.coroutines.flow.Flow
 
 interface SendPinCodeOnPhoneUseCase {
-    suspend fun execute(phone: String)
+    fun execute(phone: String): Flow<Boolean>
 }

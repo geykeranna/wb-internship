@@ -22,12 +22,12 @@ import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_PROFILE_SCR
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 
 @Composable
-fun ProfileEditCard(
+internal fun ProfileEditCard(
     state: Boolean,
-    formField: MutableList<FormField>,
+    formField: ScreenState,
     modifier: Modifier = Modifier,
-    onValueChange: (index: Int, value: String) -> Unit = {_, _ -> },
-    onClick: () -> Unit,
+    onValueChange: (key: Int, value: String) -> Unit = {_, _ -> },
+    onClick: () -> Unit = {},
 ) {
     LazyColumn (
         modifier = modifier

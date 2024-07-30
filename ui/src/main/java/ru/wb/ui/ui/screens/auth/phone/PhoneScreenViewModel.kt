@@ -10,7 +10,7 @@ import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 import ru.wb.ui.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
 
-class PhoneScreenViewModel(
+internal class PhoneScreenViewModel(
     private val sendPin: SendPinCodeOnPhoneUseCase,
 ) : BaseViewModel<PhoneScreenViewModel.Event>() {
     private val _phoneNumber = MutableStateFlow("")
@@ -22,11 +22,11 @@ class PhoneScreenViewModel(
     private val _phoneCountryCodeList = MutableStateFlow(CountryCodes.shimmerData)
     private val phoneCountryCodeList: StateFlow<List<CountryCodes>> = _phoneCountryCodeList
 
-    fun getPhoneNumber(): StateFlow<String> = phoneNumber
+    fun getPhoneNumberFlow(): StateFlow<String> = phoneNumber
 
-    fun getPhoneCountryCodeList(): StateFlow<List<CountryCodes>> = phoneCountryCodeList
+    fun getPhoneCountryCodeListFlow(): StateFlow<List<CountryCodes>> = phoneCountryCodeList
 
-    fun getSelectedPhoneCode(): StateFlow<CountryCodes> = selectedPhoneCode
+    fun getSelectedPhoneCodeFlow(): StateFlow<CountryCodes> = selectedPhoneCode
 
     fun getValidateState(): Boolean {
         val countNumInMask = selectedPhoneCode.value.mask.count {
@@ -35,17 +35,17 @@ class PhoneScreenViewModel(
         return phoneNumber.value.length == countNumInMask
     }
 
-    private fun setSelectedPhoneCode(selected: CountryCodes) {
-        _selectedPhoneCode.value = selected
+    private fun setSelectedPhoneCode(selected: CountryCodes) = viewModelScope.launch {
+        _selectedPhoneCode.emit(selected)
     }
 
     private fun sendPin() = viewModelScope.launch {
         sendPin.execute(phone = "${selectedPhoneCode.value.countryCode}${phoneNumber.value}")
-        _phoneNumber.value = ""
+        _phoneNumber.emit("")
     }
 
-    private fun setPhoneNumber(phone: String) {
-        _phoneNumber.value = phone
+    private fun setPhoneNumber(phone: String) = viewModelScope.launch {
+        _phoneNumber.emit(phone)
     }
 
     sealed class Event : BaseEvent() {

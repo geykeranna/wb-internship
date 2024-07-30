@@ -18,7 +18,7 @@ import ru.wb.ui.ui.theme.NeutralLineColor
 import ru.wb.ui.ui.theme.heading1
 
 @Composable
-fun PinCodeDot(value: String, index: Int) {
+internal fun PinCodeDot(value: String, index: Int) {
     Box(
         modifier = Modifier
             .size(SIZE_OF_PASS_ITEMS.dp),

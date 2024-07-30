@@ -30,7 +30,7 @@ import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_LINE_SOCIAL_CHIPS_GROUP
 import ru.wb.ui.ui.theme.BrandDefaultColor
 
 @Composable
-fun SocialChips(
+internal fun SocialChips(
     list: List<SocialMedia>,
     modifier: Modifier = Modifier,
 ) {

@@ -10,12 +10,12 @@ data class CommunityData (
 ){
     companion object{
         val defaultObject = CommunityData(
-            id = "0",
-            label = "Developer meeting",
+            id = "1",
+            label = "",
             icon = null,
-            countPeople = 10000,
-            description = "Описание",
-            eventList = List(5){ EventData.defaultObject }
+            countPeople = 0,
+            description = "",
+            eventList = listOf()
         )
     }
 }

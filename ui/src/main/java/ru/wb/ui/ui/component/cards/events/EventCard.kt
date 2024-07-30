@@ -33,7 +33,7 @@ import ru.wb.ui.ui.theme.bodyText1
 import ru.wb.ui.ui.theme.metadata1
 
 @Composable
-fun EventCard(
+internal fun EventCard(
     eventData: EventData,
     modifier: Modifier = Modifier,
     src: String? = null,

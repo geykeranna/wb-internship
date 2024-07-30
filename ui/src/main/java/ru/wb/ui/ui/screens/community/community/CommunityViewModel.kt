@@ -9,7 +9,7 @@ import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
-class CommunityViewModel(
+internal class CommunityViewModel(
     private val getDataList: GetCommunityListUseCase,
 ) : BaseViewModel<CommunityViewModel.Event>() {
     private val _dataList = MutableStateFlow(listOf(CommunityData.defaultObject))
@@ -22,20 +22,27 @@ class CommunityViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getSearchText(): StateFlow<String> = searchText
+    fun getSearchTextFlow(): StateFlow<String> = searchText
 
-    fun getData(): StateFlow<List<CommunityData>> = dataList
+    fun getDataFlow(): StateFlow<List<CommunityData>> = dataList
 
     private fun startLoading() = viewModelScope.launch {
-        _dataList.emit(getDataList.execute(""))
+        getDataList.execute().collect{
+            _dataList.emit(it)
+        }
     }
 
-    private fun onSearchTextChange(text: String) {
-        _searchText.value = text
+    private fun onSearchTextChange(text: String) = viewModelScope.launch {
+        _searchText.emit(text)
     }
 
-    private fun fetchData(query: String? = null) = viewModelScope.launch {
-        _dataList.emit(getDataList.execute(query))
+    private fun fetchData(
+        query: String? = null,
+    ) = viewModelScope.launch {
+        getDataList.execute(query = query).collect{
+            _dataList.emit(it)
+        }
+
     }
 
     sealed class Event : BaseEvent() {

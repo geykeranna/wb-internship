@@ -1,16 +1,28 @@
 package ru.wb.repository.data.repisotory
 
-import ru.wb.domain.repisotory.LoginRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import ru.wb.domain.repository.LoginRepository
 import ru.wb.domain.model.UserData
 
 internal class LoginRepositoryImpl: LoginRepository {
-    override suspend fun sendCode(pinCode: String) = Unit
+    override fun checkCode(pinCode: String): Flow<Boolean> {
+        return flowOf(false)
+    }
 
-    override suspend fun setPhone(phoneNumber: String) = Unit
+    override fun sendOnPhone(phoneNumber: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 
-    override suspend fun getPhoneAuth(): String = UserData.defaultObject.phone.orEmpty()
+    override fun getPhoneAuth(): Flow<String> {
+        return flowOf(UserData.defaultObject.phone)
+    }
 
-    override suspend fun getAuthState(): Boolean = !UserData.defaultObject.id.isNullOrEmpty()
+    override  fun getAuthState(): Flow<Boolean> {
+        return flowOf(UserData.defaultObject.id.isNotEmpty())
+    }
 
-    override suspend fun getUserID(): String = UserData.defaultObject.id.orEmpty()
+    override fun getUserID(): Flow<String> {
+        return flowOf(UserData.defaultObject.id)
+    }
 }

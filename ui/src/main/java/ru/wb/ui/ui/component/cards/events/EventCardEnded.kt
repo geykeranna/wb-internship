@@ -38,7 +38,7 @@ import ru.wb.ui.ui.theme.metadata1
 import ru.wb.ui.ui.theme.metadata2
 
 @Composable
-fun EventCardEnded(
+internal fun EventCardEnded(
     eventData: EventData,
     modifier: Modifier = Modifier,
     src: String? = null,

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,14 +26,14 @@ import ru.wb.ui.ui.component.utils.Constants.TOP_PADDING_LOGIN_SCREEN
 import ru.wb.ui.ui.screens.auth.components.TitleInfoWithDescription
 
 @Composable
-fun PhoneScreen(
+internal fun PhoneScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: PhoneScreenViewModel = koinViewModel()
 ) {
-    val phone by viewModel.getPhoneNumber().collectAsStateWithLifecycle()
-    val selectedPhoneCountryCode by viewModel.getSelectedPhoneCode().collectAsStateWithLifecycle()
-    val phoneCountryCodeList by viewModel.getPhoneCountryCodeList().collectAsStateWithLifecycle()
+    val phone by viewModel.getPhoneNumberFlow().collectAsStateWithLifecycle()
+    val selectedPhoneCountryCode by viewModel.getSelectedPhoneCodeFlow().collectAsStateWithLifecycle()
+    val phoneCountryCodeList by viewModel.getPhoneCountryCodeListFlow().collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier
@@ -60,7 +59,7 @@ fun PhoneScreen(
             }
         ){
             if(viewModel.getValidateState()){
-                navController.navigate(Screen.PinCode.route)
+                navController.navigate(Screen.PINCODE.route)
             }
         }
 
@@ -72,7 +71,7 @@ fun PhoneScreen(
                 .height(HEIGHT_BUTTON_LOGIN_SCREEN.dp),
             label = stringResource(R.string.button_label_screens_phone_continue),
             onClick = {
-                navController.navigate(Screen.PinCode.route)
+                navController.navigate(Screen.PINCODE.route)
             },
             disabled = !viewModel.getValidateState()
         )

@@ -11,17 +11,17 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN
-import ru.wb.testapplication.ui.screens.auth.pin.components.InputPinCard
+import ru.wb.ui.ui.screens.auth.pin.components.InputPinCard
 import ru.wb.ui.R
 
 @Composable
-fun PinCodeScreen(
+internal fun PinCodeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: PinCodeScreenViewModel = koinViewModel()
 ) {
-    val phone by viewModel.getPhoneNumber().collectAsStateWithLifecycle()
-    val pinCode by viewModel.getPinValue().collectAsStateWithLifecycle()
+    val phone by viewModel.getPhoneNumberFlow().collectAsStateWithLifecycle()
+    val pinCode by viewModel.getPinValueFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
@@ -36,7 +36,7 @@ fun PinCodeScreen(
         onClickPassAgain = { viewModel.obtainEvent(PinCodeScreenViewModel.Event.OnSendAgain) }
     ){
         if (viewModel.getValidateState()) {
-            navController.navigate(Screen.ProfileFirstEdit.route)
+            navController.navigate(Screen.PROFILE_FIRST_EDIT.route)
         }
     }
 }

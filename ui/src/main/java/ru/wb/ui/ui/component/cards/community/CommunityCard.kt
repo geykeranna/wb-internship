@@ -30,7 +30,7 @@ import ru.wb.ui.ui.theme.metadata1
 import java.util.Locale
 
 @Composable
-fun CommunityCard(
+internal fun CommunityCard(
     modifier: Modifier = Modifier,
     src: String? = null,
     label: String = "",

@@ -2,8 +2,8 @@
 agp = "8.4.2"
 coilCompose = "2.6.0"
 dotlottieAndroid = "0.3.0"
+junitJupiter = "5.8.2"
 koinAndroid = "3.5.6"
-koinAndroidExt = "3.5.6"
 koinAndroidxCompose = "3.5.6"
 koinCore = "3.5.6"
 kotlin = "1.9.0"
@@ -11,13 +11,13 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.3"
-activityCompose = "1.9.0"
+kotlinxCoroutinesTest = "1.8.1"
+kotlinxCoroutinesCore = "1.8.1"
+lifecycleRuntimeKtx = "2.8.4"
+activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 navigationCompose = "2.7.7"
 jetbrainsKotlinJvm = "1.9.0"
-appcompat = "1.7.0"
-material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,12 +38,13 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junitJupiter" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-android-ext = { module = "io.insert-koin:koin-android-ext", version = "3.0.2" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
