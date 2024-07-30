@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.UserData
 
 interface GetUserListUseCase {
-    suspend fun execute(
+      fun execute(
         limit: Int? = null,
         offset: Int? = null,
         query: String? = null,

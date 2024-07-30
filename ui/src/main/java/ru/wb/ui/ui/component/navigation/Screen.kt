@@ -1,67 +1,55 @@
 package ru.wb.ui.ui.component.navigation
 
-sealed class Screen(
+enum class Screen(
     val route: String,
-    val name: String
+    val label: String
 ) {
-
-    data object Splash: Screen(
+    SPLASH (
         route = "splash",
-        name = "Сплеш",
-    )
-
-    data object Events: Screen(
+        label = "Сплеш",
+    ),
+    EVENTS (
         route = "event",
-        name = "Встречи"
-    )
-
-    data object EventsDetail: Screen(
+        label = "Встречи"
+    ),
+    EVENT_DETAIL(
         route = "event_detail",
-        name = "Экран детального просмотра"
-    )
-
-    data object CommunityDetail: Screen(
+        label = "Экран детального просмотра"
+    ),
+    COMMUNITY_DETAIL (
         route = "community_detail",
-        name = "Экран детального просмотра"
-    )
-
-    data object Community: Screen(
+        label = "Экран детального просмотра"
+    ),
+    COMMUNITY (
         route = "community",
-        name = "Сообщества"
-    )
-
-    data object More: Screen(
+        label = "Сообщества"
+    ),
+    MORE (
         route = "more",
-        name = "Ещё"
-    )
-
-    data object ProfileView: Screen(
+        label = "Ещё"
+    ),
+    PROFILE_VIEW(
         route = "more_profile",
-        name = "Профиль"
-    )
-
-    data object ProfileEdit: Screen(
+        label = "Профиль"
+    ),
+    PROFILE_EDIT (
         route = "more_profile_edit",
-        name = "Профиль"
-    )
-
-    data object MyEvents: Screen(
+        label = "Профиль"
+    ),
+    MY_EVENTS (
         route = "more_my_meets",
-        name = "Мои встречи"
-    )
-
-    data object Phone: Screen(
+        label = "Мои встречи"
+    ),
+    PHONE (
         route = "first_number",
-        name = "Введите номер телефона",
-    )
-
-    data object PinCode: Screen(
+        label = "Введите номер телефона",
+    ),
+    PINCODE (
         route = "first_pin_code",
-        name = "Введите код",
-    )
-
-    data object ProfileFirstEdit: Screen(
+        label = "Введите код",
+    ),
+    PROFILE_FIRST_EDIT (
         route = "first_profile_edit",
-        name = "Профиль",
+        label = "Профиль",
     )
 }

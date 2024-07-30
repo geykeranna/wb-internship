@@ -9,23 +9,23 @@ internal sealed class NavBar(
     val focused: Int,
 ) {
     data object Event: NavBar(
-        label = Screen.Events.name,
+        label = Screen.EVENTS.label,
         icon = R.drawable.ic_coffee,
-        route = Screen.Events.route,
+        route = Screen.EVENTS.route,
         focused = R.drawable.ic_choisen
     )
 
     data object Community: NavBar(
-        label = Screen.Community.name,
+        label = Screen.COMMUNITY.label,
         icon = R.drawable.ic_group,
-        route = Screen.Community.route,
+        route = Screen.COMMUNITY.route,
         focused = R.drawable.ic_choisen
     )
 
     data object More: NavBar(
-        label = Screen.More.name,
+        label = Screen.MORE.label,
         icon = R.drawable.ic_more_horizontal,
-        route = Screen.More.route,
+        route = Screen.MORE.route,
         focused = R.drawable.ic_choisen
     )
 }

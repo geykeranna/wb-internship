@@ -3,7 +3,6 @@ package ru.wb.ui.ui.screens.profile.view
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.user.GetUserDataUseCase
@@ -19,7 +18,9 @@ internal class ProfileViewScreenViewModel(
     fun getUserFlow(): StateFlow<UserData> = userData
 
     private fun startLoading() = viewModelScope.launch {
-        getUserData.execute(id = _userData.value.id).last()?.let { _userData.emit(it) }
+        getUserData.execute(id = _userData.value.id).collect {
+            _userData.emit(it)
+        }
     }
 
     sealed class Event : BaseEvent() {

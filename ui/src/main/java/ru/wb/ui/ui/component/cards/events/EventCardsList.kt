@@ -30,13 +30,13 @@ internal fun EventCardsList(
             if (itemsList[index].active) {
                 EventCard(
                     eventData = itemsList[index],
-                    onClick = { navController.navigate(Screen.EventsDetail.route + "/${itemsList[index].id}") },
+                    onClick = { navController.navigate(Screen.EVENT_DETAIL.route + "/${itemsList[index].id}") },
                     src = itemsList[index].icon
                 )
             } else {
                 EventCardEnded(
                     eventData = itemsList[index],
-                    onClick = { navController.navigate(Screen.EventsDetail.route + "/${itemsList[index].id}") },
+                    onClick = { navController.navigate(Screen.EVENT_DETAIL.route + "/${itemsList[index].id}") },
                     src = itemsList[index].icon
                 )
             }

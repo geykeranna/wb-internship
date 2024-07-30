@@ -10,7 +10,7 @@ class TestGetEventListUseCaseImpl {
     private val testRepository = EventRepositoryStubs()
 
     @Test
-    fun `should return the same event list data as in repo`() = runTest{
+    fun `should return not empty event list data as in repo`() = runTest{
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 

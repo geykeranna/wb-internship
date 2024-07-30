@@ -1,4 +1,4 @@
-package ru.wb.domain.repisotory.model
+package ru.wb.domain.repository.model
 
 data class EventGetRequest(
     val limit: Int? = null,

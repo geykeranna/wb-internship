@@ -22,13 +22,14 @@ internal fun MyEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: MyEventScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getDataListFlow().collectAsStateWithLifecycle()
+    val expectedList by viewModel.getExpectedDataListFlow().collectAsStateWithLifecycle()
+    val passedList by viewModel.getPassedDataListFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier
             .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp)
         ,
-        text = Screen.MyEvents.name,
+        text = Screen.MY_EVENTS.label,
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = {
             navController.popBackStack()
@@ -39,7 +40,13 @@ internal fun MyEventsScreen(
         modifier = Modifier
             .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp)
             .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-        listByGroup = listByGroup,
-        navController = navController
+        listByGroup = listOf(expectedList, passedList),
+        navController = navController,
+        tabsList = listOf(Group.EXPECTED.label, Group.PASSED.label)
     )
+}
+
+private enum class Group(val label: String) {
+    EXPECTED("Запланированы"),
+    PASSED("Прошли")
 }

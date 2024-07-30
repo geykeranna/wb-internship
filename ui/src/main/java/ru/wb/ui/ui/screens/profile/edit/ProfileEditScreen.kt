@@ -18,15 +18,16 @@ import ru.wb.ui.ui.screens.profile.components.ProfileEditCard
 internal fun ProfileEditScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    viewModel: ProfileEditScreenViewModel = koinViewModel(),
     onBackClick: () -> Unit = { navController.popBackStack() },
-    viewModel: ProfileEditScreenViewModel = koinViewModel()
 ){
-    val formField by viewModel.formFields.collectAsStateWithLifecycle()
+    val formField by viewModel.getFieldsValuesFlow().collectAsStateWithLifecycle()
+
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = { onBackClick() },
-        text = Screen.ProfileView.name
+        text = Screen.PROFILE_VIEW.label
     )
 
     ProfileEditCard(
@@ -36,15 +37,15 @@ internal fun ProfileEditScreen(
         onValueChange = { index, text ->
             viewModel.obtainEvent(
                 ProfileEditScreenViewModel.Event.OnChangeFieldData(
-                    index = index,
+                    key = index,
                     input = text
                 )
             )
         },
         onClick = {
             if(viewModel.getState()){
-                navController.navigate(Screen.Events.route){
-                    popUpTo(Screen.Splash.route) { inclusive = true }
+                navController.navigate(Screen.EVENTS.route){
+                    popUpTo(Screen.SPLASH.route) { inclusive = true }
                 }
                 viewModel.obtainEvent(ProfileEditScreenViewModel.Event.OnSetData)
             }

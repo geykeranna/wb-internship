@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.UserData
 
 interface GetUserDataUseCase {
-    suspend fun execute(id: String? = null): Flow<UserData?>
+    fun execute(id: String): Flow<UserData>
 }

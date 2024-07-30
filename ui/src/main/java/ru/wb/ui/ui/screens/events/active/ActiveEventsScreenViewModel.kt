@@ -4,47 +4,45 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.EventsByGroup
-import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
+import ru.wb.domain.model.EventData
+import ru.wb.domain.usecases.event.GetEventListUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
 
 internal class ActiveEventsScreenViewModel(
-    private val getEventsList: GetEventListByGroupUseCase
+    private val getEventsList: GetEventListUseCase
 ) : BaseViewModel<ActiveEventsScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(listOf(EventsByGroup.defaultObject))
-    private val dataList: StateFlow<List<EventsByGroup>> = _dataList
+    private val _allDataList = MutableStateFlow(listOf<EventData>())
+    private val allDataList: StateFlow<List<EventData>> = _allDataList
+
+    private val _activeDataList = MutableStateFlow(listOf<EventData>())
+    private val activeDataList: StateFlow<List<EventData>> = _activeDataList
 
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getDataFlow(): StateFlow<List<EventsByGroup>> = dataList
+    fun getAllDataFlow(): StateFlow<List<EventData>> = allDataList
+
+    fun getActiveDataFlow(): StateFlow<List<EventData>> = activeDataList
 
     private fun startLoading() = viewModelScope.launch {
-        getEventsList.execute("").collect{
-            _dataList.emit(it)
+        getEventsList.execute().collect{
+            _allDataList.emit(it)
         }
-    }
-
-    private fun fetchData(query: String? = null) = viewModelScope.launch {
-        getEventsList.execute(query).collect{
-            _dataList.emit(it)
+        getEventsList.execute(state = "active").collect{
+            _activeDataList.emit(it)
         }
     }
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
-        class OnLoadData(val query: String) : Event()
     }
 
     override fun obtainEvent(event: Event) {
         when (event) {
             is Event.OnLoadingStarted -> {
                 startLoading()
-            }
-            is Event.OnLoadData -> {
-                fetchData(event.query)
             }
         }
     }

@@ -27,7 +27,7 @@ internal fun CommunityScreen(
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.Community.name,
+        text = Screen.COMMUNITY.label,
     )
 
     SearchBar (

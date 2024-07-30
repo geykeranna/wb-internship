@@ -11,7 +11,7 @@ class TestPostUserDataUseCaseImpl {
     private val testRepository = UserRepositoryStubs()
 
     @Test
-    fun `show return results post user as in repo`() = runTest{
+    fun `should return results post user as in repo`() = runTest{
         val user = UserData(
             id = "1",
             firstName = "User",

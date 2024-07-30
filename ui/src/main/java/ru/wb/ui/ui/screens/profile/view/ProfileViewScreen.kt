@@ -33,8 +33,8 @@ internal fun ProfileViewScreen(
             }
         },
         iconRight = R.drawable.ic_edit,
-        onRightIconClick = { navController.navigate(Screen.ProfileEdit.route) },
-        text = Screen.ProfileView.name
+        onRightIconClick = { navController.navigate(Screen.PROFILE_EDIT.route) },
+        text = Screen.PROFILE_VIEW.label
     )
 
     ProfileViewCard(

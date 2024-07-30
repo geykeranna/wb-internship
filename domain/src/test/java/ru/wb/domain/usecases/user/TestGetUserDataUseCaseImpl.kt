@@ -10,24 +10,26 @@ class TestGetUserDataUseCaseImpl{
     private val testRepository = UserRepositoryStubs()
 
     @Test
-    fun `show return the same user data as in repo`() = runTest{
+    fun `show return not empty id user data as in repo`() = runTest{
         val useCase = GetUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("1").last()
 
-        if (actual != null) {
-            Assertions.assertTrue(
-                actual.id.isNotEmpty()
-                && actual.firstName.isNotEmpty()
-                && actual.phone.isNotEmpty()
-            )
-        }
+        Assertions.assertTrue(actual.id.isNotEmpty())
     }
 
     @Test
-    fun `show return null with null id as in repo`() = runTest{
+    fun `show return not empty first name user data as in repo`() = runTest{
         val useCase = GetUserDataUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute(null).last()
+        val actual = useCase.execute("1").last()
 
-        Assertions.assertEquals(null, actual)
+        Assertions.assertTrue(actual.firstName.isNotEmpty())
+    }
+
+    @Test
+    fun `show return not empty phone user data as in repo`() = runTest{
+        val useCase = GetUserDataUseCaseImpl(repository = testRepository)
+        val actual = useCase.execute("1").last()
+
+        Assertions.assertTrue(actual.phone.isNotEmpty())
     }
 }

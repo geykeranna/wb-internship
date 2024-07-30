@@ -10,7 +10,7 @@ class TestGetCurrentUserIDUseCaseImpl{
     private val testRepository = LoginRepositoryStubs()
 
     @Test
-    fun `should return the same auth user id data as in repo`() = runTest{
+    fun `should return not empty auth user id data as in repo`() = runTest{
         val useCase = GetCurrentUserIDUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 

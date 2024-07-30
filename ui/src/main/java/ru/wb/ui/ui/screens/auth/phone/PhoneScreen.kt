@@ -59,7 +59,7 @@ internal fun PhoneScreen(
             }
         ){
             if(viewModel.getValidateState()){
-                navController.navigate(Screen.PinCode.route)
+                navController.navigate(Screen.PINCODE.route)
             }
         }
 
@@ -71,7 +71,7 @@ internal fun PhoneScreen(
                 .height(HEIGHT_BUTTON_LOGIN_SCREEN.dp),
             label = stringResource(R.string.button_label_screens_phone_continue),
             onClick = {
-                navController.navigate(Screen.PinCode.route)
+                navController.navigate(Screen.PINCODE.route)
             },
             disabled = !viewModel.getValidateState()
         )

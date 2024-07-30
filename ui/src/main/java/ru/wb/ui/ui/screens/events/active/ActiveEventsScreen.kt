@@ -23,11 +23,12 @@ internal fun ActiveEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
-    val listByGroup by viewModel.getDataFlow().collectAsStateWithLifecycle()
+    val allListByGroup by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
+    val activeListByGroup by viewModel.getActiveDataFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.Events.name,
+        text = Screen.EVENTS.label,
         iconRight = R.drawable.ic_plus,
     )
 
@@ -42,9 +43,15 @@ internal fun ActiveEventsScreen(
     )
 
     EventListByGroup(
-        listByGroup = listByGroup,
         modifier = modifier.padding(top = 122.dp)
             .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
         navController = navController,
+        listByGroup = listOf(allListByGroup, activeListByGroup),
+        tabsList = listOf(Group.ALL.label, Group.ACTIVE.label)
     )
+}
+
+private enum class Group(val label: String) {
+    ALL("Все встречи"),
+    ACTIVE("Активные"),
 }

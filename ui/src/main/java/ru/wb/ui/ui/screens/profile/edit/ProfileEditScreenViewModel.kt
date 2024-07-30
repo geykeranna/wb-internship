@@ -1,11 +1,8 @@
 package ru.wb.ui.ui.screens.profile.edit
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
@@ -13,7 +10,7 @@ import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
-import ru.wb.ui.ui.screens.profile.components.FormField
+import ru.wb.ui.ui.screens.profile.components.ScreenState
 
 internal class ProfileEditScreenViewModel(
     private val getUserData: GetUserDataUseCase,
@@ -23,51 +20,41 @@ internal class ProfileEditScreenViewModel(
     private val _userData = MutableStateFlow(UserData.defaultObject)
     private val userData: StateFlow<UserData> = _userData
 
-    val formFields = MutableStateFlow(
-        listOf(
-            FormField(
-                id = 0,
-                name = "first_name",
-                placeholder = "Имя (обязательно)",
-                required = true,
-                inputValue = mutableStateOf(userData.value.firstName)
-            ),
-            FormField(
-                id = 1,
-                name = "last_name",
-                placeholder = "Фамилия (опционально)",
-                required = false,
-                inputValue = mutableStateOf(userData.value.firstName)
-            )
+    private val formFieldsValue = MutableStateFlow(
+        ScreenState(
+            firstName = userData.value.firstName,
+            lastName = userData.value.lastName.orEmpty(),
         )
     )
 
+    fun getFieldsValuesFlow(): MutableStateFlow<ScreenState> = formFieldsValue
+
     fun getState(): Boolean {
-        return formFields
-            .asStateFlow().value
-            .filter { it.required }
-            .all { it.inputValue.value.isNotEmpty() }
+        return formFieldsValue.value.firstName.isNotEmpty()
     }
 
-    private fun setFieldData(index: Int, input: String) {
-        formFields.value[index].inputValue.value = input
+    private fun setFieldData(key: Int, input: String) {
+        when (key) {
+            0 -> formFieldsValue.value = formFieldsValue.value.copy(firstName = input)
+            1 -> formFieldsValue.value = formFieldsValue.value.copy(lastName = input)
+        }
     }
 
     private fun sendData() = viewModelScope.launch {
-        _userData.value.firstName = formFields.value[0].inputValue.value
-        _userData.value.lastName = formFields.value[1].inputValue.value
+        _userData.value.firstName = formFieldsValue.value.firstName
+        _userData.value.lastName = formFieldsValue.value.lastName
         setUserData.execute(userData.value)
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _userData.value.id = getUserID.execute().last()
-        getUserData.execute(id = _userData.value.id).last()?.let { _userData.emit(it) } }
-
+        getUserID.execute().collect { _userData.value.id = it }
+        getUserData.execute(id = _userData.value.id).collect{ _userData.emit(it) }
+    }
 
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
         data object OnSetData : Event()
-        class OnChangeFieldData(val index: Int, val input: String) : Event()
+        class OnChangeFieldData(val key: Int, val input: String) : Event()
     }
 
     override fun obtainEvent(event: Event) {
@@ -80,7 +67,7 @@ internal class ProfileEditScreenViewModel(
             }
             is Event.OnChangeFieldData -> {
                 setFieldData(
-                    index = event.index,
+                    key = event.key,
                     input = event.input
                 )
             }

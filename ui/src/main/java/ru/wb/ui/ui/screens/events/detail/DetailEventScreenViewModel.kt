@@ -36,7 +36,7 @@ internal class DetailEventScreenViewModel(
         }
     }
 
-    private fun onHandleEvent(idEvent: String) = viewModelScope.launch {
+    private fun onChangeEventStatus(idEvent: String) = viewModelScope.launch {
         handleEvent.execute(eventId = idEvent)
         when (_btnState.value) {
             ButtonState.PRESSED.id -> {
@@ -63,7 +63,7 @@ internal class DetailEventScreenViewModel(
                 startLoading(id = event.id)
             }
             is Event.OnHandleGoingEvent -> {
-                onHandleEvent(idEvent = event.id)
+                onChangeEventStatus(idEvent = event.id)
             }
         }
     }

@@ -40,10 +40,10 @@ internal fun MainScreen(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     when (navBackStackEntry?.destination?.route) {
-        Screen.Phone.route -> bottomBarState.value = false
-        Screen.PinCode.route -> bottomBarState.value = false
-        Screen.ProfileFirstEdit.route -> bottomBarState.value = false
-        Screen.Splash.route -> bottomBarState.value = false
+        Screen.PHONE.route -> bottomBarState.value = false
+        Screen.PINCODE.route -> bottomBarState.value = false
+        Screen.PROFILE_FIRST_EDIT.route -> bottomBarState.value = false
+        Screen.SPLASH.route -> bottomBarState.value = false
         else -> bottomBarState.value = true
     }
 

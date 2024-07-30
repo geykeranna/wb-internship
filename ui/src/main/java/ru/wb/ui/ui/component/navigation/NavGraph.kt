@@ -23,15 +23,15 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = Screen.SPLASH.route
     ){
-        composable(route = Screen.Events.route) {
+        composable(route = Screen.EVENTS.route) {
             ActiveEventsScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.EventsDetail.route + "/{id}") { stackEntry ->
+        composable(route = Screen.EVENT_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
                 DetailEventScreen(
                     id = it,
@@ -40,13 +40,13 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.Community.route) {
+        composable(route = Screen.COMMUNITY.route) {
             CommunityScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.CommunityDetail.route + "/{id}") { stackEntry ->
+        composable(route = Screen.COMMUNITY_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
                     id = it,
@@ -55,55 +55,55 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.More.route) {
+        composable(route = Screen.MORE.route) {
             MoreScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.Splash.route) {
+        composable(route = Screen.SPLASH.route) {
             SplashScreen(
                 navController = navController,
                 isAuth = isAuth
             )
         }
 
-        composable(route = Screen.MyEvents.route) {
+        composable(route = Screen.MY_EVENTS.route) {
             MyEventsScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.ProfileView.route) {
+        composable(route = Screen.PROFILE_VIEW.route) {
             ProfileViewScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.Phone.route) {
+        composable(route = Screen.PHONE.route) {
             PhoneScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.PinCode.route) {
+        composable(route = Screen.PINCODE.route) {
             PinCodeScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.ProfileEdit.route) {
+        composable(route = Screen.PROFILE_EDIT.route) {
             ProfileEditScreen(
                 navController = navController
             )
         }
 
-        composable(route = Screen.ProfileFirstEdit.route) {
+        composable(route = Screen.PROFILE_FIRST_EDIT.route) {
             ProfileEditScreen(
                 navController = navController,
                 onBackClick = {
-                    navController.navigate(Screen.Phone.route) {
-                        popUpTo(Screen.ProfileFirstEdit.route) { inclusive = true }
+                    navController.navigate(Screen.PHONE.route) {
+                        popUpTo(Screen.PROFILE_FIRST_EDIT.route) { inclusive = true }
                     }
                 }
             )

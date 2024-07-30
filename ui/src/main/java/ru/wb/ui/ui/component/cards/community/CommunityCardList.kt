@@ -32,7 +32,7 @@ internal fun CommunityCardList(
             CommunityCard(
                 modifier = Modifier.clickable { onClick() },
                 label = itemsList[index].label,
-                onClick = { navController.navigate(Screen.CommunityDetail.route + "/${itemsList[index].id}") },
+                onClick = { navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${itemsList[index].id}") },
                 countPeople = itemsList[index].countPeople,
                 src = itemsList[index].icon
             )

@@ -3,7 +3,6 @@ package ru.wb.ui.ui.screens.auth.pin
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import ru.wb.domain.usecases.login.CheckPinCodeUseCase
 import ru.wb.domain.usecases.login.GetCurrentPhoneNumberUseCase

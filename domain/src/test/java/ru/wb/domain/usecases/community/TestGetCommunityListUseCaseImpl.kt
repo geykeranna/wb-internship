@@ -10,7 +10,7 @@ class TestGetCommunityListUseCaseImpl {
     private val testRepository = CommunityRepositoryStubs()
 
     @Test
-    fun `should return the same community list data as in repo`() = runTest{
+    fun `should return not empty community list data as in repo`() = runTest{
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 
@@ -18,11 +18,10 @@ class TestGetCommunityListUseCaseImpl {
     }
 
     @Test
-    fun `should return the same count community list data in list as in repo limit`() = runTest{
+    fun `should return the same count community data list in list as in repo limit`() = runTest{
         val expectedLimit = 10
 
-        val testRepo = testRepository
-        val useCase = GetCommunityListUseCaseImpl(repository = testRepo)
+        val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(limit = expectedLimit).last()
 
         Assertions.assertEquals(expectedLimit, actual.size)

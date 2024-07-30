@@ -10,7 +10,7 @@ internal class TestSendPinCodeOnPhoneUseCaseImpl{
     private val testRepository = LoginRepositoryStubs()
 
     @Test
-    fun `show return the same send pin on phone results as in repo`() = runTest{
+    fun `show return the same send pin status on phone results as in repo`() = runTest{
         val useCase = SendPinCodeOnPhoneUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("+79099099900").last()
 

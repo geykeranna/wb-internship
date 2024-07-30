@@ -10,7 +10,7 @@ internal class TestGetUserListUseCaseImpl{
     private val testRepository = UserRepositoryStubs()
 
     @Test
-    fun `show return the same list user data as in repo`() = runTest{
+    fun `should return not empty list user data as in repo`() = runTest{
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 
@@ -18,12 +18,12 @@ internal class TestGetUserListUseCaseImpl{
     }
 
     @Test
-    fun `show return the same list limit user data as in repo`() = runTest{
+    fun `should return the size of user data list the same as limit`() = runTest{
         val expectedLimit = 10
 
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(limit = expectedLimit).last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        Assertions.assertEquals(expectedLimit, actual.size)
     }
 }

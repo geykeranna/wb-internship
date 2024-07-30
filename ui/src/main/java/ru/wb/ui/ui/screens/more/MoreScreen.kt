@@ -31,7 +31,7 @@ internal fun MoreScreen(
     TopBar (
         modifier = Modifier
             .padding(start = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.More.name
+        text = Screen.MORE.label
     )
 
     LazyColumn (
@@ -45,7 +45,7 @@ internal fun MoreScreen(
             MenuItemUser(
                 userData = UserData.defaultObject,
                 onClickItem = {
-                    navController.navigate(Screen.ProfileView.route)
+                    navController.navigate(Screen.PROFILE_VIEW.route)
                 }
             )
         }
@@ -54,7 +54,7 @@ internal fun MoreScreen(
             MenuItem(
                 iconLeft = R.drawable.ic_coffee,
                 onClickItem = {
-                    navController.navigate(Screen.MyEvents.route)
+                    navController.navigate(Screen.MY_EVENTS.route)
                 },
                 text = stringResource(R.string.label_menu_items_my_meets),
                 iconRight = R.drawable.ic_chevron_right

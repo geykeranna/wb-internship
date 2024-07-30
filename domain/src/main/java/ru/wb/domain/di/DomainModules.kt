@@ -7,8 +7,6 @@ import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.domain.usecases.community.GetCommunityListUseCaseImpl
 import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.domain.usecases.event.GetEventDataUseCaseImpl
-import ru.wb.domain.usecases.event.GetEventListByGroupUseCase
-import ru.wb.domain.usecases.event.GetEventListByGroupUseCaseImpl
 import ru.wb.domain.usecases.event.GetEventListUseCase
 import ru.wb.domain.usecases.event.GetEventListUseCaseImpl
 import ru.wb.domain.usecases.login.CheckAuthStateUseCase
@@ -41,7 +39,6 @@ val domainModules = module {
 
     single<GetEventDataUseCase> { GetEventDataUseCaseImpl(get()) }
     single<GetEventListUseCase> { GetEventListUseCaseImpl(get()) }
-    single<GetEventListByGroupUseCase> { GetEventListByGroupUseCaseImpl(get()) }
 
     single<GetCommunityDataUseCase> { GetCommunityDataUseCaseImpl(get()) }
     single<GetCommunityListUseCase> { GetCommunityListUseCaseImpl(get()) }

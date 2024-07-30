@@ -10,7 +10,7 @@ class TestCheckPinCodeUseCaseImpl{
     private val testRepository = LoginRepositoryStubs()
 
     @Test
-    fun `show return the same check pin results as in repo`() = runTest{
+    fun `should return the same check pin status as in repo`() = runTest{
         val useCase = CheckPinCodeUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("4444").last()
 

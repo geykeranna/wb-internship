@@ -30,5 +30,7 @@
     <string name="label_menu_items_referral">Пригласи друга</string>
 
     <string name="text_community_meetings">Встречи сообщества</string>
+    <string name="placeholder_first_name_text_edit_form">Имя (обязательно)</string>
+    <string name="placeholder_last_name_text_edit_form">Фамилия (опционально)</string>
 
 </resources>

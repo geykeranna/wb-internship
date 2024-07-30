@@ -10,13 +10,18 @@ class TestGetEventDataUseCaseImpl{
     private val testRepository = EventRepositoryStubs()
 
     @Test
-    fun `should return the same event data as in repo`() = runTest {
+    fun `should return not empty id event data as in repo`() = runTest {
         val useCase = GetEventDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(id = "1").last()
 
-        Assertions.assertTrue(
-            actual.id.isNotEmpty()
-            && actual.name.isNotEmpty()
-        )
+        Assertions.assertTrue(actual.id.isNotEmpty())
+    }
+
+    @Test
+    fun `should return not empty name event data as in repo`() = runTest {
+        val useCase = GetEventDataUseCaseImpl(repository = testRepository)
+        val actual = useCase.execute(id = "1").last()
+
+        Assertions.assertTrue(actual.name.isNotEmpty())
     }
 }

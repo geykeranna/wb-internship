@@ -41,7 +41,7 @@ internal fun DetailCommunityScreen(
             .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
         text = detailInfo.label,
-        onLeftIconClick = { navController.navigate(Screen.Community.route) }
+        onLeftIconClick = { navController.navigate(Screen.COMMUNITY.route) }
     )
 
     LazyColumn (

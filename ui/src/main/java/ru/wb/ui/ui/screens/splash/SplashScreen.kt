@@ -20,13 +20,13 @@ internal fun SplashScreen(
     LaunchedEffect(Unit) {
         delay(3000)
         if(isAuth) {
-            navController.navigate(Screen.Events.route) {
-                popUpTo(Screen.Splash.route) { inclusive = true }
+            navController.navigate(Screen.EVENTS.route) {
+                popUpTo(Screen.SPLASH.route) { inclusive = true }
             }
         }
         else {
-            navController.navigate(Screen.Phone.route) {
-                popUpTo(Screen.Splash.route) { inclusive = true }
+            navController.navigate(Screen.PHONE.route) {
+                popUpTo(Screen.SPLASH.route) { inclusive = true }
             }
         }
     }

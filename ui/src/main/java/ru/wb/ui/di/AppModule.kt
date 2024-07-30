@@ -1,4 +1,4 @@
-package ru.wb.ui.modules
+package ru.wb.ui.di
 
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module

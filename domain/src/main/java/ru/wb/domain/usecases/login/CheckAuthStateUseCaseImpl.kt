@@ -1,10 +1,10 @@
 package ru.wb.domain.usecases.login
 
 import kotlinx.coroutines.flow.Flow
-import ru.wb.domain.repisotory.LoginRepository
+import ru.wb.domain.repository.LoginRepository
 
 class CheckAuthStateUseCaseImpl(
     private val repository: LoginRepository
 ) : CheckAuthStateUseCase {
-    override suspend fun execute(): Flow<Boolean> = repository.getAuthState()
+    override fun execute(): Flow<Boolean> = repository.getAuthState()
 }

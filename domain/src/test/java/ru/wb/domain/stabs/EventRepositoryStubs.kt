@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.Location
-import ru.wb.domain.repisotory.EventRepository
-import ru.wb.domain.repisotory.model.EventGetRequest
+import ru.wb.domain.repository.EventRepository
+import ru.wb.domain.repository.model.EventGetRequest
 
 internal class EventRepositoryStubs: EventRepository {
     private val eventData = EventData(
@@ -20,7 +20,7 @@ internal class EventRepositoryStubs: EventRepository {
         usersList = mutableListOf()
     )
 
-    override suspend fun getEvents(
+    override fun getEvents(
         data: EventGetRequest?,
     ): Flow<List<EventData>> {
         data?.limit?.let {
@@ -29,7 +29,7 @@ internal class EventRepositoryStubs: EventRepository {
         return flowOf(listOf(eventData))
     }
 
-    override suspend fun getEvent(
+    override fun getEvent(
         id: String,
     ): Flow<EventData> = flowOf(eventData)
 }

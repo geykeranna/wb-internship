@@ -10,7 +10,7 @@ internal class TestGetCurrentPhoneNumberUseCaseImpl{
     private val testRepository = LoginRepositoryStubs()
 
     @Test
-    fun `should return the same auth phone data as in repo`() = runTest{
+    fun `should return not empty phone data as in repo`() = runTest{
         val useCase = GetCurrentPhoneNumberUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 
