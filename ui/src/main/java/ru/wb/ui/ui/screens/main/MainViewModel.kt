@@ -11,17 +11,17 @@ import ru.wb.ui.ui.base.BaseViewModel
 internal class MainViewModel(
     private val getAuthState: CheckAuthStateUseCase
 ): BaseViewModel<MainViewModel.Event>() {
-    private val _state = MutableStateFlow(false)
-    private val state: StateFlow<Boolean> = _state
+    private val _status = MutableStateFlow(false)
+    private val status: StateFlow<Boolean> = _status
 
-    fun getStateFlow() : StateFlow<Boolean> = state
+    fun getStateFlow() : StateFlow<Boolean> = status
 
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
 
     private fun startLoading() = viewModelScope.launch {
-        getAuthState.execute().collect{  _state.emit(it) }
+        getAuthState.execute().collect{  _status.emit(it) }
     }
 
     sealed class Event : BaseEvent() {

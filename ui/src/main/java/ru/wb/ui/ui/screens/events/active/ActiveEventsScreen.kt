@@ -13,6 +13,7 @@ import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.R
+import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
@@ -25,6 +26,7 @@ internal fun ActiveEventsScreen(
 ) {
     val allListByGroup by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
     val activeListByGroup by viewModel.getActiveDataFlow().collectAsStateWithLifecycle()
+    val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
@@ -42,13 +44,19 @@ internal fun ActiveEventsScreen(
         value = ""
     )
 
-    EventListByGroup(
-        modifier = modifier.padding(top = 122.dp)
-            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-        navController = navController,
-        listByGroup = listOf(allListByGroup, activeListByGroup),
-        tabsList = listOf(Group.ALL.label, Group.ACTIVE.label)
-    )
+    BaseScreen(
+        modifier = modifier,
+        state = state,
+    ) {
+        EventListByGroup(
+            modifier = modifier
+                .padding(top = 122.dp)
+                .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
+            navController = navController,
+            listByGroup = listOf(allListByGroup, activeListByGroup),
+            tabsList = listOf(Group.ALL.label, Group.ACTIVE.label)
+        )
+    }
 }
 
 private enum class Group(val label: String) {

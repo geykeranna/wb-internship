@@ -8,6 +8,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.usecases.event.GetEventListUseCase
 import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.ui.ui.base.BaseEvent
+import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
 
 internal class MyEventScreenViewModel(
@@ -23,6 +24,9 @@ internal class MyEventScreenViewModel(
     private val _userID = MutableStateFlow("")
     private val userID: StateFlow<String> = _userID
 
+    private val _state = MutableStateFlow(BaseState.EMPTY)
+    private val state: StateFlow<BaseState> = _state
+
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
@@ -31,14 +35,30 @@ internal class MyEventScreenViewModel(
 
     fun getPassedDataListFlow(): StateFlow<List<EventData>> = passedDataList
 
+    fun getStateFlow(): StateFlow<BaseState> = state
+
     private fun startLoading() = viewModelScope.launch {
+        _state.emit(BaseState.LOADING)
         getUserId.execute().collect { _userID.emit(it) }
         val date = ""
         getEvents.execute(userId = userID.value, startDate = date).collect {
-            _expectedDataList.emit(it)
+            when {
+                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                else -> {
+                    _state.emit(BaseState.SUCCESS)
+                    _expectedDataList.emit(it)
+                }
+            }
+
         }
         getEvents.execute(userId = userID.value, endDate = date).collect {
-            _passedDataList.emit(it)
+            when {
+                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                else -> {
+                    _state.emit(BaseState.SUCCESS)
+                    _passedDataList.emit(it)
+                }
+            }
         }
     }
 

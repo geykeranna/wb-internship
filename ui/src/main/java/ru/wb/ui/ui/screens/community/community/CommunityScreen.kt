@@ -12,6 +12,7 @@ import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
@@ -24,6 +25,7 @@ internal fun CommunityScreen(
 ) {
     val itemsList by viewModel.getDataFlow().collectAsStateWithLifecycle()
     val searchValue by viewModel.getSearchTextFlow().collectAsStateWithLifecycle()
+    val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
@@ -43,11 +45,17 @@ internal fun CommunityScreen(
         }
     )
 
-    CommunityCardList(
-        modifier = modifier
-            .padding(top = 122.dp)
-            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-        itemsList = itemsList,
-        navController = navController
-    )
+    BaseScreen(
+        modifier = Modifier,
+        state = state
+    ){
+        CommunityCardList(
+            modifier = modifier
+                .padding(top = 122.dp)
+                .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
+            itemsList = itemsList,
+            navController = navController
+        )
+    }
+
 }

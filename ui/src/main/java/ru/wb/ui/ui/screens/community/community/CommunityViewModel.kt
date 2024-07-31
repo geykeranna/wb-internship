@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.ui.ui.base.BaseEvent
+import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
 
 internal class CommunityViewModel(
@@ -18,6 +19,9 @@ internal class CommunityViewModel(
     private val _searchText = MutableStateFlow("")
     private val searchText: StateFlow<String> = _searchText
 
+    private val _state = MutableStateFlow(BaseState.EMPTY)
+    private val state: StateFlow<BaseState> = _state
+
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
@@ -26,9 +30,18 @@ internal class CommunityViewModel(
 
     fun getDataFlow(): StateFlow<List<CommunityData>> = dataList
 
+    fun getStateFlow(): StateFlow<BaseState> = state
+
     private fun startLoading() = viewModelScope.launch {
-        getDataList.execute().collect{
-            _dataList.emit(it)
+        _state.emit(BaseState.LOADING)
+        getDataList.execute().collect {
+            when {
+                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                else -> {
+                    _dataList.emit(it)
+                    _state.emit(BaseState.SUCCESS)
+                }
+            }
         }
     }
 
