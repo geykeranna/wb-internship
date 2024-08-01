@@ -9,6 +9,7 @@ import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
+import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
 import ru.wb.ui.ui.screens.profile.components.ScreenState
 
@@ -20,6 +21,9 @@ internal class ProfileEditScreenViewModel(
     private val _userData = MutableStateFlow(UserData.defaultObject)
     private val userData: StateFlow<UserData> = _userData
 
+    private val _state = MutableStateFlow(BaseState.SUCCESS)
+    private val state: StateFlow<BaseState> = _state
+
     private val formFieldsValue = MutableStateFlow(
         ScreenState(
             firstName = userData.value.firstName,
@@ -28,6 +32,8 @@ internal class ProfileEditScreenViewModel(
     )
 
     fun getFieldsValuesFlow(): MutableStateFlow<ScreenState> = formFieldsValue
+
+    fun getStateFlow(): StateFlow<BaseState> = state
 
     fun getState(): Boolean {
         return formFieldsValue.value.firstName.isNotEmpty()
@@ -47,8 +53,18 @@ internal class ProfileEditScreenViewModel(
     }
 
     private fun startLoading() = viewModelScope.launch {
+        _state.emit(BaseState.LOADING)
         getUserID.execute().collect { _userData.value.id = it }
-        getUserData.execute(id = _userData.value.id).collect{ _userData.emit(it) }
+        getUserData.execute(id = _userData.value.id).collect{
+            when {
+                it.id.isEmpty() -> _state.emit(BaseState.ERROR)
+                else -> {
+                    _userData.emit(it)
+                    _state.emit(BaseState.SUCCESS)
+                }
+            }
+        }
+
     }
 
     sealed class Event : BaseEvent() {

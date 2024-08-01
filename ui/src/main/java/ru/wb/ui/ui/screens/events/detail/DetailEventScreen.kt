@@ -13,6 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.R
 import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.ui.ui.screens.events.components.ButtonState
 import ru.wb.ui.ui.screens.events.components.DetailData
@@ -29,6 +30,7 @@ internal fun DetailEventScreen(
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val isMapFullScreen = remember { mutableStateOf(false) }
     val stateBnt by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
+    val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
     val iconRight = when (stateBnt) {
         ButtonState.PRESSED.id -> R.drawable.ic_check_big
         else -> null
@@ -55,17 +57,22 @@ internal fun DetailEventScreen(
         }
     )
 
-    DetailData(
+    BaseScreen(
         modifier = modifier,
-        stateBnt = stateBnt,
-        isMapFullScreen = isMapFullScreen,
-        detailInfo = detailInfo,
-        onClickButton = {
-            detailViewModel.obtainEvent(
-                DetailEventScreenViewModel.Event.OnHandleGoingEvent(
-                    id = id
+        state = state,
+    ){
+        DetailData(
+            modifier = modifier,
+            stateBnt = stateBnt,
+            isMapFullScreen = isMapFullScreen,
+            detailInfo = detailInfo,
+            onClickButton = {
+                detailViewModel.obtainEvent(
+                    DetailEventScreenViewModel.Event.OnHandleGoingEvent(
+                        id = id
+                    )
                 )
-            )
-        }
-    )
+            }
+        )
+    }
 }

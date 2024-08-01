@@ -13,6 +13,7 @@ import ru.wb.ui.R
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.ui.ui.screens.profile.components.ProfileViewCard
 
@@ -23,6 +24,7 @@ internal fun ProfileViewScreen(
     viewModel: ProfileViewScreenViewModel = koinViewModel()
 ){
     val userData: UserData by viewModel.getUserFlow().collectAsStateWithLifecycle()
+    val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     TopBar(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
@@ -37,8 +39,13 @@ internal fun ProfileViewScreen(
         text = Screen.PROFILE_VIEW.label
     )
 
-    ProfileViewCard(
+    BaseScreen(
         modifier = modifier,
-        userData = userData
-    )
+        state = state
+    ) {
+        ProfileViewCard(
+            modifier = modifier,
+            userData = userData
+        )
+    }
 }

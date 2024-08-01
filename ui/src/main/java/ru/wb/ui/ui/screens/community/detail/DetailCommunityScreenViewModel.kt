@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
+import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
 
 internal class DetailCommunityScreenViewModel(
@@ -16,15 +17,26 @@ internal class DetailCommunityScreenViewModel(
     private val _detailData = MutableStateFlow(CommunityData.defaultObject)
     private val detailData: StateFlow<CommunityData> = _detailData
 
+    private val _state = MutableStateFlow(BaseState.EMPTY)
+    private val state: StateFlow<BaseState> = _state
+
     init {
         obtainEvent(Event.OnLoadingStarted(idCommunity))
     }
 
     fun getDetailDataFlow(): StateFlow<CommunityData> = detailData
 
+    fun getStateFlow(): StateFlow<BaseState> = state
+
     private fun startLoading(id: String) = viewModelScope.launch {
         getData.execute(id).collect{
-            _detailData.emit(it)
+            when {
+                it.id.isEmpty() -> _state.emit(BaseState.ERROR)
+                else -> {
+                    _detailData.emit(it)
+                    _state.emit(BaseState.SUCCESS)
+                }
+            }
         }
     }
 
