@@ -16,6 +16,10 @@ enum class Screen(
         route = "event_detail",
         label = "Экран детального просмотра"
     ),
+    MEETING_DETAIL_FROM_COMMUNITY(
+        route = "meeting_detail_from_community",
+        label = "Экран детального просмотра"
+    ),
     COMMUNITY_DETAIL (
         route = "community_detail",
         label = "Экран детального просмотра"
