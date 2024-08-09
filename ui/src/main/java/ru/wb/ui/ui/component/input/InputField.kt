@@ -55,9 +55,6 @@ internal fun InputField(
     },
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
-    color: Color = NeutralActiveColor,
-    placeholderColor: Color = NeutralDisabledColor,
-    borderColor: Color = NeutralLineColor,
     onClickRightIcon: (() -> Unit?)? = null,
     onClickLeftIcon: (() -> Unit)? = null,
     onChangeValue: (text: String) -> Unit = {},
@@ -67,8 +64,8 @@ internal fun InputField(
         focusRequester.freeFocus()
     }
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val hintColor = if (value.isEmpty()) placeholderColor else Color.Transparent
-    val contentColor = if (value.isEmpty() && !isFocused) placeholderColor else color
+    val hintColor = if (value.isEmpty()) NeutralDisabledColor else Color.Transparent
+    val contentColor = if (value.isEmpty() && !isFocused) NeutralDisabledColor else NeutralActiveColor
 
     Row(
         modifier = modifier
@@ -77,7 +74,7 @@ internal fun InputField(
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(NeutralOffWhiteColor)
-            .focusedBorder(isFocused && value.isEmpty(), borderColor)
+            .focusedBorder(isFocused && value.isEmpty(), NeutralLineColor)
             .padding(PADDING_OF_NUMBER_INPUT_FIELD.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
@@ -114,8 +111,8 @@ internal fun InputField(
                 enabled = !disable,
                 value = value,
                 singleLine = true,
-                cursorBrush = SolidColor(color),
-                textStyle = MaterialTheme.typography.bodyText1.copy(color = color),
+                cursorBrush = SolidColor(NeutralActiveColor),
+                textStyle = MaterialTheme.typography.bodyText1.copy(color = NeutralActiveColor),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
             )

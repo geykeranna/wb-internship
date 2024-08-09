@@ -21,6 +21,7 @@ import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_ITEM_DROPDOWN
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.SIZE_FLAG_ICON_DROPDOWN_CODE
+import ru.wb.ui.ui.theme.NeutralActiveColor
 import ru.wb.ui.ui.theme.NeutralDisabledColor
 import ru.wb.ui.ui.theme.NeutralOffWhiteColor
 import ru.wb.ui.ui.theme.bodyText1
@@ -33,6 +34,7 @@ internal fun DropDownCode(
     onDismissRequest: () -> Unit,
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit,
     modifier: Modifier = Modifier,
+    stateColor: Boolean = false,
     onChangeExpanded: () -> Unit = {},
 ) {
     Row(
@@ -52,7 +54,7 @@ internal fun DropDownCode(
         Text(
             text = selectedPhoneCountryCode.countryCode,
             style = MaterialTheme.typography.bodyText1,
-            color = NeutralDisabledColor
+            color = if (stateColor) NeutralActiveColor else NeutralDisabledColor
         )
     }
     DropdownMenu(
@@ -79,7 +81,7 @@ internal fun DropDownCode(
                         Text(
                             text = phoneCountryCode.countryCode,
                             style = MaterialTheme.typography.bodyText1,
-                            color = NeutralDisabledColor
+                            color = if (stateColor) NeutralActiveColor else NeutralDisabledColor
                         )
                     }
                 },
