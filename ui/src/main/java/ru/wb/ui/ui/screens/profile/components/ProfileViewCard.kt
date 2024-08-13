@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,9 +19,7 @@ import ru.wb.ui.ui.component.utils.Constants.PADDING_CHIPS_GROUP_PROFILE_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.heading3
-import ru.wb.ui.ui.theme.subheading2
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun ProfileViewCard(
@@ -50,13 +47,13 @@ internal fun ProfileViewCard(
                 Text(
                     modifier = Modifier,
                     text = userData.firstName + userData.lastName,
-                    style = MaterialTheme.typography.heading3.copy(textAlign = TextAlign.Center)
+                    style = AppTheme.typography.heading3.copy(textAlign = TextAlign.Center)
                 )
                 Text(
                     modifier = Modifier,
                     text = userData.phone,
-                    style = MaterialTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
-                    color = NeutralDisabledColor
+                    style = AppTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
+                    color = AppTheme.colors.neutralColorDisabled
                 )
             }
 

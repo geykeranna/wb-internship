@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,13 +28,7 @@ import ru.wb.ui.ui.component.utils.Constants.HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CAR
 import ru.wb.ui.ui.component.utils.Constants.PADDING_AROUND_IMG_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.PADDING_START_TEXT_BLOCK_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD
-import ru.wb.ui.ui.theme.NeutralActiveColor
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.NeutralLineColor
-import ru.wb.ui.ui.theme.NeutralWeakColor
-import ru.wb.ui.ui.theme.bodyText1
-import ru.wb.ui.ui.theme.metadata1
-import ru.wb.ui.ui.theme.metadata2
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun EventCardEnded(
@@ -77,8 +70,8 @@ internal fun EventCardEnded(
                         modifier = Modifier
                             .align(Alignment.CenterVertically),
                         text = eventData.name,
-                        style = MaterialTheme.typography.bodyText1,
-                        color = NeutralActiveColor
+                        style = AppTheme.typography.bodyText1,
+                        color = AppTheme.colors.neutralColorFont
                     )
                     Box(
                         contentAlignment = Alignment.TopEnd,
@@ -86,8 +79,8 @@ internal fun EventCardEnded(
                         Text(
                             modifier = Modifier,
                             text = stringResource(R.string.label_status_ended_events),
-                            style = MaterialTheme.typography.metadata2,
-                            color = NeutralWeakColor,
+                            style = AppTheme.typography.metadata2,
+                            color = AppTheme.colors.neutralColorSecondaryText,
                         )
                     }
                 }
@@ -96,8 +89,8 @@ internal fun EventCardEnded(
                     modifier = Modifier
                         .padding(bottom = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
                     text = "${eventData.date} — ${eventData.location.city}",
-                    style = MaterialTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
-                    color = NeutralDisabledColor
+                    style = AppTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
+                    color = AppTheme.colors.neutralColorDisabled
                 )
                 CustomChipsGroup(
                     chipsList = eventData.tagList
@@ -106,7 +99,7 @@ internal fun EventCardEnded(
         }
 
         HorizontalDivider(
-            color = NeutralLineColor,
+            color = AppTheme.colors.neutralColorDivider,
         )
     }
 }

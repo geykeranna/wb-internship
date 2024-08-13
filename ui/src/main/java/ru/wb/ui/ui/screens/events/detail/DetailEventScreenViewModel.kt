@@ -50,16 +50,18 @@ internal class DetailEventScreenViewModel(
     }
 
     private fun onChangeEventStatus(idEvent: String) = viewModelScope.launch {
-        handleEvent.execute(eventId = idEvent)
-        when (_btnState.value) {
-            ButtonState.PRESSED.id -> {
-                _btnState.emit(ButtonState.UNPRESSED.id)
-                _detailData.emit(detailData.value.copy(usersList = detailData.value.usersList.dropLast(1)))
-            }
-            else -> {
-                _btnState.emit(ButtonState.UNPRESSED.id)
-                getData.execute(idEvent).collect{
-                    _detailData.emit(it)
+        handleEvent.execute(eventId = idEvent).collect { state ->
+            if (!state) return@collect
+            when (_btnState.value) {
+                ButtonState.PRESSED.id -> {
+                    _btnState.emit(ButtonState.UNPRESSED.id)
+                    _detailData.emit(detailData.value.copy(usersList = detailData.value.usersList.dropLast(1)))
+                }
+                else -> {
+                    _btnState.emit(ButtonState.PRESSED.id)
+                    getData.execute(idEvent).collect{
+                        _detailData.emit(it)
+                    }
                 }
             }
         }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,10 +26,7 @@ import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.PhoneNumberVisualTransformation
-import ru.wb.ui.ui.theme.NeutralActiveColor
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.NeutralOffWhiteColor
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InputNumberTextField(
@@ -56,8 +52,8 @@ internal fun InputNumberTextField(
                 .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
             onChange(value)
         },
-        textStyle = MaterialTheme.typography.bodyText1.copy(
-            color = NeutralActiveColor
+        textStyle = AppTheme.typography.bodyText1.copy(
+            color = AppTheme.colors.neutralColorFont
         ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.NumberPassword,
@@ -72,15 +68,15 @@ internal fun InputNumberTextField(
                 modifier = Modifier
                     .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
                     .fillMaxWidth()
-                    .background(NeutralOffWhiteColor)
+                    .background(AppTheme.colors.neutralColorSecondaryBackground)
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (phone.isEmpty()){
                     Text(
                         text = selectedPhoneCountryCode.mask,
-                        style = MaterialTheme.typography.bodyText1,
-                        color = NeutralDisabledColor
+                        style = AppTheme.typography.bodyText1,
+                        color = AppTheme.colors.neutralColorDisabled
                     )
                 }
                 innerTextField()

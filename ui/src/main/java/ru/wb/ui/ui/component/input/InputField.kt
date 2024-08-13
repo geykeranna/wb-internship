@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,11 +37,7 @@ import ru.wb.ui.ui.component.utils.Constants.FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.PADDING_OF_NUMBER_INPUT_FIELD
-import ru.wb.ui.ui.theme.NeutralActiveColor
-import ru.wb.ui.ui.theme.NeutralOffWhiteColor
-import ru.wb.ui.ui.theme.NeutralLineColor
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InputField(
@@ -64,8 +59,8 @@ internal fun InputField(
         focusRequester.freeFocus()
     }
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val hintColor = if (value.isEmpty()) NeutralDisabledColor else Color.Transparent
-    val contentColor = if (value.isEmpty() && !isFocused) NeutralDisabledColor else NeutralActiveColor
+    val hintColor = if (value.isEmpty()) AppTheme.colors.neutralColorDisabled else Color.Transparent
+    val contentColor = if (value.isEmpty() && !isFocused) AppTheme.colors.neutralColorDisabled else AppTheme.colors.neutralColorFont
 
     Row(
         modifier = modifier
@@ -73,8 +68,8 @@ internal fun InputField(
             .focusable(interactionSource = interactionSource)
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
-            .background(NeutralOffWhiteColor)
-            .focusedBorder(isFocused && value.isEmpty(), NeutralLineColor)
+            .background(AppTheme.colors.neutralColorSecondaryBackground)
+            .focusedBorder(isFocused && value.isEmpty(), AppTheme.colors.neutralColorDivider)
             .padding(PADDING_OF_NUMBER_INPUT_FIELD.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
@@ -99,7 +94,7 @@ internal fun InputField(
             Text(
                 modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 text = placeholder,
-                style = MaterialTheme.typography.bodyText1,
+                style = AppTheme.typography.bodyText1,
                 color = hintColor,
             )
 
@@ -111,8 +106,8 @@ internal fun InputField(
                 enabled = !disable,
                 value = value,
                 singleLine = true,
-                cursorBrush = SolidColor(NeutralActiveColor),
-                textStyle = MaterialTheme.typography.bodyText1.copy(color = NeutralActiveColor),
+                cursorBrush = SolidColor(AppTheme.colors.neutralColorFont),
+                textStyle = AppTheme.typography.bodyText1.copy(color = AppTheme.colors.neutralColorFont),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
             )

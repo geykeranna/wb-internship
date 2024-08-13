@@ -1,4 +1,4 @@
-package ru.wb.testapplication.ui.component.toolbars
+package ru.wb.ui.ui.component.toolbars
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,8 +20,7 @@ import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_TOP_BAR
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_TOP_BAR
 import ru.wb.ui.ui.component.utils.Constants.PADDING_VERTICAL_IN_TOP_BAR
-import ru.wb.ui.ui.theme.NeutralActiveColor
-import ru.wb.ui.ui.theme.subheading1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun TopBar(
@@ -32,9 +30,8 @@ internal fun TopBar(
     iconLeft: Int? = null,
     onLeftIconClick: () -> Unit = {},
     onRightIconClick: () -> Unit = {},
-    tintRightIcon: Color = NeutralActiveColor,
-    tintLeftIcon: Color = NeutralActiveColor,
-    textColor: Color = NeutralActiveColor
+    tintRightIcon: Color = AppTheme.colors.neutralColorFont,
+    tintLeftIcon: Color = AppTheme.colors.neutralColorFont,
 ) {
     Box(
         modifier = modifier
@@ -66,8 +63,8 @@ internal fun TopBar(
                 }
                 Text(
                     text = text,
-                    style = MaterialTheme.typography.subheading1,
-                    color = textColor
+                    style = AppTheme.typography.subheading1,
+                    color = AppTheme.colors.neutralColorFont
                 )
             }
 

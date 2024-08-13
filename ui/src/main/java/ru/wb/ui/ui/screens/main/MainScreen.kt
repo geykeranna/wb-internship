@@ -30,13 +30,9 @@ internal fun MainScreen(
     viewModel: MainViewModel = koinViewModel()
 ) {
     val isAuth by viewModel.getStateFlow().collectAsStateWithLifecycle()
-
     val focusManager = LocalFocusManager.current
-
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-
     val navController = rememberNavController()
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     when (navBackStackEntry?.destination?.route) {
