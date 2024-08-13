@@ -26,8 +26,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP
 import ru.wb.ui.ui.component.utils.Constants.TAB_LABEL_TEXT_SIZE
 import ru.wb.ui.ui.component.utils.CustomIndicator
-import ru.wb.ui.ui.theme.BrandDefaultColor
-import ru.wb.ui.ui.theme.TabUnselectedColor
+import ru.wb.ui.ui.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,10 +44,13 @@ internal fun EventListByGroup (
         selectedTabIndex = selectedTab.value,
         modifier = modifier.fillMaxWidth(),
         containerColor = Color.Transparent,
-        contentColor = BrandDefaultColor,
+        contentColor = AppTheme.colors.brandColorDefault,
         divider = {},
         indicator = @Composable { tabPositions: List<TabPosition> ->
-            CustomIndicator(Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]), BrandDefaultColor)
+            CustomIndicator(
+                Modifier.tabIndicatorOffset(tabPositions[selectedTab.value]),
+                AppTheme.colors.brandColorDefault
+            )
         }
     ) {
         tabsList.forEachIndexed { index, tab ->
@@ -56,8 +58,8 @@ internal fun EventListByGroup (
                 modifier = Modifier
                     .height(HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP.dp),
                 selected = selectedTab.value == index,
-                selectedContentColor = BrandDefaultColor,
-                unselectedContentColor = TabUnselectedColor,
+                selectedContentColor = AppTheme.colors.brandColorDefault,
+                unselectedContentColor = AppTheme.colors.disabledColorForTab,
                 onClick = {
                     scope.launch {
                         pagerState.scrollToPage(index)

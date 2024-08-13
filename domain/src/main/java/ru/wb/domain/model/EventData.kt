@@ -14,13 +14,13 @@ data class EventData(
     companion object{
         val defaultObject = EventData(
             id = "1",
-            name = "",
+            name = "Name",
             location = Location.defaultObject,
-            date = "",
+            date = "mmmm.mm.mm",
             tagList = listOf(),
             icon = null,
             active = true,
-            description = "",
+            description = "Description",
             usersList = mutableListOf()
         )
     }

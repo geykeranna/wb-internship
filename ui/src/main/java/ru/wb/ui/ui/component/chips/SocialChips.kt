@@ -27,7 +27,7 @@ import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS_ITEM_LIST
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_SOCIAL_CHIPS
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_ICON_SOCIAL_CHIPS_GROUP
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_LINE_SOCIAL_CHIPS_GROUP
-import ru.wb.ui.ui.theme.BrandDefaultColor
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun SocialChips(
@@ -40,16 +40,14 @@ internal fun SocialChips(
             .height(HEIGHT_OF_LINE_SOCIAL_CHIPS_GROUP.dp),
         horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS_ITEM_LIST.dp)
     ) {
-        items(
-            list.size
-        ) {
+        items(list.size) {
             val context = LocalContext.current
             val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(list[it].url)) }
 
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(CORNER_RADIUS_OF_SOCIAL_CHIPS.dp))
-                    .border(BORDER_WIDTH_OF_SOCIAL_CHIP.dp, BrandDefaultColor, RoundedCornerShape(CORNER_RADIUS_OF_SOCIAL_CHIPS.dp))
+                    .border(BORDER_WIDTH_OF_SOCIAL_CHIP.dp, AppTheme.colors.brandColorDefault, RoundedCornerShape(CORNER_RADIUS_OF_SOCIAL_CHIPS.dp))
             ) {
                 list[it].icon?.let { icon ->
                     Icon(
@@ -60,7 +58,7 @@ internal fun SocialChips(
                             .clickable { if(intent.data.toString().isNotEmpty()) context.startActivity(intent) },
                         painter = painterResource(icon),
                         contentDescription = null,
-                        tint = BrandDefaultColor
+                        tint = AppTheme.colors.brandColorDefault
                     )
                 }
             }

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,9 +20,7 @@ import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_ITEM_DROPDOWN
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.SIZE_FLAG_ICON_DROPDOWN_CODE
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.NeutralOffWhiteColor
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun DropDownCode(
@@ -33,13 +30,14 @@ internal fun DropDownCode(
     onDismissRequest: () -> Unit,
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit,
     modifier: Modifier = Modifier,
+    stateColor: Boolean = false,
     onChangeExpanded: () -> Unit = {},
 ) {
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
             .clickable { onChangeExpanded() }
-            .background(NeutralOffWhiteColor)
+            .background(AppTheme.colors.neutralColorSecondaryBackground)
             .padding(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp)
@@ -51,20 +49,20 @@ internal fun DropDownCode(
         )
         Text(
             text = selectedPhoneCountryCode.countryCode,
-            style = MaterialTheme.typography.bodyText1,
-            color = NeutralDisabledColor
+            style = AppTheme.typography.bodyText1,
+            color = if (stateColor) AppTheme.colors.neutralColorFont else AppTheme.colors.neutralColorDisabled
         )
     }
     DropdownMenu(
         modifier = Modifier
-            .background(NeutralOffWhiteColor),
+            .background(AppTheme.colors.neutralColorSecondaryBackground),
         expanded = expanded,
         onDismissRequest = { onDismissRequest() }
     ){
         phoneCountryCodeList.forEach { phoneCountryCode ->
             DropdownMenuItem(
                 modifier = Modifier
-                    .background(NeutralOffWhiteColor),
+                    .background(AppTheme.colors.neutralColorSecondaryBackground),
                 text = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -78,8 +76,8 @@ internal fun DropDownCode(
                         )
                         Text(
                             text = phoneCountryCode.countryCode,
-                            style = MaterialTheme.typography.bodyText1,
-                            color = NeutralDisabledColor
+                            style = AppTheme.typography.bodyText1,
+                            color = if (stateColor) AppTheme.colors.neutralColorFont else AppTheme.colors.neutralColorDisabled
                         )
                     }
                 },

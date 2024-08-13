@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,8 +15,7 @@ import androidx.compose.ui.unit.sp
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_TEXT_INFO_BLOCK_LOGIN_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN
-import ru.wb.ui.ui.theme.bodyText2
-import ru.wb.ui.ui.theme.heading2
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun TitleInfoWithDescription(
@@ -39,8 +37,9 @@ internal fun TitleInfoWithDescription(
             Text(
                 modifier = Modifier,
                 text = titleText,
-                style = MaterialTheme.typography.heading2,
-                textAlign = TextAlign.Center
+                style = AppTheme.typography.heading2,
+                textAlign = TextAlign.Center,
+                color = AppTheme.colors.neutralColorFont
             )
         }
 
@@ -49,18 +48,20 @@ internal fun TitleInfoWithDescription(
                 modifier = Modifier
                     .padding(bottom = 2.dp),
                 text = descriptionText,
-                style = MaterialTheme.typography.bodyText2
+                style = AppTheme.typography.bodyText2
                     .copy(lineHeight = 24.sp),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = AppTheme.colors.neutralColorFont
             )
 
             moreInfo?.let { moreInfo ->
                 Text(
                     modifier = Modifier,
                     text = moreInfo,
-                    style = MaterialTheme.typography.bodyText2
+                    style = AppTheme.typography.bodyText2
                         .copy(lineHeight = 24.sp),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = AppTheme.colors.neutralColorFont
                 )
             }
         }

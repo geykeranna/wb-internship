@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.ui.ui.theme.heading3
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 fun BaseElementScreen(
@@ -35,7 +34,8 @@ fun BaseElementScreen(
             )
             Text(
                 text = title,
-                style = MaterialTheme.typography.heading3
+                style = AppTheme.typography.heading3,
+                color = AppTheme.colors.neutralColorFont
             )
         }
     }

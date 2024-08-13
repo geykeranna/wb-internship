@@ -3,7 +3,6 @@ package ru.wb.ui.ui.screens.community.detail
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,9 +16,7 @@ import ru.wb.ui.ui.component.cards.events.EventCardsList
 import ru.wb.ui.ui.component.text.ExpandableText
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
-import ru.wb.ui.ui.theme.NeutralWeakColor
-import ru.wb.ui.ui.theme.bodyText1
-import ru.wb.ui.ui.theme.metadata1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 fun DetailInfo(
@@ -37,8 +34,8 @@ fun DetailInfo(
                 modifier = Modifier,
                 text = detailInfo.description,
                 expandText = stringResource(R.string.expandable_text_expand_text),
-                style = MaterialTheme.typography.metadata1
-                    .copy(color = NeutralWeakColor, lineHeight = 20.sp),
+                style = AppTheme.typography.metadata1
+                    .copy(color = AppTheme.colors.neutralColorSecondaryText, lineHeight = 20.sp),
                 maxLinesCollapsed = 13,
                 collapseText = stringResource(R.string.expandable_text_collapse_text),
             )
@@ -48,8 +45,8 @@ fun DetailInfo(
                     .fillMaxWidth()
                     .padding(top = 30.dp, bottom = 16.dp),
                 text = stringResource(R.string.text_community_meetings),
-                color = NeutralWeakColor,
-                style = MaterialTheme.typography.bodyText1
+                color = AppTheme.colors.neutralColorSecondaryText,
+                style = AppTheme.typography.bodyText1
             )
 
             EventCardsList(

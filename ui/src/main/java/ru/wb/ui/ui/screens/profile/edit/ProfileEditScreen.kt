@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.ui.ui.screens.profile.components.ProfileEditCard

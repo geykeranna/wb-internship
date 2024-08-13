@@ -40,6 +40,15 @@ fun NavGraph(
             }
         }
 
+        composable(route = Screen.MEETING_DETAIL_FROM_COMMUNITY.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let {
+                DetailEventScreen(
+                    id = it,
+                    navController = navController
+                )
+            }
+        }
+
         composable(route = Screen.COMMUNITY.route) {
             CommunityScreen(
                 navController = navController

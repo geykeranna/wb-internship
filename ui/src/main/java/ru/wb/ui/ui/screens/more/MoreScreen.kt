@@ -16,12 +16,12 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.MenuItem
 import ru.wb.ui.ui.component.toolbars.MenuItemUser
-import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
-import ru.wb.ui.ui.theme.NeutralLineColor
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun MoreScreen(
@@ -93,7 +93,7 @@ internal fun MoreScreen(
             HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp,
-                color = NeutralLineColor
+                color = AppTheme.colors.neutralColorDivider
             )
 
             MenuItem(

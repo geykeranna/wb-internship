@@ -38,6 +38,7 @@ internal fun InputNumberField(
             phoneCountryCodeList = phoneCountryCodeList,
             onChangeExpanded = { expanded = !expanded },
             onDismissRequest = { expanded = false },
+            stateColor = phone.isNotEmpty(),
             onSelectedPhoneCountryCode = onSelectedPhoneCountryCode
         )
 

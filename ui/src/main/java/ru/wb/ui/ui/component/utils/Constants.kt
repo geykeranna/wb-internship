@@ -43,6 +43,13 @@ object Constants {
     // composable VisitorsList
     const val NUM_OF_VISIBLE_AVATARS = 5
     const val OVERLAPPING_PERCENTAGE = 0.35f
+    const val SIZE_USER_AVATAR = 56
+    const val STATUS_SIZE_USER_AVATAR = 16
+    const val BORDER_SIZE_USER_AVATAR = 2
+    const val BORDER_RADIUS_USER_AVATAR = 18
+    const val CORNER_RADIUS_USER_AVATAR_ITEM = 16
+    const val CORNER_RADIUS_USER_AVATAR_IMAGE = 20
+    const val SIZE_USER_AVATAR_IMAGE = 48
 
     // composable CustomChipsGroup
     const val HEIGHT_OF_LINE_CHIPS_GROUP = 20

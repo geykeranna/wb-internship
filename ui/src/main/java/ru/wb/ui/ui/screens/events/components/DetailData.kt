@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -19,8 +18,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_CO
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_ITEMS_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
-import ru.wb.ui.ui.theme.NeutralWeakColor
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun DetailData(
@@ -45,7 +43,7 @@ internal fun DetailData(
         ) {
             Text(
                 text = "${detailInfo.date} - ${detailInfo.location.city} ${detailInfo.location.address}",
-                style = MaterialTheme.typography.bodyText1.copy(color = NeutralWeakColor)
+                style = AppTheme.typography.bodyText1.copy(color = AppTheme.colors.neutralColorSecondaryText)
             )
 
             CustomChipsGroup(

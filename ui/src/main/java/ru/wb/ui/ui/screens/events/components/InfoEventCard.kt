@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -28,8 +27,7 @@ import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_MAP_SCREEN_DETAIL_EVE
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_MAP_SCREEN_DETAIL_EVENT_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_USERS_LIST_DETAIL_EVENT_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.MAX_LINE_COLLAPSED_IN_EXPANDABLE_TEXT_DETAIL_EVENT_SCREEN
-import ru.wb.ui.ui.theme.NeutralWeakColor
-import ru.wb.ui.ui.theme.metadata1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InfoEventCard(
@@ -68,7 +66,7 @@ internal fun InfoEventCard(
                 expandText = stringResource(R.string.expandable_text_expand_text),
                 collapseText = stringResource(R.string.expandable_text_collapse_text),
                 maxLinesCollapsed = MAX_LINE_COLLAPSED_IN_EXPANDABLE_TEXT_DETAIL_EVENT_SCREEN,
-                style = MaterialTheme.typography.metadata1.copy(color = NeutralWeakColor, lineHeight = 20.sp)
+                style = AppTheme.typography.metadata1.copy(color = AppTheme.colors.neutralColorSecondaryText, lineHeight = 20.sp)
             )
         }
 

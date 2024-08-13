@@ -11,7 +11,7 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
@@ -57,5 +57,4 @@ internal fun CommunityScreen(
             navController = navController
         )
     }
-
 }

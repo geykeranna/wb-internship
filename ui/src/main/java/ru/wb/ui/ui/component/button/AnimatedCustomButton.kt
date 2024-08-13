@@ -6,7 +6,6 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,11 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.BORDER_WIDTH_BUTTON
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_BUTTON
-import ru.wb.ui.ui.theme.LightColor
-import ru.wb.ui.ui.theme.BrandDefaultColor
-import ru.wb.ui.ui.theme.PurpleLightColor
-import ru.wb.ui.ui.theme.BrandDarkModeColor
-import ru.wb.ui.ui.theme.subheading2
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun AnimatedCustomButton(
@@ -29,16 +24,16 @@ internal fun AnimatedCustomButton(
     type: ButtonType = ButtonType.DEFAULT,
     disabled: Boolean = false,
     label: String = "",
-    labelStyle: TextStyle = MaterialTheme.typography.subheading2,
+    labelStyle: TextStyle = AppTheme.typography.subheading2,
     onClick: () -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
     val color = when {
-        isPressed -> BrandDarkModeColor
-        disabled -> PurpleLightColor
-        else -> BrandDefaultColor
+        isPressed -> AppTheme.colors.brandColorDarkMode
+        disabled -> AppTheme.colors.brandColorLight
+        else -> AppTheme.colors.brandColorDefault
     }
 
     Button(
@@ -47,9 +42,9 @@ internal fun AnimatedCustomButton(
         onClick = onClick,
         enabled = !disabled,
         colors = ButtonDefaults.buttonColors(
-            contentColor = if (type == ButtonType.DEFAULT) LightColor else color,
+            contentColor = if (type == ButtonType.DEFAULT) AppTheme.colors.neutralColorSecondaryBackground else color,
             containerColor = if (type != ButtonType.DEFAULT) Color.Transparent else color,
-            disabledContentColor = if (type == ButtonType.DEFAULT) LightColor else color,
+            disabledContentColor = if (type == ButtonType.DEFAULT) AppTheme.colors.neutralColorSecondaryBackground else color,
             disabledContainerColor = if (type != ButtonType.DEFAULT) Color.Transparent else color,
         ),
         interactionSource = interactionSource,
@@ -60,7 +55,7 @@ internal fun AnimatedCustomButton(
         Text(
             text = label,
             style = labelStyle,
-            color = if (type == ButtonType.DEFAULT) LightColor else color
+            color = if (type == ButtonType.DEFAULT) AppTheme.colors.neutralColorSecondaryBackground else color
         )
     }
 }

@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,7 +13,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.avatars.UserAvatar
 import ru.wb.ui.ui.component.utils.Constants.NUM_OF_VISIBLE_AVATARS
 import ru.wb.ui.ui.component.utils.Constants.OVERLAPPING_PERCENTAGE
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun VisitorsList(
@@ -63,7 +62,7 @@ internal fun VisitorsList(
                 if (visitorsList.size > NUM_OF_VISIBLE_AVATARS) {
                     Text(
                         text = "+${visitorsList.size - NUM_OF_VISIBLE_AVATARS}",
-                        style = MaterialTheme.typography.bodyText1
+                        style = AppTheme.typography.bodyText1
                     )
                 }
             }
