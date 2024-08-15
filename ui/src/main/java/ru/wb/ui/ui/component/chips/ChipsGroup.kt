@@ -24,9 +24,9 @@ internal fun ChipsGroup(
     ) {
         chips.forEach { chip ->
             val isSelect = selectedList.contains(chip)
+
             ChipsItems(
-                modifier = modifier,
-                text = chip.name,
+                item = chip,
                 isSelect = isSelect
             ) {
                 when (mode) {

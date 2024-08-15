@@ -15,34 +15,23 @@ import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_CHIPS
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-fun ChipsItems(
+fun TagItem(
     item: ChipsData,
     modifier: Modifier = Modifier,
-    isSelect: Boolean = false,
-    onSelect: () -> Unit = {}
-){
-    val background = when {
-        isSelect -> AppTheme.colors.brandColorDefault
-        else -> AppTheme.colors.brandColorLight
-    }
-    val textColor = when {
-        isSelect -> AppTheme.colors.neutralColorBackground
-        else -> AppTheme.colors.brandColorDefault
-    }
+) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_CHIPS.dp))
-            .background(background)
-            .clickable { onSelect() }
+            .background(AppTheme.colors.brandColorLight)
     ) {
         Text(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 10.dp)
+                .padding(horizontal = 6.dp, vertical = 2.dp)
                 .align(Alignment.Center),
             text = item.name,
             maxLines = 1,
-            color = textColor,
-            style = AppTheme.typography.chips
+            color = AppTheme.colors.brandColorDefault,
+            style = AppTheme.typography.metadata3
         )
     }
 }

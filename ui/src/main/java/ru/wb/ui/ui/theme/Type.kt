@@ -73,7 +73,7 @@ object AppTypo {
         fontWeight = FontWeight.Normal
     )
     val metadata3 = TextStyle(
-        fontSize = 10.sp,
+        fontSize = 14.sp,
         fontFamily = sfProDisplayFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
