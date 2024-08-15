@@ -19,7 +19,8 @@ import androidx.compose.ui.unit.sp
 import ru.wb.domain.model.EventData
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.avatars.GroupAvatar
-import ru.wb.ui.ui.component.chips.CustomChipsGroup
+import ru.wb.ui.ui.component.chips.ChipsData
+import ru.wb.ui.ui.component.chips.ChipsGroup
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD
@@ -92,8 +93,8 @@ internal fun EventCardEnded(
                     style = AppTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
                     color = AppTheme.colors.neutralColorDisabled
                 )
-                CustomChipsGroup(
-                    chipsList = eventData.tagList
+                ChipsGroup(
+                    chips = eventData.tagList.map { ChipsData(id = "key", name = it) }
                 )
             }
         }

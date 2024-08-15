@@ -15,16 +15,22 @@ import ru.wb.ui.ui.screens.more.MoreScreen
 import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
 import ru.wb.ui.ui.screens.splash.SplashScreen
+import ru.wb.ui.ui.screens.test.Test
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
+
     isAuth: Boolean = false,
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SPLASH.route
+        startDestination = Screen.TEST.route
     ){
+        composable(route = Screen.TEST.route) {
+            Test()
+        }
+
         composable(route = Screen.EVENTS.route) {
             ActiveEventsScreen(
                 navController = navController

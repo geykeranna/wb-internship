@@ -4,6 +4,10 @@ enum class Screen(
     val route: String,
     val label: String
 ) {
+    TEST (
+        route = "test",
+        label = "test",
+    ),
     SPLASH (
         route = "splash",
         label = "Сплеш",

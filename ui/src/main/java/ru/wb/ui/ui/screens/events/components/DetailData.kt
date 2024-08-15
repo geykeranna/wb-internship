@@ -12,7 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.EventData
-import ru.wb.ui.ui.component.chips.CustomChipsGroup
+import ru.wb.ui.ui.component.chips.ChipsData
+import ru.wb.ui.ui.component.chips.ChipsGroup
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_INFO_TEXT_CARD_DETAIL_EVENT_SCREEN
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
@@ -46,8 +47,8 @@ internal fun DetailData(
                 style = AppTheme.typography.bodyText1.copy(color = AppTheme.colors.neutralColorSecondaryText)
             )
 
-            CustomChipsGroup(
-                chipsList = detailInfo.tagList
+            ChipsGroup(
+                chips = detailInfo.tagList.map { ChipsData(id = "key", name = it) }
             )
         }
 

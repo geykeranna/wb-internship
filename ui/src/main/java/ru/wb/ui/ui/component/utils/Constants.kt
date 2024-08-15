@@ -51,10 +51,9 @@ object Constants {
     const val CORNER_RADIUS_USER_AVATAR_IMAGE = 20
     const val SIZE_USER_AVATAR_IMAGE = 48
 
-    // composable CustomChipsGroup
-    const val HEIGHT_OF_LINE_CHIPS_GROUP = 20
+    // composable ChipsGroup
     const val CONTENT_PADDING_OF_CHIPS = 10
-    const val CORNER_RADIUS_OF_CHIPS = 40
+    const val CORNER_RADIUS_OF_CHIPS = 8
 
     // composable SocialChips
     const val HEIGHT_OF_LINE_SOCIAL_CHIPS_GROUP = 40

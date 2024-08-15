@@ -94,4 +94,9 @@ object AppTypo {
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
     )
+    val chips = TextStyle(
+        fontFamily = sfProDisplayFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+    )
 }
