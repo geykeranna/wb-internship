@@ -9,13 +9,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.R
-import ru.wb.ui.ui.component.cards.events.EventListByGroup
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.base.BaseScreen
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
+import ru.wb.ui.ui.component.cards.events.EventCardsList
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 
 @Composable
 internal fun MyEventsScreen(
@@ -23,8 +21,7 @@ internal fun MyEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: MyEventScreenViewModel = koinViewModel()
 ) {
-    val expectedList by viewModel.getExpectedDataListFlow().collectAsStateWithLifecycle()
-    val passedList by viewModel.getPassedDataListFlow().collectAsStateWithLifecycle()
+    val events by viewModel.getExpectedDataListFlow().collectAsStateWithLifecycle()
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     TopBar(
@@ -42,18 +39,9 @@ internal fun MyEventsScreen(
         modifier = modifier,
         state = state,
     ) {
-        EventListByGroup(
-            modifier = Modifier
-                .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp)
-                .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-            listByGroup = listOf(expectedList, passedList),
-            navController = navController,
-            tabsList = listOf(Group.EXPECTED.label, Group.PASSED.label)
+        EventCardsList(
+            itemsList = events,
+            onNavigate = { }
         )
     }
-}
-
-private enum class Group(val label: String) {
-    EXPECTED("Запланированы"),
-    PASSED("Прошли")
 }

@@ -23,22 +23,17 @@ object Constants {
     const val CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST = 14
 
     // composable EventCard
-    const val HEIGHT_OF_EVENT_CARD = 88
-    const val HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD = 76
-    const val SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD = 4
-    const val PADDING_AROUND_IMG_IN_EVENT_CARD = 4
-    const val PADDING_START_TEXT_BLOCK_IN_EVENT_CARD = 12
-    const val HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD = 24
-    const val HEIGHT_OF_TEXT_BLOCK_IN_EVENT_CARD = 76
+    const val SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD = 8
+    const val SPACE_BY_TEXT_BLOCK_IN_EVENT_CARD = 2
+    const val IMAGE_RADIUS_IMAGE_IN_EVENT_CARD = 16
+    const val HEIGHT_OF_THIN_IMAGE_IN_EVENT_CARD = 147
+    const val HEIGHT_OF_WIDE_IMAGE_IN_EVENT_CARD = 180
+    const val WIDTH_OF_WIDE_IMAGE_IN_EVENT_CARD = 320
+    const val WIDTH_OF_THIN_IMAGE_IN_EVENT_CARD = 212
     const val HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD = 20
 
     // composable EventCardsList
-    const val HEIGHT_OF_EVENT_ITEM_LIST = 104
     const val CONTENT_PADDING_OF_EVENT_ITEM_LIST = 14
-
-    // composable EventListByGroup
-    const val HEIGHT_OF_TAB_ITEM_IN_EVENT_GROUP = 48
-    const val TAB_LABEL_TEXT_SIZE = 14
 
     // composable VisitorsList
     const val NUM_OF_VISIBLE_AVATARS = 5

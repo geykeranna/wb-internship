@@ -27,6 +27,12 @@ object AppTypo {
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
+    val headingLabelMeeting = TextStyle(
+        fontSize = 34.sp,
+        fontFamily = sfProDisplayFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold
+    )
     val subheading1 = TextStyle(
         fontSize = 18.sp,
         fontFamily = sfProDisplayFamily,

@@ -16,7 +16,8 @@ import ru.wb.ui.ui.component.chips.TagsChips
 fun Test() {
     val viewModel = TestViewModel()
 
-    val selectedChipsList by viewModel.getChipsFlow().collectAsStateWithLifecycle()
+    val selectedChipsSingleList by viewModel.getChipsSingleFlow().collectAsStateWithLifecycle()
+    val selectedChipsMultipleList by viewModel.getChipsMultipleFlow().collectAsStateWithLifecycle()
 
     val mod = Modifier.padding(vertical = 10.dp)
 
@@ -26,26 +27,26 @@ fun Test() {
         item {
             ChipsGroup(
                 modifier = mod,
-                chips = viewModel.chipsList,
+                data = viewModel.chipsList,
             )
         }
 
         item {
             ChipsGroup(
                 modifier = mod,
-                chips = viewModel.chipsList,
-                selectedList = selectedChipsList,
+                data = viewModel.chipsList,
+                selectedList = selectedChipsSingleList,
                 mode = ChipsMode.SINGLE
-            ) { newList -> viewModel.onSelectChips(newList)}
+            ) { newList -> viewModel.onSelectChipsSingle(newList)}
         }
 
         item {
             ChipsGroup(
                 modifier = mod,
-                chips = viewModel.chipsList,
-                selectedList = selectedChipsList,
+                data = viewModel.chipsList,
+                selectedList = selectedChipsMultipleList,
                 mode = ChipsMode.MULTIPLE
-            ) { newList -> viewModel.onSelectChips(newList) }
+            ) { newList -> viewModel.onSelectChipsMultiple(newList) }
         }
 
         item {
@@ -54,5 +55,7 @@ fun Test() {
                 modifier = mod
             )
         }
+
+
     }
 }

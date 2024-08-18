@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import ru.wb.domain.model.CommunityData
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.cards.events.EventCardsList
+import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.text.ExpandableText
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
@@ -51,7 +52,9 @@ fun DetailInfo(
 
             EventCardsList(
                 itemsList = detailInfo.eventList,
-                navController = navController
+                onNavigate = { id ->
+                    navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
+                }
             )
         }
     }

@@ -48,7 +48,7 @@ internal fun DetailData(
             )
 
             ChipsGroup(
-                chips = detailInfo.tagList.map { ChipsData(id = "key", name = it) }
+                data = detailInfo.tagList.map { ChipsData(id = "key", name = it) }
             )
         }
 

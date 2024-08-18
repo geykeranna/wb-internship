@@ -17,7 +17,7 @@ data class EventData(
             name = "Name",
             location = Location.defaultObject,
             date = "mmmm.mm.mm",
-            tagList = listOf(),
+            tagList = listOf("Moscow", "Android"),
             icon = null,
             active = true,
             description = "Description",

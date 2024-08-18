@@ -8,12 +8,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
-import ru.wb.ui.ui.component.cards.events.EventListByGroup
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBar
 import ru.wb.ui.R
 import ru.wb.ui.ui.base.BaseScreen
+import ru.wb.ui.ui.component.cards.events.EventCardsList
+import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
@@ -24,8 +25,7 @@ internal fun ActiveEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: ActiveEventsScreenViewModel = koinViewModel()
 ) {
-    val allListByGroup by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
-    val activeListByGroup by viewModel.getActiveDataFlow().collectAsStateWithLifecycle()
+    val events by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
     TopBar(
@@ -45,21 +45,18 @@ internal fun ActiveEventsScreen(
     )
 
     BaseScreen(
-        modifier = modifier,
+        modifier = modifier
+            .padding(top = 122.dp)
+            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
         state = state,
     ) {
-        EventListByGroup(
+        EventCardsList(
             modifier = modifier
                 .padding(top = 122.dp)
                 .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
-            navController = navController,
-            listByGroup = listOf(allListByGroup, activeListByGroup),
-            tabsList = listOf(Group.ALL.label, Group.ACTIVE.label)
+            onNavigate = {},
+            itemsList = events,
+            size = EventSize.WIDE,
         )
     }
-}
-
-private enum class Group(val label: String) {
-    ALL("Все встречи"),
-    ACTIVE("Активные"),
 }
