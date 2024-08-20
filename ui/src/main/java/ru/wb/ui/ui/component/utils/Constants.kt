@@ -11,12 +11,10 @@ object Constants {
     const val BORDER_WIDTH_BUTTON = 2
 
     // composable CommunityCard
-    const val HEIGHT_OF_COMMUNITY_CARD = 68
-    const val HEIGHT_WITHOUT_DIVIDER_IN_COMMUNITY_CARD = 56
-    const val HEIGHT_OF_BODY_TEXT_IN_COMMUNITY_CARD = 24
-    const val HEIGHT_OF_METADATA_TEXT_IN_COMMUNITY_CARD = 20
-    const val PADDING_AROUND_IMG_IN_COMMUNITY_CARD = 4
-    const val PADDING_START_TEXT_BLOCK_IN_COMMUNITY_CARD = 12
+    const val IMG_SIZE_COMMUNITY_AVATAR_SMALL = 104
+    const val IMG_SIZE_COMMUNITY_AVATAR_FULL = 167
+    const val IMG_RADIUS_COMMUNITY_AVATAR_SMALL = 12
+    const val IMG_RADIUS_COMMUNITY_AVATAR_FULL = 16
 
     // composable CommunityCardList
     const val HEIGHT_OF_COMMUNITY_ITEM_LIST = 104

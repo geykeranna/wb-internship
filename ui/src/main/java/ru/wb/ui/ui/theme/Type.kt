@@ -105,4 +105,16 @@ object AppTypo {
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
     )
+
+    val communityLabel = TextStyle(
+        fontFamily = sfProDisplayFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    )
+
+    val communityLabelFull = TextStyle(
+        fontFamily = sfProDisplayFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 34.sp,
+    )
 }

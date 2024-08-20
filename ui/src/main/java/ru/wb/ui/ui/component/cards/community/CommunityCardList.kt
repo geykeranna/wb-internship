@@ -23,19 +23,19 @@ internal fun CommunityCardList(
 ) {
     val heightOfList = (itemsList.size * HEIGHT_OF_COMMUNITY_ITEM_LIST).dp
 
-    LazyColumn(
-        modifier = modifier.height(heightOfList),
-        contentPadding = PaddingValues(top = CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp),
-        verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp)
-    ) {
-        items(itemsList.size){ index ->
-            CommunityCard(
-                modifier = Modifier.clickable { onClick() },
-                label = itemsList[index].label,
-                onClick = { navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${itemsList[index].id}") },
-                countPeople = itemsList[index].countPeople,
-                src = itemsList[index].icon
-            )
-        }
-    }
+//    LazyColumn(
+//        modifier = modifier.height(heightOfList),
+//        contentPadding = PaddingValues(top = CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp),
+//        verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_COMMUNITY_ITEM_LIST.dp)
+//    ) {
+//        items(itemsList.size){ index ->
+//            CommunityCard(
+//                modifier = Modifier.clickable { onClick() },
+//                label = itemsList[index].label,
+//                onClick = { navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${itemsList[index].id}") },
+//                countPeople = itemsList[index].countPeople,
+//                src = itemsList[index].icon
+//            )
+//        }
+//    }
 }
