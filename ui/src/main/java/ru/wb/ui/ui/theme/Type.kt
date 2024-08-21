@@ -117,4 +117,16 @@ object AppTypo {
         fontWeight = FontWeight.Normal,
         fontSize = 34.sp,
     )
+
+    val userPlusInList = TextStyle(
+        fontFamily = sfProDisplayFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+    )
+
+    val primary = TextStyle(
+        fontFamily = sfProDisplayFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp,
+    )
 }

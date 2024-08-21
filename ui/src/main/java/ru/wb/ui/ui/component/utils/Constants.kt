@@ -6,6 +6,9 @@ object Constants {
 
     // Components
 
+    // chips value
+    const val SPACE_BY_IN_TAGS_CHIPS = 6
+
     // composable Buttons
     const val CORNER_RADIUS_BUTTON = 30
     const val BORDER_WIDTH_BUTTON = 2
@@ -34,15 +37,9 @@ object Constants {
     const val CONTENT_PADDING_OF_EVENT_ITEM_LIST = 14
 
     // composable VisitorsList
-    const val NUM_OF_VISIBLE_AVATARS = 5
-    const val OVERLAPPING_PERCENTAGE = 0.35f
-    const val SIZE_USER_AVATAR = 56
-    const val STATUS_SIZE_USER_AVATAR = 16
-    const val BORDER_SIZE_USER_AVATAR = 2
-    const val BORDER_RADIUS_USER_AVATAR = 18
-    const val CORNER_RADIUS_USER_AVATAR_ITEM = 16
-    const val CORNER_RADIUS_USER_AVATAR_IMAGE = 20
-    const val SIZE_USER_AVATAR_IMAGE = 48
+    const val SIZE_USER_AVATAR_IN_CARD = 104
+    const val SIZE_USER_AVATAR = 47
+    const val SPACE_BY_AVATAR_ROW = 10
 
     // composable ChipsGroup
     const val CONTENT_PADDING_OF_CHIPS = 10
