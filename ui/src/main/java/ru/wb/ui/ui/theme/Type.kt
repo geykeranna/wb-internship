@@ -11,38 +11,38 @@ import androidx.compose.ui.unit.sp
 object AppTypo {
     val heading1 = TextStyle(
         fontSize = 32.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     val heading2 = TextStyle(
         fontSize = 24.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     val heading3 = TextStyle(
         fontSize = 24.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
     val headingLabelMeeting = TextStyle(
         fontSize = 34.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     val subheading1 = TextStyle(
         fontSize = 18.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
 
     val subheading2 = TextStyle(
         fontSize = 16.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
@@ -56,31 +56,31 @@ object AppTypo {
 
     val bodyText1 = TextStyle(
         fontSize = 14.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold,
     )
     val bodyText2 = TextStyle(
         fontSize = 14.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
     val metadata1 = TextStyle(
         fontSize = 12.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
     val metadata2 = TextStyle(
         fontSize = 10.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
     val metadata3 = TextStyle(
         fontSize = 14.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
@@ -91,41 +91,41 @@ object AppTypo {
         letterSpacing = TextUnit(0.83F, TextUnitType.Sp)
     )
     val usernameText = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     )
     val usernamePhoneNumber = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
     )
     val chips = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
     )
 
     val communityLabel = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
     )
 
     val communityLabelFull = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 34.sp,
     )
 
     val userPlusInList = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
     )
 
     val primary = TextStyle(
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 18.sp,
     )
