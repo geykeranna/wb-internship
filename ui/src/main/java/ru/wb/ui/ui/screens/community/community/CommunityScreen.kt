@@ -11,7 +11,7 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.ui.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
@@ -27,9 +27,9 @@ internal fun CommunityScreen(
     val searchValue by viewModel.getSearchTextFlow().collectAsStateWithLifecycle()
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
-    TopBar(
+    TopBarCustom(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.COMMUNITY.label,
+        label = Screen.COMMUNITY.label,
     )
 
     SearchBar (
@@ -54,7 +54,6 @@ internal fun CommunityScreen(
                 .padding(top = 122.dp)
                 .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
             itemsList = itemsList,
-            navController = navController
         )
     }
 }

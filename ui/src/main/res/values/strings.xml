@@ -3,7 +3,7 @@
 
     <string name="continuation_count_of_human">человек</string>
     <string name="label_status_ended_events">Закончилась</string>
-    <string name="placeholder_in_search_field">Поиск</string>
+    <string name="placeholder_in_search_field">Найти встречи и сообщества</string>
 
     <string name="label_screens_splash">Сплеш</string>
     <string name="label_screens_event">Встречи</string>
@@ -30,6 +30,7 @@
     <string name="label_menu_items_referral">Пригласи друга</string>
 
     <string name="text_community_meetings">Встречи сообщества</string>
+    <string name="text_cancel">Отмена</string>
     <string name="placeholder_first_name_text_edit_form">Имя (обязательно)</string>
     <string name="placeholder_last_name_text_edit_form">Фамилия (опционально)</string>
 

@@ -53,8 +53,8 @@ object Constants {
     const val HEIGHT_OF_ICON_SOCIAL_CHIPS_GROUP = 20
 
     // composable InputField
-    const val CORNER_RADIUS_OF_INPUT_FIELD = 4
-    const val ICON_SIZE_IN_INPUT_FIELD = 24
+    const val CORNER_RADIUS_OF_INPUT_FIELD = 16
+    const val ICON_SIZE_IN_INPUT_FIELD = 22
     const val HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD = 8
     const val FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD = 2
 
@@ -83,6 +83,7 @@ object Constants {
     const val CONTENT_PADDING_IN_MENU_ITEM = 6
 
     // composable TopBar
+    const val ICON_SIZE_IN_DETAIL_TOP_BAR = 24
     const val HEIGHT_TOP_BAR = 30
     const val PADDING_VERTICAL_IN_TOP_BAR = 16
     const val ICON_SIZE_IN_TOP_BAR = 24
@@ -130,8 +131,6 @@ object Constants {
     const val VERTICAL_PADDING_BUTTON_PROFILE_SCREEN = 56
     const val SPACE_BY_IN_INPUT_FIELDS_PROFILE_SCREEN = 12
     const val PADDING_CHIPS_GROUP_PROFILE_SCREEN = 26
-
-
 
     // View Models
     const val SEARCH_WAITING_TIME: Long = 5000

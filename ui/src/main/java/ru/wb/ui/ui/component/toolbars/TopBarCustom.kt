@@ -23,15 +23,15 @@ import ru.wb.ui.ui.component.utils.Constants.PADDING_VERTICAL_IN_TOP_BAR
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-internal fun TopBar(
+internal fun TopBarCustom(
     modifier: Modifier = Modifier,
-    text: String = "",
+    label: String = "",
     iconRight: Int? = null,
     iconLeft: Int? = null,
-    onLeftIconClick: () -> Unit = {},
-    onRightIconClick: () -> Unit = {},
     tintRightIcon: Color = AppTheme.colors.neutralColorFont,
     tintLeftIcon: Color = AppTheme.colors.neutralColorFont,
+    onLeftIconClick: () -> Unit = {},
+    onRightIconClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
@@ -62,7 +62,7 @@ internal fun TopBar(
                     )
                 }
                 Text(
-                    text = text,
+                    text = label,
                     style = AppTheme.typography.subheading1,
                     color = AppTheme.colors.neutralColorFont
                 )

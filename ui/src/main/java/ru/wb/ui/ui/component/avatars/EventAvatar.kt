@@ -14,8 +14,6 @@ import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_THIN_IMAGE_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_WIDE_IMAGE_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.IMAGE_RADIUS_IMAGE_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.WIDTH_OF_THIN_IMAGE_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.WIDTH_OF_WIDE_IMAGE_IN_EVENT_CARD
 
 @Composable
 internal fun EventAvatar(
@@ -26,10 +24,16 @@ internal fun EventAvatar(
     val mod = when (size) {
         EventSize.WIDE -> modifier
             .clip(RoundedCornerShape(IMAGE_RADIUS_IMAGE_IN_EVENT_CARD.dp))
-            .size(height = HEIGHT_OF_WIDE_IMAGE_IN_EVENT_CARD.dp, width = WIDTH_OF_WIDE_IMAGE_IN_EVENT_CARD.dp)
+            .size(
+                height = HEIGHT_OF_WIDE_IMAGE_IN_EVENT_CARD.dp,
+                width = EventSize.WIDE.width.dp
+            )
         else -> modifier
             .clip(RoundedCornerShape(IMAGE_RADIUS_IMAGE_IN_EVENT_CARD.dp))
-            .size(width = WIDTH_OF_THIN_IMAGE_IN_EVENT_CARD.dp, HEIGHT_OF_THIN_IMAGE_IN_EVENT_CARD.dp)
+            .size(
+                width = EventSize.THIN.width.dp,
+                height = HEIGHT_OF_THIN_IMAGE_IN_EVENT_CARD.dp
+            )
     }
 
     when {
@@ -43,7 +47,7 @@ internal fun EventAvatar(
         else -> {
             Image(
                 modifier = mod,
-                painter = painterResource(R.drawable.default_thin_img),
+                painter = painterResource(R.drawable.default_wide_img),
                 contentDescription = "avatar"
             )
         }

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 
 object AppTypo {
     val heading1 = TextStyle(
-        fontSize = 32.sp,
+        fontSize = 34.sp,
         fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
@@ -19,22 +19,16 @@ object AppTypo {
         fontSize = 24.sp,
         fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.SemiBold
     )
     val heading3 = TextStyle(
-        fontSize = 24.sp,
+        fontSize = 18.sp,
         fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
-    val headingLabelMeeting = TextStyle(
-        fontSize = 34.sp,
-        fontFamily = interFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Bold
-    )
     val subheading1 = TextStyle(
-        fontSize = 18.sp,
+        fontSize = 24.sp,
         fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
@@ -84,6 +78,28 @@ object AppTypo {
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
+
+    val primary = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Medium,
+    )
+
+    val secondary = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Medium,
+    )
+
+    val secondary1 = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold,
+    )
+
     val textForTabs = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
@@ -122,11 +138,5 @@ object AppTypo {
         fontFamily = interFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-    )
-
-    val primary = TextStyle(
-        fontFamily = interFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
     )
 }

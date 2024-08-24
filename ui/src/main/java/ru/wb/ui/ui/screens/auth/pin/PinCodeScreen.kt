@@ -9,7 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.ui.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN
 import ru.wb.ui.ui.screens.auth.pin.components.InputPinCard
 import ru.wb.ui.R
@@ -23,7 +23,7 @@ internal fun PinCodeScreen(
     val phone by viewModel.getPhoneNumberFlow().collectAsStateWithLifecycle()
     val pinCode by viewModel.getPinValueFlow().collectAsStateWithLifecycle()
 
-    TopBar(
+    TopBarCustom(
         modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN.dp),
         iconLeft = R.drawable.ic_chevron_left,
         onLeftIconClick = { navController.popBackStack() },

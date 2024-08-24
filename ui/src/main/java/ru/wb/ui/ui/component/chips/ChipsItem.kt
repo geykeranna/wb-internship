@@ -23,7 +23,7 @@ fun ChipsItems(
 ){
     val background = when {
         isSelect -> AppTheme.colors.brandColorDefault
-        else -> AppTheme.colors.brandColorLight
+        else -> AppTheme.colors.neutralColorSecondaryBackground
     }
     val textColor = when {
         isSelect -> AppTheme.colors.neutralColorBackground

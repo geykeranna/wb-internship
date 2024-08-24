@@ -8,8 +8,8 @@ import ru.wb.ui.ui.screens.auth.phone.PhoneScreen
 import ru.wb.ui.ui.screens.auth.pin.PinCodeScreen
 import ru.wb.ui.ui.screens.community.community.CommunityScreen
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
-import ru.wb.ui.ui.screens.events.active.ActiveEventsScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
+import ru.wb.ui.ui.screens.events.main.MainEventsScreen
 import ru.wb.ui.ui.screens.events.myevents.MyEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
 import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
@@ -32,7 +32,7 @@ fun NavGraph(
         }
 
         composable(route = Screen.EVENTS.route) {
-            ActiveEventsScreen(
+            MainEventsScreen(
                 navController = navController
             )
         }

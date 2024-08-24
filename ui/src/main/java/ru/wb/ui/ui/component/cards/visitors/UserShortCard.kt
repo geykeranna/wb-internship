@@ -15,7 +15,7 @@ import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR_IN_CARD
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-fun UserShortCard(
+internal fun UserShortCard(
     userData: UserData,
     modifier: Modifier = Modifier,
 ) {

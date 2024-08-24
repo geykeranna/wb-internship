@@ -14,6 +14,9 @@ class TestViewModel: ViewModel() {
     private val _chipsDataMultiple = MutableStateFlow(listOf(ChipsData(id="1", name = "Test1")))
     private val chipsDataMultiple: StateFlow<List<ChipsData>> = _chipsDataMultiple
 
+    private val _text = MutableStateFlow("")
+    private val text: StateFlow<String> = _text
+
     val chipsList = listOf(
         ChipsData(id="1", name = "Test1"),
         ChipsData(id="2", name = "Test2"),
@@ -23,7 +26,14 @@ class TestViewModel: ViewModel() {
     )
 
     fun getChipsSingleFlow(): StateFlow<List<ChipsData>> = chipsDataSingle
+
     fun getChipsMultipleFlow(): StateFlow<List<ChipsData>> = chipsDataMultiple
+
+    fun getTextFlow(): StateFlow<String> = text
+
+    fun onTextChange(text: String) = viewModelScope.launch {
+        _text.emit(text)
+    }
 
     fun onSelectChipsSingle(list: List<ChipsData>) = viewModelScope.launch {
         _chipsDataSingle.emit(list)

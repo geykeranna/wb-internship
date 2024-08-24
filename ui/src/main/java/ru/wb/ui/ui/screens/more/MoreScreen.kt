@@ -16,7 +16,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.MenuItem
 import ru.wb.ui.ui.component.toolbars.MenuItemUser
-import ru.wb.ui.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
@@ -28,10 +28,10 @@ internal fun MoreScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    TopBar (
+    TopBarCustom (
         modifier = Modifier
             .padding(start = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.MORE.label
+        label = Screen.MORE.label
     )
 
     LazyColumn (

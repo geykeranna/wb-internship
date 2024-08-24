@@ -6,8 +6,8 @@ data class Location(
 ){
     companion object {
         val defaultObject = Location(
-            city = "",
-            address = ""
+            city = "Mocква",
+            address = "ул. Инженерная, 6"
         )
     }
 }

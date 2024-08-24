@@ -14,9 +14,9 @@ data class EventData(
     companion object{
         val defaultObject = EventData(
             id = "1",
-            name = "Name",
+            name = "QA Talks — Global tech forum",
             location = Location.defaultObject,
-            date = "mmmm.mm.mm",
+            date = "10 августа",
             tagList = listOf("Moscow", "Android"),
             icon = null,
             active = true,

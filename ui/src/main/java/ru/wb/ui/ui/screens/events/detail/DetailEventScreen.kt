@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.R
-import ru.wb.ui.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
 import ru.wb.ui.ui.screens.events.components.ButtonState
@@ -38,11 +38,11 @@ internal fun DetailEventScreen(
 
     FullScreenImageDialog(isMapFullScreen = isMapFullScreen)
 
-    TopBar(
+    TopBarCustom(
         modifier = modifier
             .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
         iconLeft = R.drawable.ic_chevron_left,
-        text = detailInfo.name,
+        label = detailInfo.name,
         iconRight = iconRight,
         onRightIconClick = {
             detailViewModel.obtainEvent(

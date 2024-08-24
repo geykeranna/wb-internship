@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +28,19 @@ internal fun UserAvatar(
             modifier
                 .clip(CircleShape)
                 .size(SIZE_USER_AVATAR_IN_CARD.dp)
+                .background(color = AppTheme.colors.neutralColorDivider)
+        }
+        AvatarsSize.SQUARE -> {
+            modifier
+                .size(SIZE_USER_AVATAR_IN_CARD.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(color = AppTheme.colors.neutralColorDivider)
         }
         else -> {
             modifier
                 .clip(CircleShape)
                 .size(SIZE_USER_AVATAR.dp)
+                .background(color = AppTheme.colors.neutralColorDivider)
         }
     }
 
@@ -45,8 +54,7 @@ internal fun UserAvatar(
         }
         else -> {
             Image(
-                modifier = mod
-                    .background(color = AppTheme.colors.neutralColorDivider),
+                modifier = mod,
                 painter = painterResource(id = R.drawable.ic_user),
                 contentDescription = "user avatar"
             )

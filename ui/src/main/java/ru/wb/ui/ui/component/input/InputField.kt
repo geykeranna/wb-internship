@@ -34,9 +34,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.PADDING_OF_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -48,37 +46,50 @@ internal fun InputField(
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
+    focusRequester: FocusRequester = remember { FocusRequester() },
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
     onClickRightIcon: (() -> Unit?)? = null,
     onClickLeftIcon: (() -> Unit)? = null,
     onChangeValue: (text: String) -> Unit = {},
 ){
-    val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
         focusRequester.freeFocus()
     }
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val hintColor = if (value.isEmpty()) AppTheme.colors.neutralColorDisabled else Color.Transparent
-    val contentColor = if (value.isEmpty() && !isFocused) AppTheme.colors.neutralColorDisabled else AppTheme.colors.neutralColorFont
+    val hintColor = when {
+        value.isEmpty() -> {
+            AppTheme.colors.neutralColorDisabled
+        }
+        else -> {
+            Color.Transparent
+        }
+    }
+    val contentColor = when {
+        value.isEmpty() && !isFocused -> {
+            AppTheme.colors.neutralColorDisabled
+        }
+        else -> {
+            AppTheme.colors.neutralColorFont
+        }
+    }
 
     Row(
         modifier = modifier
-            .fillMaxWidth()
             .focusable(interactionSource = interactionSource)
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(AppTheme.colors.neutralColorSecondaryBackground)
             .focusedBorder(isFocused && value.isEmpty(), AppTheme.colors.neutralColorDivider)
-            .padding(PADDING_OF_NUMBER_INPUT_FIELD.dp),
+            .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         iconLeft?.let {
             Icon(
                 modifier = Modifier
+                    .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
                     .clickable { onClickLeftIcon?.let { onClickLeftIcon() } }
-                    .padding(vertical = 9.dp, horizontal = 8.dp)
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
@@ -87,27 +98,25 @@ internal fun InputField(
         }
         Box(
             modifier = Modifier
-                .weight(1f, true)
+                .fillMaxWidth(0.90f)
                 .align(Alignment.CenterVertically),
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 text = placeholder,
-                style = AppTheme.typography.bodyText1,
+                style = AppTheme.typography.secondary,
                 color = hintColor,
             )
 
             BasicTextField(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp)
-                    .focusRequester(focusRequester),
+                    .focusRequester(focusRequester)
+                    .fillMaxWidth(),
                 enabled = !disable,
                 value = value,
                 singleLine = true,
                 cursorBrush = SolidColor(AppTheme.colors.neutralColorFont),
-                textStyle = AppTheme.typography.bodyText1.copy(color = AppTheme.colors.neutralColorFont),
+                textStyle = AppTheme.typography.secondary.copy(color = AppTheme.colors.neutralColorFont),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
             )
@@ -115,8 +124,8 @@ internal fun InputField(
         iconRight?.let {
             Icon(
                 modifier = Modifier
+                    .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
                     .clickable { onClickRightIcon?.let { onClickRightIcon() } }
-                    .padding(vertical = 9.dp, horizontal = 8.dp)
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,

@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.ui.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.R
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.cards.events.EventCardsList
@@ -18,19 +18,20 @@ import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_SEARCH_BAR_COMMON
+import ru.wb.ui.ui.screens.events.main.MainEventsScreenViewModel
 
 @Composable
 internal fun ActiveEventsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: ActiveEventsScreenViewModel = koinViewModel()
+    viewModel: MainEventsScreenViewModel = koinViewModel()
 ) {
     val events by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
 
-    TopBar(
+    TopBarCustom(
         modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.EVENTS.label,
+        label = Screen.EVENTS.label,
         iconRight = R.drawable.ic_plus,
     )
 

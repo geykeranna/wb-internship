@@ -10,7 +10,7 @@ internal class EventRepositoryImpl: EventRepository {
     override fun getEvents(
         data: EventGetRequest?,
     ): Flow<List<EventData>>{
-        return flowOf(listOf(EventData.defaultObject))
+        return flowOf(List(10) { EventData.defaultObject })
     }
 
     override fun getEvent(

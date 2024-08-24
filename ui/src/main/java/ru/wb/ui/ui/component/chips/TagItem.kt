@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.component.chips
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +21,7 @@ fun TagItem(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_CHIPS.dp))
-            .background(AppTheme.colors.brandColorLight)
+            .background(AppTheme.colors.neutralColorSecondaryBackground)
     ) {
         Text(
             modifier = Modifier
@@ -31,7 +30,7 @@ fun TagItem(
             text = item.name,
             maxLines = 1,
             color = AppTheme.colors.brandColorDefault,
-            style = AppTheme.typography.metadata3
+            style = AppTheme.typography.secondary
         )
     }
 }
