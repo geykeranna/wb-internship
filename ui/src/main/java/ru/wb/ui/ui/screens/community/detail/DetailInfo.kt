@@ -22,8 +22,8 @@ import ru.wb.ui.ui.theme.AppTheme
 @Composable
 fun DetailInfo(
     detailInfo: CommunityData,
-    navController: NavController,
     modifier: Modifier = Modifier,
+    onNavigate: (id: String) -> Unit = {}
 ) {
     LazyColumn (
         modifier = modifier
@@ -52,9 +52,7 @@ fun DetailInfo(
 
             EventCardsList(
                 itemsList = detailInfo.eventList,
-                onNavigate = { id ->
-                    navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
-                }
+                onNavigate = onNavigate
             )
         }
     }

@@ -38,7 +38,8 @@ internal fun VisitorsList(
         modifier = modifier
             .fillMaxWidth()
             .onGloballyPositioned { layoutCoordinates ->
-                val dpValueWidth = layoutCoordinates.size.width / density
+                val width = if (visitorsList.isNotEmpty()) layoutCoordinates.size.width else 0
+                val dpValueWidth = width / density
                 val widthItemsWithOffset = SIZE_USER_AVATAR - SPACE_BY_AVATAR_ROW
                 val widthItemsLineWithLastItems = dpValueWidth - SPACE_BY_AVATAR_ROW
                 countItems.intValue = (widthItemsLineWithLastItems / widthItemsWithOffset).toInt()

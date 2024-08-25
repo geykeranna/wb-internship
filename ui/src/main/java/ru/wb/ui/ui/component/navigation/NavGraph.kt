@@ -1,5 +1,6 @@
 package ru.wb.ui.ui.component.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -20,12 +21,11 @@ import ru.wb.ui.ui.screens.test.Test
 @Composable
 fun NavGraph(
     navController: NavHostController,
-
     isAuth: Boolean = false,
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.TEST.route
+        startDestination = Screen.EVENTS.route
     ){
         composable(route = Screen.TEST.route) {
             Test()
@@ -39,6 +39,7 @@ fun NavGraph(
 
         composable(route = Screen.EVENT_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
+                Log.d("testest 1", it)
                 DetailEventScreen(
                     id = it,
                     navController = navController

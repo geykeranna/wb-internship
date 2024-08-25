@@ -1,5 +1,6 @@
 package ru.wb.ui.ui.screens.events.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
+import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarMain
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenContent
@@ -29,7 +31,7 @@ internal fun MainEventsScreen(
     TopBarMain(
         modifier = Modifier
             .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp)
-            .padding(top = 10.dp, bottom = 20.dp),
+            .padding(top = 10.dp),
         inputText = search,
     ) { input ->
         viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
@@ -43,8 +45,14 @@ internal fun MainEventsScreen(
                 state = state,
                 community = community,
                 selectedChips = selectedChips,
-                allChipsList = allChipsList
-            )
+                allChipsList = allChipsList,
+                onSelect = { selected ->
+                    viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
+                }
+            ){ id ->
+                Log.d("testest", id)
+                navController.navigate(Screen.EVENT_DETAIL.route + "/1")
+            }
         }
         else -> {
             MainEventScreenSearch(
@@ -52,6 +60,7 @@ internal fun MainEventsScreen(
                 events = events,
                 state = state,
                 community = community,
+                onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
             )
         }
     }

@@ -1,4 +1,4 @@
-package ru.wb.ui.ui.screens.events.components
+package ru.wb.ui.ui.screens.events.detail.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTransformGestures

@@ -25,8 +25,7 @@ internal fun EventCardsList(
                 modifier = Modifier.fillMaxWidth(),
                 eventData = itemsList[index],
                 size = size,
-                onClick = { onNavigate(itemsList[index].id) },
-                src = itemsList[index].icon
+                onNavigate = onNavigate,
             )
         }
     }

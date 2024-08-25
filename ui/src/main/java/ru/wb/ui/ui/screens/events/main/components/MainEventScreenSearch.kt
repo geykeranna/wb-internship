@@ -13,6 +13,7 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.base.BaseState
+import ru.wb.ui.ui.component.cards.LabeledCard
 import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.cards.events.EventCard
 import ru.wb.ui.ui.component.cards.events.EventCardsList
@@ -26,6 +27,7 @@ internal fun MainEventScreenSearch(
     events: List<EventData> = listOf(),
     community: List<CommunityData> = listOf(),
     state: BaseState = BaseState.EMPTY,
+    onNavigate: (id: String) -> Unit
 ) {
     BaseScreen(
         modifier = modifier
@@ -44,43 +46,34 @@ internal fun MainEventScreenSearch(
                     modifier = Modifier.fillMaxWidth(),
                     eventData = events[index],
                     size = EventSize.WIDE,
-                    onClick = { },
-                    src = events[index].icon
+                    onNavigate = onNavigate,
                 )
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    text = "Сообщества",
-                    style = AppTheme.typography.heading2,
-                    overflow = TextOverflow.Visible,
-                    color = AppTheme.colors.neutralColorFont
-                )
-
-                CommunityCardList(
-                    modifier = Modifier,
-                    itemsList = community,
-                    onClick = {},
-                    onNavigate = {}
-                )
+                LabeledCard(
+                    label = "Сообщества"
+                ) {
+                    CommunityCardList(
+                        modifier = Modifier,
+                        itemsList = community,
+                        onClick = {},
+                        onNavigate = {}
+                    )
+                }
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    text = "Встречи для разработчиков",
-                    style = AppTheme.typography.heading2,
-                    color = AppTheme.colors.neutralColorFont,
-                    overflow = TextOverflow.Visible,
-                )
-
-                EventCardsList(
-                    modifier = Modifier,
-                    onNavigate = {},
-                    itemsList = events,
-                    size = EventSize.THIN,
-                )
+                LabeledCard(
+                    label = "Встречи для разработчиков"
+                ) {
+                    EventCardsList(
+                        modifier = Modifier,
+                        onNavigate = {},
+                        itemsList = events,
+                        size = EventSize.THIN,
+                    )
+                }
             }
         }
     }

@@ -6,7 +6,8 @@ data class CommunityData (
     val countPeople: Int,
     val icon: String?,
     val description: String,
-    val eventList: List<EventData>
+    val eventList: List<EventData>,
+    val isVerified: Boolean
 ){
     companion object{
         val defaultObject = CommunityData(
@@ -15,7 +16,8 @@ data class CommunityData (
             icon = null,
             countPeople = 0,
             description = "Description",
-            eventList = listOf()
+            eventList = listOf(),
+            isVerified = false
         )
     }
 }

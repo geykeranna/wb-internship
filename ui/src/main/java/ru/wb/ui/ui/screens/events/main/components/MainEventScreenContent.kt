@@ -14,6 +14,7 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.base.BaseState
+import ru.wb.ui.ui.component.cards.LabeledCard
 import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.cards.events.EventCard
 import ru.wb.ui.ui.component.cards.events.EventCardsList
@@ -32,7 +33,8 @@ internal fun MainEventScreenContent(
     state: BaseState = BaseState.EMPTY,
     selectedChips: List<ChipsData> = listOf(),
     allChipsList: List<ChipsData> = listOf(),
-    onSelect: (list: List<ChipsData>) -> Unit = {}
+    onSelect: (list: List<ChipsData>) -> Unit = {},
+    onNavigate: (id: String) -> Unit = {}
 ) {
     BaseScreen(
         modifier = modifier
@@ -50,62 +52,50 @@ internal fun MainEventScreenContent(
             item {
                 EventCardsList(
                     modifier = Modifier,
-                    onNavigate = {},
+                    onNavigate = onNavigate,
                     itemsList = events,
                     size = EventSize.WIDE,
                 )
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    text = "Близжайшие встречи",
-                    style = AppTheme.typography.heading2,
-                    color = AppTheme.colors.neutralColorFont,
-                    overflow = TextOverflow.Visible,
-                )
-
-                EventCardsList(
-                    modifier = Modifier,
-                    onNavigate = {},
-                    itemsList = events,
-                    size = EventSize.THIN,
-                )
+                LabeledCard(
+                    label = "Близжайшие встречи"
+                ) {
+                    EventCardsList(
+                        modifier = Modifier,
+                        onNavigate = onNavigate,
+                        itemsList = events,
+                        size = EventSize.THIN,
+                    )
+                }
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    text = "Сообщества для тестировщиков",
-                    style = AppTheme.typography.heading2,
-                    overflow = TextOverflow.Visible,
-                    color = AppTheme.colors.neutralColorFont
-                )
-
-                CommunityCardList(
-                    modifier = Modifier,
-                    itemsList = community,
-                    onClick = {},
-                    onNavigate = {}
-                )
+                LabeledCard(
+                    label = "Сообщества для тестировщиков"
+                ) {
+                    CommunityCardList(
+                        modifier = Modifier,
+                        itemsList = community,
+                        onClick = {},
+                        onNavigate = {}
+                    )
+                }
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    text = "Другие встречи",
-                    style = AppTheme.typography.heading2,
-                    overflow = TextOverflow.Visible,
-                    color = AppTheme.colors.neutralColorFont
-                )
-
-                ChipsGroup(
-                    modifier = Modifier,
-                    data = allChipsList,
-                    mode = ChipsMode.MULTIPLE,
-                    selectedList = selectedChips,
-                    onChangeSelect = { selected -> onSelect(selected) }
-                )
+                LabeledCard(
+                    label = "Другие встречи"
+                ) {
+                    ChipsGroup(
+                        modifier = Modifier,
+                        data = allChipsList,
+                        mode = ChipsMode.MULTIPLE,
+                        selectedList = selectedChips,
+                        onChangeSelect = onSelect
+                    )
+                }
             }
 
             items (events.size) { index ->
@@ -113,8 +103,7 @@ internal fun MainEventScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     eventData = events[index],
                     size = EventSize.WIDE,
-                    onClick = { },
-                    src = events[index].icon
+                    onNavigate = onNavigate,
                 )
             }
         }

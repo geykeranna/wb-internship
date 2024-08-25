@@ -2,14 +2,15 @@ package ru.wb.domain.model
 
 data class UserData(
     var id: String,
-    var icon: String?,
+    var icon: String? = null,
     var firstName: String,
-    var lastName: String?,
-    val story: Boolean,
-    var status: Boolean,
+    var lastName: String? = null,
+    val story: Boolean = false,
+    val status: Boolean = false,
     var phone: String,
-    var role: String?,
-    var socialMedia: List<SocialMedia>
+    var role: String? = null,
+    var socialMedia: List<SocialMedia>,
+    val description: String? = null,
 ){
     companion object{
         val defaultObject = UserData(
@@ -22,6 +23,7 @@ data class UserData(
             phone = "",
             socialMedia = listOf(),
             role = "Developer",
+            description = ""
         )
     }
 }

@@ -39,7 +39,8 @@ internal fun DetailCommunityScreen(
     ) {
         DetailInfo(
             detailInfo = detailInfo,
-            navController = navController
-        )
+        ) { id ->
+            navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
+        }
     }
 }
