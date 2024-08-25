@@ -1,7 +1,7 @@
 package ru.wb.ui.ui.screens.events.main
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -28,40 +28,42 @@ internal fun MainEventsScreen(
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
     val allChipsList = viewModel.getAllChipsList()
 
-    TopBarMain(
-        modifier = Modifier
-            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp)
-            .padding(top = 10.dp),
-        inputText = search,
-    ) { input ->
-        viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
-    }
-
-    when {
-        search.isEmpty() -> {
-            MainEventScreenContent(
-                modifier = modifier,
-                events = events,
-                state = state,
-                community = community,
-                selectedChips = selectedChips,
-                allChipsList = allChipsList,
-                onSelect = { selected ->
-                    viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
-                }
-            ){ id ->
-                Log.d("testest", id)
-                navController.navigate(Screen.EVENT_DETAIL.route + "/1")
+    Scaffold(
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
+        topBar = {
+            TopBarMain(
+                modifier = Modifier.padding(top = 10.dp),
+                inputText = search,
+            ) { input ->
+                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
             }
-        }
-        else -> {
-            MainEventScreenSearch(
-                modifier = modifier,
-                events = events,
-                state = state,
-                community = community,
-                onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
-            )
+        },
+        bottomBar = {}
+    ) { padding ->
+        when {
+            search.isEmpty() -> {
+                MainEventScreenContent(
+                    modifier = modifier.padding(padding),
+                    events = events,
+                    state = state,
+                    community = community,
+                    selectedChips = selectedChips,
+                    allChipsList = allChipsList,
+                    onSelect = { selected ->
+                        viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
+                    },
+                    onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
+                )
+            }
+            else -> {
+                MainEventScreenSearch(
+                    modifier = modifier.padding(padding),
+                    events = events,
+                    state = state,
+                    community = community,
+                    onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
+                )
+            }
         }
     }
 }

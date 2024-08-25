@@ -28,7 +28,16 @@ val AccentSafe = Color(0xFF7BCBCF)
 
 //Gradient colors
 val Gradient1 = Brush.linearGradient(listOf(Color(0xFFD2D5F9), Color(0xFF2C37E1)))
-val Gradient2 = Brush.linearGradient(listOf(Color(0xFFEC9EFF), Color(0xFF5F2EEA)))
+val Gradient2 = Brush.linearGradient(listOf(
+    Color(0xFFED3CCA),
+    Color(0xFFDF34D2),
+    Color(0xFFD02BD9),
+    Color(0xFFBF22E1),
+    Color(0xFFAE1AE8),
+    Color(0xFF9A10F0),
+    Color(0xFF8306F7),
+    Color(0xFF6600FF),
+))
 val GradientColorBackground = Color(0xFFD2D5F9)
 
 val DisabledColorForTab = Color(0xFF666666)

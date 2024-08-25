@@ -47,14 +47,16 @@ internal class ProfileEditScreenViewModel(
     }
 
     private fun sendData() = viewModelScope.launch {
-        _userData.value.firstName = formFieldsValue.value.firstName
-        _userData.value.lastName = formFieldsValue.value.lastName
+        _userData.value = userData.value.copy(
+            firstName = formFieldsValue.value.firstName,
+            lastName = formFieldsValue.value.lastName
+        )
         setUserData.execute(userData.value)
     }
 
     private fun startLoading() = viewModelScope.launch {
         _state.emit(BaseState.LOADING)
-        getUserID.execute().collect { _userData.value.id = it }
+        getUserID.execute().collect { _userData.value = userData.value.copy(id = it) }
         getUserData.execute(id = _userData.value.id).collect{
             when {
                 it.id.isEmpty() -> _state.emit(BaseState.ERROR)

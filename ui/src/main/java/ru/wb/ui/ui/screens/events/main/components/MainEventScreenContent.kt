@@ -37,21 +37,17 @@ internal fun MainEventScreenContent(
     onNavigate: (id: String) -> Unit = {}
 ) {
     BaseScreen(
-        modifier = modifier
-            .padding(top = 74.dp)
-            .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),
+        modifier = modifier.padding(top = 20.dp),
         state = state,
     ) {
         LazyColumn(
             modifier = Modifier
-                .padding(top = 74.dp)
-                .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             item {
                 EventCardsList(
-                    modifier = Modifier,
+                    modifier = Modifier.padding(top = 20.dp),
                     onNavigate = onNavigate,
                     itemsList = events,
                     size = EventSize.WIDE,

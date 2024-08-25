@@ -1,15 +1,15 @@
 package ru.wb.domain.model
 
 data class UserData(
-    var id: String,
-    var icon: String? = null,
-    var firstName: String,
-    var lastName: String? = null,
+    val id: String,
+    val icon: String? = null,
+    val firstName: String,
+    val lastName: String? = null,
     val story: Boolean = false,
     val status: Boolean = false,
-    var phone: String,
-    var role: String? = null,
-    var socialMedia: List<SocialMedia>,
+    val phone: String,
+    val role: String? = null,
+    val socialMedia: List<SocialMedia>,
     val description: String? = null,
 ){
     companion object{

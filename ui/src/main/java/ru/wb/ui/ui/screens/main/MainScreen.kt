@@ -52,12 +52,6 @@ internal fun MainScreen(
             ) {
                 focusManager.clearFocus()
             },
-        bottomBar = {
-            BottomNavBar(
-                navController = navController,
-                state = bottomBarState
-            )
-        },
         containerColor = Color.White,
     ) { padding ->
         CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
