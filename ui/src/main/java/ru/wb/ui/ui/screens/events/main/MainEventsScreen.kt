@@ -11,9 +11,10 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarMain
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenContent
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenSearch
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun MainEventsScreen(
@@ -29,7 +30,7 @@ internal fun MainEventsScreen(
     val allChipsList = viewModel.getAllChipsList()
 
     Scaffold(
-        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
+        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
         topBar = {
             TopBarMain(
                 modifier = Modifier.padding(top = 10.dp),
@@ -38,7 +39,8 @@ internal fun MainEventsScreen(
                 viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
             }
         },
-        bottomBar = {}
+        bottomBar = {},
+        containerColor = AppTheme.colors.neutralColorBackground
     ) { padding ->
         when {
             search.isEmpty() -> {
@@ -52,7 +54,13 @@ internal fun MainEventsScreen(
                     onSelect = { selected ->
                         viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
                     },
-                    onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
+                    onAddCommunityClick = { },
+                    onNavigateToCommunityDetail = { id ->
+                        navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")
+                    },
+                    onNavigateToEventDetail = { id ->
+                        navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
+                    },
                 )
             }
             else -> {
@@ -61,7 +69,13 @@ internal fun MainEventsScreen(
                     events = events,
                     state = state,
                     community = community,
-                    onNavigate = {id -> navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")}
+                    onNavigateCommunityDetail = { id ->
+                        navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")
+                    },
+                    onAddCommunityClick = { },
+                    onNavigateEventDetail = { id ->
+                        navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
+                    },
                 )
             }
         }

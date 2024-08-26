@@ -33,13 +33,13 @@ internal fun CommunityAvatar (
     val mod = when (size) {
         CommunitySize.FULL -> {
             Modifier
-                .clip(RoundedCornerShape(IMG_RADIUS_COMMUNITY_AVATAR_FULL.dp))
                 .size(IMG_SIZE_COMMUNITY_AVATAR_FULL.dp)
+                .clip(RoundedCornerShape(IMG_RADIUS_COMMUNITY_AVATAR_FULL.dp))
         }
         else -> {
             Modifier
-                .clip(RoundedCornerShape(IMG_RADIUS_COMMUNITY_AVATAR_SMALL.dp))
                 .size(IMG_SIZE_COMMUNITY_AVATAR_SMALL.dp)
+                .clip(RoundedCornerShape(IMG_RADIUS_COMMUNITY_AVATAR_SMALL.dp))
         }
     }
 

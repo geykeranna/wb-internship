@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
@@ -22,8 +20,6 @@ import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.chips.ChipsGroup
 import ru.wb.ui.ui.component.chips.ChipsMode
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
-import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun MainEventScreenContent(
@@ -34,7 +30,9 @@ internal fun MainEventScreenContent(
     selectedChips: List<ChipsData> = listOf(),
     allChipsList: List<ChipsData> = listOf(),
     onSelect: (list: List<ChipsData>) -> Unit = {},
-    onNavigate: (id: String) -> Unit = {}
+    onAddCommunityClick: () -> Unit = {},
+    onNavigateToCommunityDetail: (id: String) -> Unit = {},
+    onNavigateToEventDetail: (id: String) -> Unit = {}
 ) {
     BaseScreen(
         modifier = modifier.padding(top = 20.dp),
@@ -48,7 +46,7 @@ internal fun MainEventScreenContent(
             item {
                 EventCardsList(
                     modifier = Modifier.padding(top = 20.dp),
-                    onNavigate = onNavigate,
+                    onNavigate = onNavigateToEventDetail,
                     itemsList = events,
                     size = EventSize.WIDE,
                 )
@@ -60,7 +58,7 @@ internal fun MainEventScreenContent(
                 ) {
                     EventCardsList(
                         modifier = Modifier,
-                        onNavigate = onNavigate,
+                        onNavigate = onNavigateToEventDetail,
                         itemsList = events,
                         size = EventSize.THIN,
                     )
@@ -74,8 +72,8 @@ internal fun MainEventScreenContent(
                     CommunityCardList(
                         modifier = Modifier,
                         itemsList = community,
-                        onClick = {},
-                        onNavigate = {}
+                        onClick = onAddCommunityClick,
+                        onNavigate = onNavigateToCommunityDetail,
                     )
                 }
             }
@@ -99,7 +97,7 @@ internal fun MainEventScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     eventData = events[index],
                     size = EventSize.WIDE,
-                    onNavigate = onNavigate,
+                    onNavigate = onNavigateToEventDetail,
                 )
             }
         }

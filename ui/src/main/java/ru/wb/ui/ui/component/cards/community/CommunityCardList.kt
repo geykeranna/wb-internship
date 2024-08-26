@@ -14,7 +14,7 @@ internal fun CommunityCardList(
     itemsList: List<CommunityData>,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    onNavigate: () -> Unit = {},
+    onNavigate: (id: String) -> Unit = {},
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
@@ -22,9 +22,9 @@ internal fun CommunityCardList(
     ) {
         items(itemsList.size) { index ->
             CommunityViewCard(
-                modifier = Modifier.clickable { onNavigate() },
+                modifier = Modifier.clickable { onNavigate(itemsList[index].id) },
                 onAddClick = { onClick() },
-                communityData = itemsList[index]
+                communityData = itemsList[index],
             )
         }
     }

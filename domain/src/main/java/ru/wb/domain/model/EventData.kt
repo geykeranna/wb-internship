@@ -9,6 +9,7 @@ data class EventData(
     val icon: String?,
     val active: Boolean,
     val description: String,
+    val vacantSeat: Int,
     val usersList: List<UserData> = listOf(),
     val manager: UserData,
     val sponsor: CommunityData,
@@ -43,7 +44,8 @@ data class EventData(
                 eventList = listOf(),
                 isVerified = true
             ),
-            recommendation = listOf()
+            recommendation = listOf(),
+            vacantSeat = 0
         )
     }
 }

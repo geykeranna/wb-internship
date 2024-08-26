@@ -44,10 +44,6 @@ enum class Screen(
         route = "more_profile_edit",
         label = "Профиль"
     ),
-    MY_EVENTS (
-        route = "more_my_meets",
-        label = "Мои встречи"
-    ),
     PHONE (
         route = "first_number",
         label = "Введите номер телефона",

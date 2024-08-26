@@ -32,7 +32,5 @@ internal fun MapInfo(
             )
 
         }
-
     }
-
 }

@@ -16,7 +16,6 @@ import ru.wb.ui.ui.component.cards.community.CommunityCardList
 import ru.wb.ui.ui.component.cards.events.EventCard
 import ru.wb.ui.ui.component.cards.events.EventCardsList
 import ru.wb.ui.ui.component.cards.events.EventSize
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON
 
 @Composable
 internal fun MainEventScreenSearch(
@@ -24,7 +23,9 @@ internal fun MainEventScreenSearch(
     events: List<EventData> = listOf(),
     community: List<CommunityData> = listOf(),
     state: BaseState = BaseState.EMPTY,
-    onNavigate: (id: String) -> Unit
+    onAddCommunityClick: () -> Unit = {},
+    onNavigateCommunityDetail: (id: String) -> Unit = { },
+    onNavigateEventDetail: (id: String) -> Unit = { },
 ) {
     BaseScreen(
         modifier = modifier.padding(top = 20.dp),
@@ -36,10 +37,10 @@ internal fun MainEventScreenSearch(
         ) {
             items (events.size) { index ->
                 EventCard(
-                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     eventData = events[index],
                     size = EventSize.WIDE,
-                    onNavigate = onNavigate,
+                    onNavigate = onNavigateEventDetail,
                 )
             }
 
@@ -50,8 +51,8 @@ internal fun MainEventScreenSearch(
                     CommunityCardList(
                         modifier = Modifier,
                         itemsList = community,
-                        onClick = {},
-                        onNavigate = {}
+                        onClick = onAddCommunityClick,
+                        onNavigate = onNavigateCommunityDetail
                     )
                 }
             }
@@ -62,7 +63,7 @@ internal fun MainEventScreenSearch(
                 ) {
                     EventCardsList(
                         modifier = Modifier,
-                        onNavigate = {},
+                        onNavigate = onNavigateEventDetail,
                         itemsList = events,
                         size = EventSize.THIN,
                     )

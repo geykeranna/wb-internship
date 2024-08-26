@@ -53,9 +53,7 @@ internal fun MoreScreen(
         item {
             MenuItem(
                 iconLeft = R.drawable.ic_coffee,
-                onClickItem = {
-                    navController.navigate(Screen.MY_EVENTS.route)
-                },
+                onClickItem = { },
                 text = stringResource(R.string.label_menu_items_my_meets),
                 iconRight = R.drawable.ic_chevron_right
             )

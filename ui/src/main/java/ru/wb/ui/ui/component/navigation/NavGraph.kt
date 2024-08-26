@@ -11,7 +11,6 @@ import ru.wb.ui.ui.screens.community.community.CommunityScreen
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
 import ru.wb.ui.ui.screens.events.main.MainEventsScreen
-import ru.wb.ui.ui.screens.events.myevents.MyEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
 import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
@@ -81,12 +80,6 @@ fun NavGraph(
             SplashScreen(
                 navController = navController,
                 isAuth = isAuth
-            )
-        }
-
-        composable(route = Screen.MY_EVENTS.route) {
-            MyEventsScreen(
-                navController = navController
             )
         }
 

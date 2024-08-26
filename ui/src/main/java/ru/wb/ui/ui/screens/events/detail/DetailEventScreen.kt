@@ -13,10 +13,11 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.ui.base.BaseScreen
-import ru.wb.ui.ui.component.button.GradientButton
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.screens.events.components.ButtonByState
 import ru.wb.ui.ui.screens.events.detail.components.DetailData
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun DetailEventScreen(
@@ -27,11 +28,13 @@ internal fun DetailEventScreen(
 ) {
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
+    val btnState by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
+            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+        containerColor = AppTheme.colors.neutralColorBackground,
         topBar = {
             TopBarDetail(
                 modifier = Modifier,
@@ -40,10 +43,10 @@ internal fun DetailEventScreen(
             )
         },
         bottomBar = {
-            GradientButton(
-                text = "Записаться на встречу",
-                modifier = Modifier
-                    .fillMaxWidth()
+            ButtonByState(
+                modifier = Modifier.fillMaxWidth(),
+                state = btnState,
+                countPeople = detailInfo.vacantSeat
             ) {
                 detailViewModel.obtainEvent(
                     DetailEventScreenViewModel.Event.OnHandleGoingEvent(
@@ -54,8 +57,7 @@ internal fun DetailEventScreen(
         }
     ) { padding ->
         BaseScreen(
-            modifier = Modifier
-                .padding(padding),
+            modifier = Modifier.padding(padding),
             state = state,
         ){
             DetailData(
