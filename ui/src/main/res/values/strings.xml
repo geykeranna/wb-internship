@@ -19,7 +19,7 @@
     <string name="button_label_screens_phone_continue">Продолжить</string>
     <string name="button_label_screens_pin_request_the_code_again">Запросить код повторно</string>
     <string name="expandable_text_collapse_text">Скрыть</string>
-    <string name="expandable_text_expand_text">...</string>
+    <string name="expandable_text_expand_text">…</string>
     <string name="label_button_save">Сохранить</string>
     <string name="label_menu_items_my_meets">Мои встречи</string>
     <string name="label_menu_items_theme">Тема</string>
@@ -33,5 +33,6 @@
     <string name="text_cancel">Отмена</string>
     <string name="placeholder_first_name_text_edit_form">Имя (обязательно)</string>
     <string name="placeholder_last_name_text_edit_form">Фамилия (опционально)</string>
+    <string name="text_for_sub_community">Будем приглашать на встречи сообщества и рекомендовать похожие</string>
 
 </resources>

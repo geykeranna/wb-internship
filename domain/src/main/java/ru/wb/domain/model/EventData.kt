@@ -25,24 +25,18 @@ data class EventData(
             icon = null,
             active = true,
             description = "Description",
-            usersList = mutableListOf(),
-            manager = UserData(
-                firstName = "Павел",
-                lastName = "Хориков",
-                description = "Ведущий специалист по подбору персонала в одной из крупнейших IT-компаний в ЕС.",
-                icon = null,
-                id = "user",
-                socialMedia = listOf(),
-                phone = ""
-            ),
+            usersList = List (10) { UserData.defaultObject },
+            manager = UserData.defaultObject,
             sponsor = CommunityData(
+                id = "1",
                 label = "The IT-Crowd",
-                description = "Сообщество профессионалов в сфере IT. Объединяем специалистов разных направлений для обмена опытом, знаниями и идеями.",
                 icon = null,
-                countPeople = 0,
-                id = "owner",
+                subscribers = List (10) { UserData.defaultObject },
+                description = "Сообщество профессионалов в сфере IT. Объединяем специалистов разных направлений для обмена опытом, знаниями и идеями.",
                 eventList = listOf(),
-                isVerified = true
+                isVerified = false,
+                isSubscribed = false,
+                tags = listOf("Разработка")
             ),
             recommendation = listOf(),
             vacantSeat = 0

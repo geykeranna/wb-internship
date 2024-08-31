@@ -14,4 +14,8 @@ interface UserRepository {
     fun postUser(userData: UserData): Flow<Boolean>
 
     fun handleGoingEvent(eventID: String): Flow<Boolean>
+
+    fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean>
+
+    fun getSubscriptionStatus(idCommunity: String): Flow<Boolean>
 }

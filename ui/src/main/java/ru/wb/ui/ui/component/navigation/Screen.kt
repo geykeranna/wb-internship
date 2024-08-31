@@ -16,11 +16,11 @@ enum class Screen(
         route = "event",
         label = "Встречи"
     ),
-    EVENT_DETAIL(
+    EVENT_DETAIL (
         route = "event_detail",
         label = "Экран детального просмотра"
     ),
-    MEETING_DETAIL_FROM_COMMUNITY(
+    MEETING_DETAIL_FROM_COMMUNITY (
         route = "meeting_detail_from_community",
         label = "Экран детального просмотра"
     ),
@@ -55,5 +55,9 @@ enum class Screen(
     PROFILE_FIRST_EDIT (
         route = "first_profile_edit",
         label = "Профиль",
+    ),
+    USER_LIST (
+        route = "user_list_by_event",
+        label = "Пользователи",
     )
 }

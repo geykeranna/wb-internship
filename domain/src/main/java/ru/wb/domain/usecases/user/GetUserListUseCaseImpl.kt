@@ -8,7 +8,7 @@ import ru.wb.domain.repository.model.UsersGetRequest
 internal class GetUserListUseCaseImpl(
     private val repository: UserRepository
 ) : GetUserListUseCase {
-    override   fun execute(
+    override fun execute(
         limit: Int?,
         offset: Int?,
         query: String?,

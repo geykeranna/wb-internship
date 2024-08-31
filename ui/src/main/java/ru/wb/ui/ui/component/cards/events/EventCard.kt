@@ -15,7 +15,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.EventData
 import ru.wb.ui.ui.component.avatars.EventAvatar
-import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.chips.TagsChips
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_TEXT_BLOCK_IN_EVENT_CARD
@@ -69,7 +68,7 @@ internal fun EventCard(
         }
 
         TagsChips (
-            data = eventData.tagList.map { ChipsData(id = "key", name = it) }
+            data = eventData.tagList
         )
     }
 }

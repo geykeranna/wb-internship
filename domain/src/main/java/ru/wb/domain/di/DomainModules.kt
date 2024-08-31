@@ -19,6 +19,10 @@ import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.login.GetCurrentUserIDUseCaseImpl
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCase
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCaseImpl
+import ru.wb.domain.usecases.user.ChangeSubscriptionStatusUseCase
+import ru.wb.domain.usecases.user.ChangeSubscriptionStatusUseCaseImpl
+import ru.wb.domain.usecases.user.GetSubscriptionStatusUseCase
+import ru.wb.domain.usecases.user.GetSubscriptionStatusUseCaseImpl
 import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCaseImpl
 import ru.wb.domain.usecases.user.GetUserListUseCase
@@ -36,6 +40,8 @@ val domainModules = module {
     single<PostUserDataUseCase> { PostUserDataUseCaseImpl(get()) }
     single<PutUserDataUseCase> { PutUserDataUseCaseImpl(get()) }
     single<HandleGoingEventUseCase> { HandleGoingEventImpl(get()) }
+    single<ChangeSubscriptionStatusUseCase> { ChangeSubscriptionStatusUseCaseImpl(get()) }
+    single<GetSubscriptionStatusUseCase> { GetSubscriptionStatusUseCaseImpl(get()) }
 
     single<GetEventDataUseCase> { GetEventDataUseCaseImpl(get()) }
     single<GetEventListUseCase> { GetEventListUseCaseImpl(get()) }

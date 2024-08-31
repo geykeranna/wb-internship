@@ -16,6 +16,7 @@ import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
 import ru.wb.ui.ui.screens.splash.SplashScreen
 import ru.wb.ui.ui.screens.test.Test
+import ru.wb.ui.ui.screens.users.list.UsersListByEventScreen
 
 @Composable
 fun NavGraph(
@@ -64,7 +65,7 @@ fun NavGraph(
         composable(route = Screen.COMMUNITY_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
-                    id = it,
+                    idCommunity = it,
                     navController = navController,
                 )
             }
@@ -116,6 +117,15 @@ fun NavGraph(
                     }
                 }
             )
+        }
+
+        composable(route = Screen.USER_LIST.route + "/{data}") { stackEntry ->
+            stackEntry.arguments?.getString("data")?.let { data ->
+                UsersListByEventScreen(
+                    data = data,
+                    navController = navController,
+                )
+            }
         }
     }
 }

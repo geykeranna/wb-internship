@@ -24,5 +24,5 @@ data class Colors(
     val disabledColorForTab: Color,
     val gradient1: Brush,
     val gradient2: Brush,
-    val gradientColorBackground: Color,
+    val gradientColorBackground: Brush,
 )

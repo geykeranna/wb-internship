@@ -5,8 +5,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -29,29 +29,28 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun VisitorsList(
     visitorsList: List<UserData>,
     modifier: Modifier = Modifier,
-    onClick: (id: String?) -> Unit = {},
+    onClick: () -> Unit = {},
 ) {
     val density = LocalDensity.current.density
     val countItems = remember { mutableIntStateOf(0) }
 
     LazyRow(
         modifier = modifier
-            .fillMaxWidth()
+            .width(100.dp)
+            .clickable { onClick() }
             .onGloballyPositioned { layoutCoordinates ->
                 val width = if (visitorsList.isNotEmpty()) layoutCoordinates.size.width else 0
                 val dpValueWidth = width / density
                 val widthItemsWithOffset = SIZE_USER_AVATAR - SPACE_BY_AVATAR_ROW
                 val widthItemsLineWithLastItems = dpValueWidth - SPACE_BY_AVATAR_ROW
-                countItems.intValue = (widthItemsLineWithLastItems / widthItemsWithOffset).toInt()
+                val maxElemOnLine = (widthItemsLineWithLastItems / widthItemsWithOffset).toInt()
+                countItems.intValue = if (visitorsList.size > maxElemOnLine) maxElemOnLine else visitorsList.size
             },
         userScrollEnabled = false,
         horizontalArrangement = Arrangement.spacedBy((-SPACE_BY_AVATAR_ROW).dp),
     ) {
         items(countItems.intValue) { index ->
-            Box(
-                modifier = Modifier
-                    .clickable { onClick(visitorsList[index].id) }
-            ) {
+            Box(modifier = Modifier) {
                 when {
                     index == countItems.intValue - 1 && countItems.intValue < visitorsList.size -> {
                         Box(

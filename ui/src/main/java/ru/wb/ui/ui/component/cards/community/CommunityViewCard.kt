@@ -26,7 +26,7 @@ import ru.wb.ui.ui.theme.AppTheme
 fun CommunityViewCard(
     communityData: CommunityData,
     modifier: Modifier = Modifier,
-    onAddClick: () -> Unit = {}
+    onAddClick: (id: String) -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -53,7 +53,7 @@ fun CommunityViewCard(
                 .fillMaxWidth()
                 .height(37.dp)
                 .clip(RoundedCornerShape(12.dp)),
-            onClick = onAddClick,
+            onClick = { onAddClick(communityData.id) },
             colors = ButtonColors(
                 contentColor = AppTheme.colors.brandColorDefault,
                 disabledContentColor = AppTheme.colors.brandColorDefault,

@@ -19,7 +19,7 @@ internal fun OwnerCard(
     title: String,
     description: String,
     modifier: Modifier = Modifier,
-    icon: @Composable () -> Unit,
+    icon: @Composable () -> Unit = {},
 ) {
     Column(
         modifier = modifier,

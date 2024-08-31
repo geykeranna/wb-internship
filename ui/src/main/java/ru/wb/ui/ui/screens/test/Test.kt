@@ -14,7 +14,6 @@ import ru.wb.ui.ui.component.cards.OwnerCard
 import ru.wb.ui.ui.component.cards.visitors.AvatarsSize
 import ru.wb.ui.ui.component.chips.ChipsGroup
 import ru.wb.ui.ui.component.chips.ChipsMode
-import ru.wb.ui.ui.component.chips.TagsChips
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.toolbars.TopBarMain
 
@@ -81,11 +80,11 @@ fun Test() {
             ) { newList -> viewModel.onSelectChipsMultiple(newList) }
         }
 
-        item {
-            TagsChips(
-                data = viewModel.chipsList,
-                modifier = mod
-            )
-        }
+//        item {
+//            TagsChips(
+//                data = viewModel.chipsList,
+//                modifier = mod
+//            )
+//        }
     }
 }

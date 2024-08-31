@@ -1,7 +1,8 @@
 package ru.wb.ui.ui.screens.events.detail.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,16 +30,19 @@ import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-internal fun DetailData(
+internal fun DetailEventData(
     detailInfo: EventData,
     modifier: Modifier = Modifier,
+    onNavigateUsersScreen: () -> Unit = {},
+    onNavigateEventScreen: (id: String) -> Unit = {},
+    onNavigateUserScreen: (id: String) -> Unit = {},
+    onNavigateCommunityScreen: (id: String) -> Unit = {},
 ) {
     val isMapFullScreen = remember { mutableStateOf(false) }
     FullScreenImageDialog(isMapFullScreen = isMapFullScreen)
 
     LazyColumn (
-        modifier = modifier
-            .padding(vertical = VERTICAL_PADDING_ITEMS_COMMON.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(VERTICAL_SPACE_BY_CONTENT_COMMON.dp)
     ) {
@@ -58,6 +62,7 @@ internal fun DetailData(
 
         item {
             OwnerCard(
+                modifier = Modifier.clickable { onNavigateUserScreen(detailInfo.manager.id) },
                 owner = Owner.USER,
                 title = "${detailInfo.manager.firstName} ${detailInfo.manager.lastName.orEmpty()}",
                 description = detailInfo.manager.description.orEmpty()
@@ -83,7 +88,9 @@ internal fun DetailData(
                     label = "Пойдут на встречу"
                 ) {
                     VisitorsList(
-                        visitorsList = detailInfo.usersList
+                        modifier = Modifier.fillMaxWidth(),
+                        visitorsList = detailInfo.usersList,
+                        onClick = onNavigateUsersScreen
                     )
                 }
             }
@@ -91,6 +98,7 @@ internal fun DetailData(
 
         item {
             OwnerCard(
+                modifier = Modifier.clickable { onNavigateCommunityScreen(detailInfo.sponsor.id) },
                 owner = Owner.COMMUNITY,
                 title = detailInfo.sponsor.label,
                 description = detailInfo.sponsor.description
@@ -110,7 +118,7 @@ internal fun DetailData(
                 ) {
                     EventCardsList(
                         modifier = Modifier,
-                        onNavigate = {},
+                        onNavigate = onNavigateEventScreen,
                         itemsList = detailInfo.recommendation,
                         size = EventSize.THIN,
                     )

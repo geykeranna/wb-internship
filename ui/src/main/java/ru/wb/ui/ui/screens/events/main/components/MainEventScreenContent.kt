@@ -26,79 +26,90 @@ internal fun MainEventScreenContent(
     modifier: Modifier = Modifier,
     events: List<EventData> = listOf(),
     community: List<CommunityData> = listOf(),
-    state: BaseState = BaseState.EMPTY,
+    eventListState: BaseState = BaseState.EMPTY,
+    communityListState: BaseState = BaseState.EMPTY,
     selectedChips: List<ChipsData> = listOf(),
     allChipsList: List<ChipsData> = listOf(),
     onSelect: (list: List<ChipsData>) -> Unit = {},
-    onAddCommunityClick: () -> Unit = {},
+    onAddCommunityClick: (id: String) -> Unit = {},
     onNavigateToCommunityDetail: (id: String) -> Unit = {},
     onNavigateToEventDetail: (id: String) -> Unit = {}
 ) {
     BaseScreen(
         modifier = modifier.padding(top = 20.dp),
-        state = state,
+        state = BaseState.SUCCESS,
     ) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
-            item {
-                EventCardsList(
-                    modifier = Modifier.padding(top = 20.dp),
-                    onNavigate = onNavigateToEventDetail,
-                    itemsList = events,
-                    size = EventSize.WIDE,
-                )
-            }
-
-            item {
-                LabeledCard(
-                    label = "Близжайшие встречи"
-                ) {
+            if (eventListState == BaseState.SUCCESS) {
+                item {
                     EventCardsList(
-                        modifier = Modifier,
+                        modifier = Modifier.padding(top = 20.dp),
                         onNavigate = onNavigateToEventDetail,
                         itemsList = events,
-                        size = EventSize.THIN,
+                        size = EventSize.WIDE,
                     )
                 }
             }
 
-            item {
-                LabeledCard(
-                    label = "Сообщества для тестировщиков"
-                ) {
-                    CommunityCardList(
-                        modifier = Modifier,
-                        itemsList = community,
-                        onClick = onAddCommunityClick,
-                        onNavigate = onNavigateToCommunityDetail,
-                    )
+            if (eventListState == BaseState.SUCCESS) {
+                item {
+                    LabeledCard(
+                        label = "Близжайшие встречи"
+                    ) {
+                        EventCardsList(
+                            modifier = Modifier,
+                            onNavigate = onNavigateToEventDetail,
+                            itemsList = events,
+                            size = EventSize.THIN,
+                        )
+                    }
                 }
             }
 
-            item {
-                LabeledCard(
-                    label = "Другие встречи"
-                ) {
-                    ChipsGroup(
-                        modifier = Modifier,
-                        data = allChipsList,
-                        mode = ChipsMode.MULTIPLE,
-                        selectedList = selectedChips,
-                        onChangeSelect = onSelect
-                    )
+            if (communityListState == BaseState.SUCCESS) {
+                item {
+                    LabeledCard(
+                        label = "Сообщества для тестировщиков"
+                    ) {
+                        CommunityCardList(
+                            modifier = Modifier,
+                            itemsList = community,
+                            onClick = onAddCommunityClick,
+                            onNavigate = onNavigateToCommunityDetail,
+                        )
+                    }
                 }
             }
 
-            items (events.size) { index ->
-                EventCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    eventData = events[index],
-                    size = EventSize.WIDE,
-                    onNavigate = onNavigateToEventDetail,
-                )
+            if (allChipsList.isNotEmpty()) {
+                item {
+                    LabeledCard(
+                        label = "Другие встречи"
+                    ) {
+                        ChipsGroup(
+                            modifier = Modifier,
+                            data = allChipsList,
+                            mode = ChipsMode.MULTIPLE,
+                            selectedList = selectedChips,
+                            onChangeSelect = onSelect
+                        )
+                    }
+                }
+            }
+
+            if (eventListState == BaseState.SUCCESS) {
+                items (events.size) { index ->
+                    EventCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        eventData = events[index],
+                        size = EventSize.WIDE,
+                        onNavigate = onNavigateToEventDetail,
+                    )
+                }
             }
         }
     }

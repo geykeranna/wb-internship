@@ -15,7 +15,7 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 fun TagItem(
-    item: ChipsData,
+    item: String,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -27,7 +27,7 @@ fun TagItem(
             modifier = Modifier
                 .padding(horizontal = 6.dp, vertical = 2.dp)
                 .align(Alignment.Center),
-            text = item.name,
+            text = item,
             maxLines = 1,
             color = AppTheme.colors.brandColorDefault,
             style = AppTheme.typography.secondary

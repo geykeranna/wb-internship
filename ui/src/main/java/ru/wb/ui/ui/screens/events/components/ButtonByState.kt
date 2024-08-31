@@ -17,7 +17,7 @@ internal fun ButtonByState(
     state: String,
     countPeople: Int,
     modifier: Modifier = Modifier,
-    onClickButton: () -> Unit,
+    onClickButton: () -> Unit = {},
 ) {
     Column(
         modifier = modifier,

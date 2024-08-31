@@ -23,7 +23,8 @@ internal fun MainEventsScreen(
     viewModel: MainEventsScreenViewModel = koinViewModel()
 ) {
     val events by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
-    val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
+    val stateEventList by viewModel.getEventsStateFlow().collectAsStateWithLifecycle()
+    val stateCommunityList by viewModel.getCommunityStateFlow().collectAsStateWithLifecycle()
     val search by viewModel.getSearchStringFlow().collectAsStateWithLifecycle()
     val community by viewModel.getDataCommunityFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
@@ -39,7 +40,6 @@ internal fun MainEventsScreen(
                 viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
             }
         },
-        bottomBar = {},
         containerColor = AppTheme.colors.neutralColorBackground
     ) { padding ->
         when {
@@ -47,14 +47,17 @@ internal fun MainEventsScreen(
                 MainEventScreenContent(
                     modifier = modifier.padding(padding),
                     events = events,
-                    state = state,
+                    eventListState = stateEventList,
+                    communityListState = stateCommunityList,
                     community = community,
                     selectedChips = selectedChips,
                     allChipsList = allChipsList,
                     onSelect = { selected ->
                         viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
                     },
-                    onAddCommunityClick = { },
+                    onAddCommunityClick = { idCommunity ->
+                        viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnChangeSubscribeState(idCommunity))
+                    },
                     onNavigateToCommunityDetail = { id ->
                         navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")
                     },
@@ -67,7 +70,7 @@ internal fun MainEventsScreen(
                 MainEventScreenSearch(
                     modifier = modifier.padding(padding),
                     events = events,
-                    state = state,
+                    state = stateEventList,
                     community = community,
                     onNavigateCommunityDetail = { id ->
                         navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")

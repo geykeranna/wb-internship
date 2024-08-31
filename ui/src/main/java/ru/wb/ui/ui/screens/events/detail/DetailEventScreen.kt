@@ -13,10 +13,11 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.ui.base.BaseScreen
+import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.components.ButtonByState
-import ru.wb.ui.ui.screens.events.detail.components.DetailData
+import ru.wb.ui.ui.screens.events.detail.components.DetailEventData
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -60,9 +61,12 @@ internal fun DetailEventScreen(
             modifier = Modifier.padding(padding),
             state = state,
         ){
-            DetailData(
-                modifier = modifier,
+            DetailEventData(
+                modifier = Modifier,
                 detailInfo = detailInfo,
+                onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/event $id") },
+                onNavigateCommunityScreen = {id -> navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")},
+                onNavigateEventScreen = { id -> navController.navigate(Screen.EVENT_DETAIL.route + "/$id") }
             )
         }
     }

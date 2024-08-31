@@ -40,7 +40,7 @@ internal class DetailEventScreenViewModel(
         _state.emit(BaseState.LOADING)
         getData.execute(id).collect {
             when {
-                it.id.isEmpty() -> _state.emit(BaseState.ERROR)
+                it.id.isEmpty() -> _state.emit(BaseState.EMPTY)
                 else -> {
                     _detailData.emit(it)
                     _state.emit(BaseState.SUCCESS)

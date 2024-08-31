@@ -26,4 +26,12 @@ internal class UserRepositoryImpl: UserRepository {
     override fun handleGoingEvent(eventID: String): Flow<Boolean> {
         return flowOf(true)
     }
+
+    override fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
+
+    override fun getSubscriptionStatus(idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 }

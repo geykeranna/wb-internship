@@ -23,6 +23,8 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun TopBarDetail(
     modifier: Modifier = Modifier,
     title: String = "",
+    leftIconVisible: Boolean = true,
+    rightIconVisible: Boolean = true,
     onBackClick: () -> Unit = {},
     onShareClick: () -> Unit = {},
 ) {
@@ -33,14 +35,17 @@ internal fun TopBarDetail(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Icon(
-            modifier = Modifier
-                .clickable { onBackClick() }
-                .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
-            painter = painterResource(id = R.drawable.ic_back),
-            tint = AppTheme.colors.brandColorDefault,
-            contentDescription = "back button"
-        )
+        if (leftIconVisible) {
+            Icon(
+                modifier = Modifier
+                    .clickable { onBackClick() }
+                    .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
+                painter = painterResource(id = R.drawable.ic_back),
+                tint = AppTheme.colors.brandColorDefault,
+                contentDescription = "back button"
+            )
+        }
+
 
         Text (
             modifier = Modifier.fillMaxWidth(0.9f),
@@ -51,13 +56,15 @@ internal fun TopBarDetail(
             textAlign = TextAlign.Center,
         )
 
-        Icon(
-            modifier = Modifier
-                .clickable { onShareClick() }
-                .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
-            painter = painterResource(id = R.drawable.ic_share),
-            tint = AppTheme.colors.brandColorDefault,
-            contentDescription = "share button"
-        )
+        if (rightIconVisible) {
+            Icon(
+                modifier = Modifier
+                    .clickable { onShareClick() }
+                    .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
+                painter = painterResource(id = R.drawable.ic_share),
+                tint = AppTheme.colors.brandColorDefault,
+                contentDescription = "share button"
+            )
+        }
     }
 }

@@ -38,7 +38,16 @@ val Gradient2 = Brush.linearGradient(listOf(
     Color(0xFF8306F7),
     Color(0xFF6600FF),
 ))
-val GradientColorBackground = Color(0xFFD2D5F9)
+val GradientColorBackground = Brush.linearGradient(listOf(
+    Color(0xFFFEF1FB),
+    Color(0xFFFDF1FC),
+    Color(0xFFFCF0FC),
+    Color(0xFFFBF0FD),
+    Color(0xFFF9EFFD),
+    Color(0xFFF8EEFE),
+    Color(0xFFF6EEFE),
+    Color(0xFFF4EDFF),
+))
 
 val DisabledColorForTab = Color(0xFF666666)
 

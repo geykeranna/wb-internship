@@ -8,6 +8,7 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.domain.usecases.event.GetEventListUseCase
+import ru.wb.domain.usecases.user.ChangeSubscriptionStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
@@ -16,21 +17,25 @@ import ru.wb.ui.ui.component.chips.ChipsData
 internal class MainEventsScreenViewModel(
     private val getEventsList: GetEventListUseCase,
     private val getCommunityList: GetCommunityListUseCase,
+    private val changeSubscribeState: ChangeSubscriptionStatusUseCase,
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
     private val _dataList = MutableStateFlow(listOf<EventData>())
     private val dataList: StateFlow<List<EventData>> = _dataList
 
-    private val _dataListCommunity = MutableStateFlow(listOf(CommunityData.defaultObject))
+    private val _dataListCommunity = MutableStateFlow(List(10) {CommunityData.defaultObject})
     private val dataListCommunity: StateFlow<List<CommunityData>> = _dataListCommunity
 
-    private val _chipsData = MutableStateFlow(listOf(ChipsData(id="0", name = "Все категории")))
+    private val _chipsData = MutableStateFlow(listOf(ChipsData.defaultObject))
     private val chipsData: StateFlow<List<ChipsData>> = _chipsData
 
     private val _searchString = MutableStateFlow("")
     private val searchString: StateFlow<String> = _searchString
 
-    private val _state = MutableStateFlow(BaseState.EMPTY)
-    private val state: StateFlow<BaseState> = _state
+    private val _stateEventData = MutableStateFlow(BaseState.EMPTY)
+    private val stateEventData: StateFlow<BaseState> = _stateEventData
+
+    private val _stateCommunityData = MutableStateFlow(BaseState.EMPTY)
+    private val stateCommunityData: StateFlow<BaseState> = _stateCommunityData
 
     init {
         obtainEvent(Event.OnLoadingStarted)
@@ -42,7 +47,9 @@ internal class MainEventsScreenViewModel(
 
     fun getDataCommunityFlow(): StateFlow<List<CommunityData>> = dataListCommunity
 
-    fun getStateFlow(): StateFlow<BaseState> = state
+    fun getEventsStateFlow(): StateFlow<BaseState> = stateEventData
+
+    fun getCommunityStateFlow(): StateFlow<BaseState> = stateCommunityData
 
     fun getChipsFlow(): StateFlow<List<ChipsData>> = chipsData
 
@@ -65,36 +72,50 @@ internal class MainEventsScreenViewModel(
     )
 
     private fun startLoading() = viewModelScope.launch {
-        _state.emit(BaseState.LOADING)
+        _stateEventData.emit(BaseState.LOADING)
         getEventsList.execute().collect {
             when {
-                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                it.isEmpty() -> _stateEventData.emit(BaseState.EMPTY)
                 else -> {
                     _dataList.emit(it)
-                    _state.emit(BaseState.SUCCESS)
+                    _stateEventData.emit(BaseState.SUCCESS)
                 }
             }
         }
         getCommunityList.execute().collect {
             when {
-                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                it.isEmpty() -> _stateCommunityData.emit(BaseState.EMPTY)
                 else -> {
                     _dataListCommunity.emit(it)
-                    _state.emit(BaseState.SUCCESS)
+                    _stateCommunityData.emit(BaseState.SUCCESS)
                 }
             }
         }
     }
 
     private fun onSearch(search: String) = viewModelScope.launch {
-        _state.emit(BaseState.LOADING)
+        _stateEventData.emit(BaseState.LOADING)
+        _stateCommunityData.emit(BaseState.LOADING)
         _searchString.emit(search)
         getEventsList.execute(query = search).collect {
             when {
-                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                it.isEmpty() -> {
+                    _stateEventData.emit(BaseState.EMPTY)
+                }
                 else -> {
                     _dataList.emit(it)
-                    _state.emit(BaseState.SUCCESS)
+                    _stateEventData.emit(BaseState.SUCCESS)
+                }
+            }
+        }
+        getCommunityList.execute(query = search).collect {
+            when {
+                it.isEmpty() -> {
+                    _stateCommunityData.emit(BaseState.EMPTY)
+                }
+                else -> {
+                    _dataListCommunity.emit(it)
+                    _stateCommunityData.emit(BaseState.SUCCESS)
                 }
             }
         }
@@ -104,10 +125,20 @@ internal class MainEventsScreenViewModel(
         _chipsData.emit(selectedList)
     }
 
+    private fun onChangeSub(idCommunity: String) = viewModelScope.launch {
+        changeSubscribeState.execute(idCommunity).collect { results ->
+            _dataListCommunity.emit(dataListCommunity.value.map { value ->
+                if (value.id == idCommunity) { value.copy(isSubscribed = results) }
+                else { value }
+            })
+        }
+    }
+
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
         class OnSearch(val query: String) : Event()
         class OnSelectValue(val selectedList: List<ChipsData>): Event()
+        class OnChangeSubscribeState(val idCommunity: String) : Event()
     }
 
     override fun obtainEvent(event: Event) {
@@ -120,6 +151,9 @@ internal class MainEventsScreenViewModel(
             }
             is Event.OnSelectValue -> {
                 onSelectItems(event.selectedList)
+            }
+            is Event.OnChangeSubscribeState -> {
+                onChangeSub(event.idCommunity)
             }
         }
     }

@@ -1,5 +1,8 @@
-package ru.wb.ui.ui.screens.community.detail
+package ru.wb.ui.ui.screens.users.list
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,24 +14,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.base.BaseScreen
+import ru.wb.ui.ui.component.cards.visitors.UserShortCard
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
-import ru.wb.ui.ui.screens.community.detail.components.DetailCommunityData
 import ru.wb.ui.ui.theme.AppTheme
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun DetailCommunityScreen(
-    idCommunity: String,
+internal fun UsersListByEventScreen(
+    data: String,
     navController: NavController,
     modifier: Modifier = Modifier,
-    detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(idCommunity) })
+    detailViewModel: UsersListScreenViewModel = koinViewModel(parameters = { parametersOf(data) })
 ) {
-    val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
-    val btnState by detailViewModel.getBtnStateBySubStatusFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
-    val labels by detailViewModel.getBtnStateBySubStatusFlow().collectAsStateWithLifecycle()
+    val usersListLabel by detailViewModel.getUserListLabelFlow().collectAsStateWithLifecycle()
+    val dataList by detailViewModel.getDataListFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
@@ -37,9 +39,10 @@ internal fun DetailCommunityScreen(
         containerColor = AppTheme.colors.neutralColorBackground,
         topBar = {
             TopBarDetail(
-                modifier = Modifier.padding(bottom = 20.dp),
-                title = labels.label,
-                onBackClick = { navController.popBackStack() }
+                modifier = Modifier,
+                title = usersListLabel.label,
+                onBackClick = { navController.popBackStack() },
+                rightIconVisible = false,
             )
         },
     ) { padding ->
@@ -47,13 +50,16 @@ internal fun DetailCommunityScreen(
             modifier = Modifier.padding(padding),
             state = state,
         ){
-            DetailCommunityData(
-                modifier = Modifier,
-                detailInfo = detailInfo,
-                btnState = btnState,
-                onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/community $idCommunity") },
-            ) { idCommunity ->
-                navController.navigate(Screen.EVENT_DETAIL.route + "/$idCommunity")
+            FlowRow(
+                modifier = modifier.fillMaxSize().padding(top = 32.dp),
+                verticalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                dataList.forEach { user ->
+                    UserShortCard(
+                        userData = user,
+                    )
+                }
             }
         }
     }

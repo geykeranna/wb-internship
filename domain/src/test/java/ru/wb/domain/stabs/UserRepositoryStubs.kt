@@ -32,4 +32,8 @@ internal class UserRepositoryStubs: UserRepository {
     override fun postUser(userData: UserData) = flowOf(true)
 
     override fun handleGoingEvent(eventID: String) = flowOf(true)
+
+    override fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+
+    override fun getSubscriptionStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
 }

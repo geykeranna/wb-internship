@@ -11,7 +11,7 @@ import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_IN_TAGS_CHIPS
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TagsChips(
-    data: List<ChipsData>,
+    data: List<String>,
     modifier: Modifier = Modifier,
 ) {
     FlowRow(

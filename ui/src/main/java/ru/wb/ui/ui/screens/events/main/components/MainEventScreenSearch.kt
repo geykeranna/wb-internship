@@ -23,7 +23,7 @@ internal fun MainEventScreenSearch(
     events: List<EventData> = listOf(),
     community: List<CommunityData> = listOf(),
     state: BaseState = BaseState.EMPTY,
-    onAddCommunityClick: () -> Unit = {},
+    onAddCommunityClick: (id: String) -> Unit = {},
     onNavigateCommunityDetail: (id: String) -> Unit = { },
     onNavigateEventDetail: (id: String) -> Unit = { },
 ) {

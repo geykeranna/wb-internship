@@ -8,22 +8,22 @@ data class UserData(
     val story: Boolean = false,
     val status: Boolean = false,
     val phone: String,
-    val role: String? = null,
+    val role: List<String>? = null,
     val socialMedia: List<SocialMedia>,
     val description: String? = null,
 ){
     companion object{
         val defaultObject = UserData(
             id = "",
-            firstName = "Anna",
-            lastName = "",
-            icon = "",
+            firstName = "Павел",
+            lastName = "Хориков",
+            icon = "https://i.pinimg.com/736x/68/66/8b/68668baa3fc2881be05b907ab5c02ba8.jpg",
             story = false,
             status = false,
             phone = "",
             socialMedia = listOf(),
-            role = "Developer",
-            description = ""
+            role = listOf("Developer"),
+            description = "Ведущий специалист по подбору персонала в одной из крупнейших IT-компаний в ЕС."
         )
     }
 }
