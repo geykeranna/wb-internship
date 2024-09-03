@@ -25,7 +25,6 @@ import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.cards.events.LargeEventCard
 import ru.wb.ui.ui.component.cards.visitors.AvatarsSize
 import ru.wb.ui.ui.component.cards.visitors.VisitorsList
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_ITEMS_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -64,12 +63,12 @@ internal fun DetailEventData(
             OwnerCard(
                 modifier = Modifier.clickable { onNavigateUserScreen(detailInfo.manager.id) },
                 owner = Owner.USER,
-                title = "${detailInfo.manager.firstName} ${detailInfo.manager.lastName.orEmpty()}",
-                description = detailInfo.manager.description.orEmpty()
+                title = detailInfo.manager.name,
+                description = detailInfo.manager.description
             ) {
                 UserAvatar(
                     src = detailInfo.manager.icon,
-                    size = AvatarsSize.SQUARE,
+                    sizeAvatar = AvatarsSize.SQUARE,
                 )
             }
         }

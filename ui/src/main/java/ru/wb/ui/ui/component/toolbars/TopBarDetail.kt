@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -23,10 +24,10 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun TopBarDetail(
     modifier: Modifier = Modifier,
     title: String = "",
-    leftIconVisible: Boolean = true,
-    rightIconVisible: Boolean = true,
-    onBackClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
+    leftIcon: Painter? = painterResource(id = R.drawable.ic_back),
+    rightIcon: Painter? = painterResource(id = R.drawable.ic_share),
+    onLeftClick: () -> Unit = {},
+    onRightClick: () -> Unit = {},
 ) {
     Row(
         modifier = modifier
@@ -35,17 +36,16 @@ internal fun TopBarDetail(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        if (leftIconVisible) {
+        leftIcon?.let { icon ->
             Icon(
                 modifier = Modifier
-                    .clickable { onBackClick() }
+                    .clickable { onLeftClick() }
                     .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
-                painter = painterResource(id = R.drawable.ic_back),
+                painter = icon,
                 tint = AppTheme.colors.brandColorDefault,
                 contentDescription = "back button"
             )
         }
-
 
         Text (
             modifier = Modifier.fillMaxWidth(0.9f),
@@ -56,12 +56,12 @@ internal fun TopBarDetail(
             textAlign = TextAlign.Center,
         )
 
-        if (rightIconVisible) {
+        rightIcon?.let { icon ->
             Icon(
                 modifier = Modifier
-                    .clickable { onShareClick() }
+                    .clickable { onRightClick() }
                     .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
-                painter = painterResource(id = R.drawable.ic_share),
+                painter = icon,
                 tint = AppTheme.colors.brandColorDefault,
                 contentDescription = "share button"
             )

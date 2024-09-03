@@ -13,7 +13,7 @@ import ru.wb.domain.model.CommunityData
 internal fun CommunityCardList(
     itemsList: List<CommunityData>,
     modifier: Modifier = Modifier,
-    onClick: (id: String) -> Unit = {},
+    onClick: ((id: String) -> Unit)? = {},
     onNavigate: (id: String) -> Unit = {},
 ) {
     LazyRow(

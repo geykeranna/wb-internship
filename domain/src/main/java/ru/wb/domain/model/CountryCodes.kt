@@ -4,10 +4,10 @@ data class CountryCodes(
     val countryCode: String,
     val country: String,
     val flagIcon: String,
-    val mask: String
+    val mask: String,
 ) {
     companion object {
-        val shimmerData = listOf(
+        val defaultData = listOf(
             CountryCodes(
                 country = "Russia",
                 countryCode = "+7",

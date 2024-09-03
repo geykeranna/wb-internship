@@ -29,10 +29,14 @@
     <string name="label_menu_items_help">Помощь</string>
     <string name="label_menu_items_referral">Пригласи друга</string>
 
+    <string name="label_show_my_community">Показывать мои сообщества</string>
+    <string name="label_show_my_events">Показывать мои встречи</string>
+    <string name="label_enable_notification">Включить уведомления</string>
     <string name="text_community_meetings">Встречи сообщества</string>
     <string name="text_cancel">Отмена</string>
-    <string name="placeholder_first_name_text_edit_form">Имя (обязательно)</string>
-    <string name="placeholder_last_name_text_edit_form">Фамилия (опционально)</string>
+    <string name="placeholder_first_name_text_edit_form">Имя Фамилия</string>
+    <string name="placeholder_location_text_edit_form">Город</string>
+    <string name="placeholder_description_text_edit_form">Расскажите о себе </string>
     <string name="text_for_sub_community">Будем приглашать на встречи сообщества и рекомендовать похожие</string>
 
 </resources>

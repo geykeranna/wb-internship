@@ -33,12 +33,16 @@ internal fun InputNumberTextField(
     phone: String,
     selectedPhoneCountryCode: CountryCodes,
     modifier: Modifier = Modifier,
+    isAccent: Boolean = true,
+    isByFullPlaceholder: Boolean = false,
     onChange: (value: String) -> Unit = {},
     onEnterClick: () -> Unit = {},
 ) {
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+        when {
+            isAccent -> focusRequester.requestFocus()
+        }
     }
 
     BasicTextField(
@@ -74,7 +78,9 @@ internal fun InputNumberTextField(
             ) {
                 if (phone.isEmpty()){
                     Text(
-                        text = selectedPhoneCountryCode.mask,
+                        text = "${
+                            if(isByFullPlaceholder) { selectedPhoneCountryCode.countryCode } else ""
+                        } ${selectedPhoneCountryCode.mask}",
                         style = AppTheme.typography.bodyText1,
                         color = AppTheme.colors.neutralColorDisabled
                     )

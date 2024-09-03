@@ -8,5 +8,7 @@ interface GetCommunityListUseCase {
         limit: Int? = null,
         offset: Int? = null,
         query: String? = null,
+        idEvent: String? = null,
+        idUser: String? = null,
     ): Flow<List<CommunityData>>
 }

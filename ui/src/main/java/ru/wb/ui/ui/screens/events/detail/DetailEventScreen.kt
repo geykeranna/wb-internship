@@ -38,9 +38,9 @@ internal fun DetailEventScreen(
         containerColor = AppTheme.colors.neutralColorBackground,
         topBar = {
             TopBarDetail(
-                modifier = Modifier,
+                modifier = Modifier.padding(bottom = 20.dp),
                 title = detailInfo.name,
-                onBackClick = { navController.popBackStack() }
+                onLeftClick = { navController.popBackStack() }
             )
         },
         bottomBar = {
@@ -66,7 +66,8 @@ internal fun DetailEventScreen(
                 detailInfo = detailInfo,
                 onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/event $id") },
                 onNavigateCommunityScreen = {id -> navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")},
-                onNavigateEventScreen = { id -> navController.navigate(Screen.EVENT_DETAIL.route + "/$id") }
+                onNavigateEventScreen = { id -> navController.navigate(Screen.EVENT_DETAIL.route + "/$id") },
+                onNavigateUserScreen = {id -> navController.navigate(Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route + "/$id")}
             )
         }
     }

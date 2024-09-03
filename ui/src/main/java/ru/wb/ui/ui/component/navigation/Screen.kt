@@ -36,12 +36,12 @@ enum class Screen(
         route = "more",
         label = "Ещё"
     ),
-    PROFILE_VIEW(
-        route = "more_profile",
+    PROFILE_VIEW_OUTSIDE_DETAIL (
+        route = "profile_detail",
         label = "Профиль"
     ),
-    PROFILE_EDIT (
-        route = "more_profile_edit",
+    PROFILE_VIEW_INSIDE_DETAIL (
+        route = "profile_detail",
         label = "Профиль"
     ),
     PHONE (
@@ -51,10 +51,6 @@ enum class Screen(
     PINCODE (
         route = "first_pin_code",
         label = "Введите код",
-    ),
-    PROFILE_FIRST_EDIT (
-        route = "first_profile_edit",
-        label = "Профиль",
     ),
     USER_LIST (
         route = "user_list_by_event",

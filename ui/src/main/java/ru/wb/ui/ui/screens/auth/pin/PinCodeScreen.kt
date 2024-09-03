@@ -36,7 +36,7 @@ internal fun PinCodeScreen(
         onClickPassAgain = { viewModel.obtainEvent(PinCodeScreenViewModel.Event.OnSendAgain) }
     ){
         if (viewModel.getValidateState()) {
-            navController.navigate(Screen.PROFILE_FIRST_EDIT.route)
+            navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)
         }
     }
 }

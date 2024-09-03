@@ -1,65 +1,86 @@
 package ru.wb.ui.ui.screens.profile.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.wb.domain.model.CommunityData
+import ru.wb.domain.model.EventData
 import ru.wb.domain.model.UserData
-import ru.wb.ui.ui.component.avatars.ProfileAvatar
-import ru.wb.ui.ui.component.avatars.ProfileSize
-import ru.wb.ui.ui.component.chips.SocialChips
-import ru.wb.ui.ui.component.utils.Constants.PADDING_CHIPS_GROUP_PROFILE_SCREEN
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN
+import ru.wb.ui.ui.component.cards.LabeledCard
+import ru.wb.ui.ui.component.cards.community.CommunityCardList
+import ru.wb.ui.ui.component.cards.events.EventCardsList
+import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun ProfileViewCard(
     userData: UserData,
-    modifier: Modifier = Modifier
+    eventData: List<EventData>,
+    communityData: List<CommunityData>,
+    modifier: Modifier = Modifier,
+    pageMode: ProfilePageMode = ProfilePageMode.VIEW_OUTSIDE,
+    onBottomClick: () -> Unit = {},
+    onNavigateToCommunityDetail: (id: String) -> Unit = {},
+    onNavigateToEventDetail: (id: String) -> Unit = {}
 ) {
     LazyColumn (
-        modifier = modifier
-            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(40.dp),
     ){
         item {
-            ProfileAvatar(
-                modifier = Modifier.padding(top = VERTICAL_PADDING_AVATAR_PROFILE_SCREEN.dp),
-                size = ProfileSize.LARGE
+            ProfileViewInfoCard(
+                modifier = Modifier,
+                userData = userData
             )
+        }
 
-            Column(
+        if (eventData.isNotEmpty()) {
+            item {
+                LabeledCard(
+                    label = pageMode.eventLabelText
+                ) {
+                    EventCardsList(
+                        modifier = Modifier,
+                        onNavigate = onNavigateToEventDetail,
+                        itemsList = eventData,
+                        size = EventSize.THIN,
+                    )
+                }
+            }
+        }
+
+        if (communityData.isNotEmpty()) {
+            item {
+                LabeledCard(
+                    label = pageMode.communityLabelText
+                ) {
+                    CommunityCardList(
+                        modifier = Modifier,
+                        itemsList = communityData,
+                        onClick = null,
+                        onNavigate = onNavigateToCommunityDetail,
+                    )
+                }
+            }
+        }
+
+        item {
+            Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = VERTICAL_PADDING_TEXT_BLOCK_PROFILE_SCREEN.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier,
-                    text = userData.firstName + userData.lastName,
-                    style = AppTheme.typography.heading3.copy(textAlign = TextAlign.Center)
-                )
-                Text(
-                    modifier = Modifier,
-                    text = userData.phone,
-                    style = AppTheme.typography.subheading2.copy(textAlign = TextAlign.Center),
-                    color = AppTheme.colors.neutralColorDisabled
-                )
-            }
-
-            SocialChips(
-                modifier = Modifier.padding(PADDING_CHIPS_GROUP_PROFILE_SCREEN.dp),
-                list = userData.socialMedia
+                    .height(40.dp)
+                    .clickable { onBottomClick() },
+                text = pageMode.bottomBarText,
+                textAlign = TextAlign.Center,
+                color = AppTheme.colors.neutralColorSecondaryText,
+                style = AppTheme.typography.primary,
             )
         }
     }

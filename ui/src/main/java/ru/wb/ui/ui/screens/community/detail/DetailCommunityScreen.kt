@@ -39,7 +39,7 @@ internal fun DetailCommunityScreen(
             TopBarDetail(
                 modifier = Modifier.padding(bottom = 20.dp),
                 title = labels.label,
-                onBackClick = { navController.popBackStack() }
+                onLeftClick = { navController.popBackStack() }
             )
         },
     ) { padding ->

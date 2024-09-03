@@ -24,12 +24,12 @@ internal fun UserShortCard(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         UserAvatar(
-            size = AvatarsSize.NORMAL,
+            sizeAvatar = AvatarsSize.NORMAL,
             src = userData.icon
         )
 
         Text(
-            text = userData.firstName,
+            text = userData.name,
             style = AppTheme.typography.primary
         )
 

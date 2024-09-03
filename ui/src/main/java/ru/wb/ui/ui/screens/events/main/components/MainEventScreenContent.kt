@@ -19,7 +19,6 @@ import ru.wb.ui.ui.component.cards.events.EventCardsList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.chips.ChipsGroup
-import ru.wb.ui.ui.component.chips.ChipsMode
 
 @Composable
 internal fun MainEventScreenContent(
@@ -30,7 +29,7 @@ internal fun MainEventScreenContent(
     communityListState: BaseState = BaseState.EMPTY,
     selectedChips: List<ChipsData> = listOf(),
     allChipsList: List<ChipsData> = listOf(),
-    onSelect: (list: List<ChipsData>) -> Unit = {},
+    onSelect: (newValue: ChipsData) -> Unit = {},
     onAddCommunityClick: (id: String) -> Unit = {},
     onNavigateToCommunityDetail: (id: String) -> Unit = {},
     onNavigateToEventDetail: (id: String) -> Unit = {}
@@ -47,7 +46,7 @@ internal fun MainEventScreenContent(
             if (eventListState == BaseState.SUCCESS) {
                 item {
                     EventCardsList(
-                        modifier = Modifier.padding(top = 20.dp),
+                        modifier = Modifier,
                         onNavigate = onNavigateToEventDetail,
                         itemsList = events,
                         size = EventSize.WIDE,
@@ -93,7 +92,6 @@ internal fun MainEventScreenContent(
                         ChipsGroup(
                             modifier = Modifier,
                             data = allChipsList,
-                            mode = ChipsMode.MULTIPLE,
                             selectedList = selectedChips,
                             onChangeSelect = onSelect
                         )

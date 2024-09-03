@@ -22,7 +22,6 @@ import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.NavGraph
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.ui.ui.component.toolbars.BottomNavBar
 import ru.wb.ui.ui.component.utils.NoRippleTheme
 
 @Composable
@@ -38,7 +37,6 @@ internal fun MainScreen(
     when (navBackStackEntry?.destination?.route) {
         Screen.PHONE.route -> bottomBarState.value = false
         Screen.PINCODE.route -> bottomBarState.value = false
-        Screen.PROFILE_FIRST_EDIT.route -> bottomBarState.value = false
         Screen.SPLASH.route -> bottomBarState.value = false
         else -> bottomBarState.value = true
     }

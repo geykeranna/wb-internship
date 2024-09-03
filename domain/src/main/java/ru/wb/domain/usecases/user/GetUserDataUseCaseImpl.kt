@@ -7,5 +7,5 @@ import ru.wb.domain.repository.UserRepository
 internal class GetUserDataUseCaseImpl(
     private val repository: UserRepository
 ) : GetUserDataUseCase {
-    override fun execute(id: String): Flow<UserData> = repository.getUser(id = id)
+    override fun execute(id: String?): Flow<UserData> = repository.getUser(id = id)
 }

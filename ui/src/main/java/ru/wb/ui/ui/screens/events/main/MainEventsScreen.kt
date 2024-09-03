@@ -22,11 +22,11 @@ internal fun MainEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: MainEventsScreenViewModel = koinViewModel()
 ) {
-    val events by viewModel.getAllDataFlow().collectAsStateWithLifecycle()
+    val events by viewModel.getEventDataFlow().collectAsStateWithLifecycle()
     val stateEventList by viewModel.getEventsStateFlow().collectAsStateWithLifecycle()
     val stateCommunityList by viewModel.getCommunityStateFlow().collectAsStateWithLifecycle()
     val search by viewModel.getSearchStringFlow().collectAsStateWithLifecycle()
-    val community by viewModel.getDataCommunityFlow().collectAsStateWithLifecycle()
+    val community by viewModel.getCommunityDataFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
     val allChipsList = viewModel.getAllChipsList()
 
@@ -36,9 +36,9 @@ internal fun MainEventsScreen(
             TopBarMain(
                 modifier = Modifier.padding(top = 10.dp),
                 inputText = search,
-            ) { input ->
-                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input))
-            }
+                onChangeValue = { input -> viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input)) },
+                onRightClick =  { navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)}
+            )
         },
         containerColor = AppTheme.colors.neutralColorBackground
     ) { padding ->

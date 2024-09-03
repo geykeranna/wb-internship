@@ -1,8 +1,6 @@
 package ru.wb.ui.ui.component.input
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.hoverable
@@ -24,17 +22,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
+import ru.wb.ui.ui.component.utils.focusedBorder
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -46,6 +44,8 @@ internal fun InputField(
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
+    fontStyle: TextStyle = AppTheme.typography.inputText,
+    minLines: Int = 1,
     focusRequester: FocusRequester = remember { FocusRequester() },
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
@@ -76,6 +76,7 @@ internal fun InputField(
 
     Row(
         modifier = modifier
+            .fillMaxWidth()
             .focusable(interactionSource = interactionSource)
             .hoverable(interactionSource = interactionSource)
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
@@ -104,7 +105,7 @@ internal fun InputField(
         ) {
             Text(
                 text = placeholder,
-                style = AppTheme.typography.secondary,
+                style = fontStyle,
                 color = hintColor,
             )
 
@@ -114,9 +115,10 @@ internal fun InputField(
                     .fillMaxWidth(),
                 enabled = !disable,
                 value = value,
-                singleLine = true,
+                singleLine = minLines == 1,
+                minLines = minLines,
                 cursorBrush = SolidColor(AppTheme.colors.neutralColorFont),
-                textStyle = AppTheme.typography.secondary.copy(color = AppTheme.colors.neutralColorFont),
+                textStyle = fontStyle.copy(color = AppTheme.colors.neutralColorFont),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
             )
@@ -133,11 +135,4 @@ internal fun InputField(
             )
         }
     }
-}
-
-@SuppressLint("UnnecessaryComposedModifier")
-fun Modifier.focusedBorder(isActive: Boolean = false, borderColor: Color) = composed {
-    return@composed  if (isActive) {
-        this.border(FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD.dp, borderColor, RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
-    } else this
 }

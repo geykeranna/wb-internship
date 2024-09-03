@@ -3,6 +3,7 @@ package ru.wb.ui.ui.component.chips
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -13,12 +14,12 @@ import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS
 internal fun ChipsGroup(
     data: List<ChipsData>,
     modifier: Modifier = Modifier,
-    mode: ChipsMode = ChipsMode.NO_SELECT,
+    size: ChipsSize = ChipsSize.LARGE,
     selectedList: List<ChipsData> = listOf(),
-    onChangeSelect: (list: List<ChipsData>) -> Unit = {}
+    onChangeSelect: (newValue: ChipsData) -> Unit = {},
 ) {
     FlowRow(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS.dp),
         verticalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS.dp)
     ) {
@@ -26,39 +27,12 @@ internal fun ChipsGroup(
             val isSelect = selectedList.contains(chip)
 
             ChipsItems(
+                modifier = Modifier,
                 item = chip,
-                isSelect = isSelect
-            ) {
-                when (mode) {
-                    ChipsMode.SINGLE -> {
-                        onSelect(
-                            isSelect = isSelect,
-                            selectedList = listOf(),
-                            unSelectedList = listOf(chip),
-                            onChangeSelect = onChangeSelect
-                        )
-                    }
-                    ChipsMode.MULTIPLE -> {
-                        onSelect(
-                            isSelect = isSelect,
-                            selectedList = selectedList - chip,
-                            unSelectedList = selectedList + chip,
-                            onChangeSelect = onChangeSelect
-                        )
-                    }
-                    else -> {}
-                }
-            }
+                size = size,
+                isSelect = isSelect,
+                onSelect = onChangeSelect
+            )
         }
     }
-}
-
-private fun onSelect(
-    isSelect: Boolean,
-    selectedList: List<ChipsData>,
-    unSelectedList: List<ChipsData>,
-    onChangeSelect: (list: List<ChipsData>) -> Unit,
-) {
-    val newList = if (isSelect) selectedList else unSelectedList
-    return onChangeSelect(newList)
 }

@@ -18,31 +18,40 @@ import ru.wb.ui.ui.theme.AppTheme
 fun ChipsItems(
     item: ChipsData,
     modifier: Modifier = Modifier,
+    size: ChipsSize = ChipsSize.LARGE,
     isSelect: Boolean = false,
-    onSelect: () -> Unit = {}
+    onSelect: (newValue: ChipsData) -> Unit = {}
 ){
-    val background = when {
-        isSelect -> AppTheme.colors.brandColorDefault
-        else -> AppTheme.colors.neutralColorSecondaryBackground
+    val (background, textColor) = when {
+        isSelect -> listOf(AppTheme.colors.brandColorDefault, AppTheme.colors.neutralColorBackground)
+        else -> listOf(AppTheme.colors.neutralColorSecondaryBackground, AppTheme.colors.brandColorDefault)
     }
-    val textColor = when {
-        isSelect -> AppTheme.colors.neutralColorBackground
-        else -> AppTheme.colors.brandColorDefault
+
+    val font = when (size) {
+        ChipsSize.LARGE -> AppTheme.typography.subheading3
+        ChipsSize.NORMAL -> AppTheme.typography.subheading4
+        ChipsSize.SMALL -> AppTheme.typography.secondary
     }
+
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_CHIPS.dp))
             .background(background)
-            .clickable { onSelect() }
+            .clickable { onSelect(item) }
     ) {
         Text(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 10.dp)
+                .padding(
+                    top = size.paddingTop.dp,
+                    bottom = size.paddingBottom.dp,
+                    start = size.paddingLeft.dp,
+                    end = size.paddingRight.dp,
+                )
                 .align(Alignment.Center),
             text = item.name,
             maxLines = 1,
             color = textColor,
-            style = AppTheme.typography.chips
+            style = font
         )
     }
 }

@@ -16,10 +16,10 @@ internal class PhoneScreenViewModel(
     private val _phoneNumber = MutableStateFlow("")
     private val phoneNumber: StateFlow<String> = _phoneNumber
 
-    private val _selectedPhoneCode = MutableStateFlow(CountryCodes.shimmerData.first())
+    private val _selectedPhoneCode = MutableStateFlow(CountryCodes.defaultData.first())
     private val selectedPhoneCode: StateFlow<CountryCodes> = _selectedPhoneCode
 
-    private val _phoneCountryCodeList = MutableStateFlow(CountryCodes.shimmerData)
+    private val _phoneCountryCodeList = MutableStateFlow(CountryCodes.defaultData)
     private val phoneCountryCodeList: StateFlow<List<CountryCodes>> = _phoneCountryCodeList
 
     fun getPhoneNumberFlow(): StateFlow<String> = phoneNumber

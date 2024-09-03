@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.avatars.CommunityAvatar
 import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.chips.ChipsGroup
-import ru.wb.ui.ui.component.chips.ChipsMode
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -41,7 +40,6 @@ internal fun CommunityCard(
 
         ChipsGroup(
             data = tags,
-            mode = ChipsMode.NO_SELECT
         )
     }
 }

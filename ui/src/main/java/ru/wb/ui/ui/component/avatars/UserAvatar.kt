@@ -13,33 +13,31 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.cards.visitors.AvatarsSize
-import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR
-import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR_IN_CARD
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun UserAvatar(
     modifier: Modifier = Modifier,
     src: String? = null,
-    size: AvatarsSize = AvatarsSize.SMALL
+    sizeAvatar: AvatarsSize = AvatarsSize.SMALL
 ) {
-    val mod = when(size) {
+    val mod = when(sizeAvatar) {
         AvatarsSize.NORMAL -> {
             modifier
                 .clip(CircleShape)
-                .size(SIZE_USER_AVATAR_IN_CARD.dp)
+                .size(sizeAvatar.size.dp)
                 .background(color = AppTheme.colors.neutralColorDivider)
         }
         AvatarsSize.SQUARE -> {
             modifier
-                .size(SIZE_USER_AVATAR_IN_CARD.dp)
+                .size(sizeAvatar.size.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .background(color = AppTheme.colors.neutralColorDivider)
         }
         else -> {
             modifier
                 .clip(CircleShape)
-                .size(SIZE_USER_AVATAR.dp)
+                .size(sizeAvatar.size.dp)
                 .background(color = AppTheme.colors.neutralColorDivider)
         }
     }

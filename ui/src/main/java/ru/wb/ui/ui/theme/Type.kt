@@ -4,8 +4,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.sp
 
 object AppTypo {
@@ -27,6 +25,12 @@ object AppTypo {
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
+    val heading4 = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.SemiBold
+    )
     val subheading1 = TextStyle(
         fontSize = 24.sp,
         fontFamily = interFamily,
@@ -42,10 +46,15 @@ object AppTypo {
     )
 
     val subheading3 = TextStyle(
-        fontSize = 14.sp,
-        fontFamily = latoFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.SemiBold
+        fontSize = 22.sp,
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Normal,
+    )
+
+    val subheading4 = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Medium,
     )
 
     val bodyText1 = TextStyle(
@@ -100,26 +109,21 @@ object AppTypo {
         fontWeight = FontWeight.Bold,
     )
 
-    val textForTabs = TextStyle(
+    val inputText = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        letterSpacing = TextUnit(0.83F, TextUnitType.Sp)
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
     )
+
     val usernameText = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     )
-    val usernamePhoneNumber = TextStyle(
+    val large = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-    )
-    val chips = TextStyle(
-        fontFamily = interFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
+        fontSize = 48.sp,
     )
 
     val communityLabel = TextStyle(
@@ -127,13 +131,11 @@ object AppTypo {
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
     )
-
     val communityLabelFull = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 34.sp,
     )
-
     val userPlusInList = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Medium,

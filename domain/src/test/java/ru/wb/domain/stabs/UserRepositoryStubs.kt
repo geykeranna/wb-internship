@@ -9,8 +9,7 @@ import ru.wb.domain.repository.model.UsersGetRequest
 internal class UserRepositoryStubs: UserRepository {
     private val userData = UserData(
         id = "1",
-        firstName = "Name",
-        lastName = null,
+        name = "Name",
         icon = null,
         story = false,
         status = false,
@@ -25,7 +24,7 @@ internal class UserRepositoryStubs: UserRepository {
         return flowOf(listOf(userData))
     }
 
-    override fun getUser(id: String) = flowOf(userData)
+    override fun getUser(id: String?) = flowOf(userData)
 
     override fun putUser(userData: UserData) = flowOf(true)
 

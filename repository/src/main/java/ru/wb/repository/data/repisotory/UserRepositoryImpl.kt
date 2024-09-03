@@ -11,7 +11,7 @@ internal class UserRepositoryImpl: UserRepository {
         return flowOf(List(10) { UserData.defaultObject })
     }
 
-    override fun getUser(id: String): Flow<UserData> {
+    override fun getUser(id: String?): Flow<UserData> {
         return flowOf(UserData.defaultObject)
     }
 

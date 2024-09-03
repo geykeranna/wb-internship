@@ -12,9 +12,13 @@ internal class GetCommunityListUseCaseImpl(
         limit: Int?,
         offset: Int?,
         query: String?,
+        idEvent: String?,
+        idUser: String?,
     ): Flow<List<CommunityData>> = repository.getCommunities(CommunitiesGetRequest(
         limit = limit,
         offset = offset,
         query = query,
+        idEvent = idEvent,
+        idUser = idUser,
     ))
 }

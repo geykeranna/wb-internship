@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -22,11 +23,12 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun TopBarMain(
     modifier: Modifier = Modifier,
     inputText: String = "",
-    onUserClick: () -> Unit = {},
+    iconRight: Painter? = painterResource(id = R.drawable.user),
+    onRightClick: () -> Unit = {},
     onCancelClick: () -> Unit = {},
     onChangeValue: (text: String) -> Unit = {},
 ) {
-    val iconRight = when {
+    val iconRightInTextField = when {
         inputText.isNotEmpty() -> {
             painterResource(id = R.drawable.ic_close_small)
         }
@@ -45,8 +47,9 @@ internal fun TopBarMain(
             modifier = Modifier.weight(0.8f),
             value = inputText,
             onChangeValue = onChangeValue,
-            iconRight = iconRight,
+            iconRight = iconRightInTextField,
             focusRequester = focusRequester,
+            fontStyle = AppTheme.typography.secondary,
             onClickRightIcon = { onChangeValue("") },
             iconLeft = painterResource(id = R.drawable.ic_search),
             placeholder = stringResource(R.string.placeholder_in_search_field),
@@ -64,15 +67,15 @@ internal fun TopBarMain(
                     text = stringResource(R.string.text_cancel),
                 )
             }
-            else -> {
+            iconRight != null -> {
                 Icon(
-                    modifier = Modifier
-                        .clickable { onUserClick() },
-                    painter = painterResource(id = R.drawable.user),
+                    modifier = Modifier.clickable { onRightClick() },
+                    painter = iconRight,
                     contentDescription = null,
                     tint = AppTheme.colors.brandColorDefault
                 )
             }
+            else -> {}
         }
     }
 }

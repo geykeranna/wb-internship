@@ -26,7 +26,7 @@ import ru.wb.ui.ui.theme.AppTheme
 fun CommunityViewCard(
     communityData: CommunityData,
     modifier: Modifier = Modifier,
-    onAddClick: (id: String) -> Unit = {}
+    onAddClick: ((id: String) -> Unit)? = {}
 ) {
     Column(
         modifier = modifier
@@ -48,23 +48,25 @@ fun CommunityViewCard(
             color = AppTheme.colors.neutralColorFont
         )
 
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(37.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            onClick = { onAddClick(communityData.id) },
-            colors = ButtonColors(
-                contentColor = AppTheme.colors.brandColorDefault,
-                disabledContentColor = AppTheme.colors.brandColorDefault,
-                containerColor = AppTheme.colors.brandColorLight,
-                disabledContainerColor = AppTheme.colors.neutralColorSecondaryBackground,
-            )
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.ic_plus),
-                contentDescription = ""
-            )
+        onAddClick?.let { action ->
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(37.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                onClick = { action(communityData.id) },
+                colors = ButtonColors(
+                    contentColor = AppTheme.colors.brandColorDefault,
+                    disabledContentColor = AppTheme.colors.brandColorDefault,
+                    containerColor = AppTheme.colors.brandColorLight,
+                    disabledContainerColor = AppTheme.colors.neutralColorSecondaryBackground,
+                )
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_plus),
+                    contentDescription = "add button"
+                )
+            }
         }
     }
 }

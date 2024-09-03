@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.component.navigation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,7 +11,6 @@ import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
 import ru.wb.ui.ui.screens.events.main.MainEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
-import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
 import ru.wb.ui.ui.screens.splash.SplashScreen
 import ru.wb.ui.ui.screens.test.Test
@@ -39,7 +37,6 @@ fun NavGraph(
 
         composable(route = Screen.EVENT_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
-                Log.d("testest 1", it)
                 DetailEventScreen(
                     id = it,
                     navController = navController
@@ -84,9 +81,19 @@ fun NavGraph(
             )
         }
 
-        composable(route = Screen.PROFILE_VIEW.route) {
+        composable(route = Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let {
+                ProfileViewScreen(
+                    navController = navController,
+                    idUser = it,
+                )
+            }
+        }
+
+        composable(route = Screen.PROFILE_VIEW_INSIDE_DETAIL.route) {
             ProfileViewScreen(
-                navController = navController
+                navController = navController,
+                idUser = "",
             )
         }
 
@@ -99,23 +106,6 @@ fun NavGraph(
         composable(route = Screen.PINCODE.route) {
             PinCodeScreen(
                 navController = navController
-            )
-        }
-
-        composable(route = Screen.PROFILE_EDIT.route) {
-            ProfileEditScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PROFILE_FIRST_EDIT.route) {
-            ProfileEditScreen(
-                navController = navController,
-                onBackClick = {
-                    navController.navigate(Screen.PHONE.route) {
-                        popUpTo(Screen.PROFILE_FIRST_EDIT.route) { inclusive = true }
-                    }
-                }
             )
         }
 

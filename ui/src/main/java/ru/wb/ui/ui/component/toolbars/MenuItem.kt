@@ -119,7 +119,7 @@ fun MenuItemUser(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text (
-                    text = "${userData.firstName} ${userData.lastName}",
+                    text = userData.name,
                     style = AppTheme.typography.bodyText1,
                     color = AppTheme.colors.neutralColorFont
                 )

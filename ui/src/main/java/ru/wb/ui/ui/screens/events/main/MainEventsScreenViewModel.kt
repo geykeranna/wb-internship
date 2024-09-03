@@ -19,13 +19,13 @@ internal class MainEventsScreenViewModel(
     private val getCommunityList: GetCommunityListUseCase,
     private val changeSubscribeState: ChangeSubscriptionStatusUseCase,
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
-    private val _dataList = MutableStateFlow(listOf<EventData>())
-    private val dataList: StateFlow<List<EventData>> = _dataList
+    private val _eventsList = MutableStateFlow(listOf<EventData>())
+    private val eventsList: StateFlow<List<EventData>> = _eventsList
 
-    private val _dataListCommunity = MutableStateFlow(List(10) {CommunityData.defaultObject})
-    private val dataListCommunity: StateFlow<List<CommunityData>> = _dataListCommunity
+    private val _communityList = MutableStateFlow(listOf<CommunityData>())
+    private val communityList: StateFlow<List<CommunityData>> = _communityList
 
-    private val _chipsData = MutableStateFlow(listOf(ChipsData.defaultObject))
+    private val _chipsData = MutableStateFlow(listOf<ChipsData>())
     private val chipsData: StateFlow<List<ChipsData>> = _chipsData
 
     private val _searchString = MutableStateFlow("")
@@ -41,11 +41,11 @@ internal class MainEventsScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getAllDataFlow(): StateFlow<List<EventData>> = dataList
+    fun getEventDataFlow(): StateFlow<List<EventData>> = eventsList
 
     fun getSearchStringFlow(): StateFlow<String> = searchString
 
-    fun getDataCommunityFlow(): StateFlow<List<CommunityData>> = dataListCommunity
+    fun getCommunityDataFlow(): StateFlow<List<CommunityData>> = communityList
 
     fun getEventsStateFlow(): StateFlow<BaseState> = stateEventData
 
@@ -77,7 +77,7 @@ internal class MainEventsScreenViewModel(
             when {
                 it.isEmpty() -> _stateEventData.emit(BaseState.EMPTY)
                 else -> {
-                    _dataList.emit(it)
+                    _eventsList.emit(it)
                     _stateEventData.emit(BaseState.SUCCESS)
                 }
             }
@@ -86,7 +86,7 @@ internal class MainEventsScreenViewModel(
             when {
                 it.isEmpty() -> _stateCommunityData.emit(BaseState.EMPTY)
                 else -> {
-                    _dataListCommunity.emit(it)
+                    _communityList.emit(it)
                     _stateCommunityData.emit(BaseState.SUCCESS)
                 }
             }
@@ -103,7 +103,7 @@ internal class MainEventsScreenViewModel(
                     _stateEventData.emit(BaseState.EMPTY)
                 }
                 else -> {
-                    _dataList.emit(it)
+                    _eventsList.emit(it)
                     _stateEventData.emit(BaseState.SUCCESS)
                 }
             }
@@ -114,20 +114,22 @@ internal class MainEventsScreenViewModel(
                     _stateCommunityData.emit(BaseState.EMPTY)
                 }
                 else -> {
-                    _dataListCommunity.emit(it)
+                    _communityList.emit(it)
                     _stateCommunityData.emit(BaseState.SUCCESS)
                 }
             }
         }
     }
 
-    private fun onSelectItems(selectedList: List<ChipsData>) = viewModelScope.launch {
-        _chipsData.emit(selectedList)
+    private fun onSelectItems(selectedItem: ChipsData) = viewModelScope.launch {
+        val newValue = chipsData.value.toMutableList()
+        newValue.add(selectedItem)
+        _chipsData.emit(newValue)
     }
 
     private fun onChangeSub(idCommunity: String) = viewModelScope.launch {
         changeSubscribeState.execute(idCommunity).collect { results ->
-            _dataListCommunity.emit(dataListCommunity.value.map { value ->
+            _communityList.emit(communityList.value.map { value ->
                 if (value.id == idCommunity) { value.copy(isSubscribed = results) }
                 else { value }
             })
@@ -137,7 +139,7 @@ internal class MainEventsScreenViewModel(
     sealed class Event : BaseEvent() {
         data object OnLoadingStarted : Event()
         class OnSearch(val query: String) : Event()
-        class OnSelectValue(val selectedList: List<ChipsData>): Event()
+        class OnSelectValue(val selectedList: ChipsData): Event()
         class OnChangeSubscribeState(val idCommunity: String) : Event()
     }
 

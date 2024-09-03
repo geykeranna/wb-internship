@@ -7,7 +7,7 @@ import ru.wb.domain.repository.model.UsersGetRequest
 interface UserRepository {
     fun getUsers(data: UsersGetRequest? = null): Flow<List<UserData>>
 
-    fun getUser(id: String): Flow<UserData>
+    fun getUser(id: String?): Flow<UserData>
 
     fun putUser(userData: UserData): Flow<Boolean>
 

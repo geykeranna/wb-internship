@@ -45,7 +45,7 @@ internal fun MoreScreen(
             MenuItemUser(
                 userData = UserData.defaultObject,
                 onClickItem = {
-                    navController.navigate(Screen.PROFILE_VIEW.route)
+                    navController.navigate(Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route)
                 }
             )
         }

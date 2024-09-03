@@ -41,8 +41,8 @@ internal fun UsersListByEventScreen(
             TopBarDetail(
                 modifier = Modifier,
                 title = usersListLabel.label,
-                onBackClick = { navController.popBackStack() },
-                rightIconVisible = false,
+                onLeftClick = { navController.popBackStack() },
+                rightIcon = null,
             )
         },
     ) { padding ->
