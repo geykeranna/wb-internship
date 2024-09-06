@@ -12,11 +12,11 @@ import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ChipsGroup(
-    data: List<ChipsData>,
+    data: List<String>,
     modifier: Modifier = Modifier,
     size: ChipsSize = ChipsSize.LARGE,
-    selectedList: List<ChipsData> = listOf(),
-    onChangeSelect: (newValue: ChipsData) -> Unit = {},
+    selectedList: List<String> = listOf(),
+    onChangeSelect: ((newValue: String) -> Unit)? = null,
 ) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),

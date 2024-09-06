@@ -11,8 +11,7 @@ class TestUserRepository {
     private val testRepository = UserRepositoryStubs()
     private val user = UserData(
         id = "1",
-        firstName = "User",
-        lastName = "",
+        name = "User",
         icon = null,
         story = false,
         status = false,
@@ -31,7 +30,7 @@ class TestUserRepository {
     fun `should return not empty first name user data`() = runTest{
         val actual = testRepository.getUser("1").last()
 
-        Assertions.assertTrue(actual.firstName.isNotEmpty())
+        Assertions.assertTrue(actual.name.isNotEmpty())
     }
 
     @Test

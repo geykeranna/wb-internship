@@ -10,18 +10,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.SocialMedia
 import ru.wb.ui.ui.component.cards.LabeledCard
-import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.chips.ChipsGroup
 import ru.wb.ui.ui.component.chips.ChipsSize
 
 @Composable
 internal fun ProfileEditCard(
-    allChipsList: List<ChipsData>,
+    allChipsList: List<String>,
     allSocialMedia: List<SocialMedia>,
     formField: ProfileFormState,
     modifier: Modifier = Modifier,
-    selectedChips: List<ChipsData> = listOf(),
-    onSelectChip: (newValue: ChipsData) -> Unit = {},
+    selectedChips: List<String> = listOf(),
+    onSelectChip: (newValue: String) -> Unit = {},
     onValueChange: (key: Int, value: Any) -> Unit = {_, _ -> },
 ) {
     LazyColumn (

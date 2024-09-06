@@ -39,7 +39,7 @@ data class EventData(
                 tags = listOf("Разработка")
             ),
             recommendation = listOf(),
-            vacantSeat = 0
+            vacantSeat = 10
         )
     }
 }

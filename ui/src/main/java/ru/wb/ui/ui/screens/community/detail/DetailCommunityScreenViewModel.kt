@@ -54,7 +54,15 @@ internal class DetailCommunityScreenViewModel(
         }
     }
 
+    private fun onChangeSubscribeStatus() = viewModelScope.launch {
+        when (btnState.value) {
+            ButtonsStateSub.PRESSED -> _btnState.emit(ButtonsStateSub.UNPRESSED)
+            else ->  _btnState.emit(ButtonsStateSub.PRESSED)
+        }
+    }
+
     sealed class Event : BaseEvent() {
+        data object OnChangeSubscribeStatus : Event()
         class OnLoadingStarted(val id: String) : Event()
     }
 
@@ -62,6 +70,9 @@ internal class DetailCommunityScreenViewModel(
         when (event) {
             is Event.OnLoadingStarted -> {
                 startLoading(id = event.id)
+            }
+            is Event.OnChangeSubscribeStatus -> {
+                onChangeSubscribeStatus()
             }
         }
     }

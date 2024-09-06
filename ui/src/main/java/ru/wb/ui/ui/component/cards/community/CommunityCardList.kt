@@ -21,7 +21,7 @@ internal fun CommunityCardList(
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(itemsList.size) { index ->
-            CommunityViewCard(
+            CommunityCard(
                 modifier = Modifier.clickable { onNavigate(itemsList[index].id) },
                 onAddClick = onClick,
                 communityData = itemsList[index],

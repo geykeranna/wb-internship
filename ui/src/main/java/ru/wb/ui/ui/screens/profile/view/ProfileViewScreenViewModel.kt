@@ -16,7 +16,6 @@ import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
-import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.utils.defaultChipsList
 import ru.wb.ui.ui.screens.profile.components.ProfilePageMode
 import ru.wb.ui.ui.screens.profile.components.ProfileFormState
@@ -38,8 +37,8 @@ internal class ProfileViewScreenViewModel(
     private val _dataCommunityList = MutableStateFlow(listOf<CommunityData>())
     private val dataCommunityList: StateFlow<List<CommunityData>> = _dataCommunityList
 
-    private val _chipsData = MutableStateFlow(listOf<ChipsData>())
-    private val chipsData: StateFlow<List<ChipsData>> = _chipsData
+    private val _chipsData = MutableStateFlow(listOf<String>())
+    private val chipsData: StateFlow<List<String>> = _chipsData
 
     private val _socialMedia = MutableStateFlow(List(10) { SocialMedia.defaultObject })
     private val socialMedia: StateFlow<List<SocialMedia>> = _socialMedia
@@ -84,15 +83,11 @@ internal class ProfileViewScreenViewModel(
 
     fun getCommunityDataFlow(): StateFlow<List<CommunityData>> = dataCommunityList
 
-    fun getChipsFlow(): StateFlow<List<ChipsData>> = chipsData
+    fun getChipsFlow(): StateFlow<List<String>> = chipsData
 
     fun getPageModeFlow(): StateFlow<ProfilePageMode> = pageMode
 
-    fun getVerified(): Boolean {
-        return formFieldsValue.value.name.isNotEmpty()
-    }
-
-    fun getAllChipsList(): List<ChipsData> = defaultChipsList
+    fun getAllChipsList(): List<String> = defaultChipsList
 
     private fun setSocialData (index: String, url: String) {
         val existValue = formFieldsValue.value.socials.find { it.id == index }
@@ -131,7 +126,8 @@ internal class ProfileViewScreenViewModel(
             }
             4 -> {
                 if (value is List<*>) {
-                    formFieldsValue.value = formFieldsValue.value.copy(tags = value as List<String>)
+                    val newValue = value.filterIsInstance<String>()
+                    formFieldsValue.value = formFieldsValue.value.copy(tags = newValue)
                 }
             }
             5 -> {
@@ -195,7 +191,7 @@ internal class ProfileViewScreenViewModel(
         setUserData.execute(userData.value)
     }
 
-    private fun onSelectItems(selectedList: ChipsData) = viewModelScope.launch {
+    private fun onSelectItems(selectedList: String) = viewModelScope.launch {
         val newList = chipsData.value.toMutableList()
         newList.add(selectedList)
         _chipsData.emit(newList)
@@ -213,7 +209,7 @@ internal class ProfileViewScreenViewModel(
     sealed class Event : BaseEvent() {
         class OnLoadingStarted(val idUser: String?) : Event()
         class OnChangeFieldData(val key: Int, val input: Any) : Event()
-        class OnSelectValue(val newValue: ChipsData): Event()
+        class OnSelectValue(val newValue: String): Event()
         class OnChangePageMode(val pageMode: ProfilePageMode): Event()
     }
 

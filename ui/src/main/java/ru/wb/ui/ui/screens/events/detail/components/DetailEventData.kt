@@ -20,7 +20,7 @@ import ru.wb.ui.ui.component.cards.LocationCard
 import ru.wb.ui.ui.component.cards.Owner
 import ru.wb.ui.ui.component.cards.OwnerCard
 import ru.wb.ui.ui.component.cards.community.CommunitySize
-import ru.wb.ui.ui.component.cards.events.EventCardsList
+import ru.wb.ui.ui.component.cards.events.EventCardsColumnList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.cards.events.LargeEventCard
 import ru.wb.ui.ui.component.cards.visitors.AvatarsSize
@@ -115,7 +115,7 @@ internal fun DetailEventData(
                 LabeledCard(
                     label = "Другие встречи сообщества"
                 ) {
-                    EventCardsList(
+                    EventCardsColumnList(
                         modifier = Modifier,
                         onNavigate = onNavigateEventScreen,
                         itemsList = detailInfo.recommendation,

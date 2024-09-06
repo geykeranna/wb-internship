@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.component.chips
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,15 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_CHIPS
+import ru.wb.ui.ui.component.utils.onClick
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 fun ChipsItems(
-    item: ChipsData,
+    item: String,
     modifier: Modifier = Modifier,
     size: ChipsSize = ChipsSize.LARGE,
     isSelect: Boolean = false,
-    onSelect: (newValue: ChipsData) -> Unit = {}
+    onSelect: ((newValue: String) -> Unit)? = null
 ){
     val (background, textColor) = when {
         isSelect -> listOf(AppTheme.colors.brandColorDefault, AppTheme.colors.neutralColorBackground)
@@ -37,7 +37,10 @@ fun ChipsItems(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_CHIPS.dp))
             .background(background)
-            .clickable { onSelect(item) }
+            .onClick(
+                disabled = onSelect == null,
+                onClick = { if(onSelect != null) onSelect(item) }
+            )
     ) {
         Text(
             modifier = Modifier
@@ -48,7 +51,7 @@ fun ChipsItems(
                     end = size.paddingRight.dp,
                 )
                 .align(Alignment.Center),
-            text = item.name,
+            text = item,
             maxLines = 1,
             color = textColor,
             style = font

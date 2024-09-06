@@ -16,7 +16,7 @@ import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
-import ru.wb.ui.ui.screens.events.components.ButtonByState
+import ru.wb.ui.ui.screens.events.detail.components.ButtonByState
 import ru.wb.ui.ui.screens.events.detail.components.DetailEventData
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -33,12 +33,13 @@ internal fun DetailEventScreen(
 
     Scaffold(
         modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+            .fillMaxSize(),
         containerColor = AppTheme.colors.neutralColorBackground,
         topBar = {
             TopBarDetail(
-                modifier = Modifier.padding(bottom = 20.dp),
+                modifier = Modifier
+                    .padding(bottom = 20.dp)
+                    .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 title = detailInfo.name,
                 onLeftClick = { navController.popBackStack() }
             )
@@ -62,7 +63,7 @@ internal fun DetailEventScreen(
             state = state,
         ){
             DetailEventData(
-                modifier = Modifier,
+                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 detailInfo = detailInfo,
                 onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/event $id") },
                 onNavigateCommunityScreen = {id -> navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")},

@@ -2,8 +2,10 @@ package ru.wb.domain.stabs
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.Location
+import ru.wb.domain.model.UserData
 import ru.wb.domain.repository.EventRepository
 import ru.wb.domain.repository.model.EventGetRequest
 
@@ -17,7 +19,10 @@ internal class EventRepositoryStubs: EventRepository {
         icon = null,
         active = true,
         description = "description",
-        usersList = mutableListOf()
+        usersList = mutableListOf(),
+        vacantSeat = 10,
+        sponsor = CommunityData.defaultObject,
+        manager = UserData.defaultObject,
     )
 
     override fun getEvents(

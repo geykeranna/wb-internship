@@ -11,7 +11,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CommunityData
 import ru.wb.ui.ui.component.cards.LabeledCard
-import ru.wb.ui.ui.component.cards.events.EventCardsList
+import ru.wb.ui.ui.component.cards.events.EventCardsColumnList
+import ru.wb.ui.ui.component.cards.events.EventCardsRowList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.cards.visitors.VisitorsList
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
@@ -23,7 +24,8 @@ internal fun DetailCommunityData(
     modifier: Modifier = Modifier,
     btnState: ButtonsStateSub = ButtonsStateSub.DEFAULT,
     onNavigateUsersScreen: () -> Unit,
-    onNavigateToEventDetail: (id: String) -> Unit = {}
+    onNavigateToEventDetail: (id: String) -> Unit = {},
+    onHandleToMeet: () -> Unit = {}
 ) {
     LazyColumn (
         modifier = modifier,
@@ -39,7 +41,8 @@ internal fun DetailCommunityData(
 
         item {
             DetailCommunitySubButton (
-                state = btnState
+                state = btnState,
+                onClickButton = onHandleToMeet,
             )
         }
 
@@ -71,10 +74,25 @@ internal fun DetailCommunityData(
                 LabeledCard(
                     label = "Встречи"
                 ) {
-                    EventCardsList(
+                    EventCardsColumnList(
                         modifier = Modifier,
                         onNavigate = onNavigateToEventDetail,
                         itemsList = detailInfo.eventList,
+                        size = EventSize.THIN,
+                    )
+                }
+            }
+        }
+
+        if (detailInfo.lastEvent.isNotEmpty()) {
+            item {
+                LabeledCard(
+                    label = "Прошлые встречи"
+                ) {
+                    EventCardsRowList(
+                        modifier = Modifier,
+                        onNavigate = onNavigateToEventDetail,
+                        itemsList = detailInfo.lastEvent,
                         size = EventSize.THIN,
                     )
                 }

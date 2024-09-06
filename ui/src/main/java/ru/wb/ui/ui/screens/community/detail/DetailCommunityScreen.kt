@@ -28,7 +28,6 @@ internal fun DetailCommunityScreen(
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val btnState by detailViewModel.getBtnStateBySubStatusFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
-    val labels by detailViewModel.getBtnStateBySubStatusFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
@@ -38,7 +37,7 @@ internal fun DetailCommunityScreen(
         topBar = {
             TopBarDetail(
                 modifier = Modifier.padding(bottom = 20.dp),
-                title = labels.label,
+                title = detailInfo.label,
                 onLeftClick = { navController.popBackStack() }
             )
         },
@@ -51,9 +50,14 @@ internal fun DetailCommunityScreen(
                 modifier = Modifier,
                 detailInfo = detailInfo,
                 btnState = btnState,
-                onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/community $idCommunity") },
-            ) { idCommunity ->
-                navController.navigate(Screen.EVENT_DETAIL.route + "/$idCommunity")
+                onNavigateUsersScreen = {
+                    navController.navigate(Screen.USER_LIST.route + "/community $idCommunity")
+                },
+                onNavigateToEventDetail = { idCommunity ->
+                    navController.navigate(Screen.EVENT_DETAIL.route + "/$idCommunity")
+                }
+            ){
+                detailViewModel.obtainEvent(DetailCommunityScreenViewModel.Event.OnChangeSubscribeStatus)
             }
         }
     }

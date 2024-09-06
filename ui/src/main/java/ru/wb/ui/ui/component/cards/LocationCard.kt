@@ -43,7 +43,7 @@ internal fun LocationCard(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ){
             Text(
-                text = data.address,
+                text = data.fullAddress,
                 style = AppTheme.typography.heading2,
                 color = AppTheme.colors.neutralColorFont,
                 overflow = TextOverflow.Visible

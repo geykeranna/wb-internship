@@ -10,7 +10,8 @@ import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CommunityData
 import ru.wb.ui.ui.component.avatars.CommunityAvatar
 import ru.wb.ui.ui.component.cards.community.CommunitySize
-import ru.wb.ui.ui.component.chips.TagsChips
+import ru.wb.ui.ui.component.chips.ChipsGroup
+import ru.wb.ui.ui.component.chips.ChipsSize
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -36,8 +37,10 @@ fun DetailCommunityInfo(
             style = AppTheme.typography.heading1
         )
 
-        TagsChips(
-            data = detailInfo.tags
+        ChipsGroup(
+            data = detailInfo.tags,
+            size = ChipsSize.NORMAL,
+            onChangeSelect = null
         )
     }
 }

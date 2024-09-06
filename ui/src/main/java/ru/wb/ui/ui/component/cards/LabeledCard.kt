@@ -19,13 +19,15 @@ internal fun LabeledCard(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            modifier = Modifier,
-            text = label,
-            style = AppTheme.typography.heading2,
-            color = AppTheme.colors.neutralColorFont,
-            overflow = TextOverflow.Visible,
-        )
+        if (label.isNotEmpty()) {
+            Text(
+                modifier = Modifier,
+                text = label,
+                style = AppTheme.typography.heading2,
+                color = AppTheme.colors.neutralColorFont,
+                overflow = TextOverflow.Visible,
+            )
+        }
 
         content()
     }

@@ -11,7 +11,6 @@ import ru.wb.domain.model.SocialMedia
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.base.BaseState
-import ru.wb.ui.ui.component.chips.ChipsData
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -21,16 +20,15 @@ internal fun ProfileView(
     eventData: List<EventData>,
     communityData: List<CommunityData>,
     state: BaseState,
-    verifiedState: Boolean,
     formField: ProfileFormState,
-    allChipsList: List<ChipsData>,
+    allChipsList: List<String>,
     socialMedia: List<SocialMedia>,
     modifier: Modifier = Modifier,
-    selectedChips: List<ChipsData> = listOf(),
+    selectedChips: List<String> = listOf(),
     pageMode: ProfilePageMode = ProfilePageMode.VIEW_OUTSIDE,
     onBackNavigate: () -> Unit = {},
     onBottomClick: () -> Unit = {},
-    onSelectChip: (newValue: ChipsData) -> Unit = {},
+    onSelectChip: (newValue: String) -> Unit = {},
     onPageModeChange: (newPageMode: ProfilePageMode) -> Unit = {},
     onValueChange: (key: Int, value: Any) -> Unit = {_, _ -> },
 ){

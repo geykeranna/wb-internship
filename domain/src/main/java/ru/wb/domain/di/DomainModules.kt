@@ -1,6 +1,14 @@
 package ru.wb.domain.di
 
 import org.koin.dsl.module
+import ru.wb.domain.usecases.common.GetChipsInterestUseCase
+import ru.wb.domain.usecases.common.GetChipsInterestUseCaseImpl
+import ru.wb.domain.usecases.common.GetContentUseCase
+import ru.wb.domain.usecases.common.GetContentUseCaseImpl
+import ru.wb.domain.usecases.common.GetCountryCodesListUseCase
+import ru.wb.domain.usecases.common.GetCountryCodesListUseCaseImpl
+import ru.wb.domain.usecases.common.GetSocialMediaListUseCase
+import ru.wb.domain.usecases.common.GetSocialMediaListUseCaseImpl
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.domain.usecases.community.GetCommunityDataUseCaseImpl
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
@@ -54,4 +62,9 @@ val domainModules = module {
     single<GetCurrentUserIDUseCase> { GetCurrentUserIDUseCaseImpl(get()) }
     single<CheckAuthStateUseCase> { CheckAuthStateUseCaseImpl(get()) }
     single<CheckPinCodeUseCase> { CheckPinCodeUseCaseImpl(get()) }
+
+    single<GetContentUseCase> { GetContentUseCaseImpl(get()) }
+    single<GetSocialMediaListUseCase> { GetSocialMediaListUseCaseImpl(get()) }
+    single<GetCountryCodesListUseCase> { GetCountryCodesListUseCaseImpl(get()) }
+    single<GetChipsInterestUseCase> { GetChipsInterestUseCaseImpl(get()) }
 }

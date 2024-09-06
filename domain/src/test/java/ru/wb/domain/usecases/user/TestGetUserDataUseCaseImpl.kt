@@ -22,7 +22,7 @@ class TestGetUserDataUseCaseImpl{
         val useCase = GetUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("1").last()
 
-        Assertions.assertTrue(actual.firstName.isNotEmpty())
+        Assertions.assertTrue(actual.name.isNotEmpty())
     }
 
     @Test

@@ -1,4 +1,4 @@
-package ru.wb.ui.ui.screens.events.components
+package ru.wb.ui.ui.screens.events.detail.components
 
 internal sealed class ButtonState(val id: String, val label: String) {
     data object DEFAULT: ButtonState(id = "default", label = "Записаться на встречу")

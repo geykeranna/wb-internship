@@ -10,7 +10,7 @@ import ru.wb.domain.usecases.user.HandleGoingEventUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
-import ru.wb.ui.ui.screens.events.components.ButtonState
+import ru.wb.ui.ui.screens.events.detail.components.ButtonState
 
 internal class DetailEventScreenViewModel(
     idEvent: String,

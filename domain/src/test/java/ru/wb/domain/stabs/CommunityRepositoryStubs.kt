@@ -11,9 +11,12 @@ internal class CommunityRepositoryStubs: CommunityRepository {
         id = "1",
         label = "Community",
         icon = null,
-        countPeople = 20,
         description = "Community Test",
-        eventList = listOf()
+        eventList = listOf(),
+        tags = listOf(),
+        subscribers = listOf(),
+        isSubscribed = false,
+        isVerified = false,
     )
 
     override fun getCommunities(

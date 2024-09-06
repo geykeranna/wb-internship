@@ -13,7 +13,6 @@ import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarMain
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenContent
-import ru.wb.ui.ui.screens.events.main.components.MainEventScreenSearch
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -22,11 +21,9 @@ internal fun MainEventsScreen(
     modifier: Modifier = Modifier,
     viewModel: MainEventsScreenViewModel = koinViewModel()
 ) {
-    val events by viewModel.getEventDataFlow().collectAsStateWithLifecycle()
-    val stateEventList by viewModel.getEventsStateFlow().collectAsStateWithLifecycle()
-    val stateCommunityList by viewModel.getCommunityStateFlow().collectAsStateWithLifecycle()
+    val stateScreen by viewModel.getContentStateFlow().collectAsStateWithLifecycle()
     val search by viewModel.getSearchStringFlow().collectAsStateWithLifecycle()
-    val community by viewModel.getCommunityDataFlow().collectAsStateWithLifecycle()
+    val content by viewModel.getContentDataFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
     val allChipsList = viewModel.getAllChipsList()
 
@@ -42,45 +39,27 @@ internal fun MainEventsScreen(
         },
         containerColor = AppTheme.colors.neutralColorBackground
     ) { padding ->
-        when {
-            search.isEmpty() -> {
-                MainEventScreenContent(
-                    modifier = modifier.padding(padding),
-                    events = events,
-                    eventListState = stateEventList,
-                    communityListState = stateCommunityList,
-                    community = community,
-                    selectedChips = selectedChips,
-                    allChipsList = allChipsList,
-                    onSelect = { selected ->
-                        viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
-                    },
-                    onAddCommunityClick = { idCommunity ->
-                        viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnChangeSubscribeState(idCommunity))
-                    },
-                    onNavigateToCommunityDetail = { id ->
-                        navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")
-                    },
-                    onNavigateToEventDetail = { id ->
-                        navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
-                    },
-                )
+        MainEventScreenContent(
+            content = content,
+            modifier = Modifier.padding(padding),
+            selectedChips = selectedChips,
+            allChipsList = allChipsList,
+            stateScreen = stateScreen,
+            onSelect = { selected ->
+                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
+            },
+            onAddCommunityClick = { idCommunity, idContent ->
+                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnChangeSubscribeState(idCommunity, idContent))
+            },
+            onNavigateToCommunityDetail = { id ->
+                navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")
+            },
+            onNavigateToEventDetail = { id ->
+                navController.navigate(Screen.EVENT_DETAIL.route + "/$id")
+            },
+            onNavigateToUserDetail = { id ->
+                navController.navigate(Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route + "/$id")
             }
-            else -> {
-                MainEventScreenSearch(
-                    modifier = modifier.padding(padding),
-                    events = events,
-                    state = stateEventList,
-                    community = community,
-                    onNavigateCommunityDetail = { id ->
-                        navController.navigate(Screen.COMMUNITY_DETAIL.route + "/${id}")
-                    },
-                    onAddCommunityClick = { },
-                    onNavigateEventDetail = { id ->
-                        navController.navigate(Screen.EVENT_DETAIL.route + "/${id}")
-                    },
-                )
-            }
-        }
+        )
     }
 }

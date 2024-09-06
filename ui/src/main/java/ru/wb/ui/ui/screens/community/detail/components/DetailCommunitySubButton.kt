@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
@@ -18,6 +20,16 @@ internal fun DetailCommunitySubButton (
     modifier: Modifier = Modifier,
     onClickButton: () -> Unit = {},
 ) {
+    val (textColor, buttonColor) = when (state) {
+        ButtonsStateSub.PRESSED -> listOf(
+            AppTheme.colors.brandColorDefault,
+            AppTheme.colors.gradient3
+        )
+        else -> listOf(
+            AppTheme.colors.neutralColorBackground,
+            AppTheme.colors.gradient1
+        )
+    }
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -27,10 +39,8 @@ internal fun DetailCommunitySubButton (
                 .padding(bottom = 10.dp),
             onClick = onClickButton,
             text = state.label,
-            gradient = when (state) {
-                ButtonsStateSub.PRESSED -> AppTheme.colors.gradientColorBackground
-                else -> AppTheme.colors.gradient2
-            }
+            textColor = textColor as Color,
+            gradient = buttonColor as Brush,
         )
         when(state) {
             ButtonsStateSub.PRESSED -> {}

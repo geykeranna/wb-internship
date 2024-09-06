@@ -1,15 +1,17 @@
 package ru.wb.ui.ui.component.cards.events
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -29,19 +31,21 @@ internal fun EventCard(
 ){
     val fontLabel = when (size) {
         EventSize.WIDE -> AppTheme.typography.heading1
+        EventSize.LARGE -> AppTheme.typography.heading2
         else -> AppTheme.typography.heading3
     }
 
     Column(
         modifier = modifier
-            .width(size.width.dp)
+            .setWidth(size.width)
             .clip(RoundedCornerShape(8.dp))
             .clickable { onNavigate(eventData.id) },
         verticalArrangement = Arrangement.spacedBy(SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD.dp)
     ) {
         EventAvatar(
             modifier = Modifier
-                .size(width = size.width.dp, height = size.height.dp),
+                .height(size.height.dp)
+                .fillMaxWidth(),
             src = eventData.icon,
         )
 
@@ -71,4 +75,11 @@ internal fun EventCard(
             data = eventData.tagList
         )
     }
+}
+
+@SuppressLint("UnnecessaryComposedModifier")
+private fun Modifier.setWidth(width: Int) = composed {
+    return@composed  if (width != 0) {
+        this.width(width.dp)
+    } else this.fillMaxWidth()
 }

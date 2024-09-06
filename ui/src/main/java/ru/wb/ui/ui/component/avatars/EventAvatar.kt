@@ -17,8 +17,7 @@ internal fun EventAvatar(
     modifier: Modifier = Modifier,
     src: String? = null,
 ) {
-    val mod = modifier
-        .clip(RoundedCornerShape(IMAGE_RADIUS_IMAGE_IN_EVENT_CARD.dp))
+    val mod = modifier.clip(RoundedCornerShape(IMAGE_RADIUS_IMAGE_IN_EVENT_CARD.dp))
 
     when {
         !src.isNullOrEmpty() -> {

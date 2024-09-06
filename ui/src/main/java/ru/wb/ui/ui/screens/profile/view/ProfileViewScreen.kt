@@ -23,7 +23,6 @@ internal fun ProfileViewScreen(
     val formField by viewModel.getFieldsValuesFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
     val socialMedia by viewModel.getSocialMediaFlow().collectAsStateWithLifecycle()
-    val verifiedState = viewModel.getVerified()
     val allChipsList = viewModel.getAllChipsList()
     val pageMode by viewModel.getPageModeFlow().collectAsStateWithLifecycle()
 
@@ -39,7 +38,6 @@ internal fun ProfileViewScreen(
         selectedChips = selectedChips,
         onBackNavigate = { navController.popBackStack() },
         formField = formField,
-        verifiedState = verifiedState,
         onPageModeChange = { newValue ->
             viewModel.obtainEvent(ProfileViewScreenViewModel.Event.OnChangePageMode(newValue))
         },

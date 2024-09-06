@@ -1,29 +1,28 @@
 package ru.wb.ui.ui.component.cards.events
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.EventData
-import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_EVENT_ITEM_LIST
 
 @Composable
-internal fun EventCardsList(
+internal fun EventCardsColumnList(
     itemsList: List<EventData>,
     modifier: Modifier = Modifier,
-    size: EventSize = EventSize.THIN,
+    size: EventSize = EventSize.LARGE,
     onNavigate: (id: String) -> Unit = {},
 ) {
-    LazyRow(
+    Column(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_EVENT_ITEM_LIST.dp),
+        verticalArrangement = Arrangement.spacedBy(40.dp),
     ) {
-        items(itemsList.size) { index ->
+        itemsList.map { item ->
             EventCard(
                 modifier = Modifier.fillMaxWidth(),
-                eventData = itemsList[index],
+                eventData = item,
                 size = size,
                 onNavigate = onNavigate
             )
