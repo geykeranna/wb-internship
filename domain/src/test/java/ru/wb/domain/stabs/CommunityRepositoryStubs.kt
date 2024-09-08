@@ -32,4 +32,8 @@ internal class CommunityRepositoryStubs: CommunityRepository {
     override fun getCommunity(
         id: String
     ): Flow<CommunityData> = flowOf(communityData)
+
+    override fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 }

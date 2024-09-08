@@ -48,7 +48,6 @@ internal fun TopBarMain(
             value = inputText,
             onChangeValue = onChangeValue,
             iconRight = iconRightInTextField,
-            focusRequester = focusRequester,
             fontStyle = AppTheme.typography.secondary,
             onClickRightIcon = { onChangeValue("") },
             iconLeft = painterResource(id = R.drawable.ic_search),

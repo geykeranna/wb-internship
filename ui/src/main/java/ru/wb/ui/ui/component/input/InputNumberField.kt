@@ -20,6 +20,8 @@ internal fun InputNumberField(
     selectedPhoneCountryCode: CountryCodes,
     phoneCountryCodeList: List<CountryCodes>,
     modifier: Modifier = Modifier,
+    isInvalid: Boolean = false,
+    disable: Boolean = false,
     onChange: (value: String) -> Unit = {},
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit = {},
     onEnterClick: () -> Unit = {},
@@ -38,12 +40,15 @@ internal fun InputNumberField(
             phoneCountryCodeList = phoneCountryCodeList,
             onChangeExpanded = { expanded = !expanded },
             onDismissRequest = { expanded = false },
-            stateColor = phone.isNotEmpty(),
+            isActive = phone.isNotEmpty(),
+            isInvalid = isInvalid,
             onSelectedPhoneCountryCode = onSelectedPhoneCountryCode
         )
 
         InputNumberTextField(
             phone = phone,
+            isInvalid = isInvalid,
+            disable = disable,
             selectedPhoneCountryCode = selectedPhoneCountryCode,
             onChange = onChange,
             onEnterClick = onEnterClick

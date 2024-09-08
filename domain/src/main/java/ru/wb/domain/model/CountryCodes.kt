@@ -11,25 +11,25 @@ data class CountryCodes(
             CountryCodes(
                 country = "Russia",
                 countryCode = "+7",
-                flagIcon = "https://www.countryflags.com/wp-content/uploads/russia-flag-png-large.png",
+                flagIcon = "ru",
                 mask = "000 000 00-00"
             ),
             CountryCodes(
                 country = "Kazakhstan",
                 countryCode = "+7",
-                flagIcon = "https://www.countryflags.com/wp-content/uploads/kazakhstan-flag-png-large.png",
+                flagIcon = "kz",
                 mask = "000 000 00-00"
             ),
             CountryCodes(
                 country = "Armenia",
                 countryCode = "+374",
-                flagIcon = "https://www.countryflags.com/wp-content/uploads/flag-jpg-xl-8-1024x512.jpg",
+                flagIcon = "am",
                 mask = "00 000-000"
             ),
             CountryCodes(
                 country = "USA",
                 countryCode = "+1",
-                flagIcon = "https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png",
+                flagIcon = "us",
                 mask = "000 000 00-00"
             )
         )

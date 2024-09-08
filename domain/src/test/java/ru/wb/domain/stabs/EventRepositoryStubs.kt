@@ -37,4 +37,8 @@ internal class EventRepositoryStubs: EventRepository {
     override fun getEvent(
         id: String,
     ): Flow<EventData> = flowOf(eventData)
+
+    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 }

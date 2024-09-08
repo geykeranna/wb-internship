@@ -19,3 +19,10 @@ internal val defaultChipsList = listOf(
     "Безопасность", "Девопс",
     "Аналитика",
 )
+
+internal val defaultFlag = mapOf(
+    "ru" to R.drawable.flag_russia,
+    "en" to R.drawable.flag_usa,
+    "kz" to R.drawable.flag_kz,
+    "am" to R.drawable.flag_armenia,
+)

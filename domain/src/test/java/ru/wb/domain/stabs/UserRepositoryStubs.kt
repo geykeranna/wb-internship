@@ -26,13 +26,21 @@ internal class UserRepositoryStubs: UserRepository {
 
     override fun getUser(id: String?) = flowOf(userData)
 
-    override fun putUser(userData: UserData) = flowOf(true)
+    override fun getUserAuth(): Flow<String?> {
+        return flowOf(null)
+    }
 
-    override fun postUser(userData: UserData) = flowOf(true)
+    override fun putUser(userData: UserData) = flowOf(userData)
 
-    override fun handleGoingEvent(eventID: String) = flowOf(true)
+    override fun postUser(userData: UserData) = flowOf(userData)
 
-    override fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+    override fun changeSubscriptionEventStatus(eventID: String) = flowOf(true)
 
-    override fun getSubscriptionStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+    override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+
+    override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+
+    override fun getSubscriptionEventStatus(idEvent: String): Flow<Boolean> {
+        return flowOf(false)
+    }
 }

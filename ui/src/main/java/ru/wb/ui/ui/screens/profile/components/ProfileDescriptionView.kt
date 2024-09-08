@@ -22,7 +22,7 @@ internal fun ProfileDescriptionView(
     ) {
         Text(
             text = userData.name,
-            style = AppTheme.typography.large,
+            style = AppTheme.typography.large2,
             color = AppTheme.colors.neutralColorFont,
         )
         Column (

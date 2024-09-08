@@ -18,4 +18,8 @@ internal class EventRepositoryImpl: EventRepository {
     ): Flow<EventData> {
         return flowOf(EventData.defaultObject)
     }
+
+    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 }

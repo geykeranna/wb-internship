@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
@@ -47,6 +50,7 @@ internal fun InputField(
     fontStyle: TextStyle = AppTheme.typography.inputText,
     minLines: Int = 1,
     focusRequester: FocusRequester = remember { FocusRequester() },
+    onEnterClick: () -> Unit = {},
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
     onClickRightIcon: (() -> Unit?)? = null,
@@ -82,7 +86,7 @@ internal fun InputField(
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(AppTheme.colors.neutralColorSecondaryBackground)
             .focusedBorder(isFocused && value.isEmpty(), AppTheme.colors.neutralColorDivider)
-            .padding(10.dp),
+            .padding(vertical = 16.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
@@ -121,6 +125,8 @@ internal fun InputField(
                 textStyle = fontStyle.copy(color = AppTheme.colors.neutralColorFont),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
+                keyboardActions = KeyboardActions(onSend = { if(disable) Unit else onEnterClick() })
             )
         }
         iconRight?.let {

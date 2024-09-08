@@ -9,13 +9,17 @@ interface UserRepository {
 
     fun getUser(id: String?): Flow<UserData>
 
-    fun putUser(userData: UserData): Flow<Boolean>
+    fun getUserAuth(): Flow<String?>
 
-    fun postUser(userData: UserData): Flow<Boolean>
+    fun putUser(userData: UserData): Flow<UserData?>
 
-    fun handleGoingEvent(eventID: String): Flow<Boolean>
+    fun postUser(userData: UserData): Flow<UserData?>
 
-    fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean>
+    fun changeSubscriptionEventStatus(eventID: String): Flow<Boolean>
 
-    fun getSubscriptionStatus(idCommunity: String): Flow<Boolean>
+    fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean>
+
+    fun getSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean>
+
+    fun getSubscriptionEventStatus(idEvent: String): Flow<Boolean>
 }

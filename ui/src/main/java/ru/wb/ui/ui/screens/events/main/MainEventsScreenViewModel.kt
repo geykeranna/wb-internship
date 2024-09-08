@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.Content
 import ru.wb.domain.usecases.common.GetContentUseCase
-import ru.wb.domain.usecases.user.ChangeSubscriptionStatusUseCase
+import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
@@ -14,7 +14,7 @@ import ru.wb.ui.ui.component.utils.defaultChipsList
 
 internal class MainEventsScreenViewModel(
     private val getContent: GetContentUseCase,
-    private val changeSubscribeState: ChangeSubscriptionStatusUseCase,
+    private val changeSubscribeState: ChangeSubscriptionCommunityStatusUseCase,
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
     private val lastChipsActionItem = "Все категории"
 

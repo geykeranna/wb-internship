@@ -53,8 +53,8 @@ internal fun DetailCommunityScreen(
                 onNavigateUsersScreen = {
                     navController.navigate(Screen.USER_LIST.route + "/community $idCommunity")
                 },
-                onNavigateToEventDetail = { idCommunity ->
-                    navController.navigate(Screen.EVENT_DETAIL.route + "/$idCommunity")
+                onNavigateToEventDetail = { idEvent ->
+                    navController.navigate(Screen.EVENT_DETAIL.route + "/$idEvent")
                 }
             ){
                 detailViewModel.obtainEvent(DetailCommunityScreenViewModel.Event.OnChangeSubscribeStatus)

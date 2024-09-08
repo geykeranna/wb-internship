@@ -15,23 +15,31 @@ internal class UserRepositoryImpl: UserRepository {
         return flowOf(UserData.defaultObject)
     }
 
-    override fun putUser(userData: UserData): Flow<Boolean>{
+    override fun getUserAuth(): Flow<String?> {
+        return flowOf(null)
+    }
+
+    override fun putUser(userData: UserData): Flow<UserData?>{
+        return flowOf(UserData.defaultObject)
+    }
+
+    override fun postUser(userData: UserData): Flow<UserData?> {
+        return flowOf(UserData.defaultObject)
+    }
+
+    override fun changeSubscriptionEventStatus(eventID: String): Flow<Boolean> {
+        return flowOf(true)
+    }
+
+    override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
+
+    override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
+
+    override fun getSubscriptionEventStatus(idEvent: String): Flow<Boolean> {
         return flowOf(false)
-    }
-
-    override fun postUser(userData: UserData): Flow<Boolean> {
-        return flowOf(false)
-    }
-
-    override fun handleGoingEvent(eventID: String): Flow<Boolean> {
-        return flowOf(true)
-    }
-
-    override fun changeSubscriptionStatus(idCommunity: String): Flow<Boolean> {
-        return flowOf(true)
-    }
-
-    override fun getSubscriptionStatus(idCommunity: String): Flow<Boolean> {
-        return flowOf(true)
     }
 }

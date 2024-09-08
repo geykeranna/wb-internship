@@ -28,8 +28,8 @@ fun ChipsItems(
     }
 
     val font = when (size) {
-        ChipsSize.LARGE -> AppTheme.typography.subheading3
-        ChipsSize.NORMAL -> AppTheme.typography.subheading4
+        ChipsSize.LARGE -> AppTheme.typography.subheading2
+        ChipsSize.NORMAL -> AppTheme.typography.subheading5
         ChipsSize.SMALL -> AppTheme.typography.secondary
     }
 

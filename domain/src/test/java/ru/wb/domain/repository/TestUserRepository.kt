@@ -63,7 +63,7 @@ class TestUserRepository {
 
     @Test
     fun `should return state of handle going event`() = runTest{
-        val actual = testRepository.handleGoingEvent("1").last()
+        val actual = testRepository.changeSubscriptionEventStatus("1").last()
 
         Assertions.assertTrue(actual)
     }

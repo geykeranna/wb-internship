@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.wb.ui.ui.screens.auth.onevent.Appointment
 import ru.wb.ui.ui.screens.auth.phone.PhoneScreen
 import ru.wb.ui.ui.screens.auth.pin.PinCodeScreen
 import ru.wb.ui.ui.screens.community.community.CommunityScreen
@@ -113,6 +114,17 @@ fun NavGraph(
             stackEntry.arguments?.getString("data")?.let { data ->
                 UsersListByEventScreen(
                     data = data,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.APPOINTMENT.route + "/{data}") { stackEntry ->
+            stackEntry.arguments?.getString("data")?.let { data ->
+                val (idEvent, label) = data.split(" | ")
+                Appointment(
+                    idEvent = idEvent,
+                    label = label,
                     navController = navController,
                 )
             }

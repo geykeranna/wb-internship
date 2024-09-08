@@ -8,4 +8,6 @@ interface CommunityRepository {
     fun getCommunity(id: String): Flow<CommunityData>
 
     fun getCommunities(data: CommunitiesGetRequest? = null): Flow<List<CommunityData>>
+
+    fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<Boolean>
 }

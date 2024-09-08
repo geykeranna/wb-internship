@@ -3,10 +3,10 @@ package ru.wb.domain.usecases.user
 import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.repository.UserRepository
 
-internal class GetSubscriptionStatusUseCaseImpl(
+internal class GetSubscriptionCommunityStatusUseCaseImpl(
     private val repository: UserRepository
-) : GetSubscriptionStatusUseCase {
+) : GetSubscriptionCommunityStatusUseCase {
     override fun execute(idCommunity: String): Flow<Boolean> {
-        return repository.getSubscriptionStatus(idCommunity = idCommunity)
+        return repository.getSubscriptionCommunityStatus(idCommunity = idCommunity)
     }
 }

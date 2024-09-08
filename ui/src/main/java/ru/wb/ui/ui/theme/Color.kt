@@ -12,13 +12,17 @@ val BrandColorBackground = Color(0xFFF5ECFF)
 
 //Neutral colors
 val NeutralColorFont = Color(0xFF29183B)
+val NeutralColorSecondaryFont = Color(0xFF76778E)
 val NeutralColorDark = Color(0xFF190E26)
 val NeutralColorText = Color(0xFF1D0835)
-val NeutralColorSecondaryText = Color(0xFFA4A4A4)
+val NeutralColorSecondaryText = Color(0xFFFDE7ED)
+val NeutralColorDisabledText = Color(0xFF9797AF)
+val NeutralColorInvalidText = Color(0xFFFF5C93)
 val NeutralColorDisabled = Color(0xFFADB5BD)
 val NeutralColorDivider = Color(0xFFEDEDED)
 val NeutralColorBackground = Color(0xFFFFFFFF)
 val NeutralColorSecondaryBackground = Color(0xFFF6F6FA)
+val NeutralColorInvalidBackground = Color(0xFFFDE7ED)
 
 //Accent colors
 val AccentError = Color(0xFFE94242)

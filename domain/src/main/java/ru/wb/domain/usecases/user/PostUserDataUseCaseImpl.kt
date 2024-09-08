@@ -7,7 +7,7 @@ import ru.wb.domain.repository.UserRepository
 internal class PostUserDataUseCaseImpl(
     private val repository: UserRepository
 ) : PostUserDataUseCase {
-    override fun execute(user: UserData): Flow<Boolean> {
+    override fun execute(user: UserData): Flow<UserData?> {
         return repository.postUser(userData = user)
     }
 }

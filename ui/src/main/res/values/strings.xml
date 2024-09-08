@@ -29,6 +29,7 @@
     <string name="label_menu_items_help">Помощь</string>
     <string name="label_menu_items_referral">Пригласи друга</string>
 
+    <string name="label_enter_on_meet">Вход и запись на встречу</string>
     <string name="label_show_my_community">Показывать мои сообщества</string>
     <string name="label_show_my_events">Показывать мои встречи</string>
     <string name="label_enable_notification">Включить уведомления</string>

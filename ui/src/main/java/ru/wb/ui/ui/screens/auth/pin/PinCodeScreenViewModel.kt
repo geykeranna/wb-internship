@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.wb.domain.usecases.login.CheckPinCodeUseCase
+import ru.wb.domain.usecases.login.CheckOTPCodeUseCase
 import ru.wb.domain.usecases.login.GetCurrentPhoneNumberUseCase
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -14,7 +14,7 @@ import ru.wb.ui.ui.component.utils.Constants.PASS_LENGTH_IN_PASS_FIELD
 internal class PinCodeScreenViewModel(
     private val getPhone: GetCurrentPhoneNumberUseCase,
     private val sendPhone: SendPinCodeOnPhoneUseCase,
-    private val sendPin: CheckPinCodeUseCase,
+    private val sendPin: CheckOTPCodeUseCase,
 ) : BaseViewModel<PinCodeScreenViewModel.Event>() {
     private val _phoneNumber = MutableStateFlow("")
     private val phoneNumber: StateFlow<String> = _phoneNumber

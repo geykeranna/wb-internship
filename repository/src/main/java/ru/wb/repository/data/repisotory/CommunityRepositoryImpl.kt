@@ -18,4 +18,8 @@ internal class CommunityRepositoryImpl: CommunityRepository {
     ): Flow<CommunityData> {
         return flowOf(CommunityData.defaultObject)
     }
+
+    override fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<Boolean> {
+        return flowOf(true)
+    }
 }

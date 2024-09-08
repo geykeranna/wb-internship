@@ -39,22 +39,30 @@ object AppTypo {
     )
 
     val subheading2 = TextStyle(
-        fontSize = 16.sp,
+        fontSize = 22.sp,
         fontFamily = interFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.Normal,
     )
 
     val subheading3 = TextStyle(
-        fontSize = 22.sp,
+        fontSize = 20.sp,
         fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
     )
 
     val subheading4 = TextStyle(
         fontSize = 16.sp,
         fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.SemiBold
+    )
+
+    val subheading5 = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = interFamily,
         fontWeight = FontWeight.Medium,
+        fontStyle = FontStyle.Normal,
     )
 
     val bodyText1 = TextStyle(
@@ -120,12 +128,16 @@ object AppTypo {
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     )
-    val large = TextStyle(
+    val large1 = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 50.sp,
+    )
+    val large2 = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 48.sp,
     )
-
     val communityLabel = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
-import ru.wb.domain.usecases.user.GetSubscriptionStatusUseCase
+import ru.wb.domain.usecases.user.GetSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
@@ -15,7 +15,7 @@ import ru.wb.ui.ui.screens.community.detail.components.ButtonsStateSub
 internal class DetailCommunityScreenViewModel(
     idCommunity: String,
     private val getData: GetCommunityDataUseCase,
-    private val getStateSubscribe: GetSubscriptionStatusUseCase,
+    private val getStateSubscribe: GetSubscriptionCommunityStatusUseCase,
 ) : BaseViewModel<DetailCommunityScreenViewModel.Event>() {
     private val _detailData = MutableStateFlow(CommunityData.defaultObject)
     private val detailData: StateFlow<CommunityData> = _detailData

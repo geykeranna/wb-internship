@@ -55,5 +55,9 @@ enum class Screen(
     USER_LIST (
         route = "user_list_by_event",
         label = "Пользователи",
+    ),
+    APPOINTMENT(
+        route = "appointment",
+        label = "Авторизация",
     )
 }

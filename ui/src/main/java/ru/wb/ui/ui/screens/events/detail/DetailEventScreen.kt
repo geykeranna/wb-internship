@@ -17,6 +17,7 @@ import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.detail.components.ButtonByState
+import ru.wb.ui.ui.screens.events.detail.components.ButtonState
 import ru.wb.ui.ui.screens.events.detail.components.DetailEventData
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -30,6 +31,7 @@ internal fun DetailEventScreen(
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
     val btnState by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
+    val subStatus by detailViewModel.getSubStatusFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
@@ -50,11 +52,16 @@ internal fun DetailEventScreen(
                 state = btnState,
                 countPeople = detailInfo.vacantSeat
             ) {
-                detailViewModel.obtainEvent(
-                    DetailEventScreenViewModel.Event.OnHandleGoingEvent(
-                        id = id
+                if(btnState != ButtonState.PRESSED.id && !subStatus){
+                    val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
+                    navController.navigate(Screen.APPOINTMENT.route + "/${detailInfo.id} | $address")
+                } else {
+                    detailViewModel.obtainEvent(
+                        DetailEventScreenViewModel.Event.OnHandleGoingEvent(
+                            id = id
+                        )
                     )
-                )
+                }
             }
         }
     ) { padding ->

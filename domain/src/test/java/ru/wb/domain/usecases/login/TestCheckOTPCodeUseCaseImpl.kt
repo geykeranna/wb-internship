@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import ru.wb.domain.stabs.LoginRepositoryStubs
 
-class TestCheckPinCodeUseCaseImpl{
+class TestCheckOTPCodeUseCaseImpl{
     private val testRepository = LoginRepositoryStubs()
 
     @Test
     fun `should return the same check pin status as in repo`() = runTest{
-        val useCase = CheckPinCodeUseCaseImpl(repository = testRepository)
+        val useCase = CheckOTPCodeUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("4444").last()
 
         Assertions.assertTrue(actual)
