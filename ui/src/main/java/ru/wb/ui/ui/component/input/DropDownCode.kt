@@ -2,7 +2,6 @@ package ru.wb.ui.ui.component.input
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -11,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CountryCodes
-import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_ITEM_DROPDOWN
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -36,8 +34,7 @@ internal fun DropDownCode(
                     isInvalid -> AppTheme.colors.neutralColorInvalidBackground
                     else -> AppTheme.colors.neutralColorSecondaryBackground
                 }
-            )
-            .padding(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp),
+            ),
         phoneCountryCode = selectedPhoneCountryCode,
         isActive = isActive,
     )

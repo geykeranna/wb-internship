@@ -13,6 +13,7 @@ internal fun AppointmentEnterPhone(
     modifier: Modifier = Modifier,
     isInvalid: Boolean = false,
     disable: Boolean = false,
+    disableEnter: Boolean = false,
     onChange: (value: String) -> Unit = {},
     onEnterClick: () -> Unit = {},
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit = {}
@@ -23,6 +24,7 @@ internal fun AppointmentEnterPhone(
         phone = phone,
         isInvalid = isInvalid,
         disable = disable,
+        disableEnter = disableEnter,
         phoneCountryCodeList = phoneCountryCodeList,
         onChange = onChange,
         onEnterClick = onEnterClick,

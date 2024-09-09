@@ -3,6 +3,7 @@ package ru.wb.ui.ui.component.input
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -12,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.R
@@ -28,7 +28,8 @@ internal fun ContentInDropDownMenuItem(
     modifier: Modifier = Modifier,
 ){
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp),
     ) {
@@ -44,22 +45,8 @@ internal fun ContentInDropDownMenuItem(
         )
         Text(
             text = phoneCountryCode.countryCode,
-            style = AppTheme.typography.bodyText1,
+            style = AppTheme.typography.regular,
             color = if (isActive) AppTheme.colors.neutralColorFont else AppTheme.colors.neutralColorDisabled
         )
     }
-}
-
-@Preview
-@Composable
-fun Preview(){
-    ContentInDropDownMenuItem(
-        phoneCountryCode = CountryCodes(
-            mask = "000000000",
-            countryCode = "+7",
-            flagIcon = "ru",
-            country = "Russia",
-        ),
-        isActive = false,
-    )
 }

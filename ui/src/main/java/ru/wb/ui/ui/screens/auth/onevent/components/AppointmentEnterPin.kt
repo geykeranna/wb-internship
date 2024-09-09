@@ -17,6 +17,7 @@ internal fun AppointmentEnterPin(
     modifier: Modifier = Modifier,
     isInvalid: Boolean = false,
     disable: Boolean = false,
+    disableEnter: Boolean = false,
     context: String = "",
     onEnterClick: () -> Unit = {},
     onChangeValue: (value: String) -> Unit = {},
@@ -27,7 +28,7 @@ internal fun AppointmentEnterPin(
     }
     Column (
         modifier = Modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.Start,
     ) {
         InputPassField(
@@ -35,6 +36,7 @@ internal fun AppointmentEnterPin(
             isInvalid = isInvalid,
             value = pin,
             disable = disable,
+            disableEnter = disableEnter,
             onEnterClick = onEnterClick,
             onChange = onChangeValue,
         )

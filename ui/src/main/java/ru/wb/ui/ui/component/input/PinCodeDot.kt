@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import ru.wb.ui.ui.component.utils.Constants.SIZE_OF_PASS_ITEMS
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -29,12 +30,15 @@ internal fun PinCodeDot(
     isInvalid: Boolean = false,
 ) {
     val offsetX = remember { Animatable(0f) }
+    val animTime = 100
+    val delay = 400L
     LaunchedEffect(isInvalid) {
         if (isInvalid){
-            offsetX.animateTo(targetValue = -30f, animationSpec = tween(durationMillis = 500))
-            offsetX.animateTo(targetValue = 0f, animationSpec = tween(durationMillis = 500))
-            offsetX.animateTo(targetValue = 30f, animationSpec = tween(durationMillis = 500))
-            offsetX.animateTo(targetValue = 0f, animationSpec = tween(durationMillis = 500))
+            delay(delay)
+            offsetX.animateTo(targetValue = -30f, animationSpec = tween(durationMillis = animTime))
+            offsetX.animateTo(targetValue = 0f, animationSpec = tween(durationMillis = animTime))
+            offsetX.animateTo(targetValue = 30f, animationSpec = tween(durationMillis = animTime))
+            offsetX.animateTo(targetValue = 0f, animationSpec = tween(durationMillis = animTime))
         }
     }
     val backgroundColor = when{

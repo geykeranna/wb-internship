@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.ui.component.utils.Constants.CHAR_IN_MASK_FOR_NUMBER
+import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.PhoneNumberVisualTransformation
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -32,6 +35,7 @@ internal fun InputNumberTextField(
     modifier: Modifier = Modifier,
     isAccent: Boolean = true,
     disable: Boolean = false,
+    disableEnter: Boolean = false,
     isInvalid: Boolean = false,
     invalidMessage: String = "",
     isByFullPlaceholder: Boolean = false,
@@ -49,15 +53,18 @@ internal fun InputNumberTextField(
         else -> AppTheme.colors.neutralColorSecondaryBackground
     }
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.Start,
     ) {
         BasicTextField(
             modifier = Modifier
+                .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
                 .background(backgroundColor)
                 .focusRequester(focusRequester),
             value = phone,
+            enabled = !disable,
             cursorBrush = SolidColor(Color.Transparent),
             onValueChange = {
                 val value = it
@@ -65,7 +72,7 @@ internal fun InputNumberTextField(
                     .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
                 onChange(value)
             },
-            textStyle = AppTheme.typography.bodyText1.copy(
+            textStyle = AppTheme.typography.regular.copy(
                 color = AppTheme.colors.neutralColorFont
             ),
             keyboardOptions = KeyboardOptions(
@@ -73,7 +80,7 @@ internal fun InputNumberTextField(
                 imeAction = ImeAction.Send
             ),
             keyboardActions = KeyboardActions(
-                onSend = { if(disable) Unit else onEnterClick() },
+                onSend = { if(disableEnter) Unit else onEnterClick() },
             ),
             visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
             decorationBox = { innerTextField ->

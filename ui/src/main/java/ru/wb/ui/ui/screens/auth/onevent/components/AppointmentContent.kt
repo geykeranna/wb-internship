@@ -39,7 +39,7 @@ internal fun AppointmentContent(
             AppointmentScreenState.ENTER_NAME -> {
                 AppointmentEnterName(
                     name = formData.name,
-                    disable = disable,
+                    disableEnter = disable,
                     onChangeValue = onChangeValue,
                     onEnterClick = onEnterClick,
                 )
@@ -49,7 +49,7 @@ internal fun AppointmentContent(
                     modifier = Modifier,
                     phone = formData.phone,
                     isInvalid = isInvalid,
-                    disable = disable,
+                    disableEnter = disable,
                     selectedPhoneCountryCode = selectedPhoneCountryCode,
                     phoneCountryCodeList = phoneCountryCodeList,
                     onChange = onChangeValue,
@@ -63,7 +63,7 @@ internal fun AppointmentContent(
                     pin = formData.pin,
                     context = description,
                     isInvalid = isInvalid,
-                    disable = disable,
+                    disableEnter = disable,
                     onChangeValue = onChangeValue,
                     onEnterClick = onEnterClick,
                 )

@@ -39,17 +39,17 @@ import ru.wb.ui.ui.component.utils.focusedBorder
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-internal fun InputField(
+internal fun InputFormField(
     value: String,
     modifier: Modifier = Modifier,
     placeholder: String = "",
     disable: Boolean = false,
+    disableEnter: Boolean = false,
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
     fontStyle: TextStyle = AppTheme.typography.regular,
     minLines: Int = 1,
-    focusRequester: FocusRequester = remember { FocusRequester() },
     onEnterClick: () -> Unit = {},
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
@@ -57,6 +57,7 @@ internal fun InputField(
     onClickLeftIcon: (() -> Unit)? = null,
     onChangeValue: (text: String) -> Unit = {},
 ){
+    val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
         focusRequester.freeFocus()
     }
@@ -86,7 +87,7 @@ internal fun InputField(
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(AppTheme.colors.neutralColorSecondaryBackground)
             .focusedBorder(isFocused && value.isEmpty(), AppTheme.colors.neutralColorDivider)
-            .padding(10.dp),
+            .padding(vertical = 16.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
@@ -126,7 +127,7 @@ internal fun InputField(
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
-                keyboardActions = KeyboardActions(onSend = { if(disable) Unit else onEnterClick() })
+                keyboardActions = KeyboardActions(onSend = { if(disableEnter) Unit else onEnterClick() })
             )
         }
         iconRight?.let {

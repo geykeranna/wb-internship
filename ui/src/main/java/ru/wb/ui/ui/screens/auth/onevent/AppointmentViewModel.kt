@@ -10,6 +10,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.common.GetCountryCodesListUseCase
 import ru.wb.domain.usecases.event.PostSubscribeOnEvent
 import ru.wb.domain.usecases.login.CheckOTPCodeUseCase
+import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
@@ -20,6 +21,7 @@ import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentScreenState
 
 internal class AppointmentViewModel(
     private val idEvent: String,
+    private val sendPinCodeOnPhoneUseCase: SendPinCodeOnPhoneUseCase,
     private val subscribeOnEvent: PostSubscribeOnEvent,
     private val setUserData: PostUserDataUseCase,
     private val checkCodeUseCase: CheckOTPCodeUseCase,
@@ -40,11 +42,17 @@ internal class AppointmentViewModel(
     private val _pinVerificationStatus = MutableStateFlow<Boolean?>(null)
     private val pinVerificationStatus: StateFlow<Boolean?> = _pinVerificationStatus
 
+    private val _validationStatus = MutableStateFlow(false)
+    private val validationStatus: StateFlow<Boolean> = _validationStatus
+
     private val _screenState = MutableStateFlow(AppointmentScreenState.ENTER_NAME)
     private val screenState: StateFlow<AppointmentScreenState> = _screenState
 
     private val _state = MutableStateFlow(BaseState.SUCCESS)
     private val state: StateFlow<BaseState> = _state
+
+    private val _contextString = MutableStateFlow("")
+    private val contextString: StateFlow<String> = _contextString
 
     private val _textButtonState = MutableStateFlow<List<Any?>>(listOf(null, false))
     private val textButtonState: StateFlow<List<Any?>> = _textButtonState
@@ -69,24 +77,23 @@ internal class AppointmentViewModel(
 
     fun getStateFlow(): StateFlow<BaseState> = state
 
-    fun getButtonStatusEnable(): Boolean = when {
-        screenState.value == AppointmentScreenState.ENTER_NAME && formData.value.name.isNotEmpty()
-            || screenState.value == AppointmentScreenState.ENTER_PHONE && checkPhoneValue()
-            || screenState.value == AppointmentScreenState.ENTER_PIN && formData.value.pin.length == 4 ->
-                true
-        else -> false
-    }
+    fun getValidationFlow(): StateFlow<Boolean> = validationStatus
 
-    fun getContextString(): String = when(screenState.value) {
-        AppointmentScreenState.ENTER_PIN -> {
-            if(pinVerificationStatus.value == false) {
-                "Неправильный код"
-            } else {
-                "Отправили код на" +
-                        " ${selectedCountryPhone.value.countryCode} ${formData.value.phone}"
+    fun getContextStringFlow(): StateFlow<String> = contextString
+
+    private fun getContextString() = viewModelScope.launch {
+        _contextString.emit(
+        when(screenState.value) {
+            AppointmentScreenState.ENTER_PIN -> {
+                if(pinVerificationStatus.value == false) {
+                    "Неправильный код"
+                } else {
+                    "Отправили код на " +
+                            "${selectedCountryPhone.value.countryCode} ${formData.value.phone}"
+                }
             }
-        }
-        else -> ""
+            else -> ""
+        })
     }
 
     private fun checkPhoneValue(): Boolean {
@@ -113,12 +120,23 @@ internal class AppointmentViewModel(
             screenState.value == AppointmentScreenState.ENTER_PHONE
                     && formData.value.phone.isNotEmpty() -> {
                 _screenState.emit(AppointmentScreenState.ENTER_PIN)
+                getContextString()
+                sendPin()
             }
             screenState.value == AppointmentScreenState.ENTER_PIN
                     && formData.value.pin.length == 4 -> {
                 checkStatus(formData.value.pin)
+                getContextString()
             }
         }
+        checkValidateState()
+    }
+    private fun checkValidateState() = viewModelScope.launch {
+        _validationStatus.emit(
+        (screenState.value == AppointmentScreenState.ENTER_NAME && formData.value.name.isNotEmpty())
+            || (screenState.value == AppointmentScreenState.ENTER_PHONE && checkPhoneValue())
+            || (screenState.value == AppointmentScreenState.ENTER_PIN && formData.value.pin.length == 4)
+        )
     }
 
     private fun onChangeValue(newValue: String) = viewModelScope.launch {
@@ -133,6 +151,7 @@ internal class AppointmentViewModel(
                 _formData.emit(formData.value.copy(pin = newValue))
             }
         }
+        checkValidateState()
     }
 
     private fun changeSelectedCountryCode(newCountryCodes: CountryCodes) = viewModelScope.launch {
@@ -145,7 +164,10 @@ internal class AppointmentViewModel(
         }
         when{
             _pinVerificationStatus.value == true -> submitForm()
-            else -> configureButtonState()
+            else -> {
+                _formData.emit(formData.value.copy(pin = ""))
+                configureButtonState()
+            }
         }
     }
 
@@ -185,9 +207,22 @@ internal class AppointmentViewModel(
         ))
     }
 
+    private fun sendPin() = viewModelScope.launch{
+        sendPinCodeOnPhoneUseCase.execute(formData.value.phone)
+    }
+
+    private fun onSendNewCode() = viewModelScope.launch{
+        sendPin()
+        _pinVerificationStatus.emit(null)
+        checkValidateState()
+        getContextString()
+        _textButtonState.emit(listOf(null, false))
+    }
+
     sealed class Event : BaseEvent() {
         data object OnLoadStarted : Event()
         data object OnEnterClick : Event()
+        data object OnSendNewCode: Event()
         class OnSelectedPhoneCountryCode(val countryCodes: CountryCodes) : Event()
         class OnChangeValue(val inputValue: String) : Event()
         class CheckPinStatus(val pin: String) : Event()
@@ -200,6 +235,9 @@ internal class AppointmentViewModel(
             }
             is Event.OnEnterClick -> {
                 changeScreenStatus()
+            }
+            is Event.OnSendNewCode -> {
+                onSendNewCode()
             }
             is Event.CheckPinStatus -> {
                 checkStatus(pin = event.pin)

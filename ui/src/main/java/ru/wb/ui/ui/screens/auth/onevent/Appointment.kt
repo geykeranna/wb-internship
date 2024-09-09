@@ -1,9 +1,7 @@
 package ru.wb.ui.ui.screens.auth.onevent
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,7 +15,6 @@ import ru.wb.ui.R
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentCard
-import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentContent
 import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentScreenState
 
 @Composable
@@ -37,8 +34,8 @@ internal fun Appointment(
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
     val validateStatus by viewModel.getValidateStatus().collectAsStateWithLifecycle()
     val textButtonData by viewModel.getTextButtonFlow().collectAsStateWithLifecycle()
-    val contextString = viewModel.getContextString()
-    val enterButtonStatusEnable = viewModel.getButtonStatusEnable()
+    val enterButtonStatusEnable by viewModel.getValidationFlow().collectAsStateWithLifecycle()
+    val contextString by viewModel.getContextStringFlow().collectAsStateWithLifecycle()
 
     BaseScreen(
         modifier = modifier
@@ -66,6 +63,9 @@ internal fun Appointment(
             },
             onChangeValue = { newValue ->
                 viewModel.obtainEvent(AppointmentViewModel.Event.OnChangeValue(newValue))
+            },
+            onTextButtonClick = {
+                viewModel.obtainEvent(AppointmentViewModel.Event.OnSendNewCode)
             },
             onEnterClick = {
                 when {

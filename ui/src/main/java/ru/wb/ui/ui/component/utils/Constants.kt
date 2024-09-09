@@ -46,13 +46,12 @@ object Constants {
     const val SIZE_OF_ICON_SOCIAL_CHIPS_GROUP = 52
 
     // composable InputField
-    const val CORNER_RADIUS_OF_INPUT_FIELD = 6
+    const val CORNER_RADIUS_OF_INPUT_FIELD = 16
     const val ICON_SIZE_IN_INPUT_FIELD = 22
     const val FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD = 2
 
     // composable InputNumberField
-    const val PADDING_OF_NUMBER_INPUT_FIELD = 6
-    const val CORNER_RADIUS_IN_NUMBER_INPUT_FIELD = 4
+    const val CORNER_RADIUS_IN_NUMBER_INPUT_FIELD = 16
     const val CONTENT_PADDING_OF_ITEM_DROPDOWN = 8
     const val CHAR_IN_MASK_FOR_NUMBER = '0'
     const val SIZE_FLAG_ICON_DROPDOWN_CODE = 16

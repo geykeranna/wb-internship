@@ -83,18 +83,6 @@ object AppTypo {
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
-    val metadata2 = TextStyle(
-        fontSize = 10.sp,
-        fontFamily = interFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Normal
-    )
-    val metadata3 = TextStyle(
-        fontSize = 14.sp,
-        fontFamily = interFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.SemiBold
-    )
 
     val primary = TextStyle(
         fontSize = 18.sp,
@@ -117,17 +105,12 @@ object AppTypo {
         fontWeight = FontWeight.Bold,
     )
 
-    val inputText = TextStyle(
+    val regular = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp,
     )
 
-    val usernameText = TextStyle(
-        fontFamily = interFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp,
-    )
     val large1 = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.SemiBold,
@@ -142,11 +125,6 @@ object AppTypo {
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-    )
-    val communityLabelFull = TextStyle(
-        fontFamily = interFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 34.sp,
     )
     val userPlusInList = TextStyle(
         fontFamily = interFamily,

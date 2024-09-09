@@ -19,6 +19,7 @@ internal fun InputPassField(
     modifier: Modifier = Modifier,
     isInvalid: Boolean = false,
     disable: Boolean = false,
+    disableEnter: Boolean = false,
     onChange: (value: String) -> Unit = {},
     onEnterClick: () -> Unit = {},
 ) {
@@ -35,12 +36,13 @@ internal fun InputPassField(
         onValueChange = {pin ->
             onChange(pin.take(PASS_LENGTH_IN_PASS_FIELD))
         },
+        enabled = !disable,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.NumberPassword,
             imeAction = ImeAction.Send
         ),
         keyboardActions = KeyboardActions(
-            onSend = { if (disable) Unit else onEnterClick() }
+            onSend = { if (disableEnter) Unit else onEnterClick() }
         ),
         decorationBox = {
             DecorationBoxInputPassField(

@@ -23,16 +23,16 @@ internal fun DecorationBoxNumberTextField(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
             .fillMaxWidth()
             .background(AppTheme.colors.neutralColorSecondaryBackground)
-            .padding(8.dp),
+            .padding(horizontal = 12.dp, vertical = 16.dp)
+            .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp)),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (value.isEmpty()){
             Text(
                 text = placeholder,
-                style = AppTheme.typography.bodyText1,
+                style = AppTheme.typography.regular,
                 color = AppTheme.colors.neutralColorDisabled
             )
         }
