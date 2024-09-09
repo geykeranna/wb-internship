@@ -6,4 +6,5 @@ internal enum class AppointmentScreenState(
     ENTER_NAME("Продолжить"),
     ENTER_PHONE("Получить код"),
     ENTER_PIN("Отправить и подтвердить запись"),
+    END_SCREEN("Найти другие встречи")
 }

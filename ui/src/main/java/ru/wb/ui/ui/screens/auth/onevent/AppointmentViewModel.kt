@@ -30,9 +30,6 @@ internal class AppointmentViewModel(
     private val _formData = MutableStateFlow(AppointmentFormData.defaultData)
     private val formData: StateFlow<AppointmentFormData> = _formData
 
-    private val _isSuccessfulRegistration = MutableStateFlow(false)
-    private val isSuccessfulRegistration: StateFlow<Boolean> = _isSuccessfulRegistration
-
     private val _countryCodesOptions = MutableStateFlow(CountryCodes.defaultData)
     private val countryCodesOptions: StateFlow<List<CountryCodes>> = _countryCodesOptions
 
@@ -64,8 +61,6 @@ internal class AppointmentViewModel(
     fun getFormDataFlow(): StateFlow<AppointmentFormData> = formData
 
     fun getTextButtonFlow(): StateFlow<List<Any?>> = textButtonState
-
-    fun getSuccessfulRegistrationStatusFlow(): StateFlow<Boolean> = isSuccessfulRegistration
 
     fun getValidateStatus(): StateFlow<Boolean?> = pinVerificationStatus
 
@@ -124,6 +119,10 @@ internal class AppointmentViewModel(
                 sendPin()
             }
             screenState.value == AppointmentScreenState.ENTER_PIN
+                    && pinVerificationStatus.value == true -> {
+                _screenState.emit(AppointmentScreenState.END_SCREEN)
+            }
+            screenState.value == AppointmentScreenState.ENTER_PIN
                     && formData.value.pin.length == 4 -> {
                 checkStatus(formData.value.pin)
                 getContextString()
@@ -131,6 +130,7 @@ internal class AppointmentViewModel(
         }
         checkValidateState()
     }
+
     private fun checkValidateState() = viewModelScope.launch {
         _validationStatus.emit(
         (screenState.value == AppointmentScreenState.ENTER_NAME && formData.value.name.isNotEmpty())
@@ -150,6 +150,7 @@ internal class AppointmentViewModel(
             AppointmentScreenState.ENTER_PIN -> {
                 _formData.emit(formData.value.copy(pin = newValue))
             }
+            else -> {}
         }
         checkValidateState()
     }
@@ -184,9 +185,7 @@ internal class AppointmentViewModel(
             subscribeOnEvent.execute(
                 idUser = it.id,
                 idEvent = idEvent
-            ).collect {
-                _isSuccessfulRegistration.emit(true)
-            }
+            )
         }
     }
 

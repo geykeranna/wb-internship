@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ru.wb.ui.R
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -22,6 +24,8 @@ internal fun AppointmentTitle(
     eventLabel: String,
     modifier: Modifier = Modifier,
     title: String = "",
+    textColor: Color = AppTheme.colors.neutralColorFont,
+    isEnded: Boolean = false,
     onCloseClick: () -> Unit = {},
 ) {
     Column(
@@ -34,23 +38,27 @@ internal fun AppointmentTitle(
             verticalAlignment = Alignment.Top,
         ){
             Text(
-                modifier = Modifier.fillMaxWidth(0.8f),
-                style = AppTheme.typography.large1,
+                modifier = Modifier.fillMaxWidth(if(!isEnded) 0.8f else 1f),
+                style = AppTheme.typography.large1.copy(lineHeight = 44.sp),
                 text = title,
+                color = textColor,
                 overflow = TextOverflow.Visible,
             )
-            Image(
-                modifier = Modifier
-                    .size(28.dp)
-                    .clickable { onCloseClick() },
-                painter = painterResource(id = R.drawable.ic_close_big),
-                contentDescription = "close button"
-            )
+            if(!isEnded) {
+                Image(
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { onCloseClick() },
+                    painter = painterResource(id = R.drawable.ic_close_big),
+                    contentDescription = "close button"
+                )
+            }
         }
         Text(
             modifier = Modifier,
             style = AppTheme.typography.subheading3,
             text = eventLabel,
+            color = textColor,
         )
     }
 }

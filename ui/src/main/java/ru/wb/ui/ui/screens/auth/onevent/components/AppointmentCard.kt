@@ -51,6 +51,7 @@ internal fun AppointmentCard(
                 onEnterClick = onEnterClick,
             )
         }
+
         item {
             AppointmentButtonsByState(
                 modifier = Modifier,
@@ -59,7 +60,7 @@ internal fun AppointmentCard(
                 active = active,
                 screenState = screenState,
                 onEnterClick = onEnterClick,
-                onClick = onTextButtonClick
+                onTextButtonClick = onTextButtonClick
             )
         }
     }

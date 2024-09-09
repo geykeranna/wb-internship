@@ -68,6 +68,7 @@ internal fun AppointmentContent(
                     onEnterClick = onEnterClick,
                 )
             }
+            else -> {}
         }
     }
 }

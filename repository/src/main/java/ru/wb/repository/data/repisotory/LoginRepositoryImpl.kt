@@ -7,7 +7,7 @@ import ru.wb.domain.model.UserData
 
 internal class LoginRepositoryImpl: LoginRepository {
     override fun checkCode(pinCode: String): Flow<Boolean> {
-        return flowOf(false)
+        return flowOf(true)
     }
 
     override fun sendOnPhone(phoneNumber: String): Flow<Boolean> {

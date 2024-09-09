@@ -22,7 +22,7 @@ internal fun AppointmentButtonsByState(
     active: Boolean = true,
     screenState: AppointmentScreenState = AppointmentScreenState.ENTER_NAME,
     onEnterClick: () -> Unit = {},
-    onClick: () -> Unit = {},
+    onTextButtonClick: () -> Unit = {},
 ) {
     val (textColor, buttonColor) = when {
         disable -> listOf(
@@ -46,7 +46,7 @@ internal fun AppointmentButtonsByState(
     ) {
         textButtonValue?.let { text ->
             Text(
-                modifier = Modifier.clickable { onClick() },
+                modifier = Modifier.clickable { onTextButtonClick() },
                 text = text,
                 style = AppTheme.typography.primary,
                 color = colorTextButton,

@@ -11,7 +11,6 @@
     <string name="label_screens_community">Сообщества</string>
     <string name="label_screens_more">Ещё</string>
     <string name="label_screens_profile">Профиль</string>
-    <string name="label_screens_my_meets">Мои встречи</string>
     <string name="label_screens_phone">Введите номер телефона</string>
     <string name="label_screens_pin">Введите код</string>
     <string name="description_screens_phone">Мы вышлем код подтверждения на указаный номер</string>
@@ -29,7 +28,9 @@
     <string name="label_menu_items_help">Помощь</string>
     <string name="label_menu_items_referral">Пригласи друга</string>
 
+    <string name="label_my_meets">Мои встречи</string>
     <string name="label_enter_on_meet">Вход и запись на встречу</string>
+    <string name="label_enter_on_meet_ended">Вы записались на встречу</string>
     <string name="label_show_my_community">Показывать мои сообщества</string>
     <string name="label_show_my_events">Показывать мои встречи</string>
     <string name="label_enable_notification">Включить уведомления</string>
