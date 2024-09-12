@@ -5,8 +5,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.wb.ui.ui.screens.auth.onevent.Appointment
-import ru.wb.ui.ui.screens.auth.phone.PhoneScreen
-import ru.wb.ui.ui.screens.auth.pin.PinCodeScreen
 import ru.wb.ui.ui.screens.community.community.CommunityScreen
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
@@ -95,18 +93,6 @@ fun NavGraph(
             ProfileViewScreen(
                 navController = navController,
                 idUser = "",
-            )
-        }
-
-        composable(route = Screen.PHONE.route) {
-            PhoneScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PINCODE.route) {
-            PinCodeScreen(
-                navController = navController
             )
         }
 

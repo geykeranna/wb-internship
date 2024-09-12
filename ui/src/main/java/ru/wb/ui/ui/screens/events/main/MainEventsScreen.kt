@@ -23,15 +23,18 @@ internal fun MainEventsScreen(
 ) {
     val stateScreen by viewModel.getContentStateFlow().collectAsStateWithLifecycle()
     val search by viewModel.getSearchStringFlow().collectAsStateWithLifecycle()
-    val content by viewModel.getContentDataFlow().collectAsStateWithLifecycle()
+    val filteredContent by viewModel.getContentDataFlow().collectAsStateWithLifecycle()
+    val staticContent by viewModel.getLabelContentDataFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
     val allChipsList = viewModel.getAllChipsList()
 
     Scaffold(
-        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+        modifier = modifier,
         topBar = {
             TopBarMain(
-                modifier = Modifier.padding(top = 10.dp),
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 inputText = search,
                 onChangeValue = { input -> viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input)) },
                 onRightClick =  { navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)}
@@ -40,7 +43,8 @@ internal fun MainEventsScreen(
         containerColor = AppTheme.colors.neutralColorBackground
     ) { padding ->
         MainEventScreenContent(
-            content = content,
+            filteredContent = filteredContent,
+            staticContent = staticContent,
             modifier = Modifier.padding(padding),
             selectedChips = selectedChips,
             allChipsList = allChipsList,

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_CHIPS
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_OF_TEXT_TAGS
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -25,7 +26,10 @@ fun TagItem(
     ) {
         Text(
             modifier = Modifier
-                .padding(horizontal = 6.dp, vertical = 2.dp)
+                .padding(
+                    horizontal = HORIZONTAL_PADDING_OF_TEXT_TAGS.dp,
+                    vertical = 2.dp
+                )
                 .align(Alignment.Center),
             text = item,
             maxLines = 1,

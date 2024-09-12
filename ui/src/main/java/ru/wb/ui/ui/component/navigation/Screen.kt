@@ -44,14 +44,6 @@ enum class Screen(
         route = "profile_detail",
         label = "Профиль"
     ),
-    PHONE (
-        route = "first_number",
-        label = "Введите номер телефона",
-    ),
-    PINCODE (
-        route = "first_pin_code",
-        label = "Введите код",
-    ),
     USER_LIST (
         route = "user_list_by_event",
         label = "Пользователи",

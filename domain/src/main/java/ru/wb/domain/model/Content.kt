@@ -33,7 +33,6 @@ data class Content(
                     label = "",
                     eventList = List (10) {EventData.defaultObject},
                 ),
-
             )
         )
     }

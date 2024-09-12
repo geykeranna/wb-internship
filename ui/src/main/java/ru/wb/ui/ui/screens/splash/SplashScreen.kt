@@ -25,7 +25,7 @@ internal fun SplashScreen(
             }
         }
         else {
-            navController.navigate(Screen.PHONE.route) {
+            navController.navigate(Screen.APPOINTMENT.route) {
                 popUpTo(Screen.SPLASH.route) { inclusive = true }
             }
         }

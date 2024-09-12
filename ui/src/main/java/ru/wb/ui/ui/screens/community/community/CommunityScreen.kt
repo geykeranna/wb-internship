@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
-import ru.wb.ui.ui.component.cards.community.CommunityCardList
+import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
 import ru.wb.ui.ui.component.input.SearchBar
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarCustom
@@ -49,7 +49,7 @@ internal fun CommunityScreen(
         modifier = Modifier,
         state = state
     ){
-        CommunityCardList(
+        CommunityCardRowList(
             modifier = modifier
                 .padding(top = 122.dp)
                 .padding(horizontal = HORIZONTAL_PADDING_DETAIL_SCREEN_COMMON.dp),

@@ -1,14 +1,17 @@
 package ru.wb.ui.ui.screens.events.main.components
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.ContentItems
-import ru.wb.ui.ui.component.cards.community.CommunityCardList
+import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
 import ru.wb.ui.ui.component.cards.events.EventCardsColumnList
 import ru.wb.ui.ui.component.cards.events.EventCardsRowList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.cards.users.UsersRowCard
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 
 @Composable
 internal fun MainViewByContent(
@@ -37,14 +40,14 @@ internal fun MainViewByContent(
             }
             !contentItem.eventList.isNullOrEmpty() -> {
                 EventCardsColumnList(
-                    modifier = Modifier,
+                    modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                     onNavigate = onNavigateToEventDetail,
                     itemsList = contentItem.eventList.orEmpty(),
                     size = EventSize.LARGE,
                 )
             }
             !contentItem.communityList.isNullOrEmpty() -> {
-                CommunityCardList(
+                CommunityCardRowList(
                     modifier = Modifier,
                     itemsList = contentItem.communityList.orEmpty(),
                     onClick = { idCommunity ->

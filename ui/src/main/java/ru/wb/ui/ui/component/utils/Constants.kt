@@ -39,6 +39,7 @@ object Constants {
     // composable ChipsGroup
     const val CONTENT_PADDING_OF_CHIPS = 10
     const val CORNER_RADIUS_OF_CHIPS = 8
+    const val HORIZONTAL_PADDING_OF_TEXT_TAGS = 6
 
     // composable SocialChips
     const val CONTENT_PADDING_OF_CHIPS_ITEM_LIST = 8
@@ -80,13 +81,7 @@ object Constants {
     const val ICON_SIZE_IN_TOP_BAR = 24
 
     // composable LoginScreen
-    const val TOP_PADDING_LOGIN_SCREEN = 100
-    const val HEIGHT_BUTTON_LOGIN_SCREEN = 52
     const val HEIGHT_TEXT_INFO_BLOCK_LOGIN_SCREEN = 85
-    const val HORIZONTAL_PADDING_IN_LOGIN_SCREEN = 24
-    const val TOP_PADDING_BUTTON_IN_LOGIN_SCREEN = 70
-    const val TOP_PADDING_FIELD_IN_LOGIN_SCREEN = 50
-    const val HORIZONTAL_PADDING_TOP_BAR_LOGIN_SCREEN = 16
     const val HORIZONTAL_PADDING_TEXT_IN_LOGIN_SCREEN = 40
     const val CONTENT_PADDING_TEXT_IN_LOGIN_SCREEN = 8
 

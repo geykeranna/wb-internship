@@ -13,6 +13,7 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun LabeledCard(
     label: String,
     modifier: Modifier = Modifier,
+    modifierLabel: Modifier = Modifier,
     content: @Composable () -> Unit = {}
 ) {
     Column(
@@ -21,7 +22,7 @@ internal fun LabeledCard(
     ) {
         if (label.isNotEmpty()) {
             Text(
-                modifier = Modifier,
+                modifier = modifierLabel,
                 text = label,
                 style = AppTheme.typography.heading2,
                 color = AppTheme.colors.neutralColorFont,

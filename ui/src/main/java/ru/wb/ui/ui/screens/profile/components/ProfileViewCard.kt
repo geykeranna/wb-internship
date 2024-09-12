@@ -14,7 +14,7 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.cards.LabeledCard
-import ru.wb.ui.ui.component.cards.community.CommunityCardList
+import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
 import ru.wb.ui.ui.component.cards.events.EventCardsRowList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.theme.AppTheme
@@ -61,7 +61,7 @@ internal fun ProfileViewCard(
                 LabeledCard(
                     label = pageMode.communityLabelText
                 ) {
-                    CommunityCardList(
+                    CommunityCardRowList(
                         modifier = Modifier,
                         itemsList = communityData,
                         onClick = null,

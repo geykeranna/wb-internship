@@ -21,7 +21,7 @@ data class EventData(
             name = "QA Talks — Global tech forum",
             location = Location.defaultObject,
             date = "10 августа",
-            tagList = listOf("Moscow", "Android"),
+            tagList = listOf("Moscow", "Android", "Moscow", "Android", "Moscow", "Android"),
             icon = null,
             active = true,
             description = "Description",

@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.Content
+import ru.wb.domain.model.ContentItems
 import ru.wb.domain.usecases.common.GetContentUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -18,8 +18,11 @@ internal class MainEventsScreenViewModel(
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
     private val lastChipsActionItem = "Все категории"
 
-    private val _content = MutableStateFlow(Content.defaultObject)
-    private val content: StateFlow<Content> = _content
+    private val _content = MutableStateFlow<List<ContentItems>>(listOf())
+    private val content: StateFlow<List<ContentItems>> = _content
+
+    private val _labelContent = MutableStateFlow<List<ContentItems>>(listOf())
+    private val labelContent: StateFlow<List<ContentItems>> = _labelContent
 
     private val _selectedItems = MutableStateFlow(listOf(lastChipsActionItem))
     private val selectedItems: StateFlow<List<String>> = _selectedItems
@@ -34,7 +37,9 @@ internal class MainEventsScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getContentDataFlow(): StateFlow<Content> = content
+    fun getContentDataFlow(): StateFlow<List<ContentItems>> = content
+
+    fun getLabelContentDataFlow(): StateFlow<List<ContentItems>> = labelContent
 
     fun getSearchStringFlow(): StateFlow<String> = searchString
 
@@ -44,13 +49,31 @@ internal class MainEventsScreenViewModel(
 
     fun getAllChipsList(): List<String> = defaultChipsList + lastChipsActionItem
 
+    private fun startFetchData() = viewModelScope.launch {
+        _stateContent.emit(BaseState.LOADING)
+        getContent.execute().collect { newValue ->
+            if(newValue.items.isEmpty()) {
+                _stateContent.emit(BaseState.EMPTY)
+                return@collect
+            }
+            val (labeledData, filteredData) = newValue.items.partition { it.isStatic }
+            _labelContent.emit(labeledData)
+            _content.emit(filteredData)
+            _stateContent.emit(BaseState.SUCCESS)
+        }
+    }
+
     private fun fetchData() = viewModelScope.launch {
         _stateContent.emit(BaseState.LOADING)
         getContent.execute(
             search = searchString.value,
             filter = selectedItems.value,
         ).collect { newValue ->
-            _content.emit(newValue)
+            if(newValue.items.isEmpty()){
+                _stateContent.emit(BaseState.EMPTY)
+                return@collect
+            }
+            _content.emit(newValue.items)
             _stateContent.emit(BaseState.SUCCESS)
         }
     }
@@ -80,7 +103,7 @@ internal class MainEventsScreenViewModel(
 
     private fun onChangeSub(idCommunity: String, idContentItem: String) = viewModelScope.launch {
         changeSubscribeState.execute(idCommunity).collect { results ->
-            val newValue = content.value.items.map { item ->
+            val newValue = content.value.map { item ->
                 if (item.id == idContentItem) {
                     item.copy(communityList = item.communityList?.map { value ->
                         if (value.id == idCommunity) { value.copy(isSubscribed = results) }
@@ -88,7 +111,7 @@ internal class MainEventsScreenViewModel(
                     })
                 } else item
             }
-            _content.emit(content.value.copy(items = newValue))
+            _content.emit(newValue)
         }
     }
 
@@ -102,7 +125,7 @@ internal class MainEventsScreenViewModel(
     override fun obtainEvent(event: Event) {
         when (event) {
             is Event.OnLoadingStarted -> {
-                fetchData()
+                startFetchData()
             }
             is Event.OnSearch -> {
                 onSearch(event.query)
