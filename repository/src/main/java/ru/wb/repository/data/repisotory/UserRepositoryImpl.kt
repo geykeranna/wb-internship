@@ -3,12 +3,18 @@ package ru.wb.repository.data.repisotory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repository.UserRepository
-import ru.wb.domain.repository.model.UsersGetRequest
+import ru.wb.domain.repository.user.UserRepository
+import ru.wb.domain.repository.user.UserResponse
+import ru.wb.domain.repository.user.UsersGetRequest
 
 internal class UserRepositoryImpl: UserRepository {
-    override fun getUsers(data: UsersGetRequest?): Flow<List<UserData>> {
-        return flowOf(List(10) { UserData.defaultObject })
+    override fun getUsers(data: UsersGetRequest?): Flow<UserResponse> {
+        val response = UserResponse(
+            limit = 10,
+            offset = 0,
+            data = List(10) { UserData.defaultObject }
+        )
+        return flowOf(response)
     }
 
     override fun getUser(id: String?): Flow<UserData> {

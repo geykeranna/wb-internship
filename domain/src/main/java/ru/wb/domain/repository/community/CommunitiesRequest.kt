@@ -1,4 +1,4 @@
-package ru.wb.domain.repository.model
+package ru.wb.domain.repository.community
 
 data class CommunitiesGetRequest(
     val limit: Int? = null,

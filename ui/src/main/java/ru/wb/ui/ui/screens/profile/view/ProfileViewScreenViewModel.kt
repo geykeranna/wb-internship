@@ -169,10 +169,10 @@ internal class ProfileViewScreenViewModel(
             }
         }
         getEventsList.execute(idUser = userId).collect {
-            _dataEventList.emit(it)
+            _dataEventList.emit(it.data)
         }
         getCommunityList.execute(idUser = userId).collect {
-            _dataCommunityList.emit(it)
+            _dataCommunityList.emit(it.data)
         }
     }
 

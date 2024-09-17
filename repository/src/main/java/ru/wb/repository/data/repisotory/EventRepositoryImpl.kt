@@ -3,14 +3,20 @@ package ru.wb.repository.data.repisotory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.EventData
-import ru.wb.domain.repository.EventRepository
-import ru.wb.domain.repository.model.EventGetRequest
+import ru.wb.domain.repository.event.EventRepository
+import ru.wb.domain.repository.event.EventGetRequest
+import ru.wb.domain.repository.event.EventResponse
 
 internal class EventRepositoryImpl: EventRepository {
     override fun getEvents(
         data: EventGetRequest?,
-    ): Flow<List<EventData>>{
-        return flowOf(List(10) { EventData.defaultObject })
+    ): Flow<EventResponse>{
+        val response = EventResponse(
+            limit = 10,
+            offset = 0,
+            data = List(10) { EventData.defaultObject }
+        )
+        return flowOf(response)
     }
 
     override fun getEvent(

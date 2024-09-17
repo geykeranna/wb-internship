@@ -5,23 +5,29 @@ import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.Content
 import ru.wb.domain.model.CountryCodes
 import ru.wb.domain.model.SocialMedia
-import ru.wb.domain.repository.CommonRepository
-import ru.wb.domain.repository.model.ContentRequest
+import ru.wb.domain.repository.common.CommonRepository
+import ru.wb.domain.repository.common.ContentRequest
+import ru.wb.domain.repository.common.ContentResponse
 
 internal class CommonRepositoryImpl: CommonRepository {
-    override fun getContent(data: ContentRequest): Flow<Content> {
-        return flowOf(Content.defaultObject)
+    override fun getContent(data: ContentRequest): Flow<ContentResponse> {
+        val response = ContentResponse(
+            limit = 4,
+            offset = 0,
+            data = Content.defaultObject
+        )
+        return flowOf(response)
     }
 
-    override fun getSocialMediaList(): Flow<List<SocialMedia>> {
+    override fun getSocialMediaList(type: String): Flow<List<SocialMedia>> {
         return flowOf(List (10){ SocialMedia.defaultObject })
     }
 
-    override fun getCountryCodesList(): Flow<List<CountryCodes>> {
+    override fun getCountryCodesList(type: String): Flow<List<CountryCodes>> {
         return flowOf(CountryCodes.defaultData)
     }
 
-    override fun getChipsInterest(): Flow<List<String>> {
+    override fun getChipsInterest(type: String): Flow<List<String>> {
         return flowOf(listOf(
             "Дизайн",
             "Продакт менеджмент",

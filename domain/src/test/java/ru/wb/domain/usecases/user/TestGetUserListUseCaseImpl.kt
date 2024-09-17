@@ -14,7 +14,7 @@ internal class TestGetUserListUseCaseImpl{
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        Assertions.assertTrue(actual.data.isNotEmpty())
     }
 
     @Test
@@ -24,6 +24,6 @@ internal class TestGetUserListUseCaseImpl{
         val useCase = GetUserListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(limit = expectedLimit).last()
 
-        Assertions.assertEquals(expectedLimit, actual.size)
+        Assertions.assertEquals(expectedLimit, actual.data.size)
     }
 }

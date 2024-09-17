@@ -25,6 +25,6 @@ class TestPutUserDataUseCaseImpl {
         val useCase = PutUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(user).last()
 
-        Assertions.assertTrue(actual)
+        Assertions.assertTrue(actual?.id?.isNotEmpty() ?: false)
     }
 }

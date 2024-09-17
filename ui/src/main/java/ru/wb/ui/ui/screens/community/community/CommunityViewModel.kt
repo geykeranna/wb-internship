@@ -36,9 +36,9 @@ internal class CommunityViewModel(
         _state.emit(BaseState.LOADING)
         getDataList.execute().collect {
             when {
-                it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                it.data.isEmpty() -> _state.emit(BaseState.EMPTY)
                 else -> {
-                    _dataList.emit(it)
+                    _dataList.emit(it.data)
                     _state.emit(BaseState.SUCCESS)
                 }
             }
@@ -53,7 +53,7 @@ internal class CommunityViewModel(
         query: String? = null,
     ) = viewModelScope.launch {
         getDataList.execute(query = query).collect{
-            _dataList.emit(it)
+            _dataList.emit(it.data)
         }
 
     }

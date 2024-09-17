@@ -1,4 +1,4 @@
-package ru.wb.domain.repository.model
+package ru.wb.domain.repository.user
 
 data class UsersGetRequest(
     val limit: Int? = null,

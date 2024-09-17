@@ -14,7 +14,7 @@ class TestGetCommunityListUseCaseImpl {
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute().last()
 
-        Assertions.assertFalse(actual.isEmpty())
+        Assertions.assertFalse(actual.data.isEmpty())
     }
 
     @Test
@@ -24,6 +24,6 @@ class TestGetCommunityListUseCaseImpl {
         val useCase = GetCommunityListUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(limit = expectedLimit).last()
 
-        Assertions.assertEquals(expectedLimit, actual.size)
+        Assertions.assertEquals(expectedLimit, actual.data.size)
     }
 }

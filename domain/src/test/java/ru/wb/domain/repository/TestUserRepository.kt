@@ -44,21 +44,21 @@ class TestUserRepository {
     fun `should return not empty user data list`() = runTest{
         val actual = testRepository.getUsers().last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        Assertions.assertTrue(actual.data.isNotEmpty())
     }
 
     @Test
     fun `should return state of put user request`() = runTest{
         val actual = testRepository.putUser(user).last()
 
-        Assertions.assertTrue(actual)
+        Assertions.assertTrue(actual.id.isNotEmpty())
     }
 
     @Test
     fun `should return state of post user request`() = runTest{
         val actual = testRepository.postUser(user).last()
 
-        Assertions.assertTrue(actual)
+        Assertions.assertTrue(actual.id.isNotEmpty())
     }
 
     @Test

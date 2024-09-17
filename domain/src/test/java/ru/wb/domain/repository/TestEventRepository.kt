@@ -27,6 +27,6 @@ class TestEventRepository {
     fun `should return not empty event data list`() = runTest {
         val actual = testRepository.getEvents().last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        Assertions.assertTrue(actual.data.isNotEmpty())
     }
 }

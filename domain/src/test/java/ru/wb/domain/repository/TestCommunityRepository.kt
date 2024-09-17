@@ -27,6 +27,6 @@ class TestCommunityRepository {
     fun `should return not empty community data list`() = runTest {
         val actual = testRepository.getCommunities().last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        Assertions.assertTrue(actual.data.isNotEmpty())
     }
 }

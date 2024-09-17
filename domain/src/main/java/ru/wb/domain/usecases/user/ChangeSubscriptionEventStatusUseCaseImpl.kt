@@ -1,7 +1,7 @@
 package ru.wb.domain.usecases.user
 
 import kotlinx.coroutines.flow.Flow
-import ru.wb.domain.repository.UserRepository
+import ru.wb.domain.repository.user.UserRepository
 
 internal class ChangeSubscriptionEventStatusUseCaseImpl(
     private val repository: UserRepository

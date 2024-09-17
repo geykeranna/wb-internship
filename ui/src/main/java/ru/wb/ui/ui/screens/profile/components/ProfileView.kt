@@ -33,10 +33,11 @@ internal fun ProfileView(
     onValueChange: (key: Int, value: Any) -> Unit = {_, _ -> },
 ){
     Scaffold(
-        modifier = modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+        modifier = modifier,
         containerColor = AppTheme.colors.neutralColorBackground,
         topBar = {
             TopBarWithAvatar(
+                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 src = userData.icon,
                 pageMode = pageMode,
                 onNavigate = onBackNavigate,

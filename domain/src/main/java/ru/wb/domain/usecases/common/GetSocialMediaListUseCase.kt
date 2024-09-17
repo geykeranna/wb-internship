@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.SocialMedia
 
 interface GetSocialMediaListUseCase {
-    fun execute(): Flow<List<SocialMedia>>
+    fun execute(type: String = "none"): Flow<List<SocialMedia>>
 }

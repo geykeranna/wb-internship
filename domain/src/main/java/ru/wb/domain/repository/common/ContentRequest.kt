@@ -1,4 +1,4 @@
-package ru.wb.domain.repository.model
+package ru.wb.domain.repository.common
 
 data class ContentRequest(
     val limit: Int? = null,

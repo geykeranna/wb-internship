@@ -12,7 +12,6 @@ import ru.wb.ui.ui.screens.events.main.MainEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
 import ru.wb.ui.ui.screens.splash.SplashScreen
-import ru.wb.ui.ui.screens.test.Test
 import ru.wb.ui.ui.screens.users.list.UsersListByEventScreen
 
 @Composable
@@ -24,10 +23,6 @@ fun NavGraph(
         navController = navController,
         startDestination = Screen.EVENTS.route
     ){
-        composable(route = Screen.TEST.route) {
-            Test()
-        }
-
         composable(route = Screen.EVENTS.route) {
             MainEventsScreen(
                 navController = navController

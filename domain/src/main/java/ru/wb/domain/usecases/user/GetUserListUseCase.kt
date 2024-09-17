@@ -1,7 +1,7 @@
 package ru.wb.domain.usecases.user
 
 import kotlinx.coroutines.flow.Flow
-import ru.wb.domain.model.UserData
+import ru.wb.domain.repository.user.UserResponse
 
 interface GetUserListUseCase {
       fun execute(
@@ -10,5 +10,5 @@ interface GetUserListUseCase {
         query: String? = null,
         communityId: String? = null,
         eventId: String? = null,
-    ): Flow<List<UserData>>
+    ): Flow<UserResponse>
 }

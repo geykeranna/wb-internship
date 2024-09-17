@@ -6,8 +6,9 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.Location
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repository.EventRepository
-import ru.wb.domain.repository.model.EventGetRequest
+import ru.wb.domain.repository.event.EventRepository
+import ru.wb.domain.repository.event.EventGetRequest
+import ru.wb.domain.repository.event.EventResponse
 
 internal class EventRepositoryStubs: EventRepository {
     private val eventData = EventData(
@@ -27,11 +28,13 @@ internal class EventRepositoryStubs: EventRepository {
 
     override fun getEvents(
         data: EventGetRequest?,
-    ): Flow<List<EventData>> {
-        data?.limit?.let {
-            return flowOf(List (it) { eventData })
-        }
-        return flowOf(listOf(eventData))
+    ): Flow<EventResponse>{
+        val response = EventResponse(
+            limit = 10,
+            offset = 0,
+            data = List(10) { EventData.defaultObject }
+        )
+        return flowOf(response)
     }
 
     override fun getEvent(

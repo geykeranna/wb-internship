@@ -1,7 +1,7 @@
 package ru.wb.domain.usecases.event
 
 import kotlinx.coroutines.flow.Flow
-import ru.wb.domain.repository.EventRepository
+import ru.wb.domain.repository.event.EventRepository
 
 internal class PostSubscribeOnEventImpl(
     private val repository: EventRepository

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
+import ru.wb.domain.repository.user.UserResponse
 import ru.wb.domain.usecases.user.GetUserListUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
@@ -37,7 +38,7 @@ internal class UsersListScreenViewModel(
     private fun startLoading(data: String) = viewModelScope.launch {
         _state.emit(BaseState.LOADING)
         val (source, id) = data.split(" ")
-        var apiCall: Flow<List<UserData>>? = null
+        var apiCall: Flow<UserResponse>? = null
         when (source) {
             "event" -> {
                 _userListLabels.emit(UsersListLabel.EVENT)
@@ -51,9 +52,9 @@ internal class UsersListScreenViewModel(
         apiCall?.let { response ->
             response.collect {
                 when {
-                    it.isEmpty() -> _state.emit(BaseState.EMPTY)
+                    it.data.isEmpty() -> _state.emit(BaseState.EMPTY)
                     else -> {
-                        _detailData.emit(it)
+                        _detailData.emit(it.data)
                         _state.emit(BaseState.SUCCESS)
                     }
                 }

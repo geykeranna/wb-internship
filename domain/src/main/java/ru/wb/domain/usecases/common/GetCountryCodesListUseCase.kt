@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.CountryCodes
 
 interface GetCountryCodesListUseCase {
-    fun execute(): Flow<List<CountryCodes>>
+    fun execute(type: String = "none"): Flow<List<CountryCodes>>
 }

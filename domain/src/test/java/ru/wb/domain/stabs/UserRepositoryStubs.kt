@@ -3,8 +3,9 @@ package ru.wb.domain.stabs
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repository.UserRepository
-import ru.wb.domain.repository.model.UsersGetRequest
+import ru.wb.domain.repository.user.UserRepository
+import ru.wb.domain.repository.user.UserResponse
+import ru.wb.domain.repository.user.UsersGetRequest
 
 internal class UserRepositoryStubs: UserRepository {
     private val userData = UserData(
@@ -17,11 +18,13 @@ internal class UserRepositoryStubs: UserRepository {
         socialMedia = listOf()
     )
 
-    override fun getUsers(data: UsersGetRequest?): Flow<List<UserData>> {
-        data?.limit?.let {
-            return flowOf(List(it) { userData })
-        }
-        return flowOf(listOf(userData))
+    override fun getUsers(data: UsersGetRequest?): Flow<UserResponse> {
+        val response = UserResponse(
+            limit = 10,
+            offset = 0,
+            data = List(10) { UserData.defaultObject }
+        )
+        return flowOf(response)
     }
 
     override fun getUser(id: String?) = flowOf(userData)

@@ -52,11 +52,11 @@ internal class MainEventsScreenViewModel(
     private fun startFetchData() = viewModelScope.launch {
         _stateContent.emit(BaseState.LOADING)
         getContent.execute().collect { newValue ->
-            if(newValue.items.isEmpty()) {
+            if(newValue.data.items.isEmpty()) {
                 _stateContent.emit(BaseState.EMPTY)
                 return@collect
             }
-            val (labeledData, filteredData) = newValue.items.partition { it.isStatic }
+            val (labeledData, filteredData) = newValue.data.items.partition { it.isStatic }
             _labelContent.emit(labeledData)
             _content.emit(filteredData)
             _stateContent.emit(BaseState.SUCCESS)
@@ -69,11 +69,11 @@ internal class MainEventsScreenViewModel(
             search = searchString.value,
             filter = selectedItems.value,
         ).collect { newValue ->
-            if(newValue.items.isEmpty()){
+            if(newValue.data.items.isEmpty()){
                 _stateContent.emit(BaseState.EMPTY)
                 return@collect
             }
-            _content.emit(newValue.items)
+            _content.emit(newValue.data.items)
             _stateContent.emit(BaseState.SUCCESS)
         }
     }
