@@ -9,6 +9,8 @@ import ru.wb.domain.usecases.common.GetCountryCodesListUseCase
 import ru.wb.domain.usecases.common.GetCountryCodesListUseCaseImpl
 import ru.wb.domain.usecases.common.GetSocialMediaListUseCase
 import ru.wb.domain.usecases.common.GetSocialMediaListUseCaseImpl
+import ru.wb.domain.usecases.common.SetChipsInterestUseCase
+import ru.wb.domain.usecases.common.SetChipsInterestUseCaseImpl
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.domain.usecases.community.GetCommunityDataUseCaseImpl
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
@@ -57,6 +59,7 @@ val domainModules = module {
     single<ChangeSubscriptionCommunityStatusUseCase> { ChangeSubscriptionCommunityStatusUseCaseImpl(get()) }
     single<GetSubscriptionCommunityStatusUseCase> { GetSubscriptionCommunityStatusUseCaseImpl(get()) }
     single<GetSubscriptionEventStatusUseCase> { GetSubscriptionEventStatusUseCaseImpl(get()) }
+    single<SetChipsInterestUseCase> { SetChipsInterestUseCaseImpl(get()) }
 
     single<GetEventDataUseCase> { GetEventDataUseCaseImpl(get()) }
     single<GetEventListUseCase> { GetEventListUseCaseImpl(get()) }

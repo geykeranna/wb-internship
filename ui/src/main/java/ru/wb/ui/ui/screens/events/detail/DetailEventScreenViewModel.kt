@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.EventData
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionEventStatusUseCase
@@ -55,21 +56,25 @@ internal class DetailEventScreenViewModel(
             }
         }
         getStatusSubscribe.execute(idEvent = id).collect{ status ->
-            _subscribeStatus.emit(status)
+            _subscribeStatus.emit(
+                when(status){
+                    UserSubscribeStatusResponse.SUBSCRIBED -> true
+                    else -> false
+                }
+            )
         }
     }
 
     private fun onChangeEventStatus(idEvent: String) = viewModelScope.launch {
         handleEvent.execute(eventId = idEvent).collect { state ->
-            if (!state) return@collect
+            if (state == UserSubscribeStatusResponse.NOT_SUBSCRIBED) return@collect
             when (_btnState.value) {
                 ButtonState.PRESSED.id -> {
                     _btnState.emit(ButtonState.UNPRESSED.id)
-                    _detailData.emit(detailData.value.copy(usersList = detailData.value.usersList.dropLast(1)))
                 }
                 else -> {
                     _btnState.emit(ButtonState.PRESSED.id)
-                    getData.execute(idEvent).collect{
+                    getData.execute(idEvent).collect {
                         _detailData.emit(it)
                     }
                 }

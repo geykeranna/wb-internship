@@ -15,9 +15,9 @@ import ru.wb.repository.data.repisotory.CommunityRepositoryImpl
 import ru.wb.repository.data.repisotory.LoginRepositoryImpl
 
 val dataModule = module {
-    singleOf(::LoginRepositoryImpl) { bind<LoginRepository>()}
-    singleOf(::EventRepositoryImpl) { bind<EventRepository>()}
-    singleOf(::CommunityRepositoryImpl) { bind<CommunityRepository>()}
-    singleOf(::UserRepositoryImpl) { bind<UserRepository>()}
-    singleOf(::CommonRepositoryImpl) { bind<CommonRepository>()}
+    singleOf(::LoginRepositoryImpl) { bind<LoginRepository>() }
+    singleOf(::EventRepositoryImpl) { bind<EventRepository>() }
+    singleOf(::CommunityRepositoryImpl) { bind<CommunityRepository>() }
+    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }
+    singleOf(::CommonRepositoryImpl) { bind<CommonRepository>() }
 }

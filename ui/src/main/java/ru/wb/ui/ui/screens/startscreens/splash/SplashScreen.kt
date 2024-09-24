@@ -1,4 +1,4 @@
-package ru.wb.ui.ui.screens.splash
+package ru.wb.ui.ui.screens.startscreens.splash
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,12 +20,12 @@ internal fun SplashScreen(
     LaunchedEffect(Unit) {
         delay(3000)
         if(isAuth) {
-            navController.navigate(Screen.EVENTS.route) {
+            navController.navigate(Screen.INTEREST.route) {
                 popUpTo(Screen.SPLASH.route) { inclusive = true }
             }
         }
         else {
-            navController.navigate(Screen.APPOINTMENT.route) {
+            navController.navigate(Screen.INTEREST.route) {
                 popUpTo(Screen.SPLASH.route) { inclusive = true }
             }
         }

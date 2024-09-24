@@ -4,10 +4,6 @@ enum class Screen(
     val route: String,
     val label: String
 ) {
-    TEST (
-        route = "test",
-        label = "test",
-    ),
     SPLASH (
         route = "splash",
         label = "Сплеш",
@@ -51,5 +47,9 @@ enum class Screen(
     APPOINTMENT(
         route = "appointment",
         label = "Авторизация",
-    )
+    ),
+    INTEREST(
+        route = "interest",
+        label = "Интересы",
+    ),
 }

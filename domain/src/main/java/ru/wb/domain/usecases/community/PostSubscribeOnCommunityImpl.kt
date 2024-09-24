@@ -1,6 +1,7 @@
 package ru.wb.domain.usecases.community
 
 import kotlinx.coroutines.flow.Flow
+import ru.wb.domain.repository.ResultResponse
 import ru.wb.domain.repository.community.CommunityRepository
 
 internal class PostSubscribeOnCommunityImpl(
@@ -9,7 +10,7 @@ internal class PostSubscribeOnCommunityImpl(
     override fun execute(
         idUser: String,
         idCommunity: String,
-    ): Flow<Boolean> = repository.subscribeOnCommunity(
+    ): Flow<ResultResponse> = repository.subscribeOnCommunity(
         idUser = idUser,
         idCommunity = idCommunity,
     )

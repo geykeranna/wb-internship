@@ -116,16 +116,19 @@ object AppTypo {
         fontWeight = FontWeight.SemiBold,
         fontSize = 50.sp,
     )
+
     val large2 = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 48.sp,
     )
+
     val communityLabel = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
     )
+
     val userPlusInList = TextStyle(
         fontFamily = interFamily,
         fontWeight = FontWeight.Medium,

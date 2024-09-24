@@ -3,9 +3,11 @@ package ru.wb.repository.data.repisotory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.EventData
+import ru.wb.domain.repository.ResultResponse
 import ru.wb.domain.repository.event.EventRepository
 import ru.wb.domain.repository.event.EventGetRequest
 import ru.wb.domain.repository.event.EventResponse
+import kotlin.random.Random
 
 internal class EventRepositoryImpl: EventRepository {
     override fun getEvents(
@@ -25,7 +27,13 @@ internal class EventRepositoryImpl: EventRepository {
         return flowOf(EventData.defaultObject)
     }
 
-    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<Boolean> {
-        return flowOf(true)
+    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<ResultResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> ResultResponse.SUCCESS
+                else -> ResultResponse.ERROR
+            }
+        )
     }
 }

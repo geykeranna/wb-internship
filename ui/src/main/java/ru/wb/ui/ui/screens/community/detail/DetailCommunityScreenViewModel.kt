@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -46,9 +47,9 @@ internal class DetailCommunityScreenViewModel(
                 }
             }
         }
-        getStateSubscribe.execute(idCommunity = id).collect {
+        getStateSubscribe.execute(idCommunity = id).collect { result ->
             when {
-                it -> ButtonsStateSub.PRESSED
+                result == UserSubscribeStatusResponse.SUBSCRIBED -> ButtonsStateSub.PRESSED
                 else -> ButtonsStateSub.UNPRESSED
             }
         }

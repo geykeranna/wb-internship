@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.wb.ui.ui.base.BaseScreen
-import ru.wb.ui.ui.component.cards.users.UsersFlowRow
+import ru.wb.ui.ui.component.cards.users.UsersGridRow
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.theme.AppTheme
@@ -51,7 +51,7 @@ internal fun UsersListByEventScreen(
                 modifier = Modifier,
             ) {
                 item {
-                    UsersFlowRow(
+                    UsersGridRow(
                         modifier = modifier.fillMaxSize().padding(top = 25.dp),
                         dataList = dataList,
                     )

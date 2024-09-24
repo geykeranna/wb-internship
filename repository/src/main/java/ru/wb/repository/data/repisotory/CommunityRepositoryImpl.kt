@@ -4,8 +4,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.repository.community.CommunityRepository
 import ru.wb.domain.model.CommunityData
+import ru.wb.domain.repository.ResultResponse
 import ru.wb.domain.repository.community.CommunitiesGetRequest
 import ru.wb.domain.repository.community.CommunityResponse
+import kotlin.random.Random
 
 internal class CommunityRepositoryImpl: CommunityRepository {
     override fun getCommunities(
@@ -25,7 +27,13 @@ internal class CommunityRepositoryImpl: CommunityRepository {
         return flowOf(CommunityData.defaultObject)
     }
 
-    override fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<Boolean> {
-        return flowOf(true)
+    override fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<ResultResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> ResultResponse.SUCCESS
+                else -> ResultResponse.ERROR
+            }
+        )
     }
 }

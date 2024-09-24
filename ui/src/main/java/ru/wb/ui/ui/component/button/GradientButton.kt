@@ -21,21 +21,28 @@ internal fun GradientButton(
     modifier: Modifier = Modifier,
     disabled: Boolean = false,
     textColor: Color = AppTheme.colors.neutralColorSecondaryBackground,
-    gradient: Brush = AppTheme.colors.gradient2,
+    gradient: Brush = AppTheme.colors.gradient1,
     onClick: () -> Unit = {}
 ) {
+    val (textButtonColor, backgroundButtonColor) = when{
+        disabled -> listOf(
+            AppTheme.colors.neutralColorDisabledText,
+            AppTheme.colors.gradient2,
+        )
+        else -> listOf(textColor, gradient)
+    }
     Box(
         modifier = modifier
             .onClick(disabled = disabled, onClick = onClick)
             .clip(RoundedCornerShape(16.dp))
-            .background(gradient)
+            .background(backgroundButtonColor as Brush)
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
             style = AppTheme.typography.heading3,
-            color = textColor
+            color = textButtonColor as Color
         )
     }
 }

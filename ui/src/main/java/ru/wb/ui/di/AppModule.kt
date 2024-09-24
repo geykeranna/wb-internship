@@ -9,6 +9,7 @@ import ru.wb.ui.ui.screens.events.detail.DetailEventScreenViewModel
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreenViewModel
 import ru.wb.ui.ui.screens.auth.onevent.AppointmentViewModel
 import ru.wb.ui.ui.screens.main.MainViewModel
+import ru.wb.ui.ui.screens.startscreens.interests.InterestsScreenViewModel
 
 val appModule = module {
     viewModelOf(::CommunityViewModel)
@@ -18,4 +19,5 @@ val appModule = module {
     viewModelOf(::DetailEventScreenViewModel)
     viewModelOf(::MainViewModel)
     viewModelOf(::AppointmentViewModel)
+    viewModelOf(::InterestsScreenViewModel)
 }

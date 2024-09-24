@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.ContentItems
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.common.GetContentUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -106,7 +107,11 @@ internal class MainEventsScreenViewModel(
             val newValue = content.value.map { item ->
                 if (item.id == idContentItem) {
                     item.copy(communityList = item.communityList?.map { value ->
-                        if (value.id == idCommunity) { value.copy(isSubscribed = results) }
+                        if (value.id == idCommunity) {
+                            value.copy(
+                                isSubscribed = results == UserSubscribeStatusResponse.SUBSCRIBED
+                            )
+                        }
                         else { value }
                     })
                 } else item

@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
 import ru.wb.domain.repository.user.UserRepository
 import ru.wb.domain.repository.user.UserResponse
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.repository.user.UsersGetRequest
+import kotlin.random.Random
 
 internal class UserRepositoryStubs: UserRepository {
     private val userData = UserData(
@@ -37,13 +39,43 @@ internal class UserRepositoryStubs: UserRepository {
 
     override fun postUser(userData: UserData) = flowOf(userData)
 
-    override fun changeSubscriptionEventStatus(eventID: String) = flowOf(true)
+    override fun changeSubscriptionEventStatus(eventID: String): Flow<UserSubscribeStatusResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> UserSubscribeStatusResponse.SUBSCRIBED
+                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            }
+        )
+    }
 
-    override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+    override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<UserSubscribeStatusResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> UserSubscribeStatusResponse.SUBSCRIBED
+                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            }
+        )
+    }
 
-    override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<Boolean> = flowOf(true)
+    override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<UserSubscribeStatusResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> UserSubscribeStatusResponse.SUBSCRIBED
+                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            }
+        )
+    }
 
-    override fun getSubscriptionEventStatus(idEvent: String): Flow<Boolean> {
-        return flowOf(false)
+    override fun getSubscriptionEventStatus(idEvent: String): Flow<UserSubscribeStatusResponse> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> UserSubscribeStatusResponse.SUBSCRIBED
+                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            }
+        )
     }
 }

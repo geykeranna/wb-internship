@@ -25,13 +25,14 @@ internal fun ButtonByState(
     modifier: Modifier = Modifier,
     onClickButton: () -> Unit = {},
 ) {
-    val (textButtonColor, buttonColor, labelText, disable) = when {
+    val (textButtonColor, buttonColor, labelText, disable, labelTextColor) = when {
         state == ButtonState.PRESSED.id -> {
             listOf(
                 AppTheme.colors.brandColorDefault,
                 AppTheme.colors.gradient3,
-                "Количество мест ограничено. Если передумаете - отпишитесь",
-                false
+                "✓ Вы пойдёте",
+                false,
+                AppTheme.colors.accentSuccess,
             )
         }
         countPeople == 0 && state != ButtonState.PRESSED.id -> {
@@ -40,6 +41,7 @@ internal fun ButtonByState(
                 AppTheme.colors.gradient2,
                 "К сожалению, мест не осталось(",
                 true,
+                AppTheme.colors.brandColorDefault,
             )
         }
         else -> {
@@ -47,7 +49,8 @@ internal fun ButtonByState(
                 AppTheme.colors.neutralColorBackground,
                 AppTheme.colors.gradient1,
                 "Всего ${countPeople} мест. Если передумаете - отпишитесь",
-                false
+                false,
+                AppTheme.colors.brandColorDefault
             )
         }
     }
@@ -66,7 +69,7 @@ internal fun ButtonByState(
                 modifier = Modifier.fillMaxWidth(),
                 text = labelText as String,
                 style = AppTheme.typography.secondary,
-                color = AppTheme.colors.brandColorDefault,
+                color = labelTextColor as Color,
                 textAlign = TextAlign.Center,
             )
 
