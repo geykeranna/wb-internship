@@ -92,6 +92,15 @@ fun NavGraph(
             )
         }
 
+        composable(route = Screen.INTEREST.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let { id ->
+                InterestsScreen(
+                    idUser = id,
+                    navController = navController,
+                )
+            }
+        }
+
         composable(route = Screen.INTEREST.route) {
             InterestsScreen(
                 navController = navController,
@@ -107,14 +116,18 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.APPOINTMENT.route + "/{data}") { stackEntry ->
-            stackEntry.arguments?.getString("data")?.let { data ->
-                val (idEvent, label) = data.split(" | ")
-                Appointment(
-                    idEvent = idEvent,
-                    label = label,
-                    navController = navController,
-                )
+        composable(route = Screen.APPOINTMENT.route + "/{eventId}/{label}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { eventId ->
+                val label = stackEntry.arguments?.getString("label")
+                when {
+                    !label.isNullOrEmpty() -> {
+                        Appointment(
+                            idEvent = eventId,
+                            label = label,
+                            navController = navController,
+                        )
+                    }
+                }
             }
         }
     }

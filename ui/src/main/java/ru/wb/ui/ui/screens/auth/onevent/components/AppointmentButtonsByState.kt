@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.screens.auth.onevent.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +11,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -46,7 +46,7 @@ internal fun AppointmentButtonsByState(
     ) {
         textButtonValue?.let { text ->
             Text(
-                modifier = Modifier.clickable { onTextButtonClick() },
+                modifier = Modifier.noRippleClickable { onTextButtonClick() },
                 text = text,
                 style = AppTheme.typography.primary,
                 color = colorTextButton,

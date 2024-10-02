@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.screens.profile.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,6 +18,7 @@ import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
 import ru.wb.ui.ui.component.cards.events.EventCardsRowList
 import ru.wb.ui.ui.component.cards.events.EventSize
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -38,7 +38,7 @@ internal fun ProfileViewCard(
     ){
         item {
             ProfileViewInfoCard(
-                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+                modifier = Modifier,
                 userData = userData
             )
         }
@@ -80,7 +80,7 @@ internal fun ProfileViewCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)
-                    .clickable { onBottomClick() },
+                    .noRippleClickable { onBottomClick() },
                 text = pageMode.bottomBarText,
                 textAlign = TextAlign.Center,
                 color = AppTheme.colors.neutralColorText,

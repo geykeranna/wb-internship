@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.component.toolbars
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.input.InputField
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -58,7 +58,7 @@ internal fun TopBarMain(
             inputText.isNotEmpty() -> {
                 Text(
                     modifier = Modifier
-                        .clickable {
+                        .noRippleClickable {
                             onCancelClick()
                             onChangeValue("")
                             focusRequester.freeFocus()
@@ -68,7 +68,7 @@ internal fun TopBarMain(
             }
             iconRight != null -> {
                 Icon(
-                    modifier = Modifier.clickable { onRightClick() },
+                    modifier = Modifier.noRippleClickable { onRightClick() },
                     painter = iconRight,
                     contentDescription = null,
                     tint = AppTheme.colors.brandColorDefault

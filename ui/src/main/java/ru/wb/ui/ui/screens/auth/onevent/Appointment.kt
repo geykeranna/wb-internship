@@ -17,6 +17,7 @@ import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentCard
 import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentEnd
 import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentScreenState
+import ru.wb.ui.ui.screens.auth.onevent.AppointmentViewModel.Event
 
 @Composable
 internal fun Appointment(
@@ -72,17 +73,13 @@ internal fun Appointment(
                     screenState = screenState,
                     disable = !enterButtonStatusEnable,
                     onBackClick = { navController.popBackStack() },
+                    onTextButtonClick = { viewModel.obtainEvent(Event.OnSendNewCode) },
+                    onEnterClick = { viewModel.obtainEvent(Event.OnEnterClick) },
                     onSelectedPhoneCountryCode = { value ->
-                        viewModel.obtainEvent(AppointmentViewModel.Event.OnSelectedPhoneCountryCode(value))
+                        viewModel.obtainEvent(Event.OnSelectedPhoneCountryCode(value))
                     },
                     onChangeValue = { newValue ->
-                        viewModel.obtainEvent(AppointmentViewModel.Event.OnChangeValue(newValue))
-                    },
-                    onTextButtonClick = {
-                        viewModel.obtainEvent(AppointmentViewModel.Event.OnSendNewCode)
-                    },
-                    onEnterClick = {
-                        viewModel.obtainEvent(AppointmentViewModel.Event.OnEnterClick)
+                        viewModel.obtainEvent(Event.OnChangeValue(newValue))
                     },
                 )
             }

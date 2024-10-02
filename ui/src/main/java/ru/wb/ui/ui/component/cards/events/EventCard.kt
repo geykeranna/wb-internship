@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.component.cards.events
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +19,7 @@ import ru.wb.ui.ui.component.avatars.EventAvatar
 import ru.wb.ui.ui.component.chips.TagsChipsEllipsis
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_TEXT_BLOCK_IN_EVENT_CARD
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -39,7 +39,7 @@ internal fun EventCard(
         modifier = modifier
             .setWidth(size.width)
             .clip(RoundedCornerShape(8.dp))
-            .clickable { onNavigate(eventData.id) },
+            .noRippleClickable { onNavigate(eventData.id) },
         verticalArrangement = Arrangement.spacedBy(SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD.dp)
     ) {
         EventAvatar(

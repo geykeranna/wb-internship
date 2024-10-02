@@ -28,6 +28,7 @@ internal fun ProfileView(
     pageMode: ProfilePageMode = ProfilePageMode.VIEW_OUTSIDE,
     onBackNavigate: () -> Unit = {},
     onBottomClick: () -> Unit = {},
+    onChipLastItemClick: () -> Unit = {},
     onSelectChip: (newValue: String) -> Unit = {},
     onPageModeChange: (newPageMode: ProfilePageMode) -> Unit = {},
     onValueChange: (key: Int, value: Any) -> Unit = {_, _ -> },
@@ -59,6 +60,7 @@ internal fun ProfileView(
                         selectedChips = selectedChips,
                         onSelectChip = onSelectChip,
                         allSocialMedia = socialMedia,
+                        onChipLastItemClick = onChipLastItemClick,
                     )
                 }
                 else -> {

@@ -1,7 +1,7 @@
 package ru.wb.ui.ui.component.input
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.CountryCodes
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_IN_NUMBER_INPUT_FIELD
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -28,7 +29,7 @@ internal fun DropDownCode(
     ContentInDropDownMenuItem(
         modifier = modifier
             .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
-            .clickable { onChangeExpanded() }
+            .noRippleClickable { onChangeExpanded() }
             .background(
                 when {
                     isInvalid -> AppTheme.colors.neutralColorInvalidBackground

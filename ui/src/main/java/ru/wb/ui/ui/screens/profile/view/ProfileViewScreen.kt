@@ -7,7 +7,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.screens.profile.components.ProfileView
+import ru.wb.ui.ui.screens.profile.view.ProfileViewScreenViewModel.Event
 
 @Composable
 internal fun ProfileViewScreen(
@@ -39,18 +41,18 @@ internal fun ProfileViewScreen(
         onBackNavigate = { navController.popBackStack() },
         formField = formField,
         onPageModeChange = { newValue ->
-            viewModel.obtainEvent(ProfileViewScreenViewModel.Event.OnChangePageMode(newValue))
+            viewModel.obtainEvent(Event.OnChangePageMode(newValue))
         },
         onBottomClick = {},
+        onChipLastItemClick = {
+            navController.navigate(Screen.INTEREST.route + "/${userData.id}")
+        },
         onSelectChip = { newValue ->
-            viewModel.obtainEvent(ProfileViewScreenViewModel.Event.OnSelectValue(newValue))
+            viewModel.obtainEvent(Event.OnSelectValue(newValue))
         },
     ) { index, value ->
         viewModel.obtainEvent(
-            ProfileViewScreenViewModel.Event.OnChangeFieldData(
-                key = index,
-                input = value
-            )
+            Event.OnChangeFieldData(key = index, input = value)
         )
     }
 }

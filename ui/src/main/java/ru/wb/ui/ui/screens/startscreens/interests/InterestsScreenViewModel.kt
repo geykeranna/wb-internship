@@ -3,19 +3,29 @@ package ru.wb.ui.ui.screens.startscreens.interests
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
+import ru.wb.domain.model.UserData
 import ru.wb.domain.usecases.common.GetChipsInterestUseCase
 import ru.wb.domain.usecases.common.SetChipsInterestUseCase
+import ru.wb.domain.usecases.user.GetUserDataUseCase
+import ru.wb.domain.usecases.user.PutUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
 
 internal class InterestsScreenViewModel(
+    idUser: String,
+    private val getUser: GetUserDataUseCase,
+    private val setUser: PutUserDataUseCase,
     private val getOptions: GetChipsInterestUseCase,
     private val setChips: SetChipsInterestUseCase,
 ) : BaseViewModel<InterestsScreenViewModel.Event>(){
     private val _interestsOption = MutableStateFlow<List<String>>(listOf())
     private val interestsOption: StateFlow<List<String>> = _interestsOption
+
+    private val _userData = MutableStateFlow(UserData.defaultObject)
+    private val userData: StateFlow<UserData> = _userData
 
     private val _selectedInterests = MutableStateFlow<List<String>>(listOf())
     private val selectedInterests: StateFlow<List<String>> = _selectedInterests
@@ -24,7 +34,7 @@ internal class InterestsScreenViewModel(
     private val state: StateFlow<BaseState> = _state
 
     init {
-        obtainEvent(Event.OnLoadingStarted)
+        obtainEvent(Event.OnLoadingStarted(idUser = idUser))
     }
 
     fun getOptions(): StateFlow<List<String>> = interestsOption
@@ -33,21 +43,33 @@ internal class InterestsScreenViewModel(
 
     fun getState(): StateFlow<BaseState> = state
 
-    private fun fetchData() = viewModelScope.launch {
+    private fun fetchData(idUser: String = "") = viewModelScope.launch {
         _state.emit(BaseState.LOADING)
+
         getOptions.execute().collect { newValue ->
             when{
                 newValue.isEmpty() -> _state.emit(BaseState.EMPTY)
                 else -> {
                     _interestsOption.emit(newValue)
-                    _state.emit(BaseState.SUCCESS)
                 }
             }
         }
+        if(idUser.isNotEmpty()) {
+            getUser.execute(idUser).collect { userData ->
+                _selectedInterests.emit(userData.tags)
+                _userData.emit(userData)
+            }
+        }
+
+        joinAll()
+        _state.emit(BaseState.SUCCESS)
     }
 
-    private fun setupData() = viewModelScope.launch {
-        setChips.execute(selectedInterests.value)
+    private fun setupData(idUser: String) = viewModelScope.launch {
+        when {
+            idUser.isNotEmpty() -> setUser.execute(userData.value.copy(tags = selectedInterests.value))
+            else -> setChips.execute(selectedInterests.value)
+        }
     }
 
     private fun setSelected(newSelected: String) = viewModelScope.launch {
@@ -61,18 +83,18 @@ internal class InterestsScreenViewModel(
     }
 
     sealed class Event : BaseEvent() {
-        data object OnLoadingStarted : Event()
-        data object OnEnterClick : Event()
+        class OnLoadingStarted(val idUser: String = "") : Event()
+        class OnEnterClick(val idUser: String = "") : Event()
         class OnSelect(val selected: String) : Event()
     }
 
     override fun obtainEvent(event: Event) {
         when (event) {
             is Event.OnLoadingStarted -> {
-                fetchData()
+                fetchData(event.idUser)
             }
             is Event.OnEnterClick -> {
-                setupData()
+                setupData(event.idUser)
             }
             is Event.OnSelect -> {
                 setSelected(event.selected)

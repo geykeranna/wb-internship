@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.screens.auth.onevent.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.wb.ui.R
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -48,7 +48,7 @@ internal fun AppointmentTitle(
                 Image(
                     modifier = Modifier
                         .size(28.dp)
-                        .clickable { onCloseClick() },
+                        .noRippleClickable { onCloseClick() },
                     painter = painterResource(id = R.drawable.ic_close_big),
                     contentDescription = "close button"
                 )

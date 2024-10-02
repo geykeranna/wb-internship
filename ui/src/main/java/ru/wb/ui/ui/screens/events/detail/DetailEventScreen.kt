@@ -54,7 +54,7 @@ internal fun DetailEventScreen(
             ) {
                 if(btnState != ButtonState.PRESSED.id && !subStatus){
                     val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
-                    navController.navigate(Screen.APPOINTMENT.route + "/${detailInfo.id} | $address")
+                    navController.navigate(Screen.APPOINTMENT.route + "/${detailInfo.id}/$address")
                 } else {
                     detailViewModel.obtainEvent(
                         DetailEventScreenViewModel.Event.OnHandleGoingEvent(

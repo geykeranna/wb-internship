@@ -1,15 +1,16 @@
 package ru.wb.ui.ui.screens.startscreens.splash
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
-import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
-import com.lottiefiles.dotlottie.core.util.DotLottieSource
+import ru.wb.ui.R
 import ru.wb.ui.ui.component.navigation.Screen
 
 @Composable
@@ -36,10 +37,15 @@ internal fun SplashScreen(
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        DotLottieAnimation(
-            source = DotLottieSource.Asset("splash_screen.json"),
-            autoplay = true,
-            loop = true
+//        DotLottieAnimation(
+//            source = DotLottieSource.Asset("splash_screen.json"),
+//            autoplay = true,
+//            loop = true
+//        )
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.splash_screen),
+            contentDescription = "splash screen"
         )
     }
 }

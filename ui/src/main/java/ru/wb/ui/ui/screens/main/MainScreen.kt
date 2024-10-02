@@ -1,7 +1,5 @@
 package ru.wb.ui.ui.screens.main
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,11 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -29,7 +25,6 @@ internal fun MainScreen(
     viewModel: MainViewModel = koinViewModel()
 ) {
     val isAuth by viewModel.getStateFlow().collectAsStateWithLifecycle()
-    val focusManager = LocalFocusManager.current
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -40,14 +35,7 @@ internal fun MainScreen(
     }
 
     Scaffold(
-        modifier = Modifier
-            .clickable(
-                interactionSource = remember {
-                    MutableInteractionSource()
-                }, indication = null
-            ) {
-                focusManager.clearFocus()
-            },
+        modifier = Modifier,
         containerColor = Color.White,
     ) { padding ->
         CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {

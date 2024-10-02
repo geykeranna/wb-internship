@@ -1,7 +1,7 @@
 package ru.wb.ui.ui.component.input
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.focusedBorder
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -94,7 +95,7 @@ internal fun InputField(
             Icon(
                 modifier = Modifier
                     .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
-                    .clickable { onClickLeftIcon?.let { onClickLeftIcon() } }
+                    .noRippleClickable { onClickLeftIcon?.let { onClickLeftIcon() } }
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
@@ -133,7 +134,7 @@ internal fun InputField(
             Icon(
                 modifier = Modifier
                     .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
-                    .clickable { onClickRightIcon?.let { onClickRightIcon() } }
+                    .noRippleClickable { onClickRightIcon?.let { onClickRightIcon() } }
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,

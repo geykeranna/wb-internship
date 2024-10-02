@@ -43,7 +43,7 @@ internal fun TopBarWithAvatar(
                 TopBarDetail(
                     modifier = Modifier,
                     rightIcon = painterResource(id = R.drawable.ic_check_big),
-                    leftIcon = painterResource(id = R.drawable.ic_close_small),
+                    leftIcon = painterResource(id = R.drawable.ic_close_big),
                     onLeftClick = { onPageModeChange(ProfilePageMode.VIEW_INSIDE) },
                     onRightClick = { onPageModeChange(ProfilePageMode.VIEW_INSIDE) },
                 )

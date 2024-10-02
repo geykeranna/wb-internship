@@ -1,6 +1,6 @@
 package ru.wb.ui.ui.screens.startscreens.interests.components
 
-import androidx.compose.foundation.clickable
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,12 +12,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InterestsScreenBottomBar(
     disabled: Boolean,
     modifier: Modifier = Modifier,
+    isWithCancelButton: Boolean = true,
     onTextClick: () -> Unit = {},
     onButtonClick: () -> Unit = {},
 ) {
@@ -31,13 +33,14 @@ internal fun InterestsScreenBottomBar(
             disabled = disabled,
             onClick = onButtonClick,
         )
-
-        Text(
-            modifier = Modifier.fillMaxWidth().clickable { onTextClick() },
-            text = stringResource(id = R.string.text_tell_later),
-            color = AppTheme.colors.neutralColorSecondaryFont,
-            style = AppTheme.typography.primary,
-            textAlign = TextAlign.Center,
-        )
+        if(isWithCancelButton) {
+            Text(
+                modifier = Modifier.fillMaxWidth().noRippleClickable { onTextClick() },
+                text = stringResource(id = R.string.text_tell_later),
+                color = AppTheme.colors.neutralColorSecondaryFont,
+                style = AppTheme.typography.primary,
+                textAlign = TextAlign.Center,
+            )
+        }
     }
 }
