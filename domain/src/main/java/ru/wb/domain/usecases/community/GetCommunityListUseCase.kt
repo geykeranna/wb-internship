@@ -1,6 +1,7 @@
 package ru.wb.domain.usecases.community
 
 import kotlinx.coroutines.flow.Flow
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.community.CommunityResponse
 
 interface GetCommunityListUseCase {
@@ -10,5 +11,5 @@ interface GetCommunityListUseCase {
         query: String? = null,
         idEvent: String? = null,
         idUser: String? = null,
-    ): Flow<CommunityResponse>
+    ): Flow<LoadState<CommunityResponse>>
 }

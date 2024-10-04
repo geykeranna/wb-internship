@@ -2,23 +2,24 @@ package ru.wb.domain.repository.user
 
 import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.components.LoadState
 
 interface UserRepository {
-    fun getUsers(data: UsersGetRequest? = null): Flow<UserResponse>
+    fun getUsers(data: UsersGetRequest? = null): Flow<LoadState<UserResponse>>
 
-    fun getUser(id: String?): Flow<UserData>
+    fun getUser(id: String?): Flow<LoadState<UserData>>
 
-    fun getUserAuth(): Flow<String?>
+    fun getUserAuth(): Flow<LoadState<String?>>
 
-    fun putUser(userData: UserData): Flow<UserData?>
+    fun putUser(userData: UserData): Flow<LoadState<UserData?>>
 
-    fun postUser(userData: UserData): Flow<UserData?>
+    fun postUser(userData: UserData): Flow<LoadState<UserData?>>
 
-    fun changeSubscriptionEventStatus(eventID: String): Flow<UserSubscribeStatusResponse>
+    fun changeSubscriptionEventStatus(eventID: String): Flow<LoadState<UserSubscribeStatusResponse>>
 
-    fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<UserSubscribeStatusResponse>
+    fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>>
 
-    fun getSubscriptionCommunityStatus(idCommunity: String): Flow<UserSubscribeStatusResponse>
+    fun getSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>>
 
-    fun getSubscriptionEventStatus(idEvent: String): Flow<UserSubscribeStatusResponse>
+    fun getSubscriptionEventStatus(idEvent: String): Flow<LoadState<UserSubscribeStatusResponse>>
 }

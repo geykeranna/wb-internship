@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.EventData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
@@ -45,39 +46,41 @@ internal class DetailEventScreenViewModel(
     fun getStateFlow(): StateFlow<BaseState> = state
 
     private fun startLoading(id: String) = viewModelScope.launch {
-        _state.emit(BaseState.LOADING)
-        getData.execute(id = id).collect {
-            when {
-                it.id.isEmpty() -> _state.emit(BaseState.EMPTY)
-                else -> {
-                    _detailData.emit(it)
-                    _state.emit(BaseState.SUCCESS)
+        getData.execute(id = id).collect { state ->
+            when(state) {
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Success -> when{
+                    state.data.id.isEmpty() -> _state.emit(BaseState.ERROR)
+                    else -> {
+                        _detailData.emit(state.data)
+                        _state.emit(BaseState.SUCCESS)
+                    }
                 }
             }
         }
         getStatusSubscribe.execute(idEvent = id).collect{ status ->
-            _subscribeStatus.emit(
-                when(status){
-                    UserSubscribeStatusResponse.SUBSCRIBED -> true
-                    else -> false
+            when(status) {
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Success -> when(status.data) {
+                    UserSubscribeStatusResponse.SUBSCRIBED -> _subscribeStatus.emit(true)
+                    UserSubscribeStatusResponse.NOT_SUBSCRIBED -> _subscribeStatus.emit(false)
                 }
-            )
+            }
         }
     }
 
     private fun onChangeEventStatus(idEvent: String) = viewModelScope.launch {
         handleEvent.execute(eventId = idEvent).collect { state ->
-            if (state == UserSubscribeStatusResponse.NOT_SUBSCRIBED) return@collect
-            when (_btnState.value) {
-                ButtonState.PRESSED.id -> {
-                    _btnState.emit(ButtonState.UNPRESSED.id)
-                }
-                else -> {
-                    _btnState.emit(ButtonState.PRESSED.id)
-                    getData.execute(idEvent).collect {
-                        _detailData.emit(it)
+            when(state){
+                is LoadState.Success -> {
+                    when(state.data){
+                        UserSubscribeStatusResponse.SUBSCRIBED -> _btnState.emit(ButtonState.PRESSED.id)
+                        UserSubscribeStatusResponse.NOT_SUBSCRIBED -> _btnState.emit(ButtonState.UNPRESSED.id)
                     }
                 }
+                else -> {}
             }
         }
     }

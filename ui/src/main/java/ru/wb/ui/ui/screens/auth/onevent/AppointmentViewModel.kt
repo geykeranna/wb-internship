@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CountryCodes
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.common.GetCountryCodesListUseCase
 import ru.wb.domain.usecases.event.PostSubscribeOnEvent
 import ru.wb.domain.usecases.login.CheckOTPCodeUseCase
@@ -101,8 +102,17 @@ internal class AppointmentViewModel(
     private fun startLoading() = viewModelScope.launch {
         _state.emit(BaseState.LOADING)
         getCountryCodesListUseCase.execute().collect { options ->
-            _countryCodesOptions.emit(options)
-            _state.emit(BaseState.SUCCESS)
+            when(options){
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Success -> {
+                    _countryCodesOptions.emit(options.data)
+                    when{
+                        options.data.isEmpty() -> _state.emit(BaseState.EMPTY)
+                        else -> _state.emit(BaseState.SUCCESS)
+                    }
+                }
+            }
         }
     }
 
@@ -161,7 +171,10 @@ internal class AppointmentViewModel(
 
     private fun checkStatus(pin: String) = viewModelScope.launch {
         checkCodeUseCase.execute(pin = pin).collect { result ->
-            _pinVerificationStatus.emit(result)
+            when(result){
+                is LoadState.Success -> { _pinVerificationStatus.emit(result.data) }
+                else -> { }
+            }
         }
         when{
             _pinVerificationStatus.value == true -> submitForm()
@@ -179,7 +192,11 @@ internal class AppointmentViewModel(
             name = formData.value.name,
             phone = formData.value.phone,
         )).collect { response ->
-            userData = response
+            when(response){
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Success -> userData = response.data
+            }
         }
         userData?.let {
             subscribeOnEvent.execute(

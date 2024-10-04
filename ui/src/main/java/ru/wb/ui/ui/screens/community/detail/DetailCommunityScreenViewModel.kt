@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionCommunityStatusUseCase
@@ -38,19 +39,31 @@ internal class DetailCommunityScreenViewModel(
     fun getStateFlow(): StateFlow<BaseState> = state
 
     private fun startLoading(id: String) = viewModelScope.launch {
-        getData.execute(id).collect {
-            when {
-                it.id.isEmpty() -> _state.emit(BaseState.ERROR)
-                else -> {
-                    _detailData.emit(it)
-                    _state.emit(BaseState.SUCCESS)
+        getData.execute(id).collect { data ->
+            when(data) {
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Success -> {
+                    _detailData.emit(data.data)
+                    when {
+                        data.data.id.isEmpty() -> _state.emit(BaseState.ERROR)
+                        else -> _state.emit(BaseState.SUCCESS)
+                    }
                 }
             }
         }
         getStateSubscribe.execute(idCommunity = id).collect { result ->
-            when {
-                result == UserSubscribeStatusResponse.SUBSCRIBED -> ButtonsStateSub.PRESSED
-                else -> ButtonsStateSub.UNPRESSED
+            when(result) {
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Success -> {
+                    when {
+                        result.data == UserSubscribeStatusResponse.SUBSCRIBED ->
+                            _btnState.emit(ButtonsStateSub.PRESSED)
+                        else -> _btnState.emit(ButtonsStateSub.UNPRESSED)
+                    }
+                    _state.emit(BaseState.SUCCESS)
+                }
             }
         }
     }

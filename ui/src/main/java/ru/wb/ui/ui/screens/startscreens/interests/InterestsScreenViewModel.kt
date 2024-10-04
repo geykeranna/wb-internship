@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.common.GetChipsInterestUseCase
 import ru.wb.domain.usecases.common.SetChipsInterestUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
@@ -47,17 +48,22 @@ internal class InterestsScreenViewModel(
         _state.emit(BaseState.LOADING)
 
         getOptions.execute().collect { newValue ->
-            when{
-                newValue.isEmpty() -> _state.emit(BaseState.EMPTY)
-                else -> {
-                    _interestsOption.emit(newValue)
-                }
+            when(newValue) {
+                is LoadState.Success -> { _interestsOption.emit(newValue.data) }
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                else -> {}
             }
         }
         if(idUser.isNotEmpty()) {
             getUser.execute(idUser).collect { userData ->
-                _selectedInterests.emit(userData.tags)
-                _userData.emit(userData)
+                when(userData) {
+                    is LoadState.Success -> {
+                        _selectedInterests.emit(userData.data.tags)
+                        _userData.emit(userData.data)
+                    }
+                    is LoadState.Error -> _state.emit(BaseState.ERROR)
+                    else -> {}
+                }
             }
         }
 

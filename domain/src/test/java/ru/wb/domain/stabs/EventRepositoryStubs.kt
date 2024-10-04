@@ -6,9 +6,11 @@ import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.Location
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.event.EventRepository
 import ru.wb.domain.repository.event.EventGetRequest
 import ru.wb.domain.repository.event.EventResponse
+import kotlin.random.Random
 
 internal class EventRepositoryStubs: EventRepository {
     private val eventData = EventData(
@@ -28,20 +30,23 @@ internal class EventRepositoryStubs: EventRepository {
 
     override fun getEvents(
         data: EventGetRequest?,
-    ): Flow<EventResponse>{
+    ): Flow<LoadState<EventResponse>>{
         val response = EventResponse(
             limit = 10,
             offset = 0,
-            data = List(10) { EventData.defaultObject }
+            data = List(10) { eventData }
         )
-        return flowOf(response)
+        return flowOf(LoadState.Success(response))
     }
 
     override fun getEvent(
         id: String,
-    ): Flow<EventData> = flowOf(eventData)
+    ): Flow<LoadState<EventData>> {
+        return flowOf(LoadState.Success(eventData))
+    }
 
-    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<Boolean> {
-        return flowOf(true)
+    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<LoadState<Boolean>> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(LoadState.Success(random))
     }
 }

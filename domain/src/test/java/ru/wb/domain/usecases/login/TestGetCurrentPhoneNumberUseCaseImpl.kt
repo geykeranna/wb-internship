@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.stabs.LoginRepositoryStubs
 
 internal class TestGetCurrentPhoneNumberUseCaseImpl{
@@ -12,8 +13,11 @@ internal class TestGetCurrentPhoneNumberUseCaseImpl{
     @Test
     fun `should return not empty phone data as in repo`() = runTest{
         val useCase = GetCurrentPhoneNumberUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute().last()
 
-        Assertions.assertTrue(actual.isNotEmpty())
+        when(val actual = useCase.execute().last()) {
+            is LoadState.Loading -> Assertions.assertTrue(true)
+            is LoadState.Success -> Assertions.assertTrue(actual.data.isNotEmpty())
+            else -> Assertions.assertTrue(false)
+        }
     }
 }

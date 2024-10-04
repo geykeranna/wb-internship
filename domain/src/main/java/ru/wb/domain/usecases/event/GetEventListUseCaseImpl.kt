@@ -1,6 +1,7 @@
 package ru.wb.domain.usecases.event
 
 import kotlinx.coroutines.flow.Flow
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.event.EventRepository
 import ru.wb.domain.repository.event.EventGetRequest
 import ru.wb.domain.repository.event.EventResponse
@@ -17,7 +18,7 @@ internal class GetEventListUseCaseImpl(
         state: String?,
         startDate: String?,
         endDate: String?,
-    ): Flow<EventResponse> {
+    ): Flow<LoadState<EventResponse>> {
         return repository.getEvents(
             EventGetRequest(
                 limit = limit,

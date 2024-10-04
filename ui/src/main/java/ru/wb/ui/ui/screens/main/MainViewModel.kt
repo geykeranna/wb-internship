@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseViewModel
@@ -21,7 +22,12 @@ internal class MainViewModel(
     }
 
     private fun startLoading() = viewModelScope.launch {
-        getAuthState.execute().collect{  _status.emit(it) }
+        getAuthState.execute().collect{ state ->
+            when(state){
+                is LoadState.Success -> _status.emit(state.data)
+                else -> {}
+            }
+        }
     }
 
     sealed class Event : BaseEvent() {
