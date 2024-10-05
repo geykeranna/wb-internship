@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
-import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.button.PrimaryButton
 import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -27,7 +27,7 @@ internal fun InterestsScreenBottomBar(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        GradientButton(
+        PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.label_button_save),
             disabled = disabled,

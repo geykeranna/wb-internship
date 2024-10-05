@@ -19,6 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.NavGraph
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.utils.NoRippleTheme
+import ru.wb.ui.ui.screens.startscreens.splash.SplashScreen
 
 @Composable
 internal fun MainScreen(
@@ -44,10 +45,18 @@ internal fun MainScreen(
                     .fillMaxWidth()
                     .padding(padding)
             ){
-                NavGraph(
-                    isAuth = isAuth,
-                    navController = navController
-                )
+                when{
+                   navController.currentDestination?.route == Screen.SPLASH.route -> SplashScreen(
+                       isAuth = isAuth,
+                       navController = navController
+                   )
+                    else -> {
+                        NavGraph(
+                            isAuth = isAuth,
+                            navController = navController
+                        )
+                    }
+                }
             }
         }
     }

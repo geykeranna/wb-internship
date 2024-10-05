@@ -54,10 +54,10 @@ internal fun AppointmentEnd(
                 )
             }
             item {
-                AppointmentButtonsByState(
+                AppointmentBottomButtons(
                     modifier = Modifier,
-                    textButtonValue = stringResource(id = R.string.label_my_meets),
-                    screenState = AppointmentScreenState.END_SCREEN,
+                    secondaryButtonText = stringResource(id = R.string.label_my_meets),
+                    primaryButtonText = AppointmentScreenState.END_SCREEN.textButton,
                     onEnterClick = onEnterClick,
                     onTextButtonClick = onTextButtonClick
                 )

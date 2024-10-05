@@ -43,6 +43,8 @@ import ru.wb.domain.usecases.user.GetUserListUseCase
 import ru.wb.domain.usecases.user.GetUserListUseCaseImpl
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCaseImpl
+import ru.wb.domain.usecases.user.DeleteUserListUseCase
+import ru.wb.domain.usecases.user.DeleteUserListUseCaseImpl
 import ru.wb.domain.usecases.user.GetSubscriptionEventStatusUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionEventStatusUseCaseImpl
 import ru.wb.domain.usecases.user.PostUserDataUseCase
@@ -55,6 +57,7 @@ val domainModules = module {
     single<GetUserListUseCase> { GetUserListUseCaseImpl(get()) }
     single<PostUserDataUseCase> { PostUserDataUseCaseImpl(get()) }
     single<PutUserDataUseCase> { PutUserDataUseCaseImpl(get()) }
+    single<DeleteUserListUseCase> { DeleteUserListUseCaseImpl(get()) }
     single<ChangeSubscriptionEventStatusUseCase> { ChangeSubscriptionEventStatusUseCaseImpl(get()) }
     single<ChangeSubscriptionCommunityStatusUseCase> { ChangeSubscriptionCommunityStatusUseCaseImpl(get()) }
     single<GetSubscriptionCommunityStatusUseCase> { GetSubscriptionCommunityStatusUseCaseImpl(get()) }

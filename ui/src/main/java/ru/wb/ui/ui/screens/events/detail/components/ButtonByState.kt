@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.button.PrimaryButton
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.theme.AppTheme
 
@@ -73,7 +73,7 @@ internal fun ButtonByState(
                 textAlign = TextAlign.Center,
             )
 
-            GradientButton(
+            PrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = onClickButton,
                 disabled = disable as Boolean,

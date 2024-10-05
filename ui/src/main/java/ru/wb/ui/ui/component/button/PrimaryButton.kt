@@ -12,14 +12,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import ru.wb.ui.ui.component.loading.LoadingSpinner
 import ru.wb.ui.ui.component.utils.onClick
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-internal fun GradientButton(
-    text: String,
+internal fun PrimaryButton(
     modifier: Modifier = Modifier,
+    text: String = "",
     disabled: Boolean = false,
+    isLoading: Boolean = false,
     textColor: Color = AppTheme.colors.neutralColorSecondaryBackground,
     gradient: Brush = AppTheme.colors.gradient1,
     onClick: () -> Unit = {}
@@ -39,10 +41,14 @@ internal fun GradientButton(
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = text,
-            style = AppTheme.typography.heading3,
-            color = textButtonColor as Color
-        )
+        if(isLoading){
+            LoadingSpinner()
+        } else {
+            Text(
+                text = text,
+                style = AppTheme.typography.heading3,
+                color = textButtonColor as Color
+            )
+        }
     }
 }

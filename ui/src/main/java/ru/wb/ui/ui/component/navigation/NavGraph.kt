@@ -10,6 +10,7 @@ import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
 import ru.wb.ui.ui.screens.events.main.MainEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
+import ru.wb.ui.ui.screens.profile.delete.DeleteProfileViewScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
 import ru.wb.ui.ui.screens.startscreens.interests.InterestsScreen
 import ru.wb.ui.ui.screens.startscreens.splash.SplashScreen
@@ -26,6 +27,12 @@ fun NavGraph(
     ){
         composable(route = Screen.EVENTS.route) {
             MainEventsScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.DELETE_PROFILE.route) {
+            DeleteProfileViewScreen(
                 navController = navController
             )
         }

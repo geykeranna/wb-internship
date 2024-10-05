@@ -40,6 +40,10 @@ enum class Screen(
         route = "profile_detail",
         label = "Профиль"
     ),
+    DELETE_PROFILE (
+        route = "delete_profile",
+        label = "Удаление профиля"
+    ),
     USER_LIST (
         route = "user_list_by_event",
         label = "Пользователи",

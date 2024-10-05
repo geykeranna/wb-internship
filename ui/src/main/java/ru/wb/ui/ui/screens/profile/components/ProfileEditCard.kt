@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.screens.profile.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -92,21 +91,17 @@ internal fun ProfileEditCard(
         }
 
         item {
-            Box(
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Text(
-                    modifier = Modifier
-                        .padding(top = 20.dp)
-                        .fillMaxWidth()
-                        .noRippleClickable { onDeleteButtonClick() },
-                    color = AppTheme.colors.accentError,
-                    maxLines = 1,
-                    style = AppTheme.typography.primary,
-                    text = stringResource(id = R.string.label_delete_profile),
-                    textAlign = TextAlign.Center,
-                )
-            }
+            Text(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .fillMaxWidth()
+                    .noRippleClickable { onDeleteButtonClick() },
+                color = AppTheme.colors.accentError,
+                maxLines = 1,
+                style = AppTheme.typography.primary,
+                text = stringResource(id = R.string.label_delete_profile),
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }

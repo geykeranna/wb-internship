@@ -10,17 +10,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.button.PrimaryButton
 import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
-internal fun AppointmentButtonsByState(
-    textButtonValue: String?,
+internal fun AppointmentBottomButtons(
     modifier: Modifier = Modifier,
     disable: Boolean = false,
     active: Boolean = true,
-    screenState: AppointmentScreenState = AppointmentScreenState.ENTER_NAME,
+    primaryButtonText: String = "",
+    secondaryButtonText: String? = null,
     onEnterClick: () -> Unit = {},
     onTextButtonClick: () -> Unit = {},
 ) {
@@ -44,7 +44,7 @@ internal fun AppointmentButtonsByState(
         verticalArrangement = Arrangement.spacedBy(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        textButtonValue?.let { text ->
+        secondaryButtonText?.let { text ->
             Text(
                 modifier = Modifier.noRippleClickable { onTextButtonClick() },
                 text = text,
@@ -53,9 +53,9 @@ internal fun AppointmentButtonsByState(
             )
         }
 
-        GradientButton(
+        PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = screenState.textButton,
+            text = primaryButtonText,
             onClick = onEnterClick,
             disabled = disable,
             textColor = textColor as Color,

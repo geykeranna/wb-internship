@@ -40,6 +40,10 @@
     <string name="label_enable_notification">Включить уведомления</string>
     <string name="text_community_meetings">Встречи сообщества</string>
     <string name="text_cancel">Отмена</string>
+    <string name="text_delete">Удалить</string>
+    <string name="text_no_need">Не надо</string>
+    <string name="text_delete_message">Точно удалить профиль?</string>
+    <string name="text_on_delete_mess">Не надо...... Мы крутые\n\nМы удалим профиль, но не сразу. У вас будет 30 дней чтобы зайти и обратно всё вернуть</string>
     <string name="text_add_with_plus">+ Добавить</string>
     <string name="text_tell_later">Расскажу позже</string>
     <string name="placeholder_first_name_text_edit_form">Имя Фамилия</string>

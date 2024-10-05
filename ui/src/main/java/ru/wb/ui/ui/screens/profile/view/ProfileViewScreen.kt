@@ -40,6 +40,7 @@ internal fun ProfileViewScreen(
         selectedChips = selectedChips,
         onBackNavigate = { navController.popBackStack() },
         formField = formField,
+        onDeleteButtonClick = { navController.navigate(Screen.DELETE_PROFILE.route) },
         onPageModeChange = { newValue ->
             viewModel.obtainEvent(Event.OnChangePageMode(newValue))
         },

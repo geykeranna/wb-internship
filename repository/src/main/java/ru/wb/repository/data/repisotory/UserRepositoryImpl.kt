@@ -36,6 +36,10 @@ internal class UserRepositoryImpl: UserRepository {
         return flowOf(LoadState.Success(UserData.defaultObject))
     }
 
+    override fun deleteUser(): Flow<LoadState<Boolean>> {
+        return flowOf(LoadState.Success(data = false))
+    }
+
     override fun changeSubscriptionEventStatus(eventID: String): Flow<LoadState<UserSubscribeStatusResponse>> {
         val random: Boolean = Random.nextBoolean()
         return flowOf(
