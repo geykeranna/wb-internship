@@ -1,6 +1,8 @@
 package ru.wb.ui.ui.component.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -39,4 +41,13 @@ inline fun Modifier.noRippleClickable(
         interactionSource = remember { MutableInteractionSource() }) {
         onClick()
     }
+}
+
+internal fun shareUser(context: Context, value: String) {
+    val shareIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, value)
+        type = "text/plain"
+    }
+    context.startActivity(Intent.createChooser(shareIntent, null))
 }

@@ -13,6 +13,7 @@ import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarMain
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenContent
+import ru.wb.ui.ui.screens.events.main.MainEventsScreenViewModel.Event
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -36,7 +37,7 @@ internal fun MainEventsScreen(
                     .padding(top = 10.dp)
                     .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 inputText = search,
-                onChangeValue = { input -> viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSearch(input)) },
+                onChangeValue = { input -> viewModel.obtainEvent(Event.OnSearch(input)) },
                 onRightClick =  { navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)}
             )
         },
@@ -50,10 +51,10 @@ internal fun MainEventsScreen(
             allChipsList = allChipsList,
             stateScreen = stateScreen,
             onSelect = { selected ->
-                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnSelectValue(selected))
+                viewModel.obtainEvent(Event.OnSelectValue(selected))
             },
             onAddCommunityClick = { idCommunity, idContent ->
-                viewModel.obtainEvent(MainEventsScreenViewModel.Event.OnChangeSubscribeState(idCommunity, idContent))
+                viewModel.obtainEvent(Event.OnChangeSubscribeState(idCommunity, idContent))
             },
             onNavigateToCommunityDetail = { id ->
                 navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")

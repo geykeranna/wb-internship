@@ -19,6 +19,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.events.detail.components.ButtonByState
 import ru.wb.ui.ui.screens.events.detail.components.ButtonState
 import ru.wb.ui.ui.screens.events.detail.components.DetailEventData
+import ru.wb.ui.ui.screens.events.detail.DetailEventScreenViewModel.Event
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -56,11 +57,7 @@ internal fun DetailEventScreen(
                     val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
                     navController.navigate(Screen.APPOINTMENT.route + "/${detailInfo.id}/$address")
                 } else {
-                    detailViewModel.obtainEvent(
-                        DetailEventScreenViewModel.Event.OnHandleGoingEvent(
-                            id = id
-                        )
-                    )
+                    detailViewModel.obtainEvent(Event.OnHandleGoingEvent(id = id))
                 }
             }
         }

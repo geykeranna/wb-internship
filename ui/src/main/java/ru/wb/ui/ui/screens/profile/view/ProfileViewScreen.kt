@@ -39,12 +39,12 @@ internal fun ProfileViewScreen(
         socialMedia = socialMedia,
         selectedChips = selectedChips,
         onBackNavigate = { navController.popBackStack() },
+        onBottomClick = {},
         formField = formField,
         onDeleteButtonClick = { navController.navigate(Screen.DELETE_PROFILE.route) },
         onPageModeChange = { newValue ->
             viewModel.obtainEvent(Event.OnChangePageMode(newValue))
         },
-        onBottomClick = {},
         onChipLastItemClick = {
             navController.navigate(Screen.INTEREST.route + "/${userData.id}")
         },
