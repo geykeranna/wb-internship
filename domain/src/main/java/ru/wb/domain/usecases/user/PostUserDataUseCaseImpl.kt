@@ -11,4 +11,12 @@ internal class PostUserDataUseCaseImpl(
     override fun execute(user: UserData): Flow<LoadState<UserData?>> {
         return repository.postUser(userData = user)
     }
+
+    override fun setName(name: String): Flow<LoadState<UserData>> {
+        return repository.setNameUser(name = name)
+    }
+
+    override fun setPhone(phone: String): Flow<LoadState<UserData>> {
+        return repository.setPhoneUser(phone = phone)
+    }
 }

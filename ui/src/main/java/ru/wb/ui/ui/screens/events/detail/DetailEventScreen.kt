@@ -32,7 +32,7 @@ internal fun DetailEventScreen(
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
     val btnState by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
-    val subStatus by detailViewModel.getSubStatusFlow().collectAsStateWithLifecycle()
+    val authStatus by detailViewModel.getAuthStatusFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
@@ -53,11 +53,15 @@ internal fun DetailEventScreen(
                 state = btnState,
                 countPeople = detailInfo.vacantSeat
             ) {
-                if(btnState != ButtonState.PRESSED.id && !subStatus){
-                    val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
-                    navController.navigate(Screen.APPOINTMENT.route + "/${detailInfo.id}/$address")
-                } else {
-                    detailViewModel.obtainEvent(Event.OnHandleGoingEvent(id = id))
+                when{
+                    btnState != ButtonState.PRESSED.id && authStatus.isBlank() -> {
+                        val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
+                        navController.navigate(Screen.APPOINTMENT_NAME.route + "/${detailInfo.id}/$address")
+                    }
+                    btnState != ButtonState.PRESSED.id -> {
+                        navController.navigate(Screen.SUBMIT_EVENT.route + "/$authStatus")
+                    }
+                    else -> detailViewModel.obtainEvent(Event.OnHandleGoingEvent(id = id))
                 }
             }
         }

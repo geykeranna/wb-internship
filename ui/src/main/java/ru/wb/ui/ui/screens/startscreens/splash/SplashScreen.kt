@@ -17,6 +17,7 @@ import ru.wb.ui.ui.component.navigation.Screen
 internal fun SplashScreen(
     isAuth: Boolean,
     navController: NavController,
+    modifier: Modifier = Modifier,
 ) {
     LaunchedEffect(Unit) {
         delay(3000)
@@ -33,7 +34,7 @@ internal fun SplashScreen(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {

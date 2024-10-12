@@ -7,7 +7,7 @@ import ru.wb.domain.repository.LoginRepository
 internal class CheckOTPCodeUseCaseImpl(
     private val repository: LoginRepository
 ) : CheckOTPCodeUseCase {
-    override fun execute(
-        pin: String
-    ): Flow<LoadState<Boolean>> = repository.checkCode(pinCode = pin)
+    override fun execute(pin: String): Flow<LoadState<String>> {
+        return repository.checkCode(pinCode = pin)
+    }
 }

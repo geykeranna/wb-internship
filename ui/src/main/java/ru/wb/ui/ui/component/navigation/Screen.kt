@@ -44,15 +44,27 @@ enum class Screen(
         route = "delete_profile",
         label = "Удаление профиля"
     ),
+    SUBMIT_EVENT (
+        route = "submit_going_event",
+        label = "Подтверждение похода на событие"
+    ),
     USER_LIST (
         route = "user_list_by_event",
         label = "Пользователи",
     ),
-    APPOINTMENT(
+    APPOINTMENT_NAME (
+        route = "appointment_name",
+        label = "Авторизация",
+    ),
+    APPOINTMENT_PHONE (
+        route = "appointment_phone",
+        label = "Авторизация",
+    ),
+    APPOINTMENT_PIN (
         route = "appointment",
         label = "Авторизация",
     ),
-    INTEREST(
+    INTEREST (
         route = "interest",
         label = "Интересы",
     ),

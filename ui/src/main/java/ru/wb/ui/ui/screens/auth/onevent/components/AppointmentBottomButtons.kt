@@ -17,15 +17,15 @@ import ru.wb.ui.ui.theme.AppTheme
 @Composable
 internal fun AppointmentBottomButtons(
     modifier: Modifier = Modifier,
-    disable: Boolean = false,
-    active: Boolean = true,
+    disableButton: Boolean = false,
+    disableTextButton: Boolean = true,
     primaryButtonText: String = "",
     secondaryButtonText: String? = null,
     onEnterClick: () -> Unit = {},
     onTextButtonClick: () -> Unit = {},
 ) {
     val (textColor, buttonColor) = when {
-        disable -> listOf(
+        disableButton -> listOf(
             AppTheme.colors.neutralColorDisabledText,
             AppTheme.colors.gradient2,
         )
@@ -35,7 +35,7 @@ internal fun AppointmentBottomButtons(
         )
     }
     val colorTextButton = when {
-        active -> AppTheme.colors.brandColorDefault
+        disableTextButton -> AppTheme.colors.brandColorDefault
         else -> AppTheme.colors.neutralColorSecondaryFont
     }
 
@@ -57,7 +57,7 @@ internal fun AppointmentBottomButtons(
             modifier = Modifier.fillMaxWidth(),
             text = primaryButtonText,
             onClick = onEnterClick,
-            disabled = disable,
+            disabled = disableButton,
             textColor = textColor as Color,
             gradient = buttonColor as Brush,
         )

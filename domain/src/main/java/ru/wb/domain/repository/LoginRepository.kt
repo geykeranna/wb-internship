@@ -7,7 +7,7 @@ interface LoginRepository {
 
     fun sendOnPhone(phoneNumber: String): Flow<LoadState<Boolean>>
 
-    fun checkCode(pinCode: String): Flow<LoadState<Boolean>>
+    fun checkCode(pinCode: String): Flow<LoadState<String>>
 
     fun getPhoneAuth(): Flow<LoadState<String>>
 

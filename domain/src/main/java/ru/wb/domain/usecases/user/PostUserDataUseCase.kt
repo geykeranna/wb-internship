@@ -6,4 +6,8 @@ import ru.wb.domain.model.components.LoadState
 
 interface PostUserDataUseCase {
       fun execute(user: UserData): Flow<LoadState<UserData?>>
+
+      fun setName(name: String): Flow<LoadState<UserData>>
+
+      fun setPhone(phone: String): Flow<LoadState<UserData>>
 }

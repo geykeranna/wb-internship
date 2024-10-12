@@ -46,6 +46,9 @@
     <string name="text_on_delete_mess">Не надо...... Мы крутые\n\nМы удалим профиль, но не сразу. У вас будет 30 дней чтобы зайти и обратно всё вернуть</string>
     <string name="text_add_with_plus">+ Добавить</string>
     <string name="text_tell_later">Расскажу позже</string>
+    <string name="text_find_another">Найти другие встречи</string>
+    <string name="text_get_code">Получить код</string>
+    <string name="text_send_and_confirm_an_entry">Отправить и подтвердить запись</string>
     <string name="placeholder_first_name_text_edit_form">Имя Фамилия</string>
     <string name="placeholder_location_text_edit_form">Город</string>
     <string name="placeholder_description_text_edit_form">Расскажите о себе </string>

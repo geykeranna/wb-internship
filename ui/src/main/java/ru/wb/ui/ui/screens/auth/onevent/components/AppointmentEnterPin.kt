@@ -15,7 +15,7 @@ import ru.wb.ui.ui.theme.AppTheme
 internal fun AppointmentEnterPin(
     pin: String,
     modifier: Modifier = Modifier,
-    isInvalid: Boolean = false,
+    invalid: Boolean = false,
     disable: Boolean = false,
     disableEnter: Boolean = false,
     context: String = "",
@@ -23,7 +23,7 @@ internal fun AppointmentEnterPin(
     onChangeValue: (value: String) -> Unit = {},
 ) {
     val color = when {
-        isInvalid -> AppTheme.colors.neutralColorInvalidText
+        invalid -> AppTheme.colors.neutralColorInvalidText
         else -> AppTheme.colors.neutralColorSecondaryFont
     }
     Column (
@@ -33,7 +33,7 @@ internal fun AppointmentEnterPin(
     ) {
         InputPassField(
             modifier = modifier.fillMaxWidth(),
-            isInvalid = isInvalid,
+            isInvalid = invalid,
             value = pin,
             disable = disable,
             disableEnter = disableEnter,

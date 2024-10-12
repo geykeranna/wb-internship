@@ -1,4 +1,4 @@
-package ru.wb.ui.ui.screens.auth.onevent.components
+package ru.wb.ui.ui.screens.auth.onevent.phone.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,25 +6,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import ru.wb.domain.model.CountryCodes
+import ru.wb.ui.R
+import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentBottomButtons
 
 @Composable
 internal fun AppointmentCard(
     eventLabel: String,
-    formData: AppointmentFormData,
     selectedPhoneCountryCode: CountryCodes,
     phoneCountryCodeList: List<CountryCodes>,
+    inputValue: String,
     modifier: Modifier = Modifier,
     title: String  = "",
-    description: String = "",
-    textButtonValue: String? = null,
-    isInvalid: Boolean = false,
     disable: Boolean = false,
-    active: Boolean = false,
-    screenState: AppointmentScreenState = AppointmentScreenState.ENTER_NAME,
     onBackClick: () -> Unit = {},
     onEnterClick: () -> Unit = {},
-    onTextButtonClick: () -> Unit = {},
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit = {},
     onChangeValue: (input: String) -> Unit = {},
 ) {
@@ -37,14 +34,11 @@ internal fun AppointmentCard(
             AppointmentContent(
                 modifier = Modifier,
                 eventLabel = eventLabel,
-                formData = formData,
+                inputValue = inputValue,
                 selectedPhoneCountryCode = selectedPhoneCountryCode,
                 phoneCountryCodeList = phoneCountryCodeList,
                 title = title,
-                description = description,
-                isInvalid = isInvalid,
-                disable = disable,
-                screenState = screenState,
+                disableEnter = disable,
                 onBackClick = onBackClick,
                 onSelectedPhoneCountryCode = onSelectedPhoneCountryCode,
                 onChangeValue = onChangeValue,
@@ -55,12 +49,9 @@ internal fun AppointmentCard(
         item {
             AppointmentBottomButtons(
                 modifier = Modifier,
-                primaryButtonText = screenState.textButton,
-                secondaryButtonText = textButtonValue,
-                disable = disable,
-                active = active,
+                primaryButtonText = stringResource(id = R.string.text_get_code),
+                disableButton = disable,
                 onEnterClick = onEnterClick,
-                onTextButtonClick = onTextButtonClick
             )
         }
     }

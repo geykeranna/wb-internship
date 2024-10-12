@@ -8,6 +8,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.event.GetEventDataUseCase
+import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionEventStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -18,6 +19,7 @@ import ru.wb.ui.ui.screens.events.detail.components.ButtonState
 internal class DetailEventScreenViewModel(
     idEvent: String,
     private val getData: GetEventDataUseCase,
+    private val getUser: GetCurrentUserIDUseCase,
     private val getStatusSubscribe: GetSubscriptionEventStatusUseCase,
     private val handleEvent: ChangeSubscriptionEventStatusUseCase,
 ) : BaseViewModel<DetailEventScreenViewModel.Event>() {
@@ -27,8 +29,8 @@ internal class DetailEventScreenViewModel(
     private val _btnState = MutableStateFlow(ButtonState.DEFAULT.id)
     private val bntState: StateFlow<String> = _btnState
 
-    private val _subscribeStatus = MutableStateFlow(false)
-    private val subscribeStatus: StateFlow<Boolean> = _subscribeStatus
+    private val _authStatus = MutableStateFlow("")
+    private val authStatus: StateFlow<String> = _authStatus
 
     private val _state = MutableStateFlow(BaseState.EMPTY)
     private val state: StateFlow<BaseState> = _state
@@ -41,7 +43,7 @@ internal class DetailEventScreenViewModel(
 
     fun getBntStateFlow(): StateFlow<String> = bntState
 
-    fun getSubStatusFlow(): StateFlow<Boolean> = subscribeStatus
+    fun getAuthStatusFlow(): StateFlow<String> = authStatus
 
     fun getStateFlow(): StateFlow<BaseState> = state
 
@@ -61,12 +63,18 @@ internal class DetailEventScreenViewModel(
         }
         getStatusSubscribe.execute(idEvent = id).collect{ status ->
             when(status) {
-                is LoadState.Loading -> _state.emit(BaseState.LOADING)
-                is LoadState.Error -> _state.emit(BaseState.ERROR)
-                is LoadState.Success -> when(status.data) {
-                    UserSubscribeStatusResponse.SUBSCRIBED -> _subscribeStatus.emit(true)
-                    UserSubscribeStatusResponse.NOT_SUBSCRIBED -> _subscribeStatus.emit(false)
+                is LoadState.Loading -> _btnState.emit(ButtonState.DEFAULT.id)
+                is LoadState.Error -> _btnState.emit(ButtonState.DEFAULT.id)
+                is LoadState.Success ->  when (status.data) {
+                    UserSubscribeStatusResponse.SUBSCRIBED -> _btnState.emit(ButtonState.PRESSED.id)
+                    UserSubscribeStatusResponse.NOT_SUBSCRIBED -> _btnState.emit(ButtonState.UNPRESSED.id)
                 }
+            }
+        }
+        getUser.execute().collect{ result ->
+            when(result) {
+                is LoadState.Success -> _authStatus.emit(result.data)
+                else -> {}
             }
         }
     }

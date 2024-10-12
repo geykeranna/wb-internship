@@ -36,6 +36,22 @@ internal class UserRepositoryImpl: UserRepository {
         return flowOf(LoadState.Success(UserData.defaultObject))
     }
 
+    override fun getNameUser(): Flow<LoadState<String>> {
+        return flowOf(LoadState.Success("Name"))
+    }
+
+    override fun setNameUser(name: String): Flow<LoadState<UserData>> {
+        return flowOf(LoadState.Success(UserData.defaultObject))
+    }
+
+    override fun getPhoneUser(): Flow<LoadState<String>> {
+        return flowOf(LoadState.Success("+79099099900"))
+    }
+
+    override fun setPhoneUser(phone: String): Flow<LoadState<UserData>> {
+        return flowOf(LoadState.Success(UserData.defaultObject))
+    }
+
     override fun deleteUser(): Flow<LoadState<Boolean>> {
         return flowOf(LoadState.Success(data = false))
     }

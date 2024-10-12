@@ -6,8 +6,8 @@ import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.LoginRepository
 
 internal class LoginRepositoryStubs: LoginRepository {
-    override fun checkCode(pinCode: String): Flow<LoadState<Boolean>> =
-        flowOf(LoadState.Success(true))
+    override fun checkCode(pinCode: String): Flow<LoadState<String>> =
+        flowOf(LoadState.Success("local"))
 
     override fun sendOnPhone(phoneNumber: String): Flow<LoadState<Boolean>> =
         flowOf(LoadState.Success("+79099099900" == phoneNumber))

@@ -15,6 +15,14 @@ interface UserRepository {
 
     fun postUser(userData: UserData): Flow<LoadState<UserData?>>
 
+    fun getNameUser(): Flow<LoadState<String>>
+
+    fun setNameUser(name: String): Flow<LoadState<UserData>>
+
+    fun getPhoneUser(): Flow<LoadState<String>>
+
+    fun setPhoneUser(phone: String): Flow<LoadState<UserData>>
+
     fun deleteUser(): Flow<LoadState<Boolean>>
 
     fun changeSubscriptionEventStatus(eventID: String): Flow<LoadState<UserSubscribeStatusResponse>>

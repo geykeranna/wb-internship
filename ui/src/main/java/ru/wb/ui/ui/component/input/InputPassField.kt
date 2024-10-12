@@ -30,11 +30,13 @@ internal fun InputPassField(
     }
 
     BasicTextField(
-        modifier = modifier
-            .focusRequester(focusRequester),
+        modifier = modifier.focusRequester(focusRequester),
         value = value,
-        onValueChange = {pin ->
-            onChange(pin.take(PASS_LENGTH_IN_PASS_FIELD))
+        onValueChange = { pin ->
+            val input = pin
+                .filter { it.isDigit() }
+                .take(PASS_LENGTH_IN_PASS_FIELD)
+            onChange(input)
         },
         enabled = !disable,
         keyboardOptions = KeyboardOptions(
