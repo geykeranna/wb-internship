@@ -41,6 +41,7 @@ internal class DetailCommunityScreenViewModel(
     private fun startLoading(id: String) = viewModelScope.launch {
         getData.execute(id).collect { data ->
             when(data) {
+                is LoadState.Empty -> _state.emit(BaseState.EMPTY)
                 is LoadState.Error -> _state.emit(BaseState.ERROR)
                 is LoadState.Loading -> _state.emit(BaseState.LOADING)
                 is LoadState.Success -> {
@@ -54,6 +55,7 @@ internal class DetailCommunityScreenViewModel(
         }
         getStateSubscribe.execute(idCommunity = id).collect { result ->
             when(result) {
+                is LoadState.Empty -> _state.emit(BaseState.EMPTY)
                 is LoadState.Error -> _state.emit(BaseState.ERROR)
                 is LoadState.Loading -> _state.emit(BaseState.LOADING)
                 is LoadState.Success -> {

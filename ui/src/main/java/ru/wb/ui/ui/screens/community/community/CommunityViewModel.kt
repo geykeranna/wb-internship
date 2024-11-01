@@ -42,6 +42,7 @@ internal class CommunityViewModel(
     ) = viewModelScope.launch {
         getDataList.execute(query = query).collect{ data ->
             when(data) {
+                is LoadState.Empty -> _state.emit(BaseState.EMPTY)
                 is LoadState.Error -> _state.emit(BaseState.ERROR)
                 is LoadState.Loading -> _state.emit(BaseState.LOADING)
                 is LoadState.Success -> {

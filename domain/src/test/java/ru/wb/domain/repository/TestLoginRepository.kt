@@ -45,13 +45,4 @@ class TestLoginRepository {
             else -> Assertions.assertTrue(false)
         }
     }
-
-    @Test
-    fun `should return not empty user id`() = runTest{
-        when(val actual = testRepository.getUserID().last()) {
-            is LoadState.Loading -> Assertions.assertTrue(true)
-            is LoadState.Success -> Assertions.assertTrue(actual.data.isNotEmpty())
-            else -> Assertions.assertTrue(false)
-        }
-    }
 }

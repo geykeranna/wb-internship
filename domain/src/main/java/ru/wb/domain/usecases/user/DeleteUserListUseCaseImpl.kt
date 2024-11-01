@@ -7,5 +7,7 @@ import ru.wb.domain.repository.user.UserRepository
 internal class DeleteUserListUseCaseImpl(
     private val repository: UserRepository
 ) : DeleteUserListUseCase {
-    override fun execute(): Flow<LoadState<Boolean>> = repository.deleteUser()
+    override fun execute(): Flow<LoadState<Boolean>> {
+        return repository.deleteUser()
+    }
 }

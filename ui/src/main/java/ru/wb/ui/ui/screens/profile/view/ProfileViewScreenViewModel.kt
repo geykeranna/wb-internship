@@ -12,7 +12,6 @@ import ru.wb.domain.model.UserData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.domain.usecases.event.GetEventListUseCase
-import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -27,7 +26,7 @@ internal class ProfileViewScreenViewModel(
     private val getUserData: GetUserDataUseCase,
     private val getEventsList: GetEventListUseCase,
     private val getCommunityList: GetCommunityListUseCase,
-    private val getUserID: GetCurrentUserIDUseCase,
+    private val getUser: GetUserDataUseCase,
     private val setUserData: PostUserDataUseCase,
 ): BaseViewModel<ProfileViewScreenViewModel.Event>() {
     private val _userData = MutableStateFlow(UserData.defaultObject)
@@ -159,9 +158,9 @@ internal class ProfileViewScreenViewModel(
         _state.emit(BaseState.LOADING)
         var userId = idUser
         if(idUser.isNullOrEmpty()) {
-            getUserID.execute().collect { data ->
+            getUser.execute().collect { data ->
                 when(data) {
-                    is LoadState.Success -> userId = data.data
+                    is LoadState.Success -> userId = data.data.id
                     else -> {}
                 }
             }

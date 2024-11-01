@@ -2,7 +2,7 @@ package ru.wb.domain.usecases.community
 
 import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.components.LoadState
-import ru.wb.domain.repository.community.CommunityResponse
+import ru.wb.domain.repository.community.CommunityGetResponse
 
 interface GetCommunityListUseCase {
     fun execute(
@@ -11,5 +11,5 @@ interface GetCommunityListUseCase {
         query: String? = null,
         idEvent: String? = null,
         idUser: String? = null,
-    ): Flow<LoadState<CommunityResponse>>
+    ): Flow<LoadState<CommunityGetResponse>>
 }

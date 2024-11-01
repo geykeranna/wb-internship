@@ -15,22 +15,14 @@ import ru.wb.domain.usecases.community.GetCommunityDataUseCase
 import ru.wb.domain.usecases.community.GetCommunityDataUseCaseImpl
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.domain.usecases.community.GetCommunityListUseCaseImpl
-import ru.wb.domain.usecases.community.PostSubscribeOnCommunity
-import ru.wb.domain.usecases.community.PostSubscribeOnCommunityImpl
 import ru.wb.domain.usecases.event.GetEventDataUseCase
 import ru.wb.domain.usecases.event.GetEventDataUseCaseImpl
 import ru.wb.domain.usecases.event.GetEventListUseCase
 import ru.wb.domain.usecases.event.GetEventListUseCaseImpl
-import ru.wb.domain.usecases.event.PostSubscribeOnEvent
-import ru.wb.domain.usecases.event.PostSubscribeOnEventImpl
 import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.domain.usecases.login.CheckAuthStateUseCaseImpl
 import ru.wb.domain.usecases.login.CheckOTPCodeUseCase
 import ru.wb.domain.usecases.login.CheckOTPCodeUseCaseImpl
-import ru.wb.domain.usecases.login.GetCurrentPhoneNumberUseCase
-import ru.wb.domain.usecases.login.GetCurrentPhoneNumberUseCaseImpl
-import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
-import ru.wb.domain.usecases.login.GetCurrentUserIDUseCaseImpl
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCase
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCaseImpl
 import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
@@ -66,15 +58,11 @@ val domainModules = module {
 
     single<GetEventDataUseCase> { GetEventDataUseCaseImpl(get()) }
     single<GetEventListUseCase> { GetEventListUseCaseImpl(get()) }
-    single<PostSubscribeOnEvent> { PostSubscribeOnEventImpl(get()) }
 
     single<GetCommunityDataUseCase> { GetCommunityDataUseCaseImpl(get()) }
     single<GetCommunityListUseCase> { GetCommunityListUseCaseImpl(get()) }
-    single<PostSubscribeOnCommunity> { PostSubscribeOnCommunityImpl(get()) }
 
-    single<GetCurrentPhoneNumberUseCase> { GetCurrentPhoneNumberUseCaseImpl(get()) }
     single<SendPinCodeOnPhoneUseCase> { SendPinCodeOnPhoneUseCaseImpl(get()) }
-    single<GetCurrentUserIDUseCase> { GetCurrentUserIDUseCaseImpl(get()) }
     single<CheckAuthStateUseCase> { CheckAuthStateUseCaseImpl(get()) }
     single<CheckOTPCodeUseCase> { CheckOTPCodeUseCaseImpl(get()) }
 

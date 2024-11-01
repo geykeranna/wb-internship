@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.components.LoadState
-import ru.wb.domain.usecases.event.PostSubscribeOnEvent
 import ru.wb.domain.usecases.login.CheckOTPCodeUseCase
-import ru.wb.domain.usecases.login.GetCurrentPhoneNumberUseCase
 import ru.wb.domain.usecases.login.SendPinCodeOnPhoneUseCase
+import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
+import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
@@ -17,9 +17,9 @@ import ru.wb.ui.ui.screens.auth.onevent.pin.components.AppointmentValidationStat
 
 internal class AppointmentPinViewModel(
     private val idEvent: String,
-    private val getPhoneAuth: GetCurrentPhoneNumberUseCase,
+    private val getUserData: GetUserDataUseCase,
     private val sendPinCodeOnPhoneUseCase: SendPinCodeOnPhoneUseCase,
-    private val subscribeOnEvent: PostSubscribeOnEvent,
+    private val subscribeOnEvent: ChangeSubscriptionEventStatusUseCase,
     private val checkCodeUseCase: CheckOTPCodeUseCase,
 ) : BaseViewModel<AppointmentPinViewModel.Event>() {
     private val _inputValue = MutableStateFlow("")
@@ -61,12 +61,12 @@ internal class AppointmentPinViewModel(
     fun getContextFlow(): StateFlow<AppointmentValidationState> = context
 
     private fun fetchData() = viewModelScope.launch {
-        getPhoneAuth.execute().collect { options ->
+        getUserData.getPhone().collect { options ->
             when(options) {
                 is LoadState.Success -> {
                     _phone.emit(options.data)
                     _context.emit(AppointmentValidationState(
-                        contextString = "Отправили код на ${phone.value}",
+                        contextString = "Отправили код на ${options.data}",
                         isActive = false
                     ))
                 }
@@ -87,10 +87,7 @@ internal class AppointmentPinViewModel(
     }
 
     private fun submitForm() = viewModelScope.launch {
-        subscribeOnEvent.execute(
-            idUser = "local",
-            idEvent = idEvent,
-        )
+        subscribeOnEvent.execute(eventId = idEvent)
     }
 
     private fun sendPin() = viewModelScope.launch {
@@ -115,10 +112,10 @@ internal class AppointmentPinViewModel(
         checkCodeUseCase.execute(pin = inputValue.value).collect { result ->
             when (result) {
                 is LoadState.Success -> {
-                    _pinVerificationStatus.emit(result.data.isNotBlank())
-                    if (result.data.isNotBlank()) {
+                    _pinVerificationStatus.emit(result.data)
+                    if (result.data) {
                         submitForm()
-                        _userId.emit(result.data)
+                        _userId.emit("j")
                     } else {
                         _context.emit(AppointmentValidationState(
                             contextString = "Неправильный код",

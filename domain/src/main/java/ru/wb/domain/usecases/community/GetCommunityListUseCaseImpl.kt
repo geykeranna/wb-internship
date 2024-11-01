@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.community.CommunityRepository
 import ru.wb.domain.repository.community.CommunitiesGetRequest
-import ru.wb.domain.repository.community.CommunityResponse
+import ru.wb.domain.repository.community.CommunityGetResponse
 
 internal class GetCommunityListUseCaseImpl(
     private val repository: CommunityRepository
@@ -15,7 +15,7 @@ internal class GetCommunityListUseCaseImpl(
         query: String?,
         idEvent: String?,
         idUser: String?,
-    ): Flow<LoadState<CommunityResponse>> = repository.getCommunities(
+    ): Flow<LoadState<CommunityGetResponse>> = repository.getCommunities(
         CommunitiesGetRequest(
             limit = limit,
             offset = offset,

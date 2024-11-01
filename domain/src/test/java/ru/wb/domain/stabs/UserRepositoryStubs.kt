@@ -21,7 +21,7 @@ internal class UserRepositoryStubs: UserRepository {
         socialMedia = listOf()
     )
 
-    override fun getUsers(data: UsersGetRequest?): Flow<LoadState<UserResponse>> {
+    override fun getUsers(request: UsersGetRequest?): Flow<LoadState<UserResponse>> {
         val response = UserResponse(
             limit = 10,
             offset = 0,

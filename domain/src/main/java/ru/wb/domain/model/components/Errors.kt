@@ -7,8 +7,7 @@ enum class Errors(
     val message: String? = null,
 ) {
     NETWORK_ERROR("Ошибка подключения", isVisible = true),
-    REQUEST_ERROR("Ошибка запроса"),
-    RESPONSE_ERROR("Ошибка полученных данных"),
+    AUTH_ERROR("Ошибка авторизации"),
     DATABASE_ERROR("Ошибка внутреннего хранилища", isVisible = true),
     UI_ERROR("Ошибка интерфейса", isVisible = true),
 }

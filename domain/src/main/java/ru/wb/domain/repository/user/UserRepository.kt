@@ -5,7 +5,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.domain.model.components.LoadState
 
 interface UserRepository {
-    fun getUsers(data: UsersGetRequest? = null): Flow<LoadState<UserResponse>>
+    fun getUsers(request: UsersGetRequest? = null): Flow<LoadState<UserResponse>>
 
     fun getUser(id: String?): Flow<LoadState<UserData>>
 

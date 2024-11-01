@@ -8,9 +8,9 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.event.GetEventDataUseCase
-import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionEventStatusUseCase
 import ru.wb.domain.usecases.user.GetSubscriptionEventStatusUseCase
+import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.base.BaseViewModel
@@ -19,7 +19,7 @@ import ru.wb.ui.ui.screens.events.detail.components.ButtonState
 internal class DetailEventScreenViewModel(
     idEvent: String,
     private val getData: GetEventDataUseCase,
-    private val getUser: GetCurrentUserIDUseCase,
+    private val getUser: GetUserDataUseCase,
     private val getStatusSubscribe: GetSubscriptionEventStatusUseCase,
     private val handleEvent: ChangeSubscriptionEventStatusUseCase,
 ) : BaseViewModel<DetailEventScreenViewModel.Event>() {
@@ -50,6 +50,7 @@ internal class DetailEventScreenViewModel(
     private fun startLoading(id: String) = viewModelScope.launch {
         getData.execute(id = id).collect { state ->
             when(state) {
+                is LoadState.Empty -> _state.emit(BaseState.EMPTY)
                 is LoadState.Loading -> _state.emit(BaseState.LOADING)
                 is LoadState.Error -> _state.emit(BaseState.ERROR)
                 is LoadState.Success -> when{
@@ -69,11 +70,12 @@ internal class DetailEventScreenViewModel(
                     UserSubscribeStatusResponse.SUBSCRIBED -> _btnState.emit(ButtonState.PRESSED.id)
                     UserSubscribeStatusResponse.NOT_SUBSCRIBED -> _btnState.emit(ButtonState.UNPRESSED.id)
                 }
+                else -> {}
             }
         }
         getUser.execute().collect{ result ->
             when(result) {
-                is LoadState.Success -> _authStatus.emit(result.data)
+                is LoadState.Success -> _authStatus.emit(result.data.id)
                 else -> {}
             }
         }

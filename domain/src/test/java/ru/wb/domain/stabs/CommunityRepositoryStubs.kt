@@ -6,8 +6,7 @@ import ru.wb.domain.repository.community.CommunityRepository
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.community.CommunitiesGetRequest
-import ru.wb.domain.repository.community.CommunityResponse
-import kotlin.random.Random
+import ru.wb.domain.repository.community.CommunityGetResponse
 
 internal class CommunityRepositoryStubs: CommunityRepository {
     private val communityData: CommunityData = CommunityData(
@@ -23,9 +22,9 @@ internal class CommunityRepositoryStubs: CommunityRepository {
     )
 
     override fun getCommunities(
-        data: CommunitiesGetRequest?
-    ): Flow<LoadState<CommunityResponse>> {
-        val communityResponse = CommunityResponse(
+        request: CommunitiesGetRequest?
+    ): Flow<LoadState<CommunityGetResponse>> {
+        val communityResponse = CommunityGetResponse(
             limit = 10,
             offset = 0,
             data = List(10) {communityData}
@@ -37,10 +36,5 @@ internal class CommunityRepositoryStubs: CommunityRepository {
         id: String
     ): Flow<LoadState<CommunityData>> {
         return flowOf(LoadState.Success(communityData))
-    }
-
-    override fun subscribeOnCommunity(idUser: String, idCommunity: String): Flow<LoadState<Boolean>> {
-        val random: Boolean = Random.nextBoolean()
-        return flowOf(LoadState.Success(random))
     }
 }

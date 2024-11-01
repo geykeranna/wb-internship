@@ -2,7 +2,7 @@ package ru.wb.domain.usecases.common
 
 import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.components.LoadState
-import ru.wb.domain.repository.common.ContentResponse
+import ru.wb.domain.repository.common.ContentGetResponse
 
 interface GetContentUseCase {
     fun execute(
@@ -10,5 +10,5 @@ interface GetContentUseCase {
         offset: Int? = null,
         filter: List<String>? = null,
         search: String? = null,
-    ): Flow<LoadState<ContentResponse>>
+    ): Flow<LoadState<ContentGetResponse>>
 }

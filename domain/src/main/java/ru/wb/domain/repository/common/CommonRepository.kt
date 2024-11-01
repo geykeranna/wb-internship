@@ -6,7 +6,7 @@ import ru.wb.domain.model.SocialMedia
 import ru.wb.domain.model.components.LoadState
 
 interface CommonRepository {
-    fun getContent(data: ContentRequest): Flow<LoadState<ContentResponse>>
+    fun getContent(request: ContentGetRequest): Flow<LoadState<ContentGetResponse>>
 
     fun getSocialMediaList(type: String = "none"): Flow<LoadState<List<SocialMedia>>>
 

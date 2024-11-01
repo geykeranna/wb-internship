@@ -9,8 +9,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.event.EventRepository
 import ru.wb.domain.repository.event.EventGetRequest
-import ru.wb.domain.repository.event.EventResponse
-import kotlin.random.Random
+import ru.wb.domain.repository.event.EventGetResponse
 
 internal class EventRepositoryStubs: EventRepository {
     private val eventData = EventData(
@@ -29,9 +28,9 @@ internal class EventRepositoryStubs: EventRepository {
     )
 
     override fun getEvents(
-        data: EventGetRequest?,
-    ): Flow<LoadState<EventResponse>>{
-        val response = EventResponse(
+        request: EventGetRequest?,
+    ): Flow<LoadState<EventGetResponse>>{
+        val response = EventGetResponse(
             limit = 10,
             offset = 0,
             data = List(10) { eventData }
@@ -43,10 +42,5 @@ internal class EventRepositoryStubs: EventRepository {
         id: String,
     ): Flow<LoadState<EventData>> {
         return flowOf(LoadState.Success(eventData))
-    }
-
-    override fun subscribeOnEvent(idUser: String, idEvent: String): Flow<LoadState<Boolean>> {
-        val random: Boolean = Random.nextBoolean()
-        return flowOf(LoadState.Success(random))
     }
 }

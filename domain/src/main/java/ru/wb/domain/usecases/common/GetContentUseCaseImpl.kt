@@ -3,8 +3,8 @@ package ru.wb.domain.usecases.common
 import kotlinx.coroutines.flow.Flow
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.common.CommonRepository
-import ru.wb.domain.repository.common.ContentRequest
-import ru.wb.domain.repository.common.ContentResponse
+import ru.wb.domain.repository.common.ContentGetRequest
+import ru.wb.domain.repository.common.ContentGetResponse
 
 internal class GetContentUseCaseImpl(
     private val repository: CommonRepository
@@ -14,8 +14,8 @@ internal class GetContentUseCaseImpl(
         offset: Int?,
         filter: List<String>?,
         search: String?
-    ): Flow<LoadState<ContentResponse>> = repository.getContent(
-        ContentRequest(
+    ): Flow<LoadState<ContentGetResponse>> = repository.getContent(
+        ContentGetRequest(
             limit = limit,
             offset = offset,
             filter = filter,

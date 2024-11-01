@@ -5,9 +5,7 @@ import ru.wb.domain.model.EventData
 import ru.wb.domain.model.components.LoadState
 
 interface EventRepository {
-    fun getEvents(data: EventGetRequest? = null): Flow<LoadState<EventResponse>>
+    fun getEvents(request: EventGetRequest? = null): Flow<LoadState<EventGetResponse>>
 
     fun getEvent(id: String): Flow<LoadState<EventData>>
-
-    fun subscribeOnEvent(idUser: String, idEvent: String) : Flow<LoadState<Boolean>>
 }

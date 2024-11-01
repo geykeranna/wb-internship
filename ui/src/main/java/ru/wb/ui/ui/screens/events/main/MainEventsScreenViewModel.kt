@@ -57,6 +57,7 @@ internal class MainEventsScreenViewModel(
             filter = selectedItems.value,
         ).collect { newValue ->
             when(newValue){
+                is LoadState.Empty -> _stateContent.emit(BaseState.EMPTY)
                 is LoadState.Loading -> _stateContent.emit(BaseState.LOADING)
                 is LoadState.Error -> _stateContent.emit(BaseState.ERROR)
                 is LoadState.Success -> when {
