@@ -1,7 +1,8 @@
 package ru.wb.domain.usecases.event
 
 import kotlinx.coroutines.flow.Flow
-import ru.wb.domain.repository.event.EventResponse
+import ru.wb.domain.model.components.LoadState
+import ru.wb.domain.repository.event.EventGetResponse
 
 interface GetEventListUseCase {
     fun execute(
@@ -13,5 +14,5 @@ interface GetEventListUseCase {
         state: String? = null,
         startDate: String? = null,
         endDate: String? = null,
-    ): Flow<EventResponse>
+    ): Flow<LoadState<EventGetResponse>>
 }

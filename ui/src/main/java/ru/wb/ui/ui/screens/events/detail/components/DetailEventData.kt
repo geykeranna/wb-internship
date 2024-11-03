@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.screens.events.detail.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,6 +25,7 @@ import ru.wb.ui.ui.component.cards.events.LargeEventCard
 import ru.wb.ui.ui.component.cards.visitors.AvatarsSize
 import ru.wb.ui.ui.component.cards.visitors.VisitorsList
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -61,7 +61,7 @@ internal fun DetailEventData(
 
         item {
             OwnerCard(
-                modifier = Modifier.clickable { onNavigateUserScreen(detailInfo.manager.id) },
+                modifier = Modifier.noRippleClickable { onNavigateUserScreen(detailInfo.manager.id) },
                 owner = Owner.USER,
                 title = detailInfo.manager.name,
                 description = detailInfo.manager.description
@@ -97,7 +97,7 @@ internal fun DetailEventData(
 
         item {
             OwnerCard(
-                modifier = Modifier.clickable { onNavigateCommunityScreen(detailInfo.sponsor.id) },
+                modifier = Modifier.noRippleClickable { onNavigateCommunityScreen(detailInfo.sponsor.id) },
                 owner = Owner.COMMUNITY,
                 title = detailInfo.sponsor.label,
                 description = detailInfo.sponsor.description

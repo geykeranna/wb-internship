@@ -4,10 +4,6 @@ enum class Screen(
     val route: String,
     val label: String
 ) {
-    TEST (
-        route = "test",
-        label = "test",
-    ),
     SPLASH (
         route = "splash",
         label = "Сплеш",
@@ -44,12 +40,32 @@ enum class Screen(
         route = "profile_detail",
         label = "Профиль"
     ),
+    DELETE_PROFILE (
+        route = "delete_profile",
+        label = "Удаление профиля"
+    ),
+    SUBMIT_EVENT (
+        route = "submit_going_event",
+        label = "Подтверждение похода на событие"
+    ),
     USER_LIST (
         route = "user_list_by_event",
         label = "Пользователи",
     ),
-    APPOINTMENT(
+    APPOINTMENT_NAME (
+        route = "appointment_name",
+        label = "Авторизация",
+    ),
+    APPOINTMENT_PHONE (
+        route = "appointment_phone",
+        label = "Авторизация",
+    ),
+    APPOINTMENT_PIN (
         route = "appointment",
         label = "Авторизация",
-    )
+    ),
+    INTEREST (
+        route = "interest",
+        label = "Интересы",
+    ),
 }

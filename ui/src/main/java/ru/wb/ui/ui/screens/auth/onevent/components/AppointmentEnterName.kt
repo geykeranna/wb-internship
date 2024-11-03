@@ -7,7 +7,7 @@ import ru.wb.ui.ui.component.input.InputFormField
 
 @Composable
 internal fun AppointmentEnterName(
-    name: String,
+    value: String,
     modifier: Modifier = Modifier,
     disableEnter: Boolean = false,
     placeholder: String = "Имя и фамилия",
@@ -16,7 +16,7 @@ internal fun AppointmentEnterName(
 ) {
     InputFormField(
         modifier = modifier.fillMaxWidth(),
-        value = name,
+        value = value,
         disableEnter = disableEnter,
         placeholder = placeholder,
         onChangeValue = onChangeValue,

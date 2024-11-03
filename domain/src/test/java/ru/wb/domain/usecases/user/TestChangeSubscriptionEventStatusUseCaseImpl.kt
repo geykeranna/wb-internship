@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.stabs.UserRepositoryStubs
 
 class TestChangeSubscriptionEventStatusUseCaseImpl {
@@ -14,6 +15,6 @@ class TestChangeSubscriptionEventStatusUseCaseImpl {
         val useCase = ChangeSubscriptionEventStatusUseCaseImpl(repository = testRepository)
         val actual = useCase.execute("1").last()
 
-        Assertions.assertTrue(actual)
+        Assertions.assertTrue(actual is LoadState.Success)
     }
 }

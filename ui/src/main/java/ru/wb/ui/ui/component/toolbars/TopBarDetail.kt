@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.component.toolbars
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_DETAIL_TOP_BAR
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -39,7 +39,7 @@ internal fun TopBarDetail(
         leftIcon?.let { icon ->
             Icon(
                 modifier = Modifier
-                    .clickable { onLeftClick() }
+                    .noRippleClickable { onLeftClick() }
                     .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
                 painter = icon,
                 tint = AppTheme.colors.brandColorDefault,
@@ -59,7 +59,7 @@ internal fun TopBarDetail(
         rightIcon?.let { icon ->
             Icon(
                 modifier = Modifier
-                    .clickable { onRightClick() }
+                    .noRippleClickable { onRightClick() }
                     .size(ICON_SIZE_IN_DETAIL_TOP_BAR.dp),
                 painter = icon,
                 tint = AppTheme.colors.brandColorDefault,

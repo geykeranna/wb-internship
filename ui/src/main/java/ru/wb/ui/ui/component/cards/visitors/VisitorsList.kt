@@ -2,7 +2,6 @@ package ru.wb.ui.ui.component.cards.visitors
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -23,6 +22,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.avatars.UserAvatar
 import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_AVATAR_ROW
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -37,7 +37,7 @@ internal fun VisitorsList(
     LazyRow(
         modifier = modifier
             .width(100.dp)
-            .clickable { onClick() }
+            .noRippleClickable { onClick() }
             .onGloballyPositioned { layoutCoordinates ->
                 val width = if (visitorsList.isNotEmpty()) layoutCoordinates.size.width else 0
                 val dpValueWidth = width / density

@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.component.toolbars
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_TOP_BAR
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_TOP_BAR
 import ru.wb.ui.ui.component.utils.Constants.PADDING_VERTICAL_IN_TOP_BAR
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -54,7 +54,7 @@ internal fun TopBarCustom(
                     Icon(
                         modifier = Modifier
                             .size(ICON_SIZE_IN_TOP_BAR.dp)
-                            .clickable { onLeftIconClick() }
+                            .noRippleClickable { onLeftIconClick() }
                             .align(Alignment.CenterVertically),
                         painter = painterResource(iconLeft),
                         contentDescription = "left button",
@@ -72,7 +72,7 @@ internal fun TopBarCustom(
                 Icon(
                     modifier = Modifier
                         .size(ICON_SIZE_IN_TOP_BAR.dp)
-                        .clickable { onRightIconClick() }
+                        .noRippleClickable { onRightIconClick() }
                         .align(Alignment.CenterVertically),
                     painter = painterResource(iconRight),
                     contentDescription = "right button",

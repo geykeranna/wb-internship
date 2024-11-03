@@ -1,6 +1,5 @@
 package ru.wb.ui.ui.component.cards.users
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
@@ -11,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.cards.visitors.UserShortCard
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.component.utils.noRippleClickable
 
 @Composable
 internal fun UsersRowCard(
@@ -28,7 +28,7 @@ internal fun UsersRowCard(
     ) {
         items(itemsList){ item ->
             UserShortCard(
-                modifier = Modifier.clickable { onNavigate(item.id) },
+                modifier = Modifier.noRippleClickable { onNavigate(item.id) },
                 userData = item,
             )
         }

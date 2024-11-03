@@ -20,7 +20,7 @@ fun ChipsItems(
     modifier: Modifier = Modifier,
     size: ChipsSize = ChipsSize.LARGE,
     isSelect: Boolean = false,
-    onSelect: ((newValue: String) -> Unit)? = null
+    onSelect: ((newValue: String) -> Unit)? = null,
 ){
     val (background, textColor) = when {
         isSelect -> listOf(AppTheme.colors.brandColorDefault, AppTheme.colors.neutralColorBackground)

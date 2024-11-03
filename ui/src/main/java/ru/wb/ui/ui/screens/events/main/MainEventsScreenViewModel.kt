@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.ContentItems
+import ru.wb.domain.model.components.LoadState
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.common.GetContentUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -49,32 +51,25 @@ internal class MainEventsScreenViewModel(
 
     fun getAllChipsList(): List<String> = defaultChipsList + lastChipsActionItem
 
-    private fun startFetchData() = viewModelScope.launch {
-        _stateContent.emit(BaseState.LOADING)
-        getContent.execute().collect { newValue ->
-            if(newValue.data.items.isEmpty()) {
-                _stateContent.emit(BaseState.EMPTY)
-                return@collect
-            }
-            val (labeledData, filteredData) = newValue.data.items.partition { it.isStatic }
-            _labelContent.emit(labeledData)
-            _content.emit(filteredData)
-            _stateContent.emit(BaseState.SUCCESS)
-        }
-    }
-
     private fun fetchData() = viewModelScope.launch {
-        _stateContent.emit(BaseState.LOADING)
         getContent.execute(
             search = searchString.value,
             filter = selectedItems.value,
         ).collect { newValue ->
-            if(newValue.data.items.isEmpty()){
-                _stateContent.emit(BaseState.EMPTY)
-                return@collect
+            when(newValue){
+                is LoadState.Empty -> _stateContent.emit(BaseState.EMPTY)
+                is LoadState.Loading -> _stateContent.emit(BaseState.LOADING)
+                is LoadState.Error -> _stateContent.emit(BaseState.ERROR)
+                is LoadState.Success -> when {
+                    newValue.data.data.items.isEmpty() -> _stateContent.emit(BaseState.EMPTY)
+                    else -> {
+                        val (labeledData, filteredData) = newValue.data.data.items.partition { it.isStatic }
+                        _labelContent.emit(labeledData)
+                        _content.emit(filteredData)
+                        _stateContent.emit(BaseState.SUCCESS)
+                    }
+                }
             }
-            _content.emit(newValue.data.items)
-            _stateContent.emit(BaseState.SUCCESS)
         }
     }
 
@@ -103,15 +98,24 @@ internal class MainEventsScreenViewModel(
 
     private fun onChangeSub(idCommunity: String, idContentItem: String) = viewModelScope.launch {
         changeSubscribeState.execute(idCommunity).collect { results ->
-            val newValue = content.value.map { item ->
-                if (item.id == idContentItem) {
-                    item.copy(communityList = item.communityList?.map { value ->
-                        if (value.id == idCommunity) { value.copy(isSubscribed = results) }
-                        else { value }
-                    })
-                } else item
+            when(results){
+                is LoadState.Success -> {
+                    val newValue = content.value.map { item ->
+                        if (item.id == idContentItem) {
+                            item.copy(communityList = item.communityList?.map { value ->
+                                if (value.id == idCommunity) {
+                                    value.copy(
+                                        isSubscribed = results.data == UserSubscribeStatusResponse.SUBSCRIBED
+                                    )
+                                }
+                                else { value }
+                            })
+                        } else item
+                    }
+                    _content.emit(newValue)
+                }
+                else -> {}
             }
-            _content.emit(newValue)
         }
     }
 
@@ -125,7 +129,7 @@ internal class MainEventsScreenViewModel(
     override fun obtainEvent(event: Event) {
         when (event) {
             is Event.OnLoadingStarted -> {
-                startFetchData()
+                fetchData()
             }
             is Event.OnSearch -> {
                 onSearch(event.query)

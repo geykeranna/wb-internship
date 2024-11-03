@@ -28,6 +28,10 @@
     <string name="label_menu_items_help">Помощь</string>
     <string name="label_menu_items_referral">Пригласи друга</string>
 
+    <string name="label_interesting">Интересы</string>
+    <string name="label_socials">Социальные сети</string>
+    <string name="label_delete_profile">Удалить профиль</string>
+    <string name="label_interesting_description">Выберите интересы, чтобы мы рекомендовали полезные встречи</string>
     <string name="label_my_meets">Мои встречи</string>
     <string name="label_enter_on_meet">Вход и запись на встречу</string>
     <string name="label_enter_on_meet_ended">Вы записались на встречу</string>
@@ -36,6 +40,15 @@
     <string name="label_enable_notification">Включить уведомления</string>
     <string name="text_community_meetings">Встречи сообщества</string>
     <string name="text_cancel">Отмена</string>
+    <string name="text_delete">Удалить</string>
+    <string name="text_no_need">Не надо</string>
+    <string name="text_delete_message">Точно удалить профиль?</string>
+    <string name="text_on_delete_mess">Не надо...... Мы крутые\n\nМы удалим профиль, но не сразу. У вас будет 30 дней чтобы зайти и обратно всё вернуть</string>
+    <string name="text_add_with_plus">+ Добавить</string>
+    <string name="text_tell_later">Расскажу позже</string>
+    <string name="text_find_another">Найти другие встречи</string>
+    <string name="text_get_code">Получить код</string>
+    <string name="text_send_and_confirm_an_entry">Отправить и подтвердить запись</string>
     <string name="placeholder_first_name_text_edit_form">Имя Фамилия</string>
     <string name="placeholder_location_text_edit_form">Город</string>
     <string name="placeholder_description_text_edit_form">Расскажите о себе </string>

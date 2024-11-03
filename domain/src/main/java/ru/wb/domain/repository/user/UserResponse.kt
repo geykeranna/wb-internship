@@ -7,3 +7,8 @@ data class UserResponse(
     val offset: Int?,
     val data: List<UserData>,
 )
+
+enum class UserSubscribeStatusResponse{
+    SUBSCRIBED,
+    NOT_SUBSCRIBED,
+}

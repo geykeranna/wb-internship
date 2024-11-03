@@ -30,10 +30,10 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InputNumberTextField(
-    phone: String,
+    input: String,
     selectedPhoneCountryCode: CountryCodes,
     modifier: Modifier = Modifier,
-    isAccent: Boolean = true,
+    isAccent: Boolean = false,
     disable: Boolean = false,
     disableEnter: Boolean = false,
     isInvalid: Boolean = false,
@@ -52,6 +52,7 @@ internal fun InputNumberTextField(
         isInvalid -> AppTheme.colors.neutralColorInvalidBackground
         else -> AppTheme.colors.neutralColorSecondaryBackground
     }
+
     Column(
         modifier = modifier
             .fillMaxWidth(),
@@ -63,12 +64,12 @@ internal fun InputNumberTextField(
                 .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
                 .background(backgroundColor)
                 .focusRequester(focusRequester),
-            value = phone,
+            value = input,
             enabled = !disable,
             cursorBrush = SolidColor(Color.Transparent),
-            onValueChange = {
-                val value = it
-                    .replace("\\D", "")
+            onValueChange = { text ->
+                val value = text
+                    .filter { it.isDigit() }
                     .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
                 onChange(value)
             },
@@ -85,7 +86,7 @@ internal fun InputNumberTextField(
             visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
             decorationBox = { innerTextField ->
                 DecorationBoxNumberTextField(
-                    value = phone,
+                    value = input,
                     placeholder = "${
                         if(isByFullPlaceholder) { selectedPhoneCountryCode.countryCode } else ""
                     } ${selectedPhoneCountryCode.mask}",

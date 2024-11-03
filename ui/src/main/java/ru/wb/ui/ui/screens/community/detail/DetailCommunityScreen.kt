@@ -16,6 +16,7 @@ import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.component.toolbars.TopBarDetail
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.screens.community.detail.components.DetailCommunityData
+import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreenViewModel.Event
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -57,7 +58,7 @@ internal fun DetailCommunityScreen(
                     navController.navigate(Screen.EVENT_DETAIL.route + "/$idEvent")
                 }
             ){
-                detailViewModel.obtainEvent(DetailCommunityScreenViewModel.Event.OnChangeSubscribeStatus)
+                detailViewModel.obtainEvent(Event.OnChangeSubscribeStatus)
             }
         }
     }

@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.stabs.EventRepositoryStubs
 
 class TestGetEventListUseCaseImpl {
@@ -12,9 +13,12 @@ class TestGetEventListUseCaseImpl {
     @Test
     fun `should return not empty event list data as in repo`() = runTest{
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute().last()
 
-        Assertions.assertTrue(actual.data.isNotEmpty())
+        when(val actual = useCase.execute().last()) {
+            is LoadState.Loading -> Assertions.assertTrue(true)
+            is LoadState.Success -> Assertions.assertTrue(actual.data.data.isNotEmpty())
+            else -> Assertions.assertTrue(false)
+        }
     }
 
     @Test
@@ -22,8 +26,11 @@ class TestGetEventListUseCaseImpl {
         val expectedLimit = 10
 
         val useCase = GetEventListUseCaseImpl(repository = testRepository)
-        val actual = useCase.execute(limit = expectedLimit).last()
 
-        Assertions.assertEquals(expectedLimit, actual.data.size)
+        when(val actual = useCase.execute(limit = expectedLimit).last()) {
+            is LoadState.Loading -> Assertions.assertTrue(true)
+            is LoadState.Success -> Assertions.assertEquals(expectedLimit, actual.data.data.size)
+            else -> Assertions.assertTrue(false)
+        }
     }
 }

@@ -48,7 +48,7 @@ internal fun InputNumberField(
         )
 
         InputNumberTextField(
-            phone = phone,
+            input = phone,
             isInvalid = isInvalid,
             disableEnter = disableEnter,
             disable = disable,

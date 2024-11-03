@@ -35,7 +35,7 @@ internal fun ProfileEditUserForm(
 
         InputNumberTextField(
             modifier = modifierItems,
-            phone = formFields.phone,
+            input = formFields.phone,
             selectedPhoneCountryCode = CountryCodes.defaultData.first(),
             isAccent = false,
             isByFullPlaceholder = true,

@@ -3,9 +3,9 @@ package ru.wb.ui.ui.component.chips
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,8 +24,10 @@ import ru.wb.domain.model.SocialMedia
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_CHIPS_ITEM_LIST
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_SOCIAL_CHIPS
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.SIZE_OF_ICON_SOCIAL_CHIPS_GROUP
 import ru.wb.ui.ui.component.utils.defaultSocialMediaMap
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -35,7 +37,8 @@ internal fun SocialChips(
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS_ITEM_LIST.dp)
+        horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_CHIPS_ITEM_LIST.dp),
+        contentPadding = PaddingValues(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
     ) {
         items(list) { item ->
             val icon = defaultSocialMediaMap.getOrDefault(item.name) { R.drawable.ic_help_circle}
@@ -50,7 +53,7 @@ internal fun SocialChips(
                         .size(SIZE_OF_ICON_SOCIAL_CHIPS_GROUP.dp)
                         .clip(RoundedCornerShape(CORNER_RADIUS_OF_SOCIAL_CHIPS.dp))
                         .background(AppTheme.colors.brandColorDefault)
-                        .clickable { context.startActivity(intent) }
+                        .noRippleClickable { context.startActivity(intent) }
                 ) {
                     Icon(
                         modifier = Modifier.align(Alignment.Center),

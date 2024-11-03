@@ -1,9 +1,13 @@
 package ru.wb.ui.ui.component.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
@@ -25,5 +29,25 @@ internal fun Modifier.onClick(
     disabled: Boolean,
     onClick: () -> Unit
 ): Modifier {
-    return if (!disabled) { this.clickable { onClick() } } else this
+    return if (!disabled) { this.noRippleClickable { onClick() } } else this
+}
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver", "UnnecessaryComposedModifier")
+inline fun Modifier.noRippleClickable(
+    crossinline onClick: () -> Unit
+): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }) {
+        onClick()
+    }
+}
+
+internal fun shareUser(context: Context, value: String) {
+    val shareIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, value)
+        type = "text/plain"
+    }
+    context.startActivity(Intent.createChooser(shareIntent, null))
 }

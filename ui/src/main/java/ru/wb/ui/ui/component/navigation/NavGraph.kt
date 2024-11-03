@@ -4,14 +4,19 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.wb.ui.ui.screens.auth.onevent.Appointment
+import ru.wb.ui.ui.screens.auth.onevent.name.AppointmentName
+import ru.wb.ui.ui.screens.auth.onevent.phone.AppointmentPhone
+import ru.wb.ui.ui.screens.auth.onevent.pin.AppointmentPin
 import ru.wb.ui.ui.screens.community.community.CommunityScreen
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
 import ru.wb.ui.ui.screens.events.main.MainEventsScreen
+import ru.wb.ui.ui.screens.events.submit.SubmitEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
+import ru.wb.ui.ui.screens.profile.delete.DeleteProfileViewScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
-import ru.wb.ui.ui.screens.splash.SplashScreen
+import ru.wb.ui.ui.screens.startscreens.interests.InterestsScreen
+import ru.wb.ui.ui.screens.startscreens.splash.SplashScreen
 import ru.wb.ui.ui.screens.users.list.UsersListByEventScreen
 
 @Composable
@@ -21,10 +26,16 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.EVENTS.route
+        startDestination = Screen.SPLASH.route
     ){
         composable(route = Screen.EVENTS.route) {
             MainEventsScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.DELETE_PROFILE.route) {
+            DeleteProfileViewScreen(
                 navController = navController
             )
         }
@@ -91,6 +102,32 @@ fun NavGraph(
             )
         }
 
+        composable(route = Screen.INTEREST.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let { id ->
+                InterestsScreen(
+                    idUser = id,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.INTEREST.route) {
+            InterestsScreen(
+                navController = navController,
+            )
+        }
+
+        composable(route = Screen.SUBMIT_EVENT.route + "/{label}/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("label")?.let { label ->
+                val idUser = stackEntry.arguments?.getString("label") ?: ""
+                SubmitEventsScreen(
+                    label = label,
+                    id = idUser,
+                    navController = navController,
+                )
+            }
+        }
+
         composable(route = Screen.USER_LIST.route + "/{data}") { stackEntry ->
             stackEntry.arguments?.getString("data")?.let { data ->
                 UsersListByEventScreen(
@@ -100,14 +137,46 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.APPOINTMENT.route + "/{data}") { stackEntry ->
-            stackEntry.arguments?.getString("data")?.let { data ->
-                val (idEvent, label) = data.split(" | ")
-                Appointment(
-                    idEvent = idEvent,
-                    label = label,
-                    navController = navController,
-                )
+        composable(route = Screen.APPOINTMENT_NAME.route + "/{eventId}/{label}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { eventId ->
+                val label = stackEntry.arguments?.getString("label")
+                when {
+                    !label.isNullOrEmpty() -> {
+                        AppointmentName(
+                            idEvent = eventId,
+                            label = label,
+                            navController = navController,
+                        )
+                    }
+                }
+            }
+        }
+        composable(route = Screen.APPOINTMENT_PIN.route + "/{eventId}/{label}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { eventId ->
+                val label = stackEntry.arguments?.getString("label")
+                when {
+                    !label.isNullOrEmpty() -> {
+                        AppointmentPin(
+                            idEvent = eventId,
+                            label = label,
+                            navController = navController,
+                        )
+                    }
+                }
+            }
+        }
+        composable(route = Screen.APPOINTMENT_PHONE.route + "/{eventId}/{label}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { eventId ->
+                val label = stackEntry.arguments?.getString("label")
+                when {
+                    !label.isNullOrEmpty() -> {
+                        AppointmentPhone(
+                            idEvent = eventId,
+                            label = label,
+                            navController = navController,
+                        )
+                    }
+                }
             }
         }
     }

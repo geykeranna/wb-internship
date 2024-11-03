@@ -3,14 +3,15 @@ package ru.wb.ui.ui.screens.profile.view
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
 import ru.wb.domain.model.EventData
 import ru.wb.domain.model.SocialMedia
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.domain.usecases.event.GetEventListUseCase
-import ru.wb.domain.usecases.login.GetCurrentUserIDUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -25,7 +26,7 @@ internal class ProfileViewScreenViewModel(
     private val getUserData: GetUserDataUseCase,
     private val getEventsList: GetEventListUseCase,
     private val getCommunityList: GetCommunityListUseCase,
-    private val getUserID: GetCurrentUserIDUseCase,
+    private val getUser: GetUserDataUseCase,
     private val setUserData: PostUserDataUseCase,
 ): BaseViewModel<ProfileViewScreenViewModel.Event>() {
     private val _userData = MutableStateFlow(UserData.defaultObject)
@@ -156,24 +157,38 @@ internal class ProfileViewScreenViewModel(
     private fun startLoading(idUser: String?) = viewModelScope.launch {
         _state.emit(BaseState.LOADING)
         var userId = idUser
-        when {
-            idUser.isNullOrEmpty() -> getUserID.execute().collect { userId = it }
-        }
-        getUserData.execute(id = userId).collect {
-            when {
-                it.id.isEmpty() -> BaseState.ERROR
-                else -> {
-                    _state.emit(BaseState.SUCCESS)
-                    _userData.emit(it)
+        if(idUser.isNullOrEmpty()) {
+            getUser.execute().collect { data ->
+                when(data) {
+                    is LoadState.Success -> userId = data.data.id
+                    else -> {}
                 }
             }
         }
-        getEventsList.execute(idUser = userId).collect {
-            _dataEventList.emit(it.data)
+        getUserData.execute(id = userId).collect { data ->
+            when(data) {
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Success -> {
+                    _userData.emit(data.data)
+                    _state.emit(BaseState.SUCCESS)
+                }
+                else -> {}
+            }
         }
-        getCommunityList.execute(idUser = userId).collect {
-            _dataCommunityList.emit(it.data)
+        getEventsList.execute(idUser = userId).collect { event ->
+            when(event) {
+                is LoadState.Success -> _dataEventList.emit(event.data.data)
+                else -> {}
+            }
         }
+        getCommunityList.execute(idUser = userId).collect { community ->
+            when(community) {
+                is LoadState.Success -> _dataCommunityList.emit(community.data.data)
+                else -> {}
+            }
+        }
+        joinAll()
+        _state.emit(BaseState.SUCCESS)
     }
 
     private fun sendData() = viewModelScope.launch {

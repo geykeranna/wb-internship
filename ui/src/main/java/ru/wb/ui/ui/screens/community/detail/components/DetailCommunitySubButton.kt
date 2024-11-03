@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.R
-import ru.wb.ui.ui.component.button.GradientButton
+import ru.wb.ui.ui.component.button.PrimaryButton
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -33,7 +33,7 @@ internal fun DetailCommunitySubButton (
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
-        GradientButton (
+        PrimaryButton (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp),
