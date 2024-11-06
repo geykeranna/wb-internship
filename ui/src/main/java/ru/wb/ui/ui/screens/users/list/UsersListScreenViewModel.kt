@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.UserData
+import ru.wb.domain.model.UserItemsData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserResponse
 import ru.wb.domain.usecases.user.GetUserListUseCase
@@ -17,8 +17,8 @@ internal class UsersListScreenViewModel(
     data: String,
     private val getData: GetUserListUseCase,
 ) : BaseViewModel<UsersListScreenViewModel.Event>() {
-    private val _detailData = MutableStateFlow(listOf(UserData.defaultObject))
-    private val detailData: StateFlow<List<UserData>> = _detailData
+    private val _detailData = MutableStateFlow<List<UserItemsData>>(listOf())
+    private val detailData: StateFlow<List<UserItemsData>> = _detailData
 
     private val _state = MutableStateFlow(BaseState.EMPTY)
     private val state: StateFlow<BaseState> = _state
@@ -30,7 +30,7 @@ internal class UsersListScreenViewModel(
         obtainEvent(Event.OnLoadingStarted(data))
     }
 
-    fun getDataListFlow(): StateFlow<List<UserData>> = detailData
+    fun getDataListFlow(): StateFlow<List<UserItemsData>> = detailData
 
     fun getStateFlow(): StateFlow<BaseState> = state
 

@@ -40,6 +40,8 @@
     <string name="label_enable_notification">Включить уведомления</string>
     <string name="text_community_meetings">Встречи сообщества</string>
     <string name="text_cancel">Отмена</string>
+    <string name="text_another_meet_in_community">Другие встречи сообщества</string>
+    <string name="text_will_go_on_meet">Пойдут на встречу</string>
     <string name="text_delete">Удалить</string>
     <string name="text_no_need">Не надо</string>
     <string name="text_delete_message">Точно удалить профиль?</string>

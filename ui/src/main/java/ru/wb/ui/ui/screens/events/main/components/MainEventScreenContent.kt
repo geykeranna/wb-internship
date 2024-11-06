@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.ContentItems
+import ru.wb.domain.model.Content
 import ru.wb.ui.ui.base.BaseScreen
 import ru.wb.ui.ui.base.BaseState
 import ru.wb.ui.ui.component.cards.LabeledCard
@@ -17,8 +17,8 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 
 @Composable
 internal fun MainEventScreenContent(
-    filteredContent: List<ContentItems>,
-    staticContent: List<ContentItems>,
+    filteredContent: List<Content>,
+    staticContent: List<Content>,
     stateScreen: BaseState,
     modifier: Modifier = Modifier,
     isSearch: Boolean = false,

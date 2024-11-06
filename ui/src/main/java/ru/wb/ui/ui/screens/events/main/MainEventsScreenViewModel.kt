@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.ContentItems
+import ru.wb.domain.model.Content
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.common.GetContentUseCase
@@ -20,11 +20,11 @@ internal class MainEventsScreenViewModel(
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
     private val lastChipsActionItem = "Все категории"
 
-    private val _content = MutableStateFlow<List<ContentItems>>(listOf())
-    private val content: StateFlow<List<ContentItems>> = _content
+    private val _content = MutableStateFlow<List<Content>>(listOf())
+    private val content: StateFlow<List<Content>> = _content
 
-    private val _labelContent = MutableStateFlow<List<ContentItems>>(listOf())
-    private val labelContent: StateFlow<List<ContentItems>> = _labelContent
+    private val _labelContent = MutableStateFlow<List<Content>>(listOf())
+    private val labelContent: StateFlow<List<Content>> = _labelContent
 
     private val _selectedItems = MutableStateFlow(listOf(lastChipsActionItem))
     private val selectedItems: StateFlow<List<String>> = _selectedItems
@@ -39,9 +39,9 @@ internal class MainEventsScreenViewModel(
         obtainEvent(Event.OnLoadingStarted)
     }
 
-    fun getContentDataFlow(): StateFlow<List<ContentItems>> = content
+    fun getContentDataFlow(): StateFlow<List<Content>> = content
 
-    fun getLabelContentDataFlow(): StateFlow<List<ContentItems>> = labelContent
+    fun getLabelContentDataFlow(): StateFlow<List<Content>> = labelContent
 
     fun getSearchStringFlow(): StateFlow<String> = searchString
 
@@ -61,9 +61,9 @@ internal class MainEventsScreenViewModel(
                 is LoadState.Loading -> _stateContent.emit(BaseState.LOADING)
                 is LoadState.Error -> _stateContent.emit(BaseState.ERROR)
                 is LoadState.Success -> when {
-                    newValue.data.data.items.isEmpty() -> _stateContent.emit(BaseState.EMPTY)
+                    newValue.data.data.isEmpty() -> _stateContent.emit(BaseState.EMPTY)
                     else -> {
-                        val (labeledData, filteredData) = newValue.data.data.items.partition { it.isStatic }
+                        val (labeledData, filteredData) = newValue.data.data.partition { it.id.toInt() < 2 }
                         _labelContent.emit(labeledData)
                         _content.emit(filteredData)
                         _stateContent.emit(BaseState.SUCCESS)

@@ -19,8 +19,6 @@ internal fun ProfileViewScreen(
     viewModel: ProfileViewScreenViewModel = koinViewModel(parameters = { parametersOf(idUser) })
 ){
     val userData by viewModel.getUserFlow().collectAsStateWithLifecycle()
-    val eventData by viewModel.getEventDataFlow().collectAsStateWithLifecycle()
-    val communityData by viewModel.getCommunityDataFlow().collectAsStateWithLifecycle()
     val state by viewModel.getStateFlow().collectAsStateWithLifecycle()
     val formField by viewModel.getFieldsValuesFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
@@ -31,15 +29,15 @@ internal fun ProfileViewScreen(
     ProfileView(
         modifier = modifier,
         userData = userData,
-        eventData = eventData,
-        communityData = communityData,
         state = state,
         pageMode = pageMode,
         allChipsList = allChipsList,
         socialMedia = socialMedia,
         selectedChips = selectedChips,
         onBackNavigate = { navController.popBackStack() },
-        onBottomClick = {},
+        onBottomClick = {
+            // TODO
+        },
         formField = formField,
         onDeleteButtonClick = { navController.navigate(Screen.DELETE_PROFILE.route) },
         onPageModeChange = { newValue ->

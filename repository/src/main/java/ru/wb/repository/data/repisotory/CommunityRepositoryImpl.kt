@@ -10,14 +10,16 @@ import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.community.CommunitiesGetRequest
 import ru.wb.domain.repository.community.CommunityRepository
 import ru.wb.domain.repository.community.CommunityGetResponse
-import ru.wb.repository.data.api.mappers.models.CommunityMapper
 import ru.wb.repository.data.api.mappers.request.CommunityGetRequestMapper
 import ru.wb.repository.data.api.mappers.response.CommunityGetResponseMapper
+import ru.wb.repository.data.api.model.Community
 import ru.wb.repository.data.api.services.community.CommunityService
+import ru.wb.repository.data.api.services.event.EventGetRequest
+import ru.wb.repository.data.api.services.event.EventService
 
 internal class CommunityRepositoryImpl(
     private val api: CommunityService,
-    private val communityMapper: CommunityMapper,
+    private val eventApi: EventService,
     private val getRequestMapper: CommunityGetRequestMapper,
     private val getResponseMapper: CommunityGetResponseMapper,
 ): CommunityRepository {
@@ -41,11 +43,15 @@ internal class CommunityRepositoryImpl(
         id: String
     ): Flow<LoadState<CommunityData>> {
         return flow {
-            api.getCommunity(id = id)?.let {
-                val communityData = communityMapper.transformToDomain(it)
-                emit(LoadState.Success(communityData) as LoadState<CommunityData>)
+            var communityData: Community? = null
+            api.getCommunity(id = id)?.let { item ->
+                communityData = item
             }
-            emit(LoadState.Empty)
+            eventApi.getEvents(EventGetRequest(
+                idCommunity = id,
+                type = ""
+            ))
+            emit(LoadState.Success(communityData) as LoadState<CommunityData>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {

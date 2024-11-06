@@ -5,13 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
-import ru.wb.domain.model.CommunityData
-import ru.wb.domain.model.EventData
 import ru.wb.domain.model.SocialMedia
 import ru.wb.domain.model.UserData
 import ru.wb.domain.model.components.LoadState
-import ru.wb.domain.usecases.community.GetCommunityListUseCase
-import ru.wb.domain.usecases.event.GetEventListUseCase
 import ru.wb.domain.usecases.user.GetUserDataUseCase
 import ru.wb.domain.usecases.user.PostUserDataUseCase
 import ru.wb.ui.ui.base.BaseEvent
@@ -24,19 +20,10 @@ import ru.wb.ui.ui.screens.profile.components.ProfileFormState
 internal class ProfileViewScreenViewModel(
     idUser: String,
     private val getUserData: GetUserDataUseCase,
-    private val getEventsList: GetEventListUseCase,
-    private val getCommunityList: GetCommunityListUseCase,
-    private val getUser: GetUserDataUseCase,
     private val setUserData: PostUserDataUseCase,
 ): BaseViewModel<ProfileViewScreenViewModel.Event>() {
     private val _userData = MutableStateFlow(UserData.defaultObject)
     private val userData: StateFlow<UserData> = _userData
-
-    private val _dataEventList = MutableStateFlow(listOf<EventData>())
-    private val dataEventList: StateFlow<List<EventData>> = _dataEventList
-
-    private val _dataCommunityList = MutableStateFlow(listOf<CommunityData>())
-    private val dataCommunityList: StateFlow<List<CommunityData>> = _dataCommunityList
 
     private val _chipsData = MutableStateFlow(listOf<String>())
     private val chipsData: StateFlow<List<String>> = _chipsData
@@ -79,10 +66,6 @@ internal class ProfileViewScreenViewModel(
     fun getSocialMediaFlow(): StateFlow<List<SocialMedia>> = socialMedia
 
     fun getStateFlow(): StateFlow<BaseState> = state
-
-    fun getEventDataFlow(): StateFlow<List<EventData>> = dataEventList
-
-    fun getCommunityDataFlow(): StateFlow<List<CommunityData>> = dataCommunityList
 
     fun getChipsFlow(): StateFlow<List<String>> = chipsData
 
@@ -158,7 +141,7 @@ internal class ProfileViewScreenViewModel(
         _state.emit(BaseState.LOADING)
         var userId = idUser
         if(idUser.isNullOrEmpty()) {
-            getUser.execute().collect { data ->
+            getUserData.execute().collect { data ->
                 when(data) {
                     is LoadState.Success -> userId = data.data.id
                     else -> {}
@@ -172,18 +155,6 @@ internal class ProfileViewScreenViewModel(
                     _userData.emit(data.data)
                     _state.emit(BaseState.SUCCESS)
                 }
-                else -> {}
-            }
-        }
-        getEventsList.execute(idUser = userId).collect { event ->
-            when(event) {
-                is LoadState.Success -> _dataEventList.emit(event.data.data)
-                else -> {}
-            }
-        }
-        getCommunityList.execute(idUser = userId).collect { community ->
-            when(community) {
-                is LoadState.Success -> _dataCommunityList.emit(community.data.data)
                 else -> {}
             }
         }

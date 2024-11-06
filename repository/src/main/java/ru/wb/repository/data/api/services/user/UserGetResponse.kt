@@ -1,9 +1,9 @@
 package ru.wb.repository.data.api.services.user
 
-import ru.wb.repository.data.api.model.User
+import ru.wb.repository.data.api.model.UserItem
 
 internal data class UserGetResponse(
     val limit: Int?,
     val offset: Int?,
-    val data: List<User>,
+    val data: List<UserItem>,
 )

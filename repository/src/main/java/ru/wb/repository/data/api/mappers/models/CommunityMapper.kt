@@ -5,8 +5,7 @@ import ru.wb.repository.data.api.mappers.Mapper
 import ru.wb.repository.data.api.model.Community
 
 internal class CommunityMapper(
-//    private val eventMapper: EventMapper,
-    private val userMapper: UserMapper,
+    private val userMapper: UserItemsMapper,
 ) : Mapper<Community, CommunityData> {
     override fun transformToDomain(data: Community): CommunityData {
         return CommunityData(
@@ -31,10 +30,8 @@ internal class CommunityMapper(
             icon = data.icon,
             isVerified = data.isVerified,
             isSubscribed = data.isSubscribed,
-            lastEvent = listOf(),
-            eventList = listOf(),
             tags = data.tags,
-            subscribers = data.subscribers.map { userMapper.transformToRepository(it) }
+            subscribers = data.subscribers.map { userMapper.transformToRepository(it) },
         )
     }
 }

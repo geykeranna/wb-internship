@@ -1,9 +1,8 @@
 package ru.wb.repository.data.api.model
 
-internal data class Community (
+internal data class CommunityItem(
     val id: String,
     val label: String,
-    val subscribers: List<UserItem>,
     val icon: String?,
     val description: String,
     val isVerified: Boolean,

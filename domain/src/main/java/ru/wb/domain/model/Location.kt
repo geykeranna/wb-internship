@@ -15,7 +15,7 @@ data class Location(
             city = "Mocква",
             address = "ул. Инженерная, 6",
             metro = "Приморская",
-            icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Moskwa_Metro_Line_2.svg/1024px-Moskwa_Metro_Line_2.svg.png",
+            icon = null,
             fullAddress = "Севкабель Порт, Кожевенная линия, 40",
             coordinate = null,
         )

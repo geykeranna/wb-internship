@@ -9,4 +9,5 @@ internal data class EventGetRequest(
     val state: String? = null,
     val startDate: String? = null,
     val endDate: String? = null,
+    val type: String? = null,
 )

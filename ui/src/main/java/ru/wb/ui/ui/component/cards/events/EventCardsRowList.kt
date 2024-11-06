@@ -7,13 +7,13 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.EventData
+import ru.wb.domain.model.EventItemData
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_OF_EVENT_ITEM_LIST
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 
 @Composable
 internal fun EventCardsRowList(
-    itemsList: List<EventData>,
+    itemsList: List<EventItemData>,
     modifier: Modifier = Modifier,
     size: EventSize = EventSize.THIN,
     onNavigate: (id: String) -> Unit = {},

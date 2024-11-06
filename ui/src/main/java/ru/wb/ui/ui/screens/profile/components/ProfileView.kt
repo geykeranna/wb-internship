@@ -5,8 +5,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.CommunityData
-import ru.wb.domain.model.EventData
 import ru.wb.domain.model.SocialMedia
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.base.BaseScreen
@@ -17,8 +15,6 @@ import ru.wb.ui.ui.theme.AppTheme
 @Composable
 internal fun ProfileView(
     userData: UserData,
-    eventData: List<EventData>,
-    communityData: List<CommunityData>,
     state: BaseState,
     formField: ProfileFormState,
     allChipsList: List<String>,
@@ -69,8 +65,6 @@ internal fun ProfileView(
                     ProfileViewCard(
                         modifier = modifier,
                         userData = userData,
-                        communityData = communityData,
-                        eventData = eventData,
                         pageMode = pageMode,
                         onBottomClick = onBottomClick,
                     )

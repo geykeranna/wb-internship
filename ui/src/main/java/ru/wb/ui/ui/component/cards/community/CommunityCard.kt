@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.CommunityData
+import ru.wb.domain.model.CommunityItemData
 import ru.wb.ui.R
 import ru.wb.ui.ui.component.avatars.CommunityAvatar
 import ru.wb.ui.ui.component.utils.Constants.IMG_SIZE_COMMUNITY_AVATAR_SMALL
@@ -24,7 +24,7 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 fun CommunityCard(
-    communityData: CommunityData,
+    communityData: CommunityItemData,
     modifier: Modifier = Modifier,
     onAddClick: ((id: String) -> Unit)? = {}
 ) {

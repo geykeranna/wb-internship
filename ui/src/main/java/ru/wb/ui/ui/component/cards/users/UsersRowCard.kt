@@ -7,14 +7,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.UserData
+import ru.wb.domain.model.UserItemsData
 import ru.wb.ui.ui.component.cards.visitors.UserShortCard
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.noRippleClickable
 
 @Composable
 internal fun UsersRowCard(
-    itemsList: List<UserData>,
+    itemsList: List<UserItemsData>,
     modifier: Modifier = Modifier,
     onNavigate: (idUser: String) -> Unit = {},
 ) {

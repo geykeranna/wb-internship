@@ -14,7 +14,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.EventData
+import ru.wb.domain.model.EventItemData
 import ru.wb.ui.ui.component.avatars.EventAvatar
 import ru.wb.ui.ui.component.chips.TagsChipsEllipsis
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD
@@ -24,7 +24,7 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun EventCard(
-    eventData: EventData,
+    eventData: EventItemData,
     modifier: Modifier = Modifier,
     size: EventSize = EventSize.THIN,
     onNavigate: (id: String) -> Unit = {},

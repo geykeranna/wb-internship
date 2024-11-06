@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import ru.wb.ui.ui.screens.auth.onevent.name.AppointmentName
 import ru.wb.ui.ui.screens.auth.onevent.phone.AppointmentPhone
 import ru.wb.ui.ui.screens.auth.onevent.pin.AppointmentPin
-import ru.wb.ui.ui.screens.community.community.CommunityScreen
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
 import ru.wb.ui.ui.screens.events.main.MainEventsScreen
@@ -58,11 +57,11 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.COMMUNITY.route) {
-            CommunityScreen(
-                navController = navController
-            )
-        }
+//        composable(route = Screen.COMMUNITY.route) {
+//            CommunityScreen(
+//                navController = navController
+//            )
+//        }
 
         composable(route = Screen.COMMUNITY_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {

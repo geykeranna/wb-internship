@@ -15,6 +15,8 @@ data class UserData(
     val isShowCommunity: Boolean = true,
     val isShowEvent: Boolean = true,
     val enableNotification: Boolean = true,
+    val communities: List<CommunityItemData>? = null,
+    val events: List<EventItemData>? = null,
 ){
     companion object{
         val defaultObject = UserData(
@@ -29,6 +31,8 @@ data class UserData(
             description = "Ведущий специалист по подбору персонала в одной из крупнейших IT-компаний в ЕС.",
             location = "Moscow",
             tags = listOf("Python", "Backend", "Developer"),
+            communities = null,
+            events = null,
         )
     }
 }

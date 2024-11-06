@@ -1,5 +1,8 @@
 package ru.wb.repository.data.api.model
 
+import ru.wb.domain.model.CommunityItemData
+import ru.wb.domain.model.EventItemData
+
 internal data class User(
     val id: String,
     val icon: String? = null,
@@ -15,4 +18,6 @@ internal data class User(
     val isShowCommunity: Boolean = true,
     val isShowEvent: Boolean = true,
     val enableNotification: Boolean = true,
+    val communities: List<CommunityItemData>? = null,
+    val events: List<EventItemData>? = null,
 )

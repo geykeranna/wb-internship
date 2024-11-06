@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.ContentItems
+import ru.wb.domain.model.Content
 import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
 import ru.wb.ui.ui.component.cards.events.EventCardsColumnList
 import ru.wb.ui.ui.component.cards.events.EventCardsRowList
@@ -15,7 +15,7 @@ import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 
 @Composable
 internal fun MainViewByContent(
-    contentItem: ContentItems,
+    contentItem: Content,
     modifier: Modifier = Modifier,
     isFilter: Boolean = false,
     onNavigateToCommunityDetail: (id: String) -> Unit = {},

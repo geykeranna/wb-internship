@@ -5,5 +5,5 @@ import ru.wb.repository.data.api.model.Content
 internal data class ContentGetResponse(
     val limit: Int?,
     val offset: Int?,
-    val data: Content,
+    val data: List<Content>,
 )

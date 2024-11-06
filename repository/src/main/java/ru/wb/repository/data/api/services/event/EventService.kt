@@ -14,6 +14,5 @@ internal interface EventService {
     @GET("/event/{id}")
     suspend fun getEvent(
         @Path("id") id: String
-    )
-    : Event
+    ): Event
 }

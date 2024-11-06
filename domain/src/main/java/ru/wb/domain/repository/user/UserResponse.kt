@@ -1,11 +1,11 @@
 package ru.wb.domain.repository.user
 
-import ru.wb.domain.model.UserData
+import ru.wb.domain.model.UserItemsData
 
 data class UserResponse(
     val limit: Int?,
     val offset: Int?,
-    val data: List<UserData>,
+    val data: List<UserItemsData>,
 )
 
 enum class UserSubscribeStatusResponse{

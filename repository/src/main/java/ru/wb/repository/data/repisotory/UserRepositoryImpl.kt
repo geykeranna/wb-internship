@@ -14,6 +14,7 @@ import ru.wb.domain.repository.user.UsersGetRequest
 import ru.wb.repository.data.api.mappers.models.UserMapper
 import ru.wb.repository.data.api.mappers.request.UsersGetRequestMapper
 import ru.wb.repository.data.api.mappers.response.UserGetResponseMapper
+import ru.wb.repository.data.api.mappers.response.UserStatusGetResponseMapper
 import ru.wb.repository.data.api.services.user.UserService
 import ru.wb.repository.data.sharedpreferences.user.SharedPrefUserStorage
 
@@ -23,6 +24,7 @@ internal class UserRepositoryImpl(
     private val userMapper: UserMapper,
     private val userGetResponseMapper: UserGetResponseMapper,
     private val usersGetRequestMapper: UsersGetRequestMapper,
+    private val userStatusGetResponseMapper: UserStatusGetResponseMapper,
 ): UserRepository {
     override fun getUsers(request: UsersGetRequest?): Flow<LoadState<UserResponse>> {
         return flow {
@@ -160,12 +162,15 @@ internal class UserRepositoryImpl(
 
     override fun changeSubscriptionEventStatus(eventID: String): Flow<LoadState<UserSubscribeStatusResponse>> {
         return flow {
-            val response = api.setUserInEvent(eventId = eventID)
-            val status = when(response) {
-                true -> UserSubscribeStatusResponse.SUBSCRIBED
-                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            val id = sharedPrefStorage.getValue()
+            when {
+                id.isNotBlank() -> {
+                    val response = api.setUserInEvent(eventId = eventID, userId = id)
+                    val status = userStatusGetResponseMapper.transformToDomain(response)
+                    emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
+                }
+                else -> emit(LoadState.Empty)
             }
-            emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {
@@ -175,12 +180,15 @@ internal class UserRepositoryImpl(
 
     override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>> {
         return flow {
-            val response = api.setUserInCommunity(communityId = idCommunity)
-            val status = when(response) {
-                true -> UserSubscribeStatusResponse.SUBSCRIBED
-                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            val id = sharedPrefStorage.getValue()
+            when {
+                id.isNotBlank() -> {
+                    val response = api.setUserInCommunity(communityId = idCommunity, userId = id)
+                    val status = userStatusGetResponseMapper.transformToDomain(response)
+                    emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
+                }
+                else -> emit(LoadState.Empty)
             }
-            emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {
@@ -190,12 +198,15 @@ internal class UserRepositoryImpl(
 
     override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>> {
         return flow {
-            val response = api.getUserInCommunity(communityId = idCommunity)
-            val status = when(response) {
-                true -> UserSubscribeStatusResponse.SUBSCRIBED
-                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            val id = sharedPrefStorage.getValue()
+            when {
+                id.isNotBlank() -> {
+                    val response = api.getUserInCommunity(communityId = idCommunity, userId = id)
+                    val status = userStatusGetResponseMapper.transformToDomain(response)
+                    emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
+                }
+                else -> emit(LoadState.Empty)
             }
-            emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {
@@ -205,12 +216,15 @@ internal class UserRepositoryImpl(
 
     override fun getSubscriptionEventStatus(idEvent: String): Flow<LoadState<UserSubscribeStatusResponse>> {
         return flow {
-            val response = api.getUserInEvent(eventId = idEvent)
-            val status = when(response) {
-                true -> UserSubscribeStatusResponse.SUBSCRIBED
-                else -> UserSubscribeStatusResponse.NOT_SUBSCRIBED
+            val id = sharedPrefStorage.getValue()
+            when {
+                id.isNotBlank() -> {
+                    val response = api.getUserInEvent(eventId = idEvent, userId = id)
+                    val status = userStatusGetResponseMapper.transformToDomain(response)
+                    emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
+                }
+                else -> emit(LoadState.Empty)
             }
-            emit(LoadState.Success(status) as LoadState<UserSubscribeStatusResponse>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {

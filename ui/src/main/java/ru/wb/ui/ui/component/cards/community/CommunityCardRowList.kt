@@ -7,13 +7,13 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.CommunityData
+import ru.wb.domain.model.CommunityItemData
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.noRippleClickable
 
 @Composable
 internal fun CommunityCardRowList(
-    itemsList: List<CommunityData>,
+    itemsList: List<CommunityItemData>,
     modifier: Modifier = Modifier,
     onClick: ((id: String) -> Unit)? = {},
     onNavigate: (id: String) -> Unit = {},

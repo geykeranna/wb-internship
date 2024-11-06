@@ -5,9 +5,10 @@ import ru.wb.repository.data.api.mappers.Mapper
 import ru.wb.repository.data.api.model.Event
 
 internal class EventMapper(
-    private val userMapper: UserMapper,
+    private val userItemsMapper: UserItemsMapper,
+    private val eventItemMapper: EventItemMapper,
     private val locationMapper: LocationMapper,
-    private val communityMapper: CommunityMapper,
+    private val communityItemMapper: CommunityItemMapper,
 ) : Mapper<Event, EventData> {
     override fun transformToDomain(data: Event): EventData {
         return EventData(
@@ -20,10 +21,12 @@ internal class EventMapper(
             active = data.active,
             description = data.description,
             vacantSeat = data.vacantSeat,
-            usersList = data.usersList.map { userMapper.transformToDomain(it) },
-            manager = userMapper.transformToDomain(data.manager),
-            sponsor = communityMapper.transformToDomain(data.sponsor),
-            recommendation = data.recommendation.map { transformToDomain(it) },
+            usersList = data.usersList.map { userItemsMapper.transformToDomain(it) },
+            manager = data.manager?.let { userItemsMapper.transformToDomain(data.manager) },
+            sponsor = data.sponsor?.let { communityItemMapper.transformToDomain(it) },
+            recommendation = data.recommendation?.let { events ->
+                events.map { eventItem -> eventItemMapper.transformToDomain(eventItem) }
+            },
         )
     }
 
@@ -38,10 +41,12 @@ internal class EventMapper(
             active = data.active,
             description = data.description,
             vacantSeat = data.vacantSeat,
-            usersList = data.usersList.map { userMapper.transformToRepository(it) },
-            manager = userMapper.transformToRepository(data.manager),
-            sponsor = communityMapper.transformToRepository(data.sponsor),
-            recommendation = data.recommendation.map { transformToRepository(it) },
+            usersList = data.usersList.map { userItemsMapper.transformToRepository(it) },
+            manager = data.manager?.let { userItemsMapper.transformToRepository(it) },
+            sponsor = data.sponsor?.let { communityItemMapper.transformToRepository(it) },
+            recommendation = data.recommendation?.let { events ->
+                events.map { eventItem -> eventItemMapper.transformToRepository(eventItem) }
+            },
         )
     }
 }

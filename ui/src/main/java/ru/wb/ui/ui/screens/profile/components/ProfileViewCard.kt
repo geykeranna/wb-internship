@@ -10,8 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.CommunityData
-import ru.wb.domain.model.EventData
 import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.cards.LabeledCard
 import ru.wb.ui.ui.component.cards.community.CommunityCardRowList
@@ -24,8 +22,6 @@ import ru.wb.ui.ui.theme.AppTheme
 @Composable
 internal fun ProfileViewCard(
     userData: UserData,
-    eventData: List<EventData>,
-    communityData: List<CommunityData>,
     modifier: Modifier = Modifier,
     pageMode: ProfilePageMode = ProfilePageMode.VIEW_OUTSIDE,
     onBottomClick: () -> Unit = {},
@@ -43,7 +39,7 @@ internal fun ProfileViewCard(
             )
         }
 
-        if (eventData.isNotEmpty()) {
+        userData.events?.let { eventData ->
             item {
                 LabeledCard(
                     label = pageMode.eventLabelText,
@@ -59,7 +55,7 @@ internal fun ProfileViewCard(
             }
         }
 
-        if (communityData.isNotEmpty()) {
+        userData.communities?.let { communityData ->
             item {
                 LabeledCard(
                     label = pageMode.communityLabelText,

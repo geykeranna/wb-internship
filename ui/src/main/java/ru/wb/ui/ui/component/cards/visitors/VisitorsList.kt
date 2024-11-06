@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.UserData
+import ru.wb.domain.model.UserItemsData
 import ru.wb.ui.ui.component.avatars.UserAvatar
 import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR
 import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_AVATAR_ROW
@@ -27,7 +27,7 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun VisitorsList(
-    visitorsList: List<UserData>,
+    visitorsList: List<UserItemsData>,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
 ) {

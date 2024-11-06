@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.wb.domain.model.EventData
+import ru.wb.domain.model.EventItemData
 
 @Composable
 internal fun EventCardsColumnList(
-    itemsList: List<EventData>,
+    itemsList: List<EventItemData>,
     modifier: Modifier = Modifier,
     size: EventSize = EventSize.LARGE,
     onNavigate: (id: String) -> Unit = {},

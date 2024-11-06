@@ -13,7 +13,7 @@ internal class ContentGetResponseMapper(
         return ru.wb.domain.repository.common.ContentGetResponse(
             limit = data.limit,
             offset = data.offset,
-            data = contentMapper.transformToDomain(data.data)
+            data = data.data.map { contentMapper.transformToDomain(it) }
         )
     }
 
@@ -23,7 +23,7 @@ internal class ContentGetResponseMapper(
         return ContentGetResponse(
             limit = data.limit,
             offset = data.offset,
-            data = contentMapper.transformToRepository(data.data),
+            data = data.data.map { contentMapper.transformToRepository(it) },
         )
     }
 }

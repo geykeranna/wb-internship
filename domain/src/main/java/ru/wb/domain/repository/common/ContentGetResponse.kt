@@ -5,5 +5,5 @@ import ru.wb.domain.model.Content
 data class ContentGetResponse(
     val limit: Int?,
     val offset: Int?,
-    val data: Content,
+    val data: List<Content>,
 )

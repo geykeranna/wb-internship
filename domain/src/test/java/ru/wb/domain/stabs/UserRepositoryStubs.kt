@@ -3,6 +3,7 @@ package ru.wb.domain.stabs
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
+import ru.wb.domain.model.UserItemsData
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserRepository
 import ru.wb.domain.repository.user.UserResponse
@@ -21,11 +22,19 @@ internal class UserRepositoryStubs: UserRepository {
         socialMedia = listOf()
     )
 
+    private val userItemData = UserItemsData(
+        id = "1",
+        name = "Name",
+        icon = null,
+        story = false,
+        status = false,
+    )
+
     override fun getUsers(request: UsersGetRequest?): Flow<LoadState<UserResponse>> {
         val response = UserResponse(
             limit = 10,
             offset = 0,
-            data = List(10) { userData }
+            data = List(10) { userItemData }
         )
         return flowOf(LoadState.Success(response))
     }

@@ -37,21 +37,25 @@ internal interface UserService {
 
     @POST("/user/event/{id}")
     suspend fun setUserInEvent(
-        @Path("id") eventId: String
+        @Path("event_id") eventId: String,
+        @Path("user_id") userId: String,
     ): Boolean
 
     @GET("/user/event/{id}")
     suspend fun getUserInEvent(
-        @Path("id") eventId: String
+        @Path("event_id") eventId: String,
+        @Path("user_id") userId: String,
     ): Boolean
 
     @POST("/user/community/{id}")
     suspend fun setUserInCommunity(
-        @Path("id") communityId: String
+        @Path("community_id") communityId: String,
+        @Path("user_id") userId: String,
     ): Boolean
 
     @GET("/user/community/{id}")
     suspend fun getUserInCommunity(
-        @Path("id") communityId: String
+        @Path("community_id") communityId: String,
+        @Path("user_id") userId: String,
     ): Boolean
 }

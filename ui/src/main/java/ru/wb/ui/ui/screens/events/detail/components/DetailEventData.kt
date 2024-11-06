@@ -9,9 +9,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.wb.domain.model.EventData
+import ru.wb.ui.R
 import ru.wb.ui.ui.component.avatars.CommunityAvatar
 import ru.wb.ui.ui.component.avatars.UserAvatar
 import ru.wb.ui.ui.component.cards.LabeledCard
@@ -59,17 +61,19 @@ internal fun DetailEventData(
             )
         }
 
-        item {
-            OwnerCard(
-                modifier = Modifier.noRippleClickable { onNavigateUserScreen(detailInfo.manager.id) },
-                owner = Owner.USER,
-                title = detailInfo.manager.name,
-                description = detailInfo.manager.description
-            ) {
-                UserAvatar(
-                    src = detailInfo.manager.icon,
-                    sizeAvatar = AvatarsSize.SQUARE,
-                )
+        detailInfo.manager?.let { userData ->
+            item {
+                OwnerCard(
+                    modifier = Modifier.noRippleClickable { onNavigateUserScreen(userData.id) },
+                    owner = Owner.USER,
+                    title = userData.name,
+                    description = userData.description
+                ) {
+                    UserAvatar(
+                        src = userData.icon,
+                        sizeAvatar = AvatarsSize.SQUARE,
+                    )
+                }
             }
         }
 
@@ -84,7 +88,7 @@ internal fun DetailEventData(
         if (detailInfo.usersList.isNotEmpty()) {
             item {
                 LabeledCard(
-                    label = "Пойдут на встречу"
+                    label = stringResource(id = R.string.text_will_go_on_meet)
                 ) {
                     VisitorsList(
                         modifier = Modifier.fillMaxWidth(),
@@ -95,30 +99,32 @@ internal fun DetailEventData(
             }
         }
 
-        item {
-            OwnerCard(
-                modifier = Modifier.noRippleClickable { onNavigateCommunityScreen(detailInfo.sponsor.id) },
-                owner = Owner.COMMUNITY,
-                title = detailInfo.sponsor.label,
-                description = detailInfo.sponsor.description
-            ) {
-                CommunityAvatar(
-                    src = detailInfo.sponsor.icon,
-                    size = CommunitySize.SMALL,
-                    isVerified = detailInfo.sponsor.isVerified
-                )
+        detailInfo.sponsor?.let { item ->
+            item {
+                OwnerCard(
+                    modifier = Modifier.noRippleClickable { onNavigateCommunityScreen(item.id) },
+                    owner = Owner.COMMUNITY,
+                    title = item.label,
+                    description = item.description
+                ) {
+                    CommunityAvatar(
+                        src = item.icon,
+                        size = CommunitySize.SMALL,
+                        isVerified = item.isVerified
+                    )
+                }
             }
         }
 
-        if (detailInfo.recommendation.isNotEmpty()) {
+        if (!detailInfo.recommendation.isNullOrEmpty()) {
             item {
                 LabeledCard(
-                    label = "Другие встречи сообщества"
+                    label = stringResource(id = R.string.text_another_meet_in_community)
                 ) {
                     EventCardsColumnList(
                         modifier = Modifier,
                         onNavigate = onNavigateEventScreen,
-                        itemsList = detailInfo.recommendation,
+                        itemsList = detailInfo.recommendation ?: listOf(),
                         size = EventSize.THIN,
                     )
                 }

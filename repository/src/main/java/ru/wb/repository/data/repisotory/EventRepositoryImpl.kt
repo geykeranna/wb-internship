@@ -23,7 +23,7 @@ internal class EventRepositoryImpl(
 ): EventRepository {
     override fun getEvents(
         request: EventGetRequest?,
-    ): Flow<LoadState<EventGetResponse>>{
+    ): Flow<LoadState<EventGetResponse>> {
         return flow {
             val requestData = request?.let { getRequestMapper.transformToRepository(it) }
             val response = getResponseMapper.transformToDomain(api.getEvents(requestData))
