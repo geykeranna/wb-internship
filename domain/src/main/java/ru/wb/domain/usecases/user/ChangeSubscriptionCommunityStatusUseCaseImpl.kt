@@ -8,7 +8,7 @@ import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 internal class ChangeSubscriptionCommunityStatusUseCaseImpl(
     private val repository: UserRepository
 ) : ChangeSubscriptionCommunityStatusUseCase {
-    override fun execute(idCommunity: String) : Flow<LoadState<UserSubscribeStatusResponse>> {
-        return repository.changeSubscriptionCommunityStatus(idCommunity = idCommunity)
+    override fun execute(communityId: String) : Flow<LoadState<UserSubscribeStatusResponse>> {
+        return repository.changeSubscriptionCommunityStatus(idCommunity = communityId)
     }
 }

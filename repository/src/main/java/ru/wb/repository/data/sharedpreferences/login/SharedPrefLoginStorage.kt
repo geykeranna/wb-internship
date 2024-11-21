@@ -11,9 +11,9 @@ internal class SharedPrefLoginStorage(
 ) : Storage {
     private val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME_TOKEN, Context.MODE_PRIVATE)
 
-    override fun saveValue(token: String): Boolean {
+    override fun saveValue(value: String): Boolean {
         try {
-            sharedPreferences.edit().putString(KEY_TOKEN, token).apply()
+            sharedPreferences.edit().putString(KEY_TOKEN, value).apply()
             return true
         } catch (error: Exception) {
             return false

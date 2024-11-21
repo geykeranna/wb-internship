@@ -17,11 +17,11 @@ interface UserRepository {
 
     fun getNameUser(): Flow<LoadState<String>>
 
-    fun setNameUser(name: String): Flow<LoadState<UserData>>
+    fun setNameUser(name: String): Flow<LoadState<Boolean>>
 
     fun getPhoneUser(): Flow<LoadState<String>>
 
-    fun setPhoneUser(phone: String): Flow<LoadState<UserData>>
+    fun setPhoneUser(phone: String): Flow<LoadState<Boolean>>
 
     fun deleteUser(): Flow<LoadState<Boolean>>
 

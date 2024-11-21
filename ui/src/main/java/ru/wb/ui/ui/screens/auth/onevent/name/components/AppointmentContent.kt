@@ -10,7 +10,7 @@ import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentTitle
 
 @Composable
 internal fun AppointmentContent(
-    eventLabel: String,
+    description: String,
     value: String,
     modifier: Modifier = Modifier,
     title: String  = "",
@@ -24,7 +24,7 @@ internal fun AppointmentContent(
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         AppointmentTitle(
-            eventLabel = eventLabel,
+            description = description,
             title = title,
             modifier = Modifier,
             onCloseClick = onBackClick,

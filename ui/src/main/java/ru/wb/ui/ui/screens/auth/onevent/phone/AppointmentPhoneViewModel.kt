@@ -42,6 +42,30 @@ internal class AppointmentPhoneViewModel(
 
     fun getValidationFlow(): StateFlow<Boolean> = validationStatus
 
+    sealed class Event : BaseEvent() {
+        data object OnStartLoading : Event()
+        data object OnEnterClick : Event()
+        class OnSelectedPhoneCountryCode(val countryCodes: CountryCodes) : Event()
+        class OnChangeValue(val inputValue: String) : Event()
+    }
+
+    override fun obtainEvent(event: Event) {
+        when (event) {
+            is Event.OnStartLoading -> {
+                fetchData()
+            }
+            is Event.OnEnterClick -> {
+                sendPin()
+                setUserPhone()
+            }
+            is Event.OnSelectedPhoneCountryCode -> {
+                changeSelectedCountryCode(newCountryCodes = event.countryCodes)
+            }
+            is Event.OnChangeValue -> {
+                onChangeValue(newValue = event.inputValue)
+            }
+        }
+    }
 
     private fun fetchData() = viewModelScope.launch {
         getCountryCodesListUseCase.execute().collect { options ->
@@ -76,30 +100,5 @@ internal class AppointmentPhoneViewModel(
 
     private fun sendPin() = viewModelScope.launch {
         sendPinCodeOnPhoneUseCase.execute(inputValue.value)
-    }
-
-    sealed class Event : BaseEvent() {
-        data object OnStartLoading : Event()
-        data object OnEnterClick : Event()
-        class OnSelectedPhoneCountryCode(val countryCodes: CountryCodes) : Event()
-        class OnChangeValue(val inputValue: String) : Event()
-    }
-
-    override fun obtainEvent(event: Event) {
-        when (event) {
-            is Event.OnStartLoading -> {
-                fetchData()
-            }
-            is Event.OnEnterClick -> {
-                sendPin()
-                setUserPhone()
-            }
-            is Event.OnSelectedPhoneCountryCode -> {
-                changeSelectedCountryCode(newCountryCodes = event.countryCodes)
-            }
-            is Event.OnChangeValue -> {
-                onChangeValue(newValue = event.inputValue)
-            }
-        }
     }
 }

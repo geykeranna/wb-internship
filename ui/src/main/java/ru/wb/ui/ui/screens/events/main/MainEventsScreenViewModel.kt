@@ -8,6 +8,7 @@ import ru.wb.domain.model.Content
 import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 import ru.wb.domain.usecases.common.GetContentUseCase
+import ru.wb.domain.usecases.login.CheckAuthStateUseCase
 import ru.wb.domain.usecases.user.ChangeSubscriptionCommunityStatusUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
@@ -15,6 +16,7 @@ import ru.wb.ui.ui.base.BaseViewModel
 import ru.wb.ui.ui.component.utils.defaultChipsList
 
 internal class MainEventsScreenViewModel(
+    private val getAuthState: CheckAuthStateUseCase,
     private val getContent: GetContentUseCase,
     private val changeSubscribeState: ChangeSubscriptionCommunityStatusUseCase,
 ) : BaseViewModel<MainEventsScreenViewModel.Event>() {
@@ -35,9 +37,14 @@ internal class MainEventsScreenViewModel(
     private val _stateContent = MutableStateFlow(BaseState.EMPTY)
     private val stateContent: StateFlow<BaseState> = _stateContent
 
+    private val _authState = MutableStateFlow(false)
+    private val authState: StateFlow<Boolean> = _authState
+
     init {
         obtainEvent(Event.OnLoadingStarted)
     }
+
+    fun getAuthStateFlow(): StateFlow<Boolean> = authState
 
     fun getContentDataFlow(): StateFlow<List<Content>> = content
 

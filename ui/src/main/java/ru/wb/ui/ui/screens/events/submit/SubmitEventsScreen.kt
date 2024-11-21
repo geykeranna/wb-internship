@@ -50,7 +50,7 @@ internal fun SubmitEventsScreen(
         ) {
             AppointmentTitle(
                 modifier = Modifier,
-                eventLabel = label,
+                description = label,
                 title = stringResource(id = R.string.label_enter_on_meet_ended),
                 isEnded = true,
                 textColor = AppTheme.colors.neutralColorBackground,

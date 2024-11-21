@@ -13,7 +13,7 @@ import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentBottomButtons
 
 @Composable
 internal fun AppointmentCard(
-    eventLabel: String,
+    description: String,
     selectedPhoneCountryCode: CountryCodes,
     phoneCountryCodeList: List<CountryCodes>,
     inputValue: String,
@@ -33,7 +33,7 @@ internal fun AppointmentCard(
         item {
             AppointmentContent(
                 modifier = Modifier,
-                eventLabel = eventLabel,
+                description = description,
                 inputValue = inputValue,
                 selectedPhoneCountryCode = selectedPhoneCountryCode,
                 phoneCountryCodeList = phoneCountryCodeList,

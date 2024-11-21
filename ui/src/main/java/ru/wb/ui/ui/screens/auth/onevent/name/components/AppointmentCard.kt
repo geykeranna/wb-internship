@@ -12,7 +12,7 @@ import ru.wb.ui.ui.screens.auth.onevent.components.AppointmentBottomButtons
 
 @Composable
 internal fun AppointmentCard(
-    eventLabel: String,
+    description: String,
     value: String,
     modifier: Modifier = Modifier,
     title: String  = "",
@@ -29,7 +29,7 @@ internal fun AppointmentCard(
         item {
             AppointmentContent(
                 modifier = Modifier,
-                eventLabel = eventLabel,
+                description = description,
                 value = value,
                 title = title,
                 disableEnter = disableEnter,

@@ -6,5 +6,5 @@ import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.repository.user.UserSubscribeStatusResponse
 
 interface ChangeSubscriptionCommunityStatusUseCase {
-    fun execute(idCommunity: String) : Flow<LoadState<UserSubscribeStatusResponse>>
+    fun execute(communityId: String) : Flow<LoadState<UserSubscribeStatusResponse>>
 }

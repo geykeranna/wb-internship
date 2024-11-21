@@ -30,7 +30,7 @@ internal fun DeleteProfileViewScreen(
     ) {
         item{
             AppointmentTitle(
-                eventLabel = stringResource(id = R.string.text_on_delete_mess),
+                description = stringResource(id = R.string.text_on_delete_mess),
                 title = stringResource(id = R.string.text_delete_message),
                 modifier = Modifier,
                 onCloseClick = { navController.popBackStack() },

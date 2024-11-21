@@ -21,7 +21,7 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun AppointmentTitle(
-    eventLabel: String,
+    description: String,
     modifier: Modifier = Modifier,
     title: String = "",
     textColor: Color = AppTheme.colors.neutralColorFont,
@@ -57,7 +57,7 @@ internal fun AppointmentTitle(
         Text(
             modifier = Modifier,
             style = AppTheme.typography.subheading3,
-            text = eventLabel,
+            text = description,
             color = textColor,
         )
     }

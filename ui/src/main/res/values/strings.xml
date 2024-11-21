@@ -34,6 +34,8 @@
     <string name="label_interesting_description">Выберите интересы, чтобы мы рекомендовали полезные встречи</string>
     <string name="label_my_meets">Мои встречи</string>
     <string name="label_enter_on_meet">Вход и запись на встречу</string>
+    <string name="label_enter_on_community">Вход и подписка на сообщество</string>
+    <string name="label_auth">Авторизация</string>
     <string name="label_enter_on_meet_ended">Вы записались на встречу</string>
     <string name="label_show_my_community">Показывать мои сообщества</string>
     <string name="label_show_my_events">Показывать мои встречи</string>

@@ -57,12 +57,6 @@ fun NavGraph(
             }
         }
 
-//        composable(route = Screen.COMMUNITY.route) {
-//            CommunityScreen(
-//                navController = navController
-//            )
-//        }
-
         composable(route = Screen.COMMUNITY_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
@@ -136,46 +130,39 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.APPOINTMENT_NAME.route + "/{eventId}/{label}") { stackEntry ->
-            stackEntry.arguments?.getString("eventId")?.let { eventId ->
-                val label = stackEntry.arguments?.getString("label")
-                when {
-                    !label.isNullOrEmpty() -> {
-                        AppointmentName(
-                            idEvent = eventId,
-                            label = label,
-                            navController = navController,
-                        )
-                    }
-                }
+        composable(route = Screen.EDIT_USER.route) { stackEntry ->
+            stackEntry.arguments?.getString("data")?.let { data ->
+                UsersListByEventScreen(
+                    data = data,
+                    navController = navController,
+                )
             }
         }
-        composable(route = Screen.APPOINTMENT_PIN.route + "/{eventId}/{label}") { stackEntry ->
-            stackEntry.arguments?.getString("eventId")?.let { eventId ->
-                val label = stackEntry.arguments?.getString("label")
-                when {
-                    !label.isNullOrEmpty() -> {
-                        AppointmentPin(
-                            idEvent = eventId,
-                            label = label,
-                            navController = navController,
-                        )
-                    }
-                }
+
+        composable(route = Screen.APPOINTMENT_PHONE.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentPhone(
+                    options = options,
+                    navController = navController,
+                )
             }
         }
-        composable(route = Screen.APPOINTMENT_PHONE.route + "/{eventId}/{label}") { stackEntry ->
-            stackEntry.arguments?.getString("eventId")?.let { eventId ->
-                val label = stackEntry.arguments?.getString("label")
-                when {
-                    !label.isNullOrEmpty() -> {
-                        AppointmentPhone(
-                            idEvent = eventId,
-                            label = label,
-                            navController = navController,
-                        )
-                    }
-                }
+
+        composable(route = Screen.APPOINTMENT_PIN.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentPin(
+                    options = options,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.APPOINTMENT_NAME.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentName(
+                    navController = navController,
+                    options = options
+                )
             }
         }
     }

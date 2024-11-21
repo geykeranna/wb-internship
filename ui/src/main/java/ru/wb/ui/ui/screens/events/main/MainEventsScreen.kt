@@ -12,6 +12,7 @@ import org.koin.androidx.compose.koinViewModel
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.TopBarMain
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.screens.auth.onevent.components.appointmentGetOptionsByParams
 import ru.wb.ui.ui.screens.events.main.components.MainEventScreenContent
 import ru.wb.ui.ui.screens.events.main.MainEventsScreenViewModel.Event
 import ru.wb.ui.ui.theme.AppTheme
@@ -27,6 +28,7 @@ internal fun MainEventsScreen(
     val filteredContent by viewModel.getContentDataFlow().collectAsStateWithLifecycle()
     val staticContent by viewModel.getLabelContentDataFlow().collectAsStateWithLifecycle()
     val selectedChips by viewModel.getChipsFlow().collectAsStateWithLifecycle()
+    val authState by viewModel.getAuthStateFlow().collectAsStateWithLifecycle()
     val allChipsList = viewModel.getAllChipsList()
 
     Scaffold(
@@ -38,7 +40,16 @@ internal fun MainEventsScreen(
                     .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
                 inputText = search,
                 onChangeValue = { input -> viewModel.obtainEvent(Event.OnSearch(input)) },
-                onRightClick =  { navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)}
+                onRightClick =  {
+                    when {
+                        authState -> navController.navigate(Screen.PROFILE_VIEW_INSIDE_DETAIL.route)
+                        else -> navController.navigate(
+                            Screen.APPOINTMENT_PHONE.route + appointmentGetOptionsByParams(
+                                "Авторизация", "user"
+                            )
+                        )
+                    }
+                }
             )
         },
         containerColor = AppTheme.colors.neutralColorBackground

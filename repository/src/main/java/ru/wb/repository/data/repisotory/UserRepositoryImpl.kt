@@ -45,8 +45,10 @@ internal class UserRepositoryImpl(
             var response: UserData
             id?.let { idUser ->
                 response = userMapper.transformToDomain(api.getUser(idUser))
+                sharedPrefStorage.saveUserData(phone = response.phone, name = response.name)
                 emit(LoadState.Success(response) as LoadState<UserData>)
             }
+            // при null id возвращается локальный пользователь из бд(бд еще нет)
             emit(LoadState.Success(UserData.defaultObject))
         }.onStart {
             emit(LoadState.Loading)
@@ -94,7 +96,7 @@ internal class UserRepositoryImpl(
 
     override fun getNameUser(): Flow<LoadState<String>> {
         return flow {
-            val userName = UserData.defaultObject.name
+            val userName = sharedPrefStorage.getName()
             emit(LoadState.Success(userName) as LoadState<String>)
         }.onStart {
             emit(LoadState.Loading)
@@ -103,16 +105,10 @@ internal class UserRepositoryImpl(
         }
     }
 
-    override fun setNameUser(name: String): Flow<LoadState<UserData>> {
+    override fun setNameUser(name: String): Flow<LoadState<Boolean>> {
         return flow {
-            val user = api.getUser("local").copy(name = name)
-            api.putUser(
-                id = "local",
-                userData = user
-            )?.let {
-                val userData = userMapper.transformToDomain(it)
-                emit(LoadState.Success(userData) as LoadState<UserData>)
-            }
+            val putStatus = sharedPrefStorage.saveUserData(name = name)
+            emit(LoadState.Success(putStatus) as LoadState<Boolean>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {
@@ -122,7 +118,7 @@ internal class UserRepositoryImpl(
 
     override fun getPhoneUser(): Flow<LoadState<String>> {
         return flow {
-            val userPhone = UserData.defaultObject.phone
+            val userPhone = sharedPrefStorage.getPhone()
             emit(LoadState.Success(userPhone) as LoadState<String>)
         }.onStart {
             emit(LoadState.Loading)
@@ -131,16 +127,10 @@ internal class UserRepositoryImpl(
         }
     }
 
-    override fun setPhoneUser(phone: String): Flow<LoadState<UserData>> {
+    override fun setPhoneUser(phone: String): Flow<LoadState<Boolean>> {
         return flow {
-            val user = api.getUser("local").copy(phone = phone)
-            api.putUser(
-                id = "local",
-                userData = user
-            )?.let {
-                val userData = userMapper.transformToDomain(it)
-                emit(LoadState.Success(userData) as LoadState<UserData>)
-            }
+            val putStatus = sharedPrefStorage.saveUserData(phone = phone)
+            emit(LoadState.Success(putStatus) as LoadState<Boolean>)
         }.onStart {
             emit(LoadState.Loading)
         }.catch {
