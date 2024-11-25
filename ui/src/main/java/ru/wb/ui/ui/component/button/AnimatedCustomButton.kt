@@ -24,7 +24,7 @@ internal fun AnimatedCustomButton(
     type: ButtonType = ButtonType.DEFAULT,
     disabled: Boolean = false,
     label: String = "",
-    labelStyle: TextStyle = AppTheme.typography.subheading2,
+    labelStyle: TextStyle = AppTheme.typography.subheading4,
     onClick: () -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }

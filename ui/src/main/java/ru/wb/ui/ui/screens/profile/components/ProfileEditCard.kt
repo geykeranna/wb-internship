@@ -3,64 +3,104 @@ package ru.wb.ui.ui.screens.profile.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.wb.domain.model.SocialMedia
 import ru.wb.ui.R
-import ru.wb.ui.ui.component.avatars.ProfileAvatar
-import ru.wb.ui.ui.component.avatars.ProfileSize
-import ru.wb.ui.ui.component.button.AnimatedCustomButton
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_BUTTON_PROFILE_SCREEN
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_BIG_COMMON
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_AVATAR_PROFILE_SCREEN
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_BUTTON_PROFILE_SCREEN
-import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
+import ru.wb.ui.ui.component.cards.LabeledCard
+import ru.wb.ui.ui.component.chips.ChipsGroup
+import ru.wb.ui.ui.component.chips.ChipsSize
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.component.utils.noRippleClickable
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun ProfileEditCard(
-    state: Boolean,
-    formField: ScreenState,
+    allChipsList: List<String>,
+    allSocialMedia: List<SocialMedia>,
+    formField: ProfileFormState,
     modifier: Modifier = Modifier,
-    onValueChange: (key: Int, value: String) -> Unit = {_, _ -> },
-    onClick: () -> Unit = {},
+    selectedChips: List<String> = listOf(),
+    onChipLastItemClick: () -> Unit = {},
+    onDeleteButtonClick: () -> Unit = {},
+    onSelectChip: (newValue: String) -> Unit = {},
+    onValueChange: (key: Int, value: Any) -> Unit = {_, _ -> },
 ) {
+    val lastItem = stringResource(id = R.string.text_add_with_plus)
+
     LazyColumn (
         modifier = modifier
-            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_BIG_COMMON.dp)
-            .padding(top = VERTICAL_PADDING_CONTENT_DETAIL_COMMON.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
+            .fillMaxSize()
+            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+        verticalArrangement = Arrangement.spacedBy(40.dp),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         item {
-            ProfileAvatar(
-                modifier = Modifier.padding(top = VERTICAL_PADDING_AVATAR_PROFILE_SCREEN.dp),
-                size = ProfileSize.NORMAL,
-                isFloatingVisible = true
-            )
-        }
-
-        item {
-            NewUserForm(
+            ProfileEditUserForm(
                 formFields = formField,
                 onValueChange = onValueChange
             )
         }
 
         item {
-            AnimatedCustomButton(
+            LabeledCard(
+                label = stringResource(id = R.string.label_interesting)
+            ) {
+                ChipsGroup(
+                    data = allChipsList + lastItem,
+                    size = ChipsSize.NORMAL,
+                    selectedList = selectedChips,
+                    onChangeSelect = { newValue ->
+                        when(newValue){
+                            lastItem -> onChipLastItemClick()
+                            else -> onSelectChip(newValue)
+                        }
+                    },
+                )
+            }
+        }
+
+        if (allSocialMedia.isNotEmpty()) {
+            item {
+                LabeledCard(
+                    label = stringResource(id = R.string.label_socials)
+                ) {
+                    ProfileEditSocialMediaForm(
+                        socialMedia = allSocialMedia,
+                        onChangeValue = {index, text ->
+                            onValueChange(5, Pair(index, text))
+                        },
+                    )
+                }
+            }
+        }
+
+        item {
+            ProfileEditSettingsValue(
+                modifier = Modifier.fillMaxWidth(),
+                formField = formField,
+                onValueChange = onValueChange,
+            )
+        }
+
+        item {
+            Text(
                 modifier = Modifier
+                    .padding(top = 20.dp)
                     .fillMaxWidth()
-                    .padding(top = VERTICAL_PADDING_BUTTON_PROFILE_SCREEN.dp)
-                    .height(HEIGHT_BUTTON_PROFILE_SCREEN.dp),
-                label = stringResource(R.string.label_button_save),
-                onClick = onClick,
-                disabled = !state
+                    .noRippleClickable { onDeleteButtonClick() },
+                color = AppTheme.colors.accentError,
+                maxLines = 1,
+                style = AppTheme.typography.primary,
+                text = stringResource(id = R.string.label_delete_profile),
+                textAlign = TextAlign.Center,
             )
         }
     }

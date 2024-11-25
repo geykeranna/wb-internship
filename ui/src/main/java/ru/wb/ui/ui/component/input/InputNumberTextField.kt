@@ -1,9 +1,9 @@
 package ru.wb.ui.ui.component.input
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -30,57 +30,76 @@ import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun InputNumberTextField(
-    phone: String,
+    input: String,
     selectedPhoneCountryCode: CountryCodes,
     modifier: Modifier = Modifier,
-    onChange: (value: String) -> Unit = {},
+    isAccent: Boolean = false,
+    disable: Boolean = false,
+    disableEnter: Boolean = false,
+    isInvalid: Boolean = false,
+    invalidMessage: String = "",
+    isByFullPlaceholder: Boolean = false,
     onEnterClick: () -> Unit = {},
+    onChange: (value: String) -> Unit = {},
 ) {
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+        when {
+            isAccent -> focusRequester.requestFocus()
+        }
+    }
+    val backgroundColor = when {
+        isInvalid -> AppTheme.colors.neutralColorInvalidBackground
+        else -> AppTheme.colors.neutralColorSecondaryBackground
     }
 
-    BasicTextField(
+    Column(
         modifier = modifier
-            .focusRequester(focusRequester),
-        value = phone,
-        cursorBrush = SolidColor(Color.Transparent),
-        onValueChange = {
-            val value = it
-                .replace("\\D", "")
-                .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
-            onChange(value)
-        },
-        textStyle = AppTheme.typography.bodyText1.copy(
-            color = AppTheme.colors.neutralColorFont
-        ),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.NumberPassword,
-            imeAction = ImeAction.Send
-        ),
-        keyboardActions = KeyboardActions(
-            onSend = { onEnterClick() },
-        ),
-        visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
-        decorationBox = { innerTextField ->
-            Row(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
-                    .fillMaxWidth()
-                    .background(AppTheme.colors.neutralColorSecondaryBackground)
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (phone.isEmpty()){
-                    Text(
-                        text = selectedPhoneCountryCode.mask,
-                        style = AppTheme.typography.bodyText1,
-                        color = AppTheme.colors.neutralColorDisabled
-                    )
-                }
-                innerTextField()
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.Start,
+    ) {
+        BasicTextField(
+            modifier = Modifier
+                .clip(RoundedCornerShape(CORNER_RADIUS_IN_NUMBER_INPUT_FIELD.dp))
+                .background(backgroundColor)
+                .focusRequester(focusRequester),
+            value = input,
+            enabled = !disable,
+            cursorBrush = SolidColor(Color.Transparent),
+            onValueChange = { text ->
+                val value = text
+                    .filter { it.isDigit() }
+                    .take(selectedPhoneCountryCode.mask.count { num -> num == CHAR_IN_MASK_FOR_NUMBER })
+                onChange(value)
+            },
+            textStyle = AppTheme.typography.regular.copy(
+                color = AppTheme.colors.neutralColorFont
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.NumberPassword,
+                imeAction = ImeAction.Send
+            ),
+            keyboardActions = KeyboardActions(
+                onSend = { if(disableEnter) Unit else onEnterClick() },
+            ),
+            visualTransformation = PhoneNumberVisualTransformation(mask = selectedPhoneCountryCode.mask),
+            decorationBox = { innerTextField ->
+                DecorationBoxNumberTextField(
+                    value = input,
+                    placeholder = "${
+                        if(isByFullPlaceholder) { selectedPhoneCountryCode.countryCode } else ""
+                    } ${selectedPhoneCountryCode.mask}",
+                    innerTextField = innerTextField
+                )
             }
+        )
+        if(isInvalid && invalidMessage.isNotEmpty()) {
+            Text(
+                text = invalidMessage,
+                style = AppTheme.typography.secondary,
+                color = AppTheme.colors.neutralColorInvalidText,
+            )
         }
-    )
+    }
 }

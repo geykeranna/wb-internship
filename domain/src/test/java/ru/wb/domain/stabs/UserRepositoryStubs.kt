@@ -3,14 +3,18 @@ package ru.wb.domain.stabs
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.wb.domain.model.UserData
-import ru.wb.domain.repository.UserRepository
-import ru.wb.domain.repository.model.UsersGetRequest
+import ru.wb.domain.model.UserItemsData
+import ru.wb.domain.model.components.LoadState
+import ru.wb.domain.repository.user.UserRepository
+import ru.wb.domain.repository.user.UserResponse
+import ru.wb.domain.repository.user.UserSubscribeStatusResponse
+import ru.wb.domain.repository.user.UsersGetRequest
+import kotlin.random.Random
 
 internal class UserRepositoryStubs: UserRepository {
     private val userData = UserData(
         id = "1",
-        firstName = "Name",
-        lastName = null,
+        name = "Name",
         icon = null,
         story = false,
         status = false,
@@ -18,18 +22,96 @@ internal class UserRepositoryStubs: UserRepository {
         socialMedia = listOf()
     )
 
-    override fun getUsers(data: UsersGetRequest?): Flow<List<UserData>> {
-        data?.limit?.let {
-            return flowOf(List(it) { userData })
-        }
-        return flowOf(listOf(userData))
+    private val userItemData = UserItemsData(
+        id = "1",
+        name = "Name",
+        icon = null,
+        story = false,
+        status = false,
+    )
+
+    override fun getUsers(request: UsersGetRequest?): Flow<LoadState<UserResponse>> {
+        val response = UserResponse(
+            limit = 10,
+            offset = 0,
+            data = List(10) { userItemData }
+        )
+        return flowOf(LoadState.Success(response))
     }
 
-    override fun getUser(id: String) = flowOf(userData)
+    override fun getUser(id: String?): Flow<LoadState<UserData>> {
+        return flowOf(LoadState.Success(userData))
+    }
 
-    override fun putUser(userData: UserData) = flowOf(true)
+    override fun getNameUser(): Flow<LoadState<String>> {
+        return flowOf(LoadState.Success("Name"))
+    }
 
-    override fun postUser(userData: UserData) = flowOf(true)
+    override fun setNameUser(name: String): Flow<LoadState<UserData>> {
+        return flowOf(LoadState.Success(userData))
+    }
 
-    override fun handleGoingEvent(eventID: String) = flowOf(true)
+    override fun getPhoneUser(): Flow<LoadState<String>> {
+        return flowOf(LoadState.Success("+79099099900"))
+    }
+
+    override fun setPhoneUser(phone: String): Flow<LoadState<UserData>> {
+        return flowOf(LoadState.Success(userData))
+    }
+
+    override fun getUserAuth(): Flow<LoadState<String?>> {
+        return flowOf(LoadState.Success(null))
+    }
+
+    override fun putUser(userData: UserData): Flow<LoadState<UserData?>>{
+        return flowOf(LoadState.Success(userData))
+    }
+
+    override fun postUser(userData: UserData): Flow<LoadState<UserData?>> {
+        return flowOf(LoadState.Success(userData))
+    }
+
+    override fun deleteUser(): Flow<LoadState<Boolean>> {
+        return flowOf(LoadState.Success(data = false))
+    }
+
+    override fun changeSubscriptionEventStatus(eventID: String): Flow<LoadState<UserSubscribeStatusResponse>> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> LoadState.Success(UserSubscribeStatusResponse.SUBSCRIBED)
+                else -> LoadState.Success(UserSubscribeStatusResponse.NOT_SUBSCRIBED)
+            }
+        )
+    }
+
+    override fun changeSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> LoadState.Success(UserSubscribeStatusResponse.SUBSCRIBED)
+                else -> LoadState.Success(UserSubscribeStatusResponse.NOT_SUBSCRIBED)
+            }
+        )
+    }
+
+    override fun getSubscriptionCommunityStatus(idCommunity: String): Flow<LoadState<UserSubscribeStatusResponse>> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> LoadState.Success(UserSubscribeStatusResponse.SUBSCRIBED)
+                else -> LoadState.Success(UserSubscribeStatusResponse.NOT_SUBSCRIBED)
+            }
+        )
+    }
+
+    override fun getSubscriptionEventStatus(idEvent: String): Flow<LoadState<UserSubscribeStatusResponse>> {
+        val random: Boolean = Random.nextBoolean()
+        return flowOf(
+            when(random) {
+                true -> LoadState.Success(UserSubscribeStatusResponse.SUBSCRIBED)
+                else -> LoadState.Success(UserSubscribeStatusResponse.NOT_SUBSCRIBED)
+            }
+        )
+    }
 }

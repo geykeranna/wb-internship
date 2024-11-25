@@ -1,9 +1,7 @@
 package ru.wb.ui.ui.component.input
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -16,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,19 +24,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import ru.wb.ui.ui.component.utils.Constants.CORNER_RADIUS_OF_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_INPUT_FIELD
-import ru.wb.ui.ui.component.utils.Constants.PADDING_OF_NUMBER_INPUT_FIELD
+import ru.wb.ui.ui.component.utils.focusedBorder
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -48,19 +48,36 @@ internal fun InputField(
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
+    fontStyle: TextStyle = AppTheme.typography.regular,
+    minLines: Int = 1,
+    focusRequester: FocusRequester = remember { FocusRequester() },
+    onEnterClick: () -> Unit = {},
     iconLeft: Painter? = null,
     iconRight: Painter? = null,
     onClickRightIcon: (() -> Unit?)? = null,
     onClickLeftIcon: (() -> Unit)? = null,
     onChangeValue: (text: String) -> Unit = {},
 ){
-    val focusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
         focusRequester.freeFocus()
     }
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val hintColor = if (value.isEmpty()) AppTheme.colors.neutralColorDisabled else Color.Transparent
-    val contentColor = if (value.isEmpty() && !isFocused) AppTheme.colors.neutralColorDisabled else AppTheme.colors.neutralColorFont
+    val hintColor = when {
+        value.isEmpty() -> {
+            AppTheme.colors.neutralColorDisabled
+        }
+        else -> {
+            Color.Transparent
+        }
+    }
+    val contentColor = when {
+        value.isEmpty() && !isFocused -> {
+            AppTheme.colors.neutralColorDisabled
+        }
+        else -> {
+            AppTheme.colors.neutralColorFont
+        }
+    }
 
     Row(
         modifier = modifier
@@ -70,15 +87,15 @@ internal fun InputField(
             .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
             .background(AppTheme.colors.neutralColorSecondaryBackground)
             .focusedBorder(isFocused && value.isEmpty(), AppTheme.colors.neutralColorDivider)
-            .padding(PADDING_OF_NUMBER_INPUT_FIELD.dp),
+            .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         iconLeft?.let {
             Icon(
                 modifier = Modifier
-                    .clickable { onClickLeftIcon?.let { onClickLeftIcon() } }
-                    .padding(vertical = 9.dp, horizontal = 8.dp)
+                    .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
+                    .noRippleClickable { onClickLeftIcon?.let { onClickLeftIcon() } }
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
@@ -87,36 +104,37 @@ internal fun InputField(
         }
         Box(
             modifier = Modifier
-                .weight(1f, true)
+                .fillMaxWidth(0.90f)
                 .align(Alignment.CenterVertically),
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp),
                 text = placeholder,
-                style = AppTheme.typography.bodyText1,
+                style = fontStyle,
                 color = hintColor,
             )
 
             BasicTextField(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = HORIZONTAL_PADDING_TEXT_IN_INPUT_FIELD.dp)
-                    .focusRequester(focusRequester),
+                    .focusRequester(focusRequester)
+                    .fillMaxWidth(),
                 enabled = !disable,
                 value = value,
-                singleLine = true,
+                singleLine = minLines == 1,
+                minLines = minLines,
                 cursorBrush = SolidColor(AppTheme.colors.neutralColorFont),
-                textStyle = AppTheme.typography.bodyText1.copy(color = AppTheme.colors.neutralColorFont),
+                textStyle = fontStyle.copy(color = AppTheme.colors.neutralColorFont),
                 interactionSource = interactionSource,
                 onValueChange = onChangeValue,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
+                keyboardActions = KeyboardActions(onSend = { if(disable) Unit else onEnterClick() })
             )
         }
         iconRight?.let {
             Icon(
                 modifier = Modifier
-                    .clickable { onClickRightIcon?.let { onClickRightIcon() } }
-                    .padding(vertical = 9.dp, horizontal = 8.dp)
+                    .clip(RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
+                    .noRippleClickable { onClickRightIcon?.let { onClickRightIcon() } }
                     .size(ICON_SIZE_IN_INPUT_FIELD.dp),
                 painter = it,
                 tint = contentColor,
@@ -124,11 +142,4 @@ internal fun InputField(
             )
         }
     }
-}
-
-@SuppressLint("UnnecessaryComposedModifier")
-fun Modifier.focusedBorder(isActive: Boolean = false, borderColor: Color) = composed {
-    return@composed  if (isActive) {
-        this.border(FOCUSED_BORDER_WIDTH_IN_INPUT_FIELD.dp, borderColor, RoundedCornerShape(CORNER_RADIUS_OF_INPUT_FIELD.dp))
-    } else this
 }

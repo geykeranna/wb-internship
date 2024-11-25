@@ -2,7 +2,6 @@ package ru.wb.ui.ui.component.toolbars
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +24,7 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_IN_MENU_ITEM
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_MENU_ITEM
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_MENU_ITEM
+import ru.wb.ui.ui.component.utils.noRippleClickable
 import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
@@ -39,7 +39,7 @@ internal fun MenuItem (
         modifier = modifier
             .fillMaxWidth()
             .height(HEIGHT_MENU_ITEM.dp)
-            .clickable { onClickItem() },
+            .noRippleClickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -85,7 +85,7 @@ fun MenuItemUser(
         modifier = modifier
             .fillMaxWidth()
             .height(66.dp)
-            .clickable { onClickItem() },
+            .noRippleClickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -119,7 +119,7 @@ fun MenuItemUser(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text (
-                    text = "${userData.firstName} ${userData.lastName}",
+                    text = userData.name,
                     style = AppTheme.typography.bodyText1,
                     color = AppTheme.colors.neutralColorFont
                 )

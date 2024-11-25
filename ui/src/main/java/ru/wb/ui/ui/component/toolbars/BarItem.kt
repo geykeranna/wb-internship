@@ -1,7 +1,6 @@
 package ru.wb.ui.ui.component.toolbars
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -23,6 +22,7 @@ import ru.wb.ui.ui.component.navigation.NavBar
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_TAB_ITEM_BOTTOM_BAR
 import ru.wb.ui.ui.component.utils.Constants.PADDING_TEXT_IN_BOTTOM_BAR
 import ru.wb.ui.ui.component.utils.Constants.WIDTH_TAB_ITEM_BOTTOM_BAR
+import ru.wb.ui.ui.component.utils.noRippleClickable
 
 @Composable
 internal fun BarItem(
@@ -36,12 +36,12 @@ internal fun BarItem(
         modifier = Modifier
             .height(HEIGHT_TAB_ITEM_BOTTOM_BAR.dp)
             .width(WIDTH_TAB_ITEM_BOTTOM_BAR.dp)
-            .clickable(onClick = {
+            .noRippleClickable {
                 navController.navigate(screen.route) {
                     popUpTo(navController.graph.findStartDestination().id)
                     launchSingleTop = true
                 }
-            }),
+            },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

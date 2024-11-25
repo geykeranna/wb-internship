@@ -1,5 +1,6 @@
 package ru.wb.ui.ui.base
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
@@ -49,6 +50,8 @@ fun BaseScreen(
                 )
             }
         }
-        BaseState.SUCCESS -> content()
+        BaseState.SUCCESS -> {
+            Box(modifier = modifier) { content() }
+        }
     }
 }
