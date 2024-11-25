@@ -9,19 +9,27 @@ data class EventData(
     val icon: String?,
     val active: Boolean,
     val description: String,
-    val usersList: List<UserData> = listOf()
+    val vacantSeat: Int,
+    val usersList: List<UserItemsData> = listOf(),
+    val manager: UserItemsData? = null,
+    val sponsor: CommunityItemData? = null,
+    val recommendation: List<EventItemData>? = null,
 ){
     companion object{
         val defaultObject = EventData(
             id = "1",
-            name = "",
+            name = "QA Talks — Global tech forum",
             location = Location.defaultObject,
-            date = "",
-            tagList = listOf(),
+            date = "10 августа",
+            tagList = listOf("Moscow", "Android", "Moscow", "Android", "Moscow", "Android"),
             icon = null,
             active = true,
-            description = "",
-            usersList = mutableListOf()
+            description = "Description",
+            usersList = listOf(),
+            manager = null,
+            sponsor = null,
+            recommendation = listOf(),
+            vacantSeat = 10
         )
     }
 }

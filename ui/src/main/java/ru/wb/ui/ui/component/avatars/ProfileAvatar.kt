@@ -2,7 +2,6 @@ package ru.wb.ui.ui.component.avatars
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,7 +14,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.wb.ui.R
-import ru.wb.ui.ui.theme.NeutralLineColor
+import ru.wb.ui.ui.component.utils.noRippleClickable
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun ProfileAvatar(
@@ -30,7 +30,7 @@ internal fun ProfileAvatar(
             modifier = Modifier
                 .size(size.boxSize.dp)
                 .clip(CircleShape)
-                .background(NeutralLineColor),
+                .background(color = AppTheme.colors.neutralColorDivider),
             contentAlignment = Alignment.Center
         ){
             if (src.isNullOrEmpty()) {
@@ -56,7 +56,7 @@ internal fun ProfileAvatar(
                     .padding(end = 3.dp)
                     .size(size.floatingBntSize.dp)
                     .clip(CircleShape)
-                    .clickable { onFloatingClick() },
+                    .noRippleClickable { onFloatingClick() },
                 painter = painterResource(id = R.drawable.ic_plus_circle),
                 contentDescription = "profile"
             )

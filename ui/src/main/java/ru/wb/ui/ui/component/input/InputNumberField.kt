@@ -1,8 +1,8 @@
 package ru.wb.ui.ui.component.input
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +20,9 @@ internal fun InputNumberField(
     selectedPhoneCountryCode: CountryCodes,
     phoneCountryCodeList: List<CountryCodes>,
     modifier: Modifier = Modifier,
+    isInvalid: Boolean = false,
+    disable: Boolean = false,
+    disableEnter: Boolean = false,
     onChange: (value: String) -> Unit = {},
     onSelectedPhoneCountryCode: (value: CountryCodes) -> Unit = {},
     onEnterClick: () -> Unit = {},
@@ -29,20 +32,26 @@ internal fun InputNumberField(
     Row(
         modifier = modifier
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(CONTENT_PADDING_OF_ITEM_DROPDOWN.dp)
     ) {
         DropDownCode(
-            modifier = Modifier.padding(end = CONTENT_PADDING_OF_ITEM_DROPDOWN.dp),
+            modifier = Modifier,
             expanded = expanded,
             selectedPhoneCountryCode = selectedPhoneCountryCode,
             phoneCountryCodeList = phoneCountryCodeList,
             onChangeExpanded = { expanded = !expanded },
             onDismissRequest = { expanded = false },
+            isActive = phone.isNotEmpty(),
+            isInvalid = isInvalid,
             onSelectedPhoneCountryCode = onSelectedPhoneCountryCode
         )
 
         InputNumberTextField(
-            phone = phone,
+            input = phone,
+            isInvalid = isInvalid,
+            disableEnter = disableEnter,
+            disable = disable,
             selectedPhoneCountryCode = selectedPhoneCountryCode,
             onChange = onChange,
             onEnterClick = onEnterClick

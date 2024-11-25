@@ -65,9 +65,12 @@ dependencies {
     implementation libs.coil.compose
     implementation libs.androidx.navigation.compose
     implementation libs.dotlottie.android
+    implementation libs.orbital
 
     implementation libs.koin.android
     implementation libs.koin.core
     implementation libs.koin.android.ext
     implementation libs.koin.androidx.compose
+
+    implementation libs.play.services.location
 }

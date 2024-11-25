@@ -4,17 +4,19 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.wb.ui.ui.screens.auth.phone.PhoneScreen
-import ru.wb.ui.ui.screens.auth.pin.PinCodeScreen
-import ru.wb.ui.ui.screens.community.community.CommunityScreen
+import ru.wb.ui.ui.screens.auth.onevent.name.AppointmentName
+import ru.wb.ui.ui.screens.auth.onevent.phone.AppointmentPhone
+import ru.wb.ui.ui.screens.auth.onevent.pin.AppointmentPin
 import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreen
-import ru.wb.ui.ui.screens.events.active.ActiveEventsScreen
 import ru.wb.ui.ui.screens.events.detail.DetailEventScreen
-import ru.wb.ui.ui.screens.events.myevents.MyEventsScreen
+import ru.wb.ui.ui.screens.events.main.MainEventsScreen
+import ru.wb.ui.ui.screens.events.submit.SubmitEventsScreen
 import ru.wb.ui.ui.screens.more.MoreScreen
-import ru.wb.ui.ui.screens.profile.edit.ProfileEditScreen
+import ru.wb.ui.ui.screens.profile.delete.DeleteProfileViewScreen
 import ru.wb.ui.ui.screens.profile.view.ProfileViewScreen
-import ru.wb.ui.ui.screens.splash.SplashScreen
+import ru.wb.ui.ui.screens.startscreens.interests.InterestsScreen
+import ru.wb.ui.ui.screens.startscreens.splash.SplashScreen
+import ru.wb.ui.ui.screens.users.list.UsersListByEventScreen
 
 @Composable
 fun NavGraph(
@@ -26,7 +28,13 @@ fun NavGraph(
         startDestination = Screen.SPLASH.route
     ){
         composable(route = Screen.EVENTS.route) {
-            ActiveEventsScreen(
+            MainEventsScreen(
+                navController = navController
+            )
+        }
+
+        composable(route = Screen.DELETE_PROFILE.route) {
+            DeleteProfileViewScreen(
                 navController = navController
             )
         }
@@ -40,16 +48,19 @@ fun NavGraph(
             }
         }
 
-        composable(route = Screen.COMMUNITY.route) {
-            CommunityScreen(
-                navController = navController
-            )
+        composable(route = Screen.MEETING_DETAIL_FROM_COMMUNITY.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let {
+                DetailEventScreen(
+                    id = it,
+                    navController = navController
+                )
+            }
         }
 
         composable(route = Screen.COMMUNITY_DETAIL.route + "/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let {
                 DetailCommunityScreen(
-                    id = it,
+                    idCommunity = it,
                     navController = navController,
                 )
             }
@@ -68,45 +79,91 @@ fun NavGraph(
             )
         }
 
-        composable(route = Screen.MY_EVENTS.route) {
-            MyEventsScreen(
-                navController = navController
-            )
+        composable(route = Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let {
+                ProfileViewScreen(
+                    navController = navController,
+                    idUser = it,
+                )
+            }
         }
 
-        composable(route = Screen.PROFILE_VIEW.route) {
+        composable(route = Screen.PROFILE_VIEW_INSIDE_DETAIL.route) {
             ProfileViewScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PHONE.route) {
-            PhoneScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PINCODE.route) {
-            PinCodeScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PROFILE_EDIT.route) {
-            ProfileEditScreen(
-                navController = navController
-            )
-        }
-
-        composable(route = Screen.PROFILE_FIRST_EDIT.route) {
-            ProfileEditScreen(
                 navController = navController,
-                onBackClick = {
-                    navController.navigate(Screen.PHONE.route) {
-                        popUpTo(Screen.PROFILE_FIRST_EDIT.route) { inclusive = true }
-                    }
-                }
+                idUser = "",
             )
+        }
+
+        composable(route = Screen.INTEREST.route + "/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let { id ->
+                InterestsScreen(
+                    idUser = id,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.INTEREST.route) {
+            InterestsScreen(
+                navController = navController,
+            )
+        }
+
+        composable(route = Screen.SUBMIT_EVENT.route + "/{label}/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("label")?.let { label ->
+                val idUser = stackEntry.arguments?.getString("label") ?: ""
+                SubmitEventsScreen(
+                    label = label,
+                    id = idUser,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.USER_LIST.route + "/{data}") { stackEntry ->
+            stackEntry.arguments?.getString("data")?.let { data ->
+                UsersListByEventScreen(
+                    data = data,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.EDIT_USER.route) { stackEntry ->
+            stackEntry.arguments?.getString("data")?.let { data ->
+                UsersListByEventScreen(
+                    data = data,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.APPOINTMENT_PHONE.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentPhone(
+                    options = options,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.APPOINTMENT_PIN.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentPin(
+                    options = options,
+                    navController = navController,
+                )
+            }
+        }
+
+        composable(route = Screen.APPOINTMENT_NAME.route + "/{options}") { stackEntry ->
+            stackEntry.arguments?.getString("options")?.let { options ->
+                AppointmentName(
+                    navController = navController,
+                    options = options
+                )
+            }
         }
     }
 }

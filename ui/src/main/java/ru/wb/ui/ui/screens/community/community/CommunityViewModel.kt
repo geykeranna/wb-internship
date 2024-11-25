@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.CommunityData
+import ru.wb.domain.model.components.LoadState
 import ru.wb.domain.usecases.community.GetCommunityListUseCase
 import ru.wb.ui.ui.base.BaseEvent
 import ru.wb.ui.ui.base.BaseState
@@ -32,19 +33,6 @@ internal class CommunityViewModel(
 
     fun getStateFlow(): StateFlow<BaseState> = state
 
-    private fun startLoading() = viewModelScope.launch {
-        _state.emit(BaseState.LOADING)
-        getDataList.execute().collect {
-            when {
-                it.isEmpty() -> _state.emit(BaseState.EMPTY)
-                else -> {
-                    _dataList.emit(it)
-                    _state.emit(BaseState.SUCCESS)
-                }
-            }
-        }
-    }
-
     private fun onSearchTextChange(text: String) = viewModelScope.launch {
         _searchText.emit(text)
     }
@@ -52,10 +40,20 @@ internal class CommunityViewModel(
     private fun fetchData(
         query: String? = null,
     ) = viewModelScope.launch {
-        getDataList.execute(query = query).collect{
-            _dataList.emit(it)
+        getDataList.execute(query = query).collect{ data ->
+            when(data) {
+                is LoadState.Empty -> _state.emit(BaseState.EMPTY)
+                is LoadState.Error -> _state.emit(BaseState.ERROR)
+                is LoadState.Loading -> _state.emit(BaseState.LOADING)
+                is LoadState.Success -> {
+                    _dataList.emit(data.data.data)
+                    when {
+                        data.data.data.isEmpty() ->  _state.emit(BaseState.EMPTY)
+                        else -> _state.emit(BaseState.SUCCESS)
+                    }
+                }
+            }
         }
-
     }
 
     sealed class Event : BaseEvent() {
@@ -67,7 +65,7 @@ internal class CommunityViewModel(
     override fun obtainEvent(event: Event) {
         when (event) {
             is Event.OnLoadingStarted -> {
-                startLoading()
+                fetchData()
             }
             is Event.OnLoadData -> {
                 fetchData(event.query)

@@ -2,7 +2,6 @@ package ru.wb.ui.ui.component.toolbars
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,10 +24,8 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.utils.Constants.CONTENT_PADDING_IN_MENU_ITEM
 import ru.wb.ui.ui.component.utils.Constants.HEIGHT_MENU_ITEM
 import ru.wb.ui.ui.component.utils.Constants.ICON_SIZE_IN_MENU_ITEM
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.NeutralLineColor
-import ru.wb.ui.ui.theme.bodyText1
-import ru.wb.ui.ui.theme.metadata1
+import ru.wb.ui.ui.component.utils.noRippleClickable
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun MenuItem (
@@ -43,7 +39,7 @@ internal fun MenuItem (
         modifier = modifier
             .fillMaxWidth()
             .height(HEIGHT_MENU_ITEM.dp)
-            .clickable { onClickItem() },
+            .noRippleClickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -63,7 +59,8 @@ internal fun MenuItem (
             }
             Text (
                 text = text,
-                style = MaterialTheme.typography.bodyText1
+                style = AppTheme.typography.bodyText1,
+                color = AppTheme.colors.neutralColorFont
             )
         }
         iconRight?.let {
@@ -88,7 +85,7 @@ fun MenuItemUser(
         modifier = modifier
             .fillMaxWidth()
             .height(66.dp)
-            .clickable { onClickItem() },
+            .noRippleClickable { onClickItem() },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -101,7 +98,7 @@ fun MenuItemUser(
             val mod = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
-                .background(NeutralLineColor)
+                .background(AppTheme.colors.neutralColorDivider)
 
             if(userData.icon.isNullOrEmpty()) {
                 Image(
@@ -122,13 +119,14 @@ fun MenuItemUser(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text (
-                    text = "${userData.firstName} ${userData.lastName}",
-                    style = MaterialTheme.typography.bodyText1
+                    text = userData.name,
+                    style = AppTheme.typography.bodyText1,
+                    color = AppTheme.colors.neutralColorFont
                 )
                 Text (
                     text = userData.phone,
-                    style = MaterialTheme.typography.metadata1,
-                    color = NeutralDisabledColor
+                    style = AppTheme.typography.metadata1,
+                    color = AppTheme.colors.neutralColorDisabled,
                 )
             }
         }

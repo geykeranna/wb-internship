@@ -14,8 +14,7 @@ class TestPutUserDataUseCaseImpl {
     fun `should return results put user as in repo`() = runTest{
         val user = UserData(
             id = "1",
-            firstName = "",
-            lastName = "",
+            name = "",
             icon = "",
             story = false,
             status = false,
@@ -26,6 +25,6 @@ class TestPutUserDataUseCaseImpl {
         val useCase = PutUserDataUseCaseImpl(repository = testRepository)
         val actual = useCase.execute(user).last()
 
-        Assertions.assertTrue(actual)
+        Assertions.assertTrue(false)
     }
 }

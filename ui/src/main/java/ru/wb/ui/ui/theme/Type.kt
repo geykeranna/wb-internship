@@ -1,112 +1,137 @@
 package ru.wb.ui.ui.theme
 
-import androidx.compose.material3.Typography
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import ru.wb.ui.ui.theme.latoFamily
-import ru.wb.ui.ui.theme.sfProDisplayFamily
 
-// Set of Material typography styles to start with
-val Typography = Typography()
-
-val Typography.heading1: TextStyle
-    @Composable
-    get() = TextStyle(
-        fontSize = 32.sp,
-        fontFamily = sfProDisplayFamily,
+object AppTypo {
+    val heading1 = TextStyle(
+        fontSize = 34.sp,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
-
-val Typography.heading2: TextStyle
-    @Composable
-    get() = TextStyle(
+    val heading2 = TextStyle(
         fontSize = 24.sp,
-        fontFamily = sfProDisplayFamily,
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Bold
-    )
-
-val Typography.heading3: TextStyle
-    @Composable
-    get() = TextStyle(
-        fontSize = 24.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
-
-val Typography.subheading1: TextStyle
-    @Composable
-    get() = TextStyle(
+    val heading3 = TextStyle(
         fontSize = 18.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.SemiBold
+    )
+    val heading4 = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.SemiBold
+    )
+    val subheading1 = TextStyle(
+        fontSize = 24.sp,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
 
-val Typography.subheading2: TextStyle
-    @Composable
-    get() = TextStyle(
+    val subheading2 = TextStyle(
+        fontSize = 22.sp,
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Normal,
+    )
+
+    val subheading3 = TextStyle(
+        fontSize = 20.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Normal,
+    )
+
+    val subheading4 = TextStyle(
         fontSize = 16.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold
     )
 
-val Typography.subheading3: TextStyle
-    @Composable
-    get() = TextStyle(
-        fontSize = 14.sp,
-        fontFamily = latoFamily,
+    val subheading5 = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Medium,
         fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.SemiBold
     )
 
-val Typography.bodyText1: TextStyle
-    @Composable
-    get() = TextStyle(
+    val bodyText1 = TextStyle(
         fontSize = 14.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold,
     )
-
-val Typography.bodyText2: TextStyle
-    @Composable
-    get() = TextStyle(
+    val bodyText2 = TextStyle(
         fontSize = 14.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
-
-val Typography.metadata1: TextStyle
-    @Composable
-    get() = TextStyle(
+    val metadata1 = TextStyle(
         fontSize = 12.sp,
-        fontFamily = sfProDisplayFamily,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal
     )
 
-val Typography.metadata2: TextStyle
-    @Composable
-    get() = TextStyle(
-        fontSize = 10.sp,
-        fontFamily = sfProDisplayFamily,
+    val primary = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Normal
+        fontWeight = FontWeight.Medium,
     )
 
-val Typography.metadata3: TextStyle
-    @Composable
-    get() = TextStyle(
-        fontSize = 10.sp,
-        fontFamily = sfProDisplayFamily,
+    val secondary = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
         fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.Medium,
     )
+
+    val secondary1 = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = interFamily,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold,
+    )
+
+    val regular = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
+    )
+
+    val large1 = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 50.sp,
+    )
+
+    val large2 = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 48.sp,
+    )
+
+    val communityLabel = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    )
+
+    val userPlusInList = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+    )
+}

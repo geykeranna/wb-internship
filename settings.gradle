@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TestApplication"
+rootProject.name = "WbApplication"
 include ':app'
 include ':repository'
 include ':domain'

@@ -1,70 +1,83 @@
 package ru.wb.ui.ui.component.cards.visitors
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.Layout
-import ru.wb.domain.model.UserData
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import ru.wb.domain.model.UserItemsData
 import ru.wb.ui.ui.component.avatars.UserAvatar
-import ru.wb.ui.ui.component.utils.Constants.NUM_OF_VISIBLE_AVATARS
-import ru.wb.ui.ui.component.utils.Constants.OVERLAPPING_PERCENTAGE
-import ru.wb.ui.ui.theme.bodyText1
+import ru.wb.ui.ui.component.utils.Constants.SIZE_USER_AVATAR
+import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_AVATAR_ROW
+import ru.wb.ui.ui.component.utils.noRippleClickable
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun VisitorsList(
+    visitorsList: List<UserItemsData>,
     modifier: Modifier = Modifier,
-    visitorsList: List<UserData> = listOf(),
     onClick: () -> Unit = {},
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth(),
-    ) {
-        val factor = 1 - OVERLAPPING_PERCENTAGE
+    val density = LocalDensity.current.density
+    val countItems = remember { mutableIntStateOf(0) }
 
-        if (visitorsList.isNotEmpty()) {
-            Row(
-                modifier = Modifier.clickable { onClick() },
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Layout(
-                    content = {
-                        visitorsList.take(NUM_OF_VISIBLE_AVATARS).forEach { visitors ->
-                            UserAvatar(
-                                src = visitors.icon,
-                                story = visitors.story,
-                                status = visitors.status,
+    LazyRow(
+        modifier = modifier
+            .width(100.dp)
+            .noRippleClickable { onClick() }
+            .onGloballyPositioned { layoutCoordinates ->
+                val width = if (visitorsList.isNotEmpty()) layoutCoordinates.size.width else 0
+                val dpValueWidth = width / density
+                val widthItemsWithOffset = SIZE_USER_AVATAR - SPACE_BY_AVATAR_ROW
+                val widthItemsLineWithLastItems = dpValueWidth - SPACE_BY_AVATAR_ROW
+                val maxElemOnLine = (widthItemsLineWithLastItems / widthItemsWithOffset).toInt()
+                countItems.intValue = if (visitorsList.size > maxElemOnLine) maxElemOnLine else visitorsList.size
+            },
+        userScrollEnabled = false,
+        horizontalArrangement = Arrangement.spacedBy((-SPACE_BY_AVATAR_ROW).dp),
+    ) {
+        items(countItems.intValue) { index ->
+            Box(modifier = Modifier) {
+                when {
+                    index == countItems.intValue - 1 && countItems.intValue < visitorsList.size -> {
+                        Box(
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(SIZE_USER_AVATAR.dp)
+                                .border(
+                                    2.dp,
+                                    AppTheme.colors.neutralColorBackground,
+                                    shape = CircleShape
+                                )
+                                .background(AppTheme.colors.neutralColorSecondaryBackground)
+                            ,
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "+${visitorsList.size - countItems.intValue}",
+                                color = AppTheme.colors.brandColorDefault,
+                                style = AppTheme.typography.userPlusInList
                             )
-                        }
-                    },
-                    measurePolicy = { measurable, constraints ->
-                    val placeable = measurable.map { it.measure(constraints) }
-                    val widthsExceptFirst = placeable.subList(1, placeable.size).sumOf { it.width }
-                    val firstWidth = placeable.getOrNull(0)?.width ?: 0
-                    val width = (widthsExceptFirst * factor + firstWidth).toInt()
-                    val height = placeable.maxOf { it.height }
-                    layout(width, height) {
-                        var x = 0
-                        placeable.forEachIndexed { index, placed ->
-                            placed.placeRelative(
-                                x, 0, (placeable.size - index).toFloat()
-                            )
-                            x += (placed.width * factor).toInt()
                         }
                     }
-                })
-
-                if (visitorsList.size > NUM_OF_VISIBLE_AVATARS) {
-                    Text(
-                        text = "+${visitorsList.size - NUM_OF_VISIBLE_AVATARS}",
-                        style = MaterialTheme.typography.bodyText1
-                    )
+                    else -> {
+                        UserAvatar(
+                            src = visitorsList[index].icon
+                        )
+                    }
                 }
             }
         }

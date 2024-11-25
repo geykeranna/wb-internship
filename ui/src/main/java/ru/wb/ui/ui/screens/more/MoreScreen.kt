@@ -16,22 +16,22 @@ import ru.wb.domain.model.UserData
 import ru.wb.ui.ui.component.navigation.Screen
 import ru.wb.ui.ui.component.toolbars.MenuItem
 import ru.wb.ui.ui.component.toolbars.MenuItemUser
-import ru.wb.testapplication.ui.component.toolbars.TopBar
+import ru.wb.ui.ui.component.toolbars.TopBarCustom
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
 import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_PADDING_CONTENT_DETAIL_COMMON
 import ru.wb.ui.ui.component.utils.Constants.VERTICAL_SPACE_BY_CONTENT_COMMON
-import ru.wb.ui.ui.theme.NeutralLineColor
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun MoreScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    TopBar (
+    TopBarCustom (
         modifier = Modifier
             .padding(start = HORIZONTAL_PADDING_TOP_BAR_COMMON.dp),
-        text = Screen.MORE.label
+        label = Screen.MORE.label
     )
 
     LazyColumn (
@@ -45,7 +45,7 @@ internal fun MoreScreen(
             MenuItemUser(
                 userData = UserData.defaultObject,
                 onClickItem = {
-                    navController.navigate(Screen.PROFILE_VIEW.route)
+                    navController.navigate(Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route)
                 }
             )
         }
@@ -53,9 +53,7 @@ internal fun MoreScreen(
         item {
             MenuItem(
                 iconLeft = R.drawable.ic_coffee,
-                onClickItem = {
-                    navController.navigate(Screen.MY_EVENTS.route)
-                },
+                onClickItem = { },
                 text = stringResource(R.string.label_menu_items_my_meets),
                 iconRight = R.drawable.ic_chevron_right
             )
@@ -93,7 +91,7 @@ internal fun MoreScreen(
             HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp,
-                color = NeutralLineColor
+                color = AppTheme.colors.neutralColorDivider
             )
 
             MenuItem(

@@ -1,24 +1,26 @@
 package ru.wb.ui.ui.screens.events.detail
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import ru.wb.ui.R
-import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.base.BaseScreen
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
-import ru.wb.ui.ui.screens.events.components.ButtonState
-import ru.wb.ui.ui.screens.events.components.DetailData
-import ru.wb.ui.ui.screens.events.components.FullScreenImageDialog
-import ru.wb.ui.ui.theme.BrandDefaultColor
+import ru.wb.ui.ui.component.navigation.Screen
+import ru.wb.ui.ui.component.toolbars.TopBarDetail
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.screens.events.detail.components.ButtonByState
+import ru.wb.ui.ui.screens.events.detail.components.ButtonState
+import ru.wb.ui.ui.screens.events.detail.components.DetailEventData
+import ru.wb.ui.ui.screens.events.detail.DetailEventScreenViewModel.Event
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun DetailEventScreen(
@@ -28,51 +30,54 @@ internal fun DetailEventScreen(
     detailViewModel: DetailEventScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
 ) {
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
-    val isMapFullScreen = remember { mutableStateOf(false) }
-    val stateBnt by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
-    val iconRight = when (stateBnt) {
-        ButtonState.PRESSED.id -> R.drawable.ic_check_big
-        else -> null
-    }
+    val btnState by detailViewModel.getBntStateFlow().collectAsStateWithLifecycle()
+    val authStatus by detailViewModel.getAuthStatusFlow().collectAsStateWithLifecycle()
 
-    FullScreenImageDialog(isMapFullScreen = isMapFullScreen)
-
-    TopBar(
+    Scaffold(
         modifier = modifier
-            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
-        iconLeft = R.drawable.ic_chevron_left,
-        text = detailInfo.name,
-        iconRight = iconRight,
-        onRightIconClick = {
-            detailViewModel.obtainEvent(
-                DetailEventScreenViewModel.Event.OnHandleGoingEvent(
-                    id = id
-                )
+            .fillMaxSize(),
+        containerColor = AppTheme.colors.neutralColorBackground,
+        topBar = {
+            TopBarDetail(
+                modifier = Modifier
+                    .padding(bottom = 20.dp)
+                    .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+                title = detailInfo.name,
+                onLeftClick = { navController.popBackStack() }
             )
         },
-        tintRightIcon = BrandDefaultColor,
-        onLeftIconClick = {
-            navController.popBackStack()
-        }
-    )
-
-    BaseScreen(
-        modifier = modifier,
-        state = state,
-    ){
-        DetailData(
-            modifier = modifier,
-            stateBnt = stateBnt,
-            isMapFullScreen = isMapFullScreen,
-            detailInfo = detailInfo,
-            onClickButton = {
-                detailViewModel.obtainEvent(
-                    DetailEventScreenViewModel.Event.OnHandleGoingEvent(
-                        id = id
-                    )
-                )
+        bottomBar = {
+            ButtonByState(
+                modifier = Modifier.fillMaxWidth(),
+                state = btnState,
+                countPeople = detailInfo.vacantSeat
+            ) {
+                when{
+                    btnState != ButtonState.PRESSED.id && authStatus.isBlank() -> {
+                        val address = "${detailInfo.name} · ${detailInfo.date} · ${detailInfo.location.address}"
+                        navController.navigate(Screen.APPOINTMENT_NAME.route + "/${detailInfo.id}/$address")
+                    }
+                    btnState != ButtonState.PRESSED.id -> {
+                        navController.navigate(Screen.SUBMIT_EVENT.route + "/$authStatus")
+                    }
+                    else -> detailViewModel.obtainEvent(Event.OnHandleGoingEvent(id = id))
+                }
             }
-        )
+        }
+    ) { padding ->
+        BaseScreen(
+            modifier = Modifier.padding(padding),
+            state = state,
+        ){
+            DetailEventData(
+                modifier = Modifier.padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+                detailInfo = detailInfo,
+                onNavigateUsersScreen = { navController.navigate(Screen.USER_LIST.route + "/event $id") },
+                onNavigateCommunityScreen = {id -> navController.navigate(Screen.COMMUNITY_DETAIL.route + "/$id")},
+                onNavigateEventScreen = { id -> navController.navigate(Screen.EVENT_DETAIL.route + "/$id") },
+                onNavigateUserScreen = {id -> navController.navigate(Screen.PROFILE_VIEW_OUTSIDE_DETAIL.route + "/$id")}
+            )
+        }
     }
 }

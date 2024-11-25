@@ -1,97 +1,86 @@
 package ru.wb.ui.ui.component.cards.events
 
-import androidx.compose.foundation.clickable
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ru.wb.domain.model.EventData
-import ru.wb.ui.ui.component.avatars.GroupAvatar
-import ru.wb.ui.ui.component.chips.CustomChipsGroup
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_OF_TEXT_BLOCK_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.PADDING_AROUND_IMG_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.PADDING_START_TEXT_BLOCK_IN_EVENT_CARD
-import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD
-import ru.wb.ui.ui.theme.NeutralActiveColor
-import ru.wb.ui.ui.theme.NeutralDisabledColor
-import ru.wb.ui.ui.theme.NeutralLineColor
-import ru.wb.ui.ui.theme.bodyText1
-import ru.wb.ui.ui.theme.metadata1
+import ru.wb.domain.model.EventItemData
+import ru.wb.ui.ui.component.avatars.EventAvatar
+import ru.wb.ui.ui.component.chips.TagsChipsEllipsis
+import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD
+import ru.wb.ui.ui.component.utils.Constants.SPACE_BY_TEXT_BLOCK_IN_EVENT_CARD
+import ru.wb.ui.ui.component.utils.noRippleClickable
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun EventCard(
-    eventData: EventData,
+    eventData: EventItemData,
     modifier: Modifier = Modifier,
-    src: String? = null,
-    onClick: () -> Unit = {},
+    size: EventSize = EventSize.THIN,
+    onNavigate: (id: String) -> Unit = {},
 ){
-    Column(
-        modifier = Modifier
-            .height(HEIGHT_OF_EVENT_CARD.dp)
-            .fillMaxWidth()
-            .clickable { onClick() },
-    ) {
-        Row(
-            modifier = modifier
-                .height(HEIGHT_WITHOUT_DIVIDER_IN_EVENT_CARD.dp)
-                .fillMaxWidth()
-        ) {
-            GroupAvatar(
-                src = src,
-                modifier = Modifier
-                    .padding(top = PADDING_AROUND_IMG_IN_EVENT_CARD.dp)
-            )
-            Column(
-                modifier = Modifier
-                    .height(HEIGHT_OF_TEXT_BLOCK_IN_EVENT_CARD.dp)
-                    .fillMaxWidth()
-                    .padding(start = PADDING_START_TEXT_BLOCK_IN_EVENT_CARD.dp),
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(HEIGHT_OF_BODY_TEXT_IN_EVENT_CARD.dp)
-                        .padding(bottom = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically),
-                        text = eventData.name,
-                        style = MaterialTheme.typography.bodyText1,
-                        color = NeutralActiveColor
-                    )
-                }
+    val fontLabel = when (size) {
+        EventSize.WIDE -> AppTheme.typography.heading1
+        EventSize.LARGE -> AppTheme.typography.heading2
+        else -> AppTheme.typography.heading3
+    }
 
-                Text(
-                    modifier = Modifier
-                        .padding(bottom = SPACE_BY_TEXT_IN_TEXT_BLOCK_IN_EVENT_CARD.dp),
-                    text = "${eventData.date} — ${eventData.location.city}",
-                    style = MaterialTheme.typography.metadata1.copy(lineHeight = HEIGHT_OF_METADATA_TEXT_IN_EVENT_CARD.sp),
-                    color = NeutralDisabledColor
-                )
-                CustomChipsGroup(
-                    chipsList = eventData.tagList
-                )
-            }
+    Column(
+        modifier = modifier
+            .setWidth(size.width)
+            .clip(RoundedCornerShape(8.dp))
+            .noRippleClickable { onNavigate(eventData.id) },
+        verticalArrangement = Arrangement.spacedBy(SPACE_BY_MAIN_BLOCK_IN_EVENT_CARD.dp)
+    ) {
+        EventAvatar(
+            modifier = Modifier
+                .height(size.height.dp)
+                .fillMaxWidth(),
+            src = eventData.icon,
+        )
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(SPACE_BY_TEXT_BLOCK_IN_EVENT_CARD.dp)
+        ) {
+            Text(
+                modifier = Modifier,
+                text = eventData.name,
+                style = fontLabel,
+                color = AppTheme.colors.neutralColorFont,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+            )
+
+            Text(
+                modifier = Modifier,
+                text = "${eventData.date} · ${eventData.location.address}",
+                style = AppTheme.typography.secondary,
+                color = AppTheme.colors.neutralColorDisabled,
+                overflow = TextOverflow.Visible,
+                maxLines = 1,
+            )
         }
 
-        HorizontalDivider(
-            color = NeutralLineColor,
+        TagsChipsEllipsis (
+            data = eventData.tagList,
         )
     }
+}
+
+@SuppressLint("UnnecessaryComposedModifier")
+private fun Modifier.setWidth(width: Int) = composed {
+    return@composed  if (width != 0) {
+        this.width(width.dp)
+    } else this.fillMaxWidth()
 }

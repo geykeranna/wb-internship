@@ -1,6 +1,8 @@
 package ru.wb.ui.ui.screens.community.detail
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -9,37 +11,55 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import ru.wb.ui.R
 import ru.wb.ui.ui.component.navigation.Screen
-import ru.wb.testapplication.ui.component.toolbars.TopBar
 import ru.wb.ui.ui.base.BaseScreen
-import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON
+import ru.wb.ui.ui.component.toolbars.TopBarDetail
+import ru.wb.ui.ui.component.utils.Constants.HORIZONTAL_PADDING_CONTENT_COMMON
+import ru.wb.ui.ui.screens.community.detail.components.DetailCommunityData
+import ru.wb.ui.ui.screens.community.detail.DetailCommunityScreenViewModel.Event
+import ru.wb.ui.ui.theme.AppTheme
 
 @Composable
 internal fun DetailCommunityScreen(
-    id: String,
+    idCommunity: String,
     navController: NavController,
     modifier: Modifier = Modifier,
-    detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(id) })
+    detailViewModel: DetailCommunityScreenViewModel = koinViewModel(parameters = { parametersOf(idCommunity) })
 ) {
     val detailInfo by detailViewModel.getDetailDataFlow().collectAsStateWithLifecycle()
+    val btnState by detailViewModel.getBtnStateBySubStatusFlow().collectAsStateWithLifecycle()
     val state by detailViewModel.getStateFlow().collectAsStateWithLifecycle()
 
-    TopBar(
+    Scaffold(
         modifier = modifier
-            .padding(horizontal = HORIZONTAL_PADDING_TOP_BAR_DETAIL_COMMON.dp),
-        iconLeft = R.drawable.ic_chevron_left,
-        text = detailInfo.label,
-        onLeftIconClick = { navController.navigate(Screen.COMMUNITY.route) }
-    )
-
-    BaseScreen(
-        modifier = modifier,
-        state = state,
-    ) {
-        DetailInfo(
-            detailInfo = detailInfo,
-            navController = navController
-        )
+            .fillMaxSize()
+            .padding(horizontal = HORIZONTAL_PADDING_CONTENT_COMMON.dp),
+        containerColor = AppTheme.colors.neutralColorBackground,
+        topBar = {
+            TopBarDetail(
+                modifier = Modifier.padding(bottom = 20.dp),
+                title = detailInfo.label,
+                onLeftClick = { navController.popBackStack() }
+            )
+        },
+    ) { padding ->
+        BaseScreen(
+            modifier = Modifier.padding(padding),
+            state = state,
+        ){
+            DetailCommunityData(
+                modifier = Modifier,
+                detailInfo = detailInfo,
+                btnState = btnState,
+                onNavigateUsersScreen = {
+                    navController.navigate(Screen.USER_LIST.route + "/community $idCommunity")
+                },
+                onNavigateToEventDetail = { idEvent ->
+                    navController.navigate(Screen.EVENT_DETAIL.route + "/$idEvent")
+                }
+            ){
+                detailViewModel.obtainEvent(Event.OnChangeSubscribeStatus)
+            }
+        }
     }
 }
