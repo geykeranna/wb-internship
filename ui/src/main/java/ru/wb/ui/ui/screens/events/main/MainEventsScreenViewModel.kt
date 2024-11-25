@@ -3,6 +3,7 @@ package ru.wb.ui.ui.screens.events.main
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import ru.wb.domain.model.Content
 import ru.wb.domain.model.components.LoadState
@@ -59,23 +60,24 @@ internal class MainEventsScreenViewModel(
     fun getAllChipsList(): List<String> = defaultChipsList + lastChipsActionItem
 
     private fun fetchData() = viewModelScope.launch {
-        getContent.execute(
-            search = searchString.value,
-            filter = selectedItems.value,
-        ).collect { newValue ->
-            when(newValue){
+        combine(
+            getContent.execute(search = searchString.value, filter = selectedItems.value),
+            getAuthState.execute(),
+        ) { contentLoad, authState ->
+            when(contentLoad){
                 is LoadState.Empty -> _stateContent.emit(BaseState.EMPTY)
                 is LoadState.Loading -> _stateContent.emit(BaseState.LOADING)
                 is LoadState.Error -> _stateContent.emit(BaseState.ERROR)
-                is LoadState.Success -> when {
-                    newValue.data.data.isEmpty() -> _stateContent.emit(BaseState.EMPTY)
-                    else -> {
-                        val (labeledData, filteredData) = newValue.data.data.partition { it.id.toInt() < 2 }
-                        _labelContent.emit(labeledData)
-                        _content.emit(filteredData)
-                        _stateContent.emit(BaseState.SUCCESS)
-                    }
+                is LoadState.Success -> {
+                    val (labeledData, filteredData) = contentLoad.data.data.partition { it.id.toInt() < 2 }
+                    _labelContent.emit(labeledData)
+                    _content.emit(filteredData)
+                    _stateContent.emit(BaseState.SUCCESS)
                 }
+            }
+            when(authState){
+                is LoadState.Success -> _authState.emit(authState.data)
+                else -> _authState.emit(false)
             }
         }
     }
